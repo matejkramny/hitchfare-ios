@@ -7,12 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F95342719FFEFDF0058210D /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F95342619FFEFDF0058210D /* UserTableViewController.swift */; };
+		4F95342A19FFF7060058210D /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F95342919FFF7060058210D /* ProfileTableViewCell.swift */; };
+		4FA9F15A19FED9B7009D0F33 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA9F15919FED9B7009D0F33 /* User.swift */; };
+		4FA9F16119FFD3CA009D0F33 /* PageRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA9F16019FFD3CA009D0F33 /* PageRootViewController.swift */; };
 		4FC1E5E619FEB518002F743B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC1E5E519FEB518002F743B /* AppDelegate.swift */; };
-		4FC1E5E819FEB518002F743B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC1E5E719FEB518002F743B /* ViewController.swift */; };
 		4FC1E5EB19FEB518002F743B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FC1E5E919FEB518002F743B /* Main.storyboard */; };
 		4FC1E5ED19FEB518002F743B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FC1E5EC19FEB518002F743B /* Images.xcassets */; };
 		4FC1E5F019FEB518002F743B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FC1E5EE19FEB518002F743B /* LaunchScreen.xib */; };
 		4FC1E5FC19FEB518002F743B /* FareShoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC1E5FB19FEB518002F743B /* FareShoutTests.swift */; };
+		4FC1E60819FEB751002F743B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC1E60719FEB751002F743B /* LoginViewController.swift */; };
+		4FC1E60A19FEB839002F743B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FC1E60919FEB839002F743B /* Social.framework */; };
+		4FC1E60C19FEB866002F743B /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FC1E60B19FEB866002F743B /* Accounts.framework */; };
+		4FC1E61019FEB891002F743B /* FacebookCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC1E60F19FEB891002F743B /* FacebookCtrl.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,16 +33,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F95342619FFEFDF0058210D /* UserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserTableViewController.swift; path = FareShout/UserTableViewController.swift; sourceTree = "<group>"; };
+		4F95342919FFF7060058210D /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileTableViewCell.swift; path = FareShout/ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		4FA9F15919FED9B7009D0F33 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		4FA9F16019FFD3CA009D0F33 /* PageRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PageRootViewController.swift; path = FareShout/PageRootViewController.swift; sourceTree = "<group>"; };
 		4FC1E5E019FEB518002F743B /* FareShout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FareShout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FC1E5E419FEB518002F743B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FC1E5E519FEB518002F743B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4FC1E5E719FEB518002F743B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4FC1E5EA19FEB518002F743B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4FC1E5EC19FEB518002F743B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4FC1E5EF19FEB518002F743B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		4FC1E5F519FEB518002F743B /* FareShoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FareShoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FC1E5FA19FEB518002F743B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FC1E5FB19FEB518002F743B /* FareShoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FareShoutTests.swift; sourceTree = "<group>"; };
+		4FC1E60719FEB751002F743B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = FareShout/LoginViewController.swift; sourceTree = "<group>"; };
+		4FC1E60919FEB839002F743B /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		4FC1E60B19FEB866002F743B /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		4FC1E60D19FEB890002F743B /* FareShout-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FareShout-Bridging-Header.h"; sourceTree = "<group>"; };
+		4FC1E60E19FEB891002F743B /* FacebookCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookCtrl.h; sourceTree = "<group>"; };
+		4FC1E60F19FEB891002F743B /* FacebookCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookCtrl.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +59,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FC1E60C19FEB866002F743B /* Accounts.framework in Frameworks */,
+				4FC1E60A19FEB839002F743B /* Social.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,9 +74,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F95342819FFF6E70058210D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4F95342919FFF7060058210D /* ProfileTableViewCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		4FA9F15819FED8CA009D0F33 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4FA9F15919FED9B7009D0F33 /* User.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		4FC1E5D719FEB518002F743B = {
 			isa = PBXGroup;
 			children = (
+				4FC1E60B19FEB866002F743B /* Accounts.framework */,
+				4FC1E60919FEB839002F743B /* Social.framework */,
+				4FA9F15819FED8CA009D0F33 /* Models */,
+				4FC1E60519FEB6E8002F743B /* Scenes */,
+				4F95342819FFF6E70058210D /* Cells */,
 				4FC1E5E219FEB518002F743B /* FareShout */,
 				4FC1E5F819FEB518002F743B /* FareShoutTests */,
 				4FC1E5E119FEB518002F743B /* Products */,
@@ -78,11 +117,13 @@
 			isa = PBXGroup;
 			children = (
 				4FC1E5E519FEB518002F743B /* AppDelegate.swift */,
-				4FC1E5E719FEB518002F743B /* ViewController.swift */,
 				4FC1E5E919FEB518002F743B /* Main.storyboard */,
 				4FC1E5EC19FEB518002F743B /* Images.xcassets */,
 				4FC1E5EE19FEB518002F743B /* LaunchScreen.xib */,
 				4FC1E5E319FEB518002F743B /* Supporting Files */,
+				4FC1E60E19FEB891002F743B /* FacebookCtrl.h */,
+				4FC1E60F19FEB891002F743B /* FacebookCtrl.m */,
+				4FC1E60D19FEB890002F743B /* FareShout-Bridging-Header.h */,
 			);
 			path = FareShout;
 			sourceTree = "<group>";
@@ -110,6 +151,24 @@
 				4FC1E5FA19FEB518002F743B /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4FC1E60519FEB6E8002F743B /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				4FC1E60619FEB71D002F743B /* Login */,
+				4FA9F16019FFD3CA009D0F33 /* PageRootViewController.swift */,
+				4F95342619FFEFDF0058210D /* UserTableViewController.swift */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		4FC1E60619FEB71D002F743B /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				4FC1E60719FEB751002F743B /* LoginViewController.swift */,
+			);
+			name = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,7 +271,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4FC1E5E819FEB518002F743B /* ViewController.swift in Sources */,
+				4FA9F15A19FED9B7009D0F33 /* User.swift in Sources */,
+				4F95342A19FFF7060058210D /* ProfileTableViewCell.swift in Sources */,
+				4FA9F16119FFD3CA009D0F33 /* PageRootViewController.swift in Sources */,
+				4FC1E61019FEB891002F743B /* FacebookCtrl.m in Sources */,
+				4FC1E60819FEB751002F743B /* LoginViewController.swift in Sources */,
+				4F95342719FFEFDF0058210D /* UserTableViewController.swift in Sources */,
 				4FC1E5E619FEB518002F743B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,9 +400,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = FareShout/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FareShout/FareShout-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -346,9 +414,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = FareShout/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FareShout/FareShout-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -405,6 +476,7 @@
 				4FC1E60119FEB518002F743B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4FC1E60219FEB518002F743B /* Build configuration list for PBXNativeTarget "FareShoutTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +485,7 @@
 				4FC1E60419FEB518002F743B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

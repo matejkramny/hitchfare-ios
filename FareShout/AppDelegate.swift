@@ -1,46 +1,81 @@
-//
-//  AppDelegate.swift
-//  FareShout
-//
-//  Created by Matej Kramny on 27/10/2014.
-//  Copyright (c) 2014 Matej Kramny. All rights reserved.
-//
 
 import UIKit
 
+var currentUser: User?
+let kAPIProtocol = "http://"
+let kAPIEndpoint = kAPIProtocol + "localhost:3000"
+var sessionCookie: String?
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
 	var window: UIWindow?
 
-
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-		// Override point for customization after application launch.
 		return true
 	}
-
-	func applicationWillResignActive(application: UIApplication) {
-		// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-		// Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-	}
-
-	func applicationDidEnterBackground(application: UIApplication) {
-		// Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-		// If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-	}
-
-	func applicationWillEnterForeground(application: UIApplication) {
-		// Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-	}
-
-	func applicationDidBecomeActive(application: UIApplication) {
-		// Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-	}
-
-	func applicationWillTerminate(application: UIApplication) {
-		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-	}
-
-
 }
 
+func makeRequest (endpoint: String, method: String?) -> NSMutableURLRequest {
+	var request = NSMutableURLRequest(URL: NSURL(string: kAPIEndpoint + endpoint)!)
+	request.setValue("application/json", forHTTPHeaderField: "Accept")
+	request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+	if sessionCookie != nil {
+		request.setValue(sessionCookie, forHTTPHeaderField: "Cookie")
+	}
+	
+	request.HTTPShouldHandleCookies = true
+	
+	if method == nil {
+		request.HTTPMethod = "GET"
+	} else {
+		request.HTTPMethod = method!
+	}
+	
+	return request
+}
+
+func doPostRequest (request: NSMutableURLRequest, callback: (err: NSError?, data: AnyObject?) -> Void, body: [NSObject: AnyObject]) {
+	var err: NSError?
+	let data = NSJSONSerialization.dataWithJSONObject(body, options: nil, error: &err)
+	
+	doRequest(request, callback, data)
+}
+
+func doRequest (request: NSMutableURLRequest, callback: (err: NSError?, data: AnyObject?) -> Void, body: NSData?) {
+	if body != nil {
+		request.HTTPBody = body
+	}
+	
+	let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data: NSData!, res: NSURLResponse!, err) -> Void in
+		if err != nil {
+			dispatch_async(dispatch_get_main_queue(), { () -> Void in
+				callback(err: err, data: nil)
+			})
+			return
+		}
+		
+		var httpRes = res as NSHTTPURLResponse
+		var cookie = httpRes.allHeaderFields["set-cookie"] as? String
+		if cookie != nil {
+			sessionCookie = cookie!.componentsSeparatedByString(";")[0] as String
+		}
+		
+		var jsonData: NSData = (NSString(data: data
+			, encoding: NSUTF8StringEncoding)!).dataUsingEncoding(NSUTF8StringEncoding)!
+		var e: NSError? = nil
+		
+		var json: AnyObject? = NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions(0), error: &e)
+		if e != nil {
+			dispatch_async(dispatch_get_main_queue(), { () -> Void in
+				callback(err: err, data: nil)
+			})
+			return
+		}
+		
+		dispatch_async(dispatch_get_main_queue(), { () -> Void in
+			callback(err: nil, data: json)
+		})
+	}
+	
+	task.resume()
+}
