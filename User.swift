@@ -16,12 +16,15 @@ class UserPicture {
 }
 
 class User {
+	var _id: NSString? = nil
 	var email: NSString? = nil
 	var first_name: NSString? = nil
 	var id: NSString? = nil
 	var last_name: NSString? = nil
 	var name: NSString? = nil
 	var picture: UserPicture? = nil
+	
+	init(){}
 	
 	init(_response: [NSString: AnyObject]) {
 		var pictureData: [String: AnyObject] = _response["picture"] as [String: AnyObject]
@@ -31,6 +34,7 @@ class User {
 		self.picture?.isSilhouette = pictureData["is_silhouette"] as Bool
 		self.picture?.url = pictureData["url"] as String?
 		
+		self._id = _response["_id"] as String?
 		self.email = _response["email"] as String?
 		self.first_name = _response["first_name"] as String?
 		self.id = _response["id"] as String?

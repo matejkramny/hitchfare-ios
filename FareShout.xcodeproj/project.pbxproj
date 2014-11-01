@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F525F371A05958B00EDD696 /* Journey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F361A05958B00EDD696 /* Journey.swift */; };
+		4F525F391A05A10800EDD696 /* NearbyJourneysTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F381A05A10800EDD696 /* NearbyJourneysTableViewController.swift */; };
+		4F525F3B1A05A26C00EDD696 /* AddJourneyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F3A1A05A26C00EDD696 /* AddJourneyTableViewController.swift */; };
 		4F95342719FFEFDF0058210D /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F95342619FFEFDF0058210D /* UserTableViewController.swift */; };
 		4F95342A19FFF7060058210D /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F95342919FFF7060058210D /* ProfileTableViewCell.swift */; };
 		4FA9F15A19FED9B7009D0F33 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA9F15919FED9B7009D0F33 /* User.swift */; };
@@ -20,6 +23,12 @@
 		4FC1E60A19FEB839002F743B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FC1E60919FEB839002F743B /* Social.framework */; };
 		4FC1E60C19FEB866002F743B /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FC1E60B19FEB866002F743B /* Accounts.framework */; };
 		4FC1E61019FEB891002F743B /* FacebookCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC1E60F19FEB891002F743B /* FacebookCtrl.m */; };
+		4FD6D2921A0551F600199082 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6D2911A0551F600199082 /* Car.swift */; };
+		4FD6D2931A0555D700199082 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA9F15919FED9B7009D0F33 /* User.swift */; };
+		4FD6D2941A0555DA00199082 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6D2911A0551F600199082 /* Car.swift */; };
+		4FD6D2961A05560B00199082 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6D2951A05560B00199082 /* Network.swift */; };
+		4FD6D2971A05561600199082 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6D2951A05560B00199082 /* Network.swift */; };
+		4FD6D2991A05564500199082 /* CarTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6D2981A05564500199082 /* CarTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +42,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F525F361A05958B00EDD696 /* Journey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Journey.swift; sourceTree = "<group>"; };
+		4F525F381A05A10800EDD696 /* NearbyJourneysTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyJourneysTableViewController.swift; sourceTree = "<group>"; };
+		4F525F3A1A05A26C00EDD696 /* AddJourneyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddJourneyTableViewController.swift; sourceTree = "<group>"; };
 		4F95342619FFEFDF0058210D /* UserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserTableViewController.swift; path = FareShout/UserTableViewController.swift; sourceTree = "<group>"; };
 		4F95342919FFF7060058210D /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileTableViewCell.swift; path = FareShout/ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		4FA9F15919FED9B7009D0F33 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -52,6 +64,9 @@
 		4FC1E60D19FEB890002F743B /* FareShout-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FareShout-Bridging-Header.h"; sourceTree = "<group>"; };
 		4FC1E60E19FEB891002F743B /* FacebookCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookCtrl.h; sourceTree = "<group>"; };
 		4FC1E60F19FEB891002F743B /* FacebookCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookCtrl.m; sourceTree = "<group>"; };
+		4FD6D2911A0551F600199082 /* Car.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
+		4FD6D2951A05560B00199082 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		4FD6D2981A05564500199082 /* CarTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +101,8 @@
 			isa = PBXGroup;
 			children = (
 				4FA9F15919FED9B7009D0F33 /* User.swift */,
+				4FD6D2911A0551F600199082 /* Car.swift */,
+				4F525F361A05958B00EDD696 /* Journey.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -117,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				4FC1E5E519FEB518002F743B /* AppDelegate.swift */,
+				4FD6D2951A05560B00199082 /* Network.swift */,
 				4FC1E5E919FEB518002F743B /* Main.storyboard */,
 				4FC1E5EC19FEB518002F743B /* Images.xcassets */,
 				4FC1E5EE19FEB518002F743B /* LaunchScreen.xib */,
@@ -140,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				4FC1E5FB19FEB518002F743B /* FareShoutTests.swift */,
+				4FD6D2981A05564500199082 /* CarTest.swift */,
 				4FC1E5F919FEB518002F743B /* Supporting Files */,
 			);
 			path = FareShoutTests;
@@ -159,6 +178,8 @@
 				4FC1E60619FEB71D002F743B /* Login */,
 				4FA9F16019FFD3CA009D0F33 /* PageRootViewController.swift */,
 				4F95342619FFEFDF0058210D /* UserTableViewController.swift */,
+				4F525F381A05A10800EDD696 /* NearbyJourneysTableViewController.swift */,
+				4F525F3A1A05A26C00EDD696 /* AddJourneyTableViewController.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -273,10 +294,15 @@
 			files = (
 				4FA9F15A19FED9B7009D0F33 /* User.swift in Sources */,
 				4F95342A19FFF7060058210D /* ProfileTableViewCell.swift in Sources */,
+				4FD6D2921A0551F600199082 /* Car.swift in Sources */,
 				4FA9F16119FFD3CA009D0F33 /* PageRootViewController.swift in Sources */,
+				4F525F371A05958B00EDD696 /* Journey.swift in Sources */,
 				4FC1E61019FEB891002F743B /* FacebookCtrl.m in Sources */,
+				4F525F3B1A05A26C00EDD696 /* AddJourneyTableViewController.swift in Sources */,
+				4FD6D2961A05560B00199082 /* Network.swift in Sources */,
 				4FC1E60819FEB751002F743B /* LoginViewController.swift in Sources */,
 				4F95342719FFEFDF0058210D /* UserTableViewController.swift in Sources */,
+				4F525F391A05A10800EDD696 /* NearbyJourneysTableViewController.swift in Sources */,
 				4FC1E5E619FEB518002F743B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,7 +311,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FD6D2931A0555D700199082 /* User.swift in Sources */,
 				4FC1E5FC19FEB518002F743B /* FareShoutTests.swift in Sources */,
+				4FD6D2991A05564500199082 /* CarTest.swift in Sources */,
+				4FD6D2971A05561600199082 /* Network.swift in Sources */,
+				4FD6D2941A0555DA00199082 /* Car.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

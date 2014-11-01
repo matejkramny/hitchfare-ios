@@ -23,6 +23,7 @@ class FareShoutTests: XCTestCase {
     
     func testExample() {
         // This is an example of a functional test case.
+		var car = Car()
         XCTAssert(true, "Pass")
     }
     

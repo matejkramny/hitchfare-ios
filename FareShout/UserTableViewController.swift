@@ -13,7 +13,11 @@ class UserTableViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		//tableView.registerClass(ProfileTableViewCell.self, forCellReuseIdentifier: "profileCell")
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addHike:")
+	}
+	
+	func addHike (sender: AnyObject) {
+		self.performSegueWithIdentifier("addJourney", sender: nil)
 	}
 	
 	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

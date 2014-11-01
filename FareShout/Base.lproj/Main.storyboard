@@ -160,9 +160,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="622-HH-5V6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1656" y="-334.5"/>
+            <point key="canvasLocation" x="1728" y="148.5"/>
         </scene>
-        <!--Hello world-->
+        <!--My Profile-->
         <scene sceneID="JPW-X8-1NN">
             <objects>
                 <tableViewController id="332-jX-tJv" customClass="UserTableViewController" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
@@ -208,8 +208,7 @@
                                                     <exclude reference="2hV-Tx-Vk6"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="128" y="8" width="224" height="21"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
                                                     <include reference="2hV-Tx-Vk6"/>
                                                 </mask>
@@ -237,8 +236,7 @@
                                                     <exclude reference="CXg-Cu-XuE"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="360" y="8" width="32" height="30"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
                                                     <include reference="CXg-Cu-XuE"/>
                                                 </mask>
@@ -309,20 +307,20 @@
                                             <exclude reference="O3O-hC-hFE"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="978-Ho-5ds"/>
-                                            <exclude reference="JTj-Y1-I0e"/>
-                                            <exclude reference="m15-JB-Hhy"/>
                                             <exclude reference="8rf-Dg-SqJ"/>
                                             <exclude reference="GG3-94-xxf"/>
                                             <exclude reference="hJs-LP-6yS"/>
                                             <exclude reference="v7K-Tp-9gC"/>
-                                            <exclude reference="QxL-71-m2g"/>
-                                            <exclude reference="nIV-7v-n4s"/>
-                                            <exclude reference="r46-wg-YLZ"/>
                                             <exclude reference="B4i-2d-lnn"/>
                                             <exclude reference="hXG-y4-qEe"/>
                                             <exclude reference="ocD-dh-wow"/>
                                             <exclude reference="vqA-BN-F0N"/>
+                                            <exclude reference="QxL-71-m2g"/>
+                                            <exclude reference="nIV-7v-n4s"/>
+                                            <exclude reference="r46-wg-YLZ"/>
+                                            <exclude reference="978-Ho-5ds"/>
+                                            <exclude reference="JTj-Y1-I0e"/>
+                                            <exclude reference="m15-JB-Hhy"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact">
@@ -335,20 +333,20 @@
                                             <include reference="O3O-hC-hFE"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="978-Ho-5ds"/>
-                                            <include reference="JTj-Y1-I0e"/>
-                                            <include reference="m15-JB-Hhy"/>
                                             <include reference="8rf-Dg-SqJ"/>
                                             <include reference="GG3-94-xxf"/>
                                             <include reference="hJs-LP-6yS"/>
                                             <include reference="v7K-Tp-9gC"/>
-                                            <include reference="QxL-71-m2g"/>
-                                            <include reference="nIV-7v-n4s"/>
-                                            <include reference="r46-wg-YLZ"/>
                                             <include reference="B4i-2d-lnn"/>
                                             <include reference="hXG-y4-qEe"/>
                                             <include reference="ocD-dh-wow"/>
                                             <include reference="vqA-BN-F0N"/>
+                                            <include reference="QxL-71-m2g"/>
+                                            <include reference="nIV-7v-n4s"/>
+                                            <include reference="r46-wg-YLZ"/>
+                                            <include reference="978-Ho-5ds"/>
+                                            <include reference="JTj-Y1-I0e"/>
+                                            <include reference="m15-JB-Hhy"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -415,11 +413,77 @@
                             <outlet property="delegate" destination="332-jX-tJv" id="xuB-wd-xEz"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Hello world" id="N4x-4m-BQF"/>
+                    <navigationItem key="navigationItem" title="My Profile" id="N4x-4m-BQF"/>
+                    <connections>
+                        <segue destination="7wh-7X-zfG" kind="presentation" identifier="addJourney" id="idd-OF-6bD"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w35-fP-mZg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3313.5" y="148.5"/>
+        </scene>
+        <!--Add Hitch-->
+        <scene sceneID="7q8-Zn-MPe">
+            <objects>
+                <tableViewController id="eH1-yq-0dA" customClass="AddJourneyTableViewController" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="vLv-p5-2u3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="rightDetail" textLabel="3b0-XX-XMP" detailTextLabel="v3D-jy-pgK" style="IBUITableViewCellStyleValue1" id="fgP-vQ-Ld9">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fgP-vQ-Ld9" id="Pcl-Kr-a4G">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3b0-XX-XMP">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            </variation>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="v3D-jy-pgK">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            </variation>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="eH1-yq-0dA" id="oIa-P0-NdW"/>
+                            <outlet property="delegate" destination="eH1-yq-0dA" id="KmR-TV-hge"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Add Hitch" id="E1k-pn-Zl2"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xys-qB-ns7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5250" y="843.75"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="DUk-gt-Cj6">
+            <objects>
+                <navigationController id="7wh-7X-zfG" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zTj-YE-W61">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="eH1-yq-0dA" kind="relationship" relationship="rootViewController" id="Rw3-8h-Cnn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1LM-f8-LGP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4506" y="843.75"/>
         </scene>
         <!--Page Root View Controller-->
         <scene sceneID="OUz-th-0A1">
@@ -430,6 +494,7 @@
                         <viewControllerLayoutGuide type="bottom" id="zQg-zC-qY7"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="PWO-8x-EBG">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -439,7 +504,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QPu-JY-tPN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1656" y="351"/>
+            <point key="canvasLocation" x="966" y="148.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Hxu-fG-AER">
@@ -457,10 +522,10 @@
             </objects>
             <point key="canvasLocation" x="2520" y="148.5"/>
         </scene>
-        <!--Hello world 2-->
+        <!--Nearby Rides-->
         <scene sceneID="nI3-su-lpA">
             <objects>
-                <tableViewController id="Vvx-gm-nLf" sceneMemberID="viewController">
+                <tableViewController id="Vvx-gm-nLf" customClass="NearbyJourneysTableViewCell" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9xV-0m-EnX">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -618,11 +683,59 @@
                             <outlet property="delegate" destination="Vvx-gm-nLf" id="V2O-Ay-P6s"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Hello world 2" id="zJn-JP-1g7"/>
+                    <navigationItem key="navigationItem" title="Nearby Rides" id="zJn-JP-1g7"/>
+                    <connections>
+                        <segue destination="7wh-7X-zfG" kind="presentation" identifier="addJourney" id="cK3-Rz-WSY"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tmi-Km-oUY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3325.5" y="843.75"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="5Hk-42-cXv">
+            <objects>
+                <tableViewController id="cU5-fp-Ekr" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="eEW-fn-jCj">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="qDG-C1-gI1">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qDG-C1-gI1" id="Ep1-XM-be6">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="cU5-fp-Ekr" id="SeW-82-F9p"/>
+                            <outlet property="delegate" destination="cU5-fp-Ekr" id="e5E-gr-4PI"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="Zst-Uv-9Eq"/>
+                    <connections>
+                        <segue destination="7wh-7X-zfG" kind="presentation" identifier="addJourney" id="WWy-7h-XJa"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ztx-7Q-uL2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3325.5" y="1534.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Sau-Sr-Lb4">
+            <objects>
+                <navigationController id="Qvf-nB-PP5" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="s3i-60-gKO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="cU5-fp-Ekr" kind="relationship" relationship="rootViewController" id="JrW-Bw-7ib"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Rh-LD-U6b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2520" y="1534.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="n4h-tr-j1B">
@@ -641,4 +754,7 @@
             <point key="canvasLocation" x="2520" y="843.75"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="WWy-7h-XJa"/>
+    </inferredMetricsTieBreakers>
 </document>
