@@ -1,14 +1,7 @@
-//
-//  UserTableViewController.swift
-//  FareShout
-//
-//  Created by Matej Kramny on 28/10/2014.
-//  Copyright (c) 2014 Matej Kramny. All rights reserved.
-//
 
 import UIKit
 
-class UserTableViewController: UITableViewController {
+class UserTableViewController: UITableViewController, ProfileTableViewCellDelegate {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -37,7 +30,8 @@ class UserTableViewController: UITableViewController {
 		
 		if indexPath.section == 0 {
 			var c = cell as ProfileTableViewCell
-			c.nameLabel.text = "Hello world"
+			c.delegate = self
+			c.nameLabel.text = currentUser!.name
 		}
 		
 		return cell!
@@ -54,5 +48,9 @@ class UserTableViewController: UITableViewController {
 		default:
 			return ""
 		}
+	}
+	
+	func openCars(sender: UIButton) {
+		self.performSegueWithIdentifier("openCars", sender: nil)
 	}
 }

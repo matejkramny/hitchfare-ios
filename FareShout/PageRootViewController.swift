@@ -1,10 +1,3 @@
-//
-//  PageRootViewController.swift
-//  FareShout
-//
-//  Created by Matej Kramny on 28/10/2014.
-//  Copyright (c) 2014 Matej Kramny. All rights reserved.
-//
 
 import UIKit
 
@@ -19,10 +12,10 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource {
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		if pageCtrl == nil {
+		if pageCtrl == nil && currentUser != nil {
 			pageCtrl = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
 			pageCtrl!.dataSource = self
-			pageCtrl!.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+			pageCtrl!.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
 			
 			self.addChildViewController(pageCtrl!)
 			self.view.addSubview(pageCtrl!.view)
@@ -31,6 +24,7 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource {
 			var storyboard = UIStoryboard(name: "Main", bundle: nil)
 			vcs.append(storyboard.instantiateViewControllerWithIdentifier("myProfile"))
 			vcs.append(storyboard.instantiateViewControllerWithIdentifier("recent"))
+			vcs.append(storyboard.instantiateViewControllerWithIdentifier("friends"))
 			
 			self.pageCtrl!.setViewControllers([vcs[0]], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
 		}

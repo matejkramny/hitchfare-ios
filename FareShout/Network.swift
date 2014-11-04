@@ -26,6 +26,51 @@ func makeRequest (endpoint: String, method: String?) -> NSMutableURLRequest {
 	return request
 }
 
+func readSettings () -> Bool {
+	var docDir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
+	
+	var err: NSError?
+	var contents = NSData(contentsOfFile: docDir + "/settings.json", options: NSDataReadingOptions.DataReadingMappedIfSafe, error: &err)
+	
+	if err != nil {
+		return false
+	}
+	
+	var settings: [String: AnyObject]? = NSJSONSerialization.JSONObjectWithData(contents!, options: NSJSONReadingOptions(0), error: &err) as? [String: AnyObject]
+	if err != nil {
+		return false
+	}
+	
+	sessionCookie = settings!["sessionCookie"] as? String
+	if settings!["user"] != nil {
+		currentUser = User(_response: settings!["user"] as [String: AnyObject])
+	}
+	
+	return true
+}
+
+func saveSettings () -> Bool {
+	var settings: [String: AnyObject] = [:]
+	settings["sessionCookie"] = sessionCookie
+	settings["user"] = currentUser?.json()
+	
+	var docDir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
+	
+	var err: NSError?
+	var jsonData = NSJSONSerialization.dataWithJSONObject(settings, options: NSJSONWritingOptions.allZeros, error: &err)
+	
+	if err != nil {
+		return false
+	}
+	
+	jsonData?.writeToFile(docDir + "/settings.json", options: NSDataWritingOptions.AtomicWrite, error: &err)
+	if err != nil {
+		return false
+	}
+	
+	return true
+}
+
 func doPostRequest (request: NSMutableURLRequest, callback: (err: NSError?, data: AnyObject?) -> Void, body: [NSObject: AnyObject]) {
 	var err: NSError?
 	let data = NSJSONSerialization.dataWithJSONObject(body, options: nil, error: &err)

@@ -10,6 +10,7 @@
 		4F525F371A05958B00EDD696 /* Journey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F361A05958B00EDD696 /* Journey.swift */; };
 		4F525F391A05A10800EDD696 /* NearbyJourneysTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F381A05A10800EDD696 /* NearbyJourneysTableViewController.swift */; };
 		4F525F3B1A05A26C00EDD696 /* AddJourneyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F3A1A05A26C00EDD696 /* AddJourneyTableViewController.swift */; };
+		4F525F3D1A06A46500EDD696 /* CarsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F3C1A06A46500EDD696 /* CarsTableViewController.swift */; };
 		4F95342719FFEFDF0058210D /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F95342619FFEFDF0058210D /* UserTableViewController.swift */; };
 		4F95342A19FFF7060058210D /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F95342919FFF7060058210D /* ProfileTableViewCell.swift */; };
 		4FA9F15A19FED9B7009D0F33 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA9F15919FED9B7009D0F33 /* User.swift */; };
@@ -45,6 +46,7 @@
 		4F525F361A05958B00EDD696 /* Journey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Journey.swift; sourceTree = "<group>"; };
 		4F525F381A05A10800EDD696 /* NearbyJourneysTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyJourneysTableViewController.swift; sourceTree = "<group>"; };
 		4F525F3A1A05A26C00EDD696 /* AddJourneyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddJourneyTableViewController.swift; sourceTree = "<group>"; };
+		4F525F3C1A06A46500EDD696 /* CarsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarsTableViewController.swift; sourceTree = "<group>"; };
 		4F95342619FFEFDF0058210D /* UserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserTableViewController.swift; path = FareShout/UserTableViewController.swift; sourceTree = "<group>"; };
 		4F95342919FFF7060058210D /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileTableViewCell.swift; path = FareShout/ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		4FA9F15919FED9B7009D0F33 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -175,11 +177,12 @@
 		4FC1E60519FEB6E8002F743B /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				4FC1E60619FEB71D002F743B /* Login */,
 				4FA9F16019FFD3CA009D0F33 /* PageRootViewController.swift */,
+				4FC1E60619FEB71D002F743B /* Login */,
 				4F95342619FFEFDF0058210D /* UserTableViewController.swift */,
 				4F525F381A05A10800EDD696 /* NearbyJourneysTableViewController.swift */,
 				4F525F3A1A05A26C00EDD696 /* AddJourneyTableViewController.swift */,
+				4F525F3C1A06A46500EDD696 /* CarsTableViewController.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				4FD6D2921A0551F600199082 /* Car.swift in Sources */,
 				4FA9F16119FFD3CA009D0F33 /* PageRootViewController.swift in Sources */,
 				4F525F371A05958B00EDD696 /* Journey.swift in Sources */,
+				4F525F3D1A06A46500EDD696 /* CarsTableViewController.swift in Sources */,
 				4FC1E61019FEB891002F743B /* FacebookCtrl.m in Sources */,
 				4F525F3B1A05A26C00EDD696 /* AddJourneyTableViewController.swift in Sources */,
 				4FD6D2961A05560B00199082 /* Network.swift in Sources */,

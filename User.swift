@@ -1,10 +1,3 @@
-//
-//  User.swift
-//  FareShout
-//
-//  Created by Matej Kramny on 27/10/2014.
-//  Copyright (c) 2014 Matej Kramny. All rights reserved.
-//
 
 import Foundation
 
@@ -28,7 +21,9 @@ class User {
 	
 	init(_response: [NSString: AnyObject]) {
 		var pictureData: [String: AnyObject] = _response["picture"] as [String: AnyObject]
-		pictureData = pictureData["data"] as [String: AnyObject]
+		if pictureData["url"] == nil {
+			pictureData = pictureData["data"] as [String: AnyObject]
+		}
 		
 		self.picture = UserPicture()
 		self.picture?.isSilhouette = pictureData["is_silhouette"] as Bool
