@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F2773731A08E4FD0012B779 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2773721A08E4FD0012B779 /* TextFieldTableViewCell.swift */; };
+		4F2773751A08E5BA0012B779 /* AddCarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2773741A08E5BA0012B779 /* AddCarTableViewController.swift */; };
 		4F525F371A05958B00EDD696 /* Journey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F361A05958B00EDD696 /* Journey.swift */; };
 		4F525F391A05A10800EDD696 /* NearbyJourneysTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F381A05A10800EDD696 /* NearbyJourneysTableViewController.swift */; };
 		4F525F3B1A05A26C00EDD696 /* AddJourneyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F3A1A05A26C00EDD696 /* AddJourneyTableViewController.swift */; };
@@ -43,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F2773721A08E4FD0012B779 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		4F2773741A08E5BA0012B779 /* AddCarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCarTableViewController.swift; sourceTree = "<group>"; };
 		4F525F361A05958B00EDD696 /* Journey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Journey.swift; sourceTree = "<group>"; };
 		4F525F381A05A10800EDD696 /* NearbyJourneysTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyJourneysTableViewController.swift; sourceTree = "<group>"; };
 		4F525F3A1A05A26C00EDD696 /* AddJourneyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddJourneyTableViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				4F95342919FFF7060058210D /* ProfileTableViewCell.swift */,
+				4F2773721A08E4FD0012B779 /* TextFieldTableViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -183,6 +188,7 @@
 				4F525F381A05A10800EDD696 /* NearbyJourneysTableViewController.swift */,
 				4F525F3A1A05A26C00EDD696 /* AddJourneyTableViewController.swift */,
 				4F525F3C1A06A46500EDD696 /* CarsTableViewController.swift */,
+				4F2773741A08E5BA0012B779 /* AddCarTableViewController.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -304,9 +310,11 @@
 				4FC1E61019FEB891002F743B /* FacebookCtrl.m in Sources */,
 				4F525F3B1A05A26C00EDD696 /* AddJourneyTableViewController.swift in Sources */,
 				4FD6D2961A05560B00199082 /* Network.swift in Sources */,
+				4F2773731A08E4FD0012B779 /* TextFieldTableViewCell.swift in Sources */,
 				4FC1E60819FEB751002F743B /* LoginViewController.swift in Sources */,
 				4F95342719FFEFDF0058210D /* UserTableViewController.swift in Sources */,
 				4F525F391A05A10800EDD696 /* NearbyJourneysTableViewController.swift in Sources */,
+				4F2773751A08E5BA0012B779 /* AddCarTableViewController.swift in Sources */,
 				4FC1E5E619FEB518002F743B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

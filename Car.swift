@@ -1,13 +1,15 @@
 
 import Foundation
 
-class Car {
+class Car: NSObject {
 	var _id: NSString? = nil
 	var name: NSString = ""
 	var owner: User? = nil
 	var seats: Int = 0
 	
-	init(){}
+	override init() {
+		super.init()
+	}
 	
 	init(_response: [NSString: AnyObject]) {
 		self.seats = _response["seats"] as Int
@@ -54,7 +56,7 @@ class Car {
 		doRequest(request, callback, nil)
 	}
 	
-	func delete (callback: (err: NSError?, data: AnyObject?) -> Void) {
+	func remove (callback: (err: NSError?, data: AnyObject?) -> Void) {
 		if self._id == nil {
 			callback(err: nil, data: nil)
 			return

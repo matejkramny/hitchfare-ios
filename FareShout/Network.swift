@@ -71,6 +71,13 @@ func saveSettings () -> Bool {
 	return true
 }
 
+func checkLoggedIn () {
+	if currentUser != nil {
+		currentUser?.register({ (error: NSError?, data: AnyObject?) -> Void in
+		})
+	}
+}
+
 func doPostRequest (request: NSMutableURLRequest, callback: (err: NSError?, data: AnyObject?) -> Void, body: [NSObject: AnyObject]) {
 	var err: NSError?
 	let data = NSJSONSerialization.dataWithJSONObject(body, options: nil, error: &err)

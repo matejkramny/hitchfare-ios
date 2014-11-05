@@ -1,0 +1,3 @@
+[submodule "FXForms"]
+	path = FXForms
+	url = git@github.com:nicklockwood/FXForms.git
