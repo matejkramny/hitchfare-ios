@@ -53,7 +53,7 @@ class Car: NSObject {
 			request = makeRequest("/car/" + self._id!, "PUT")
 		}
 		
-		doRequest(request, callback, nil)
+		doPostRequest(request, callback, self.json())
 	}
 	
 	func remove (callback: (err: NSError?, data: AnyObject?) -> Void) {
