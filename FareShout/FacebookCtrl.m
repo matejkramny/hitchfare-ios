@@ -95,10 +95,13 @@ static FacebookCtrl *appConfigInstance = nil;
 	 if (![self checkUseEnableFacebook]) return;
 	 
 	 NSURL *requestURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", FACEBOOK_HOST, @"me"]];
-	 NSDictionary *parameters = @{@"fields":@"id,email,first_name,last_name,name,picture.type(large).width(1280)"};
+	 NSDictionary *parameters = @{
+											@"fields": @"id,email,first_name,last_name,name,picture.type(large).width(1280)"
+											};
 	 
 	 SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeFacebook requestMethod:SLRequestMethodGET URL:requestURL parameters:parameters];
 	 request.account = self.facebookAccount;
+	 
 	 [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
 		  NSLog(@"%@", urlResponse);
 		  NSLog(@"%@", [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);

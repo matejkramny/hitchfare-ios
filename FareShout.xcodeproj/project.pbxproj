@@ -13,6 +13,9 @@
 		4F525F391A05A10800EDD696 /* NearbyJourneysTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F381A05A10800EDD696 /* NearbyJourneysTableViewController.swift */; };
 		4F525F3B1A05A26C00EDD696 /* AddJourneyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F3A1A05A26C00EDD696 /* AddJourneyTableViewController.swift */; };
 		4F525F3D1A06A46500EDD696 /* CarsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F3C1A06A46500EDD696 /* CarsTableViewController.swift */; };
+		4F8856AA1A10FA120039EA6E /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F8856A91A10FA120039EA6E /* TextFieldTableViewCell.xib */; };
+		4F8856AD1A1118240039EA6E /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8856AB1A1118240039EA6E /* SwitchTableViewCell.swift */; };
+		4F8856AE1A1118240039EA6E /* SwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F8856AC1A1118240039EA6E /* SwitchTableViewCell.xib */; };
 		4F95342719FFEFDF0058210D /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F95342619FFEFDF0058210D /* UserTableViewController.swift */; };
 		4F95342A19FFF7060058210D /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F95342919FFF7060058210D /* ProfileTableViewCell.swift */; };
 		4FA9F15A19FED9B7009D0F33 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA9F15919FED9B7009D0F33 /* User.swift */; };
@@ -51,6 +54,9 @@
 		4F525F381A05A10800EDD696 /* NearbyJourneysTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyJourneysTableViewController.swift; sourceTree = "<group>"; };
 		4F525F3A1A05A26C00EDD696 /* AddJourneyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddJourneyTableViewController.swift; sourceTree = "<group>"; };
 		4F525F3C1A06A46500EDD696 /* CarsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarsTableViewController.swift; sourceTree = "<group>"; };
+		4F8856A91A10FA120039EA6E /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
+		4F8856AB1A1118240039EA6E /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
+		4F8856AC1A1118240039EA6E /* SwitchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchTableViewCell.xib; sourceTree = "<group>"; };
 		4F95342619FFEFDF0058210D /* UserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserTableViewController.swift; path = FareShout/UserTableViewController.swift; sourceTree = "<group>"; };
 		4F95342919FFF7060058210D /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileTableViewCell.swift; path = FareShout/ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		4FA9F15919FED9B7009D0F33 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -100,6 +106,9 @@
 			children = (
 				4F95342919FFF7060058210D /* ProfileTableViewCell.swift */,
 				4F2773721A08E4FD0012B779 /* TextFieldTableViewCell.swift */,
+				4F8856A91A10FA120039EA6E /* TextFieldTableViewCell.xib */,
+				4F8856AB1A1118240039EA6E /* SwitchTableViewCell.swift */,
+				4F8856AC1A1118240039EA6E /* SwitchTableViewCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -282,8 +291,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FC1E5EB19FEB518002F743B /* Main.storyboard in Resources */,
+				4F8856AE1A1118240039EA6E /* SwitchTableViewCell.xib in Resources */,
 				4FC1E5F019FEB518002F743B /* LaunchScreen.xib in Resources */,
 				4FC1E5ED19FEB518002F743B /* Images.xcassets in Resources */,
+				4F8856AA1A10FA120039EA6E /* TextFieldTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +321,7 @@
 				4FC1E61019FEB891002F743B /* FacebookCtrl.m in Sources */,
 				4F525F3B1A05A26C00EDD696 /* AddJourneyTableViewController.swift in Sources */,
 				4FD6D2961A05560B00199082 /* Network.swift in Sources */,
+				4F8856AD1A1118240039EA6E /* SwitchTableViewCell.swift in Sources */,
 				4F2773731A08E4FD0012B779 /* TextFieldTableViewCell.swift in Sources */,
 				4FC1E60819FEB751002F743B /* LoginViewController.swift in Sources */,
 				4F95342719FFEFDF0058210D /* UserTableViewController.swift in Sources */,

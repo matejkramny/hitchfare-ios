@@ -7,7 +7,12 @@ class NearbyJourneysTableViewCell: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addHike:")
 		self.refreshData()
+	}
+	
+	func addHike (sender: AnyObject) {
+		self.performSegueWithIdentifier("addJourney", sender: nil)
 	}
 	
 	func refreshData () {
