@@ -29,6 +29,12 @@
 		4FC1E60A19FEB839002F743B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FC1E60919FEB839002F743B /* Social.framework */; };
 		4FC1E60C19FEB866002F743B /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FC1E60B19FEB866002F743B /* Accounts.framework */; };
 		4FC1E61019FEB891002F743B /* FacebookCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC1E60F19FEB891002F743B /* FacebookCtrl.m */; };
+		4FD346E01A127A76006026DD /* StepperTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD346DE1A127A76006026DD /* StepperTableViewCell.swift */; };
+		4FD346E11A127A76006026DD /* StepperTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FD346DF1A127A76006026DD /* StepperTableViewCell.xib */; };
+		4FD346E41A127CB3006026DD /* PriceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD346E21A127CB3006026DD /* PriceTableViewCell.swift */; };
+		4FD346E51A127CB3006026DD /* PriceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FD346E31A127CB3006026DD /* PriceTableViewCell.xib */; };
+		4FD346E81A12831B006026DD /* StartEndTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD346E61A12831B006026DD /* StartEndTableViewCell.swift */; };
+		4FD346E91A12831B006026DD /* StartEndTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FD346E71A12831B006026DD /* StartEndTableViewCell.xib */; };
 		4FD6D2921A0551F600199082 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6D2911A0551F600199082 /* Car.swift */; };
 		4FD6D2931A0555D700199082 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA9F15919FED9B7009D0F33 /* User.swift */; };
 		4FD6D2941A0555DA00199082 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6D2911A0551F600199082 /* Car.swift */; };
@@ -76,6 +82,12 @@
 		4FC1E60D19FEB890002F743B /* FareShout-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FareShout-Bridging-Header.h"; sourceTree = "<group>"; };
 		4FC1E60E19FEB891002F743B /* FacebookCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookCtrl.h; sourceTree = "<group>"; };
 		4FC1E60F19FEB891002F743B /* FacebookCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookCtrl.m; sourceTree = "<group>"; };
+		4FD346DE1A127A76006026DD /* StepperTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperTableViewCell.swift; sourceTree = "<group>"; };
+		4FD346DF1A127A76006026DD /* StepperTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepperTableViewCell.xib; sourceTree = "<group>"; };
+		4FD346E21A127CB3006026DD /* PriceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriceTableViewCell.swift; sourceTree = "<group>"; };
+		4FD346E31A127CB3006026DD /* PriceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PriceTableViewCell.xib; sourceTree = "<group>"; };
+		4FD346E61A12831B006026DD /* StartEndTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartEndTableViewCell.swift; sourceTree = "<group>"; };
+		4FD346E71A12831B006026DD /* StartEndTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartEndTableViewCell.xib; sourceTree = "<group>"; };
 		4FD6D2911A0551F600199082 /* Car.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
 		4FD6D2951A05560B00199082 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		4FD6D2981A05564500199082 /* CarTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarTest.swift; sourceTree = "<group>"; };
@@ -109,6 +121,12 @@
 				4F8856A91A10FA120039EA6E /* TextFieldTableViewCell.xib */,
 				4F8856AB1A1118240039EA6E /* SwitchTableViewCell.swift */,
 				4F8856AC1A1118240039EA6E /* SwitchTableViewCell.xib */,
+				4FD346DE1A127A76006026DD /* StepperTableViewCell.swift */,
+				4FD346DF1A127A76006026DD /* StepperTableViewCell.xib */,
+				4FD346E21A127CB3006026DD /* PriceTableViewCell.swift */,
+				4FD346E31A127CB3006026DD /* PriceTableViewCell.xib */,
+				4FD346E61A12831B006026DD /* StartEndTableViewCell.swift */,
+				4FD346E71A12831B006026DD /* StartEndTableViewCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -259,6 +277,7 @@
 				TargetAttributes = {
 					4FC1E5DF19FEB518002F743B = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = TCRG56FQHV;
 					};
 					4FC1E5F419FEB518002F743B = {
 						CreatedOnToolsVersion = 6.1;
@@ -291,7 +310,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FC1E5EB19FEB518002F743B /* Main.storyboard in Resources */,
+				4FD346E11A127A76006026DD /* StepperTableViewCell.xib in Resources */,
+				4FD346E91A12831B006026DD /* StartEndTableViewCell.xib in Resources */,
 				4F8856AE1A1118240039EA6E /* SwitchTableViewCell.xib in Resources */,
+				4FD346E51A127CB3006026DD /* PriceTableViewCell.xib in Resources */,
 				4FC1E5F019FEB518002F743B /* LaunchScreen.xib in Resources */,
 				4FC1E5ED19FEB518002F743B /* Images.xcassets in Resources */,
 				4F8856AA1A10FA120039EA6E /* TextFieldTableViewCell.xib in Resources */,
@@ -319,9 +341,12 @@
 				4F525F371A05958B00EDD696 /* Journey.swift in Sources */,
 				4F525F3D1A06A46500EDD696 /* CarsTableViewController.swift in Sources */,
 				4FC1E61019FEB891002F743B /* FacebookCtrl.m in Sources */,
+				4FD346E01A127A76006026DD /* StepperTableViewCell.swift in Sources */,
 				4F525F3B1A05A26C00EDD696 /* AddJourneyTableViewController.swift in Sources */,
+				4FD346E81A12831B006026DD /* StartEndTableViewCell.swift in Sources */,
 				4FD6D2961A05560B00199082 /* Network.swift in Sources */,
 				4F8856AD1A1118240039EA6E /* SwitchTableViewCell.swift in Sources */,
+				4FD346E41A127CB3006026DD /* PriceTableViewCell.swift in Sources */,
 				4F2773731A08E4FD0012B779 /* TextFieldTableViewCell.swift in Sources */,
 				4FC1E60819FEB751002F743B /* LoginViewController.swift in Sources */,
 				4F95342719FFEFDF0058210D /* UserTableViewController.swift in Sources */,
@@ -455,10 +480,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FareShout/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FareShout/FareShout-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -469,10 +497,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FareShout/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FareShout/FareShout-Bridging-Header.h";
 			};
 			name = Release;
