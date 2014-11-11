@@ -29,23 +29,34 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	}
 	
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 7
+		return 8
 	}
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		if indexPath.row < 3 {
+		if indexPath.row == 0 {
 			var cell = tableView.dequeueReusableCellWithIdentifier("TextField", forIndexPath: indexPath) as TextFieldTableViewCell
 			
-			if indexPath.row == 0 {
-				cell.label.text = "Title"
-			} else if indexPath.row == 1 {
+			cell.label.text = "Title"
+			
+			return cell as UITableViewCell
+		} else if indexPath.row == 1 {
+			var cell = tableView.dequeueReusableCellWithIdentifier("carSelector", forIndexPath: indexPath) as UITableViewCell
+			
+			cell.textLabel.text = "Car"
+			cell.detailTextLabel?.text = ""
+			
+			return cell
+		} else if indexPath.row < 4 {
+			var cell = tableView.dequeueReusableCellWithIdentifier("TextField", forIndexPath: indexPath) as TextFieldTableViewCell
+			
+			if indexPath.row == 2 {
 				cell.label.text = "Departure"
-			} else if indexPath.row == 2 {
+			} else if indexPath.row == 3 {
 				cell.label.text = "Destination"
 			}
 			
-			return cell as UITableViewCell
-		} else if indexPath.row == 3 {
+			return cell
+		} else if indexPath.row == 4 {
 			// I am a driver / Passenger switch
 			var cell = tableView.dequeueReusableCellWithIdentifier("Switch", forIndexPath: indexPath) as SwitchTableViewCell
 			
@@ -55,14 +66,14 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 			cell.toggle.selectedSegmentIndex = 0
 			
 			return cell as UITableViewCell
-		} else if indexPath.row == 4 {
+		} else if indexPath.row == 5 {
 			// Availability
 			var cell = tableView.dequeueReusableCellWithIdentifier("Stepper", forIndexPath: indexPath) as StepperTableViewCell
 			
 			cell.label.text = "Availability"
 			
 			return cell as UITableViewCell
-		} else if indexPath.row == 5 {
+		} else if indexPath.row == 6 {
 			// Price
 			var cell = tableView.dequeueReusableCellWithIdentifier("Price", forIndexPath: indexPath) as PriceTableViewCell
 			
@@ -70,7 +81,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 			cell.initialize()
 			
 			return cell as UITableViewCell
-		} else if indexPath.row == 6 {
+		} else if indexPath.row == 7 {
 			// Start & End Date
 			var cell = tableView.dequeueReusableCellWithIdentifier("StartEnd", forIndexPath: indexPath) as StartEndTableViewCell
 			
@@ -84,10 +95,10 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	}
 	
 	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-		if indexPath.row == 5 {
+		if indexPath.row == 6 {
 			return 88
 		}
-		if indexPath.row == 6 {
+		if indexPath.row == 7 {
 			return startEndCellHeight
 		}
 		
@@ -108,7 +119,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 		
 		startEndCellHeight = cell.preferredHeight
 		
-		var indexPath: NSIndexPath = NSIndexPath(forRow: 6, inSection: 0)
+		var indexPath: NSIndexPath = NSIndexPath(forRow: 7, inSection: 0)
 		self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
 		self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
 	}
