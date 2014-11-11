@@ -160,9 +160,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="622-HH-5V6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1728" y="148.5"/>
+            <point key="canvasLocation" x="1339.5" y="368.25"/>
         </scene>
-        <!--My Profile-->
+        <!--Hitch-->
         <scene sceneID="JPW-X8-1NN">
             <objects>
                 <tableViewController id="332-jX-tJv" customClass="UserTableViewController" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
@@ -412,7 +412,7 @@
                             <outlet property="delegate" destination="332-jX-tJv" id="xuB-wd-xEz"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="My Profile" id="N4x-4m-BQF"/>
+                    <navigationItem key="navigationItem" title="Hitch" id="N4x-4m-BQF"/>
                     <connections>
                         <segue destination="7wh-7X-zfG" kind="presentation" identifier="addJourney" id="idd-OF-6bD"/>
                         <segue destination="6A2-Vh-4zX" kind="show" identifier="openCars" id="QZn-wy-0cd"/>
@@ -537,7 +537,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xys-qB-ns7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5250" y="843.75"/>
+            <point key="canvasLocation" x="5247" y="843.75"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="DUk-gt-Cj6">
@@ -553,7 +553,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1LM-f8-LGP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4506" y="843.75"/>
+            <point key="canvasLocation" x="4503" y="843.75"/>
         </scene>
         <!--Page Root View Controller-->
         <scene sceneID="OUz-th-0A1">
@@ -574,7 +574,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QPu-JY-tPN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="966" y="148.5"/>
+            <point key="canvasLocation" x="577.5" y="368.25"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Hxu-fG-AER">
@@ -592,7 +592,7 @@
             </objects>
             <point key="canvasLocation" x="2520" y="148.5"/>
         </scene>
-        <!--Nearby Rides-->
+        <!--Close Rides-->
         <scene sceneID="nI3-su-lpA">
             <objects>
                 <tableViewController id="Vvx-gm-nLf" customClass="NearbyJourneysTableViewCell" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
@@ -677,7 +677,7 @@
                             <outlet property="delegate" destination="Vvx-gm-nLf" id="V2O-Ay-P6s"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Nearby Rides" id="zJn-JP-1g7"/>
+                    <navigationItem key="navigationItem" title="Close Rides" id="zJn-JP-1g7"/>
                     <connections>
                         <segue destination="7wh-7X-zfG" kind="presentation" identifier="addJourney" id="cK3-Rz-WSY"/>
                     </connections>
@@ -686,7 +686,7 @@
             </objects>
             <point key="canvasLocation" x="3325.5" y="843.75"/>
         </scene>
-        <!--Friends-->
+        <!--Hike-->
         <scene sceneID="5Hk-42-cXv">
             <objects>
                 <tableViewController id="cU5-fp-Ekr" sceneMemberID="viewController">
@@ -707,7 +707,7 @@
                             <outlet property="delegate" destination="cU5-fp-Ekr" id="e5E-gr-4PI"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Friends" id="Zst-Uv-9Eq"/>
+                    <navigationItem key="navigationItem" title="Hike" id="Zst-Uv-9Eq"/>
                     <connections>
                         <segue destination="7wh-7X-zfG" kind="presentation" identifier="addJourney" id="WWy-7h-XJa"/>
                     </connections>
@@ -750,7 +750,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="xrD-Vx-1Ty"/>
         <segue reference="WWy-7h-XJa"/>
+        <segue reference="xrD-Vx-1Ty"/>
     </inferredMetricsTieBreakers>
 </document>
