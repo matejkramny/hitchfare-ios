@@ -1,10 +1,3 @@
-//
-//  SwitchTableViewCell.swift
-//  FareShout
-//
-//  Created by Matej Kramny on 10/11/2014.
-//  Copyright (c) 2014 Matej Kramny. All rights reserved.
-//
 
 import UIKit
 

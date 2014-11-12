@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -16,33 +15,33 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbT-6D-9W1">
-                        <rect key="frame" x="8" y="8" width="220" height="34"/>
+                        <rect key="frame" x="15" y="8" width="206" height="34"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="£100.00" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bxV-ky-G78">
-                        <rect key="frame" x="236" y="10" width="76" height="30"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="76" id="npw-ah-FaD"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <rect key="frame" x="229" y="8" width="76" height="34"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                     </textField>
                     <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZUs-74-mh7">
-                        <rect key="frame" x="6" y="50" width="308" height="31"/>
+                        <rect key="frame" x="13" y="50" width="294" height="31"/>
                     </slider>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="bxV-ky-G78" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="A1l-zK-Nlj"/>
-                    <constraint firstItem="sbT-6D-9W1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="GE2-jl-WD1"/>
-                    <constraint firstItem="ZUs-74-mh7" firstAttribute="top" secondItem="sbT-6D-9W1" secondAttribute="bottom" constant="8" id="LXv-Zi-cpw"/>
-                    <constraint firstItem="ZUs-74-mh7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="ReM-DP-Drk"/>
-                    <constraint firstItem="ZUs-74-mh7" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="aBi-PL-kmM"/>
-                    <constraint firstItem="ZUs-74-mh7" firstAttribute="top" secondItem="bxV-ky-G78" secondAttribute="bottom" constant="10" id="fXh-Y1-9ua"/>
-                    <constraint firstItem="sbT-6D-9W1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="fwE-6Q-1l8"/>
-                    <constraint firstItem="bxV-ky-G78" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="ifw-uw-qDQ"/>
-                    <constraint firstItem="ZUs-74-mh7" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="rQN-sn-PsK"/>
+                    <constraint firstItem="sbT-6D-9W1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="6Wa-2k-eE5"/>
+                    <constraint firstItem="bxV-ky-G78" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="6ZI-UE-Ndc"/>
+                    <constraint firstItem="sbT-6D-9W1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Eb6-Fk-Jrj"/>
+                    <constraint firstItem="ZUs-74-mh7" firstAttribute="top" secondItem="bxV-ky-G78" secondAttribute="bottom" constant="8" id="N0a-cl-fVT"/>
+                    <constraint firstAttribute="trailing" secondItem="bxV-ky-G78" secondAttribute="trailing" constant="15" id="N43-sA-FVX"/>
+                    <constraint firstItem="ZUs-74-mh7" firstAttribute="top" secondItem="bxV-ky-G78" secondAttribute="bottom" constant="8" id="O0x-c9-wgy"/>
+                    <constraint firstItem="ZUs-74-mh7" firstAttribute="top" secondItem="sbT-6D-9W1" secondAttribute="bottom" constant="8" id="P7Y-F4-LiV"/>
+                    <constraint firstItem="ZUs-74-mh7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="QV1-MJ-hOA"/>
+                    <constraint firstItem="bxV-ky-G78" firstAttribute="leading" secondItem="sbT-6D-9W1" secondAttribute="trailing" constant="8" id="QZS-a8-vug"/>
+                    <constraint firstAttribute="trailing" secondItem="ZUs-74-mh7" secondAttribute="trailing" constant="15" id="Rd7-E7-iUb"/>
+                    <constraint firstItem="bxV-ky-G78" firstAttribute="leading" secondItem="sbT-6D-9W1" secondAttribute="trailing" constant="8" id="WZA-r2-o5a"/>
+                    <constraint firstAttribute="bottom" secondItem="ZUs-74-mh7" secondAttribute="bottom" constant="8" id="YQf-fz-zgH"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

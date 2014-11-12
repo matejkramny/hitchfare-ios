@@ -12,6 +12,7 @@ class Car: NSObject {
 	}
 	
 	init(_response: [NSString: AnyObject]) {
+		self._id = _response["_id"] as? String
 		self.seats = _response["seats"] as Int
 		self.name = _response["name"] as String
 	}

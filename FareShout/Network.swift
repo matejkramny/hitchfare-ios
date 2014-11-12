@@ -1,11 +1,33 @@
 
 import Foundation
 
-let kAPIProtocol = "http://"
-let kAPIEndpoint = kAPIProtocol + "localhost:3000"
+// Debug
+//let kAPIProtocol = "http://"
+//let kAPIEndpoint = kAPIProtocol + "localhost:3000"
 
+// Production
+let kAPIProtocol = "https://"
+let kAPIEndpoint = kAPIProtocol + "fareshout-matejkramny.ngapp.io"
+
+var storage: SharedStorage = SharedStorage()
 var currentUser: User?
 var sessionCookie: String?
+var queueRequests: Bool = false
+var queuedRequests: [Request] = []
+
+class Request: NSObject {
+	var request: NSMutableURLRequest
+	var callback: (err: NSError?, data: AnyObject?) -> Void
+	var body: NSData?
+	
+	init(request: NSMutableURLRequest, callback: (err: NSError?, data: AnyObject?) -> Void, body: NSData?) {
+		self.request = request
+		self.callback = callback
+		self.body = body
+		
+		super.init()
+	}
+}
 
 func makeRequest (endpoint: String, method: String?) -> NSMutableURLRequest {
 	var request = NSMutableURLRequest(URL: NSURL(string: kAPIEndpoint + endpoint)!)
@@ -74,8 +96,24 @@ func saveSettings () -> Bool {
 func checkLoggedIn () {
 	if currentUser != nil {
 		currentUser?.register({ (error: NSError?, data: AnyObject?) -> Void in
+			queueRequests = false
+			unqueueRequests()
 		})
+		
+		queueRequests = true
 	}
+}
+
+func unqueueRequests() {
+	for req in queuedRequests {
+		if sessionCookie != nil {
+			req.request.setValue(sessionCookie, forHTTPHeaderField: "Cookie")
+		}
+		
+		doRequest(req.request, req.callback, req.body)
+	}
+	
+	queuedRequests = []
 }
 
 func doPostRequest (request: NSMutableURLRequest, callback: (err: NSError?, data: AnyObject?) -> Void, body: [NSObject: AnyObject]) {
@@ -86,6 +124,13 @@ func doPostRequest (request: NSMutableURLRequest, callback: (err: NSError?, data
 }
 
 func doRequest (request: NSMutableURLRequest, callback: (err: NSError?, data: AnyObject?) -> Void, body: NSData?) {
+	if queueRequests {
+		var req: Request! = Request(request: request, callback: callback, body: body)
+		queuedRequests.append(req)
+		
+		return
+	}
+	
 	if body != nil {
 		request.HTTPBody = body
 	}

@@ -7,13 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F2773731A08E4FD0012B779 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2773721A08E4FD0012B779 /* TextFieldTableViewCell.swift */; };
+		4F1AD16D1A139AF90047BEE8 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD16B1A139AF90047BEE8 /* TextFieldTableViewCell.swift */; };
+		4F1AD16E1A139AF90047BEE8 /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F1AD16C1A139AF90047BEE8 /* TextFieldTableViewCell.xib */; };
+		4F1AD1711A139B490047BEE8 /* FSTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD16F1A139B490047BEE8 /* FSTextFieldTableViewCell.swift */; };
+		4F1AD1721A139B490047BEE8 /* FSTextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F1AD1701A139B490047BEE8 /* FSTextFieldTableViewCell.xib */; };
 		4F2773751A08E5BA0012B779 /* AddCarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2773741A08E5BA0012B779 /* AddCarTableViewController.swift */; };
+		4F4E363D1A13622100934D6B /* SharedStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E363C1A13622100934D6B /* SharedStorage.swift */; };
 		4F525F371A05958B00EDD696 /* Journey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F361A05958B00EDD696 /* Journey.swift */; };
 		4F525F391A05A10800EDD696 /* NearbyJourneysTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F381A05A10800EDD696 /* NearbyJourneysTableViewController.swift */; };
 		4F525F3B1A05A26C00EDD696 /* AddJourneyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F3A1A05A26C00EDD696 /* AddJourneyTableViewController.swift */; };
 		4F525F3D1A06A46500EDD696 /* CarsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F3C1A06A46500EDD696 /* CarsTableViewController.swift */; };
-		4F8856AA1A10FA120039EA6E /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F8856A91A10FA120039EA6E /* TextFieldTableViewCell.xib */; };
 		4F8856AD1A1118240039EA6E /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8856AB1A1118240039EA6E /* SwitchTableViewCell.swift */; };
 		4F8856AE1A1118240039EA6E /* SwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F8856AC1A1118240039EA6E /* SwitchTableViewCell.xib */; };
 		4F95342719FFEFDF0058210D /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F95342619FFEFDF0058210D /* UserTableViewController.swift */; };
@@ -41,6 +44,7 @@
 		4FD6D2961A05560B00199082 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6D2951A05560B00199082 /* Network.swift */; };
 		4FD6D2971A05561600199082 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6D2951A05560B00199082 /* Network.swift */; };
 		4FD6D2991A05564500199082 /* CarTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6D2981A05564500199082 /* CarTest.swift */; };
+		4FF1AC381A1365680074CC36 /* SharedStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E363C1A13622100934D6B /* SharedStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,13 +58,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4F2773721A08E4FD0012B779 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		4F1AD16B1A139AF90047BEE8 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		4F1AD16C1A139AF90047BEE8 /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
+		4F1AD16F1A139B490047BEE8 /* FSTextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSTextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		4F1AD1701A139B490047BEE8 /* FSTextFieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FSTextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		4F2773741A08E5BA0012B779 /* AddCarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCarTableViewController.swift; sourceTree = "<group>"; };
+		4F4E363C1A13622100934D6B /* SharedStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedStorage.swift; sourceTree = "<group>"; };
 		4F525F361A05958B00EDD696 /* Journey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Journey.swift; sourceTree = "<group>"; };
 		4F525F381A05A10800EDD696 /* NearbyJourneysTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyJourneysTableViewController.swift; sourceTree = "<group>"; };
 		4F525F3A1A05A26C00EDD696 /* AddJourneyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddJourneyTableViewController.swift; sourceTree = "<group>"; };
 		4F525F3C1A06A46500EDD696 /* CarsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarsTableViewController.swift; sourceTree = "<group>"; };
-		4F8856A91A10FA120039EA6E /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		4F8856AB1A1118240039EA6E /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		4F8856AC1A1118240039EA6E /* SwitchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchTableViewCell.xib; sourceTree = "<group>"; };
 		4F95342619FFEFDF0058210D /* UserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserTableViewController.swift; path = FareShout/UserTableViewController.swift; sourceTree = "<group>"; };
@@ -117,8 +124,10 @@
 			isa = PBXGroup;
 			children = (
 				4F95342919FFF7060058210D /* ProfileTableViewCell.swift */,
-				4F2773721A08E4FD0012B779 /* TextFieldTableViewCell.swift */,
-				4F8856A91A10FA120039EA6E /* TextFieldTableViewCell.xib */,
+				4F1AD16B1A139AF90047BEE8 /* TextFieldTableViewCell.swift */,
+				4F1AD16C1A139AF90047BEE8 /* TextFieldTableViewCell.xib */,
+				4F1AD16F1A139B490047BEE8 /* FSTextFieldTableViewCell.swift */,
+				4F1AD1701A139B490047BEE8 /* FSTextFieldTableViewCell.xib */,
 				4F8856AB1A1118240039EA6E /* SwitchTableViewCell.swift */,
 				4F8856AC1A1118240039EA6E /* SwitchTableViewCell.xib */,
 				4FD346DE1A127A76006026DD /* StepperTableViewCell.swift */,
@@ -135,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				4FA9F15919FED9B7009D0F33 /* User.swift */,
+				4F4E363C1A13622100934D6B /* SharedStorage.swift */,
 				4FD6D2911A0551F600199082 /* Car.swift */,
 				4F525F361A05958B00EDD696 /* Journey.swift */,
 			);
@@ -277,10 +287,11 @@
 				TargetAttributes = {
 					4FC1E5DF19FEB518002F743B = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = TCRG56FQHV;
+						DevelopmentTeam = P6DBKK68A7;
 					};
 					4FC1E5F419FEB518002F743B = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = P6DBKK68A7;
 						TestTargetID = 4FC1E5DF19FEB518002F743B;
 					};
 				};
@@ -311,12 +322,13 @@
 			files = (
 				4FC1E5EB19FEB518002F743B /* Main.storyboard in Resources */,
 				4FD346E11A127A76006026DD /* StepperTableViewCell.xib in Resources */,
+				4F1AD1721A139B490047BEE8 /* FSTextFieldTableViewCell.xib in Resources */,
 				4FD346E91A12831B006026DD /* StartEndTableViewCell.xib in Resources */,
 				4F8856AE1A1118240039EA6E /* SwitchTableViewCell.xib in Resources */,
 				4FD346E51A127CB3006026DD /* PriceTableViewCell.xib in Resources */,
 				4FC1E5F019FEB518002F743B /* LaunchScreen.xib in Resources */,
 				4FC1E5ED19FEB518002F743B /* Images.xcassets in Resources */,
-				4F8856AA1A10FA120039EA6E /* TextFieldTableViewCell.xib in Resources */,
+				4F1AD16E1A139AF90047BEE8 /* TextFieldTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,17 +354,19 @@
 				4F525F3D1A06A46500EDD696 /* CarsTableViewController.swift in Sources */,
 				4FC1E61019FEB891002F743B /* FacebookCtrl.m in Sources */,
 				4FD346E01A127A76006026DD /* StepperTableViewCell.swift in Sources */,
+				4F1AD1711A139B490047BEE8 /* FSTextFieldTableViewCell.swift in Sources */,
 				4F525F3B1A05A26C00EDD696 /* AddJourneyTableViewController.swift in Sources */,
 				4FD346E81A12831B006026DD /* StartEndTableViewCell.swift in Sources */,
+				4F4E363D1A13622100934D6B /* SharedStorage.swift in Sources */,
 				4FD6D2961A05560B00199082 /* Network.swift in Sources */,
 				4F8856AD1A1118240039EA6E /* SwitchTableViewCell.swift in Sources */,
 				4FD346E41A127CB3006026DD /* PriceTableViewCell.swift in Sources */,
-				4F2773731A08E4FD0012B779 /* TextFieldTableViewCell.swift in Sources */,
 				4FC1E60819FEB751002F743B /* LoginViewController.swift in Sources */,
 				4F95342719FFEFDF0058210D /* UserTableViewController.swift in Sources */,
 				4F525F391A05A10800EDD696 /* NearbyJourneysTableViewController.swift in Sources */,
 				4F2773751A08E5BA0012B779 /* AddCarTableViewController.swift in Sources */,
 				4FC1E5E619FEB518002F743B /* AppDelegate.swift in Sources */,
+				4F1AD16D1A139AF90047BEE8 /* TextFieldTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +376,7 @@
 			files = (
 				4FD6D2931A0555D700199082 /* User.swift in Sources */,
 				4FC1E5FC19FEB518002F743B /* FareShoutTests.swift in Sources */,
+				4FF1AC381A1365680074CC36 /* SharedStorage.swift in Sources */,
 				4FD6D2991A05564500199082 /* CarTest.swift in Sources */,
 				4FD6D2971A05561600199082 /* Network.swift in Sources */,
 				4FD6D2941A0555DA00199082 /* Car.swift in Sources */,
@@ -512,6 +527,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -523,6 +540,7 @@
 				INFOPLIST_FILE = FareShoutTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FareShout.app/FareShout";
 			};
 			name = Debug;
@@ -531,6 +549,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -538,6 +558,7 @@
 				INFOPLIST_FILE = FareShoutTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FareShout.app/FareShout";
 			};
 			name = Release;

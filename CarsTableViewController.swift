@@ -1,9 +1,15 @@
 
 import UIKit
 
+protocol CarSelectionProtocol {
+	func didSelectCar (car: Car)
+}
+
 class CarsTableViewController: UITableViewController {
 	
-	var cars: [Car] = []
+	var selectCarMode: Bool = false
+	var selectedCar: Car? = nil
+	var delegate: CarSelectionProtocol? = nil
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -12,7 +18,7 @@ class CarsTableViewController: UITableViewController {
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addCar:")
 		
 		self.refreshControl = UIRefreshControl()
-		self.refreshControl?.addTarget(self, action: "refreshCars:", forControlEvents: UIControlEvents.ValueChanged)
+		self.refreshControl!.addTarget(self, action: "refreshCars:", forControlEvents: UIControlEvents.ValueChanged)
 		
 		self.refreshCars(nil)
 	}
@@ -22,13 +28,9 @@ class CarsTableViewController: UITableViewController {
 	}
 	
 	func refreshCars (sender: AnyObject?) {
-		Car.getAll({ (err: NSError?, data: [Car]) -> Void in
-			self.cars = data
-			
-			self.refreshControl?.endRefreshing()
+		storage.getCars({ (err: NSError?) -> Void in
+			self.refreshControl!.endRefreshing()
 			self.tableView.reloadData()
-			
-			return
 		})
 	}
 	
@@ -37,16 +39,36 @@ class CarsTableViewController: UITableViewController {
 	}
 	
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return cars.count
+		return storage.cars.count
 	}
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("rightDetail", forIndexPath: indexPath) as UITableViewCell
 		
-		var car = cars[indexPath.row]
+		var car = storage.cars[indexPath.row]
 		cell.textLabel.text = car.name
 		
+		if selectCarMode == true {
+			cell.accessoryType = UITableViewCellAccessoryType.None
+			
+			if car == selectedCar {
+				cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+			}
+		}
+		
 		return cell
+	}
+	
+	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+		if selectCarMode == true {
+			self.selectedCar = storage.cars[indexPath.row]
+			
+			if self.delegate != nil {
+				self.delegate!.didSelectCar(selectedCar!)
+			}
+			
+			self.navigationController!.popViewControllerAnimated(true)
+		}
 	}
 	
 }

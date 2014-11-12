@@ -23,8 +23,8 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource {
 			
 			var storyboard = UIStoryboard(name: "Main", bundle: nil)
 			vcs.append(storyboard.instantiateViewControllerWithIdentifier("recent"))
-			vcs.append(storyboard.instantiateViewControllerWithIdentifier("myProfile"))
 			vcs.append(storyboard.instantiateViewControllerWithIdentifier("friends"))
+			vcs.append(storyboard.instantiateViewControllerWithIdentifier("myProfile"))
 			
 			self.pageCtrl!.setViewControllers([vcs[0]], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
 		}

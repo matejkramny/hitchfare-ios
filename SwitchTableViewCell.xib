@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,8 +14,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rmW-4t-eLg">
-                        <rect key="frame" x="8" y="9" width="304" height="28"/>
+                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rmW-4t-eLg">
+                        <rect key="frame" x="15" y="9" width="289" height="28"/>
                         <segments>
                             <segment title="First"/>
                             <segment title="Second"/>
@@ -24,10 +23,10 @@
                     </segmentedControl>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="rmW-4t-eLg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="D4u-00-vWL"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="rmW-4t-eLg" secondAttribute="bottom" id="Fbl-8e-Wco"/>
-                    <constraint firstItem="rmW-4t-eLg" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="THW-6P-PB0"/>
-                    <constraint firstItem="rmW-4t-eLg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="tyo-JI-B5Z"/>
+                    <constraint firstAttribute="bottom" secondItem="rmW-4t-eLg" secondAttribute="bottom" constant="7.5" id="Rip-e0-vfA"/>
+                    <constraint firstItem="rmW-4t-eLg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="kPc-Lf-B9n"/>
+                    <constraint firstItem="rmW-4t-eLg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="nsf-je-320"/>
+                    <constraint firstAttribute="trailing" secondItem="rmW-4t-eLg" secondAttribute="trailing" constant="16" id="pyN-iE-tOd"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

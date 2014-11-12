@@ -8,7 +8,7 @@ class AddCarTableViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.tableView.registerNib(UINib(nibName: "TextFieldTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "TextField")
+		self.tableView.registerNib(UINib(nibName: "FSTextFieldTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "TextField")
 		
 		self.navigationItem.title = "Add Car"
 		self.navigationItem.hidesBackButton = true
@@ -19,7 +19,7 @@ class AddCarTableViewController: UITableViewController {
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 		
-		let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as TextFieldTableViewCell
+		let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as FSTextFieldTableViewCell
 		cell.field.becomeFirstResponder()
 	}
 	
@@ -44,7 +44,7 @@ class AddCarTableViewController: UITableViewController {
 	}
 	
 	func getCellContents(indexPath: NSIndexPath) -> NSString {
-		return (self.tableView.cellForRowAtIndexPath(indexPath) as TextFieldTableViewCell).field.text
+		return (self.tableView.cellForRowAtIndexPath(indexPath) as FSTextFieldTableViewCell).field.text
 	}
 	
 	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -58,7 +58,7 @@ class AddCarTableViewController: UITableViewController {
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		var identifier = "TextField"
 		
-		let cell: TextFieldTableViewCell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as TextFieldTableViewCell
+		let cell: FSTextFieldTableViewCell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as FSTextFieldTableViewCell
 		
 		cell.selectionStyle = UITableViewCellSelectionStyle.None
 		
@@ -86,7 +86,7 @@ class AddCarTableViewController: UITableViewController {
 	}
 	
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		var cell: TextFieldTableViewCell = tableView.cellForRowAtIndexPath(indexPath) as TextFieldTableViewCell
+		var cell: FSTextFieldTableViewCell = tableView.cellForRowAtIndexPath(indexPath) as FSTextFieldTableViewCell
 		cell.field.becomeFirstResponder()
 		
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)

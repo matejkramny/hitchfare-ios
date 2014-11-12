@@ -2,8 +2,8 @@
 import UIKit
 
 class LoginViewController: UIViewController, FacebookCtrlDelegate, UIScrollViewDelegate {
-	@IBOutlet weak var pageCtrl: UIPageControl!
 	
+	@IBOutlet weak var pageCtrl: UIPageControl!
 	@IBOutlet weak var scrollView: UIScrollView!
 	
 	var images: [UIImageView] = []

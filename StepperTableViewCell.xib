@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,25 +14,25 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Rnb-vI-M9e">
-                        <rect key="frame" x="218" y="7" width="94" height="29"/>
+                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Rnb-vI-M9e">
+                        <rect key="frame" x="210" y="7" width="94" height="29"/>
                     </stepper>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="52e-QP-Ea7">
-                        <rect key="frame" x="8" y="8" width="202" height="28"/>
+                        <rect key="frame" x="15" y="8" width="187" height="28"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Rnb-vI-M9e" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="0fc-xh-zkv"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="Rnb-vI-M9e" secondAttribute="bottom" id="4Vj-uh-1yw"/>
-                    <constraint firstItem="Rnb-vI-M9e" firstAttribute="leading" secondItem="52e-QP-Ea7" secondAttribute="trailing" constant="8" id="9Hh-QM-dgz"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="52e-QP-Ea7" secondAttribute="bottom" id="NDI-jK-9uE"/>
-                    <constraint firstItem="52e-QP-Ea7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="XMy-dP-Xh5"/>
-                    <constraint firstItem="Rnb-vI-M9e" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Xyl-VB-pwp"/>
-                    <constraint firstItem="52e-QP-Ea7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="mae-ha-0yF"/>
-                    <constraint firstItem="Rnb-vI-M9e" firstAttribute="leading" secondItem="52e-QP-Ea7" secondAttribute="trailing" constant="8" id="nuI-kG-Mc8"/>
+                    <constraint firstItem="52e-QP-Ea7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="01O-Iu-7Mu"/>
+                    <constraint firstAttribute="bottom" secondItem="Rnb-vI-M9e" secondAttribute="bottom" constant="8" id="436-KN-nb2"/>
+                    <constraint firstItem="Rnb-vI-M9e" firstAttribute="leading" secondItem="52e-QP-Ea7" secondAttribute="trailing" constant="8" id="Fde-9E-A5A"/>
+                    <constraint firstItem="Rnb-vI-M9e" firstAttribute="leading" secondItem="52e-QP-Ea7" secondAttribute="trailing" constant="8" id="H8B-dY-hAw"/>
+                    <constraint firstAttribute="bottom" secondItem="52e-QP-Ea7" secondAttribute="bottom" constant="8" id="RMI-SD-QZR"/>
+                    <constraint firstItem="52e-QP-Ea7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="a9Z-dY-3iS"/>
+                    <constraint firstItem="Rnb-vI-M9e" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="iib-J0-DGF"/>
+                    <constraint firstAttribute="trailing" secondItem="Rnb-vI-M9e" secondAttribute="trailing" constant="16" id="sdB-Uu-Ou5"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

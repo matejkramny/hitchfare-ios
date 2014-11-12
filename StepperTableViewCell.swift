@@ -1,23 +1,29 @@
-//
-//  SwitchTableViewCell.swift
-//  FareShout
-//
-//  Created by Matej Kramny on 10/11/2014.
-//  Copyright (c) 2014 Matej Kramny. All rights reserved.
-//
 
 import UIKit
+
+protocol StepperCellDelegate {
+	func StepperValueChanged(cell: StepperTableViewCell, value: Double)
+}
 
 class StepperTableViewCell: UITableViewCell {
 	
 	@IBOutlet weak var stepper: UIStepper!
 	@IBOutlet weak var label: UILabel!
 	
-	override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-		super.init(style: style, reuseIdentifier: reuseIdentifier)
-	}
+	var delegate: StepperCellDelegate? = nil
 	
 	required init(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 	}
+	
+	func initialize() {
+		stepper.addTarget(self, action: "valueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+	}
+	
+	func valueChanged(sender: AnyObject?) {
+		if self.delegate != nil {
+			self.delegate!.StepperValueChanged(self, value: self.stepper.value)
+		}
+	}
+	
 }
