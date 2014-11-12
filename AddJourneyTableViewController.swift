@@ -146,6 +146,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 			cell.field.becomeFirstResponder()
 		case 1:
 			self.performSegueWithIdentifier("openCars", sender: nil)
+			return
 		default:
 			break
 		}
