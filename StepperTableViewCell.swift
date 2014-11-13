@@ -16,6 +16,10 @@ class StepperTableViewCell: UITableViewCell {
 		super.init(coder: aDecoder)
 	}
 	
+	override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+		super.init(style: style, reuseIdentifier: reuseIdentifier)
+	}
+	
 	func initialize() {
 		stepper.addTarget(self, action: "valueChanged:", forControlEvents: UIControlEvents.ValueChanged)
 	}

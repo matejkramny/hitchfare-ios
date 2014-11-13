@@ -9,6 +9,8 @@ enum StartEndTableViewCellField: Int {
 
 protocol StartEndTableViewCellProtocol {
 	func StartEndTableViewCellAnimateCellHeight(cell: StartEndTableViewCell)
+	func StartEndTableViewCellDateChanged(cell: StartEndTableViewCell, startDate: NSDate)
+	func StartEndTableViewCellDateChanged(cell: StartEndTableViewCell, endDate: NSDate)
 }
 
 class StartEndTableViewCell: UITableViewCell, UITextFieldDelegate {
@@ -27,6 +29,9 @@ class StartEndTableViewCell: UITableViewCell, UITextFieldDelegate {
 	func initialize() {
 		startDateField.delegate = self
 		endDateField.delegate = self
+		
+		startDateField.placeholder = "Start Date"
+		endDateField.placeholder = "End Date"
 	}
 	
 	func showDatePicker (field: StartEndTableViewCellField) {
@@ -92,10 +97,17 @@ class StartEndTableViewCell: UITableViewCell, UITextFieldDelegate {
 	
 	func datePickerValueChanged (sender: AnyObject?) {
 		if currentDatePicker == StartEndTableViewCellField.Start {
+			// Needs some formatting
 			startDateField.text = datePicker!.date.description
+			self.delegate!.StartEndTableViewCellDateChanged(self, startDate: datePicker!.date)
 		} else if currentDatePicker == StartEndTableViewCellField.End {
 			endDateField.text = datePicker!.date.description
+			self.delegate!.StartEndTableViewCellDateChanged(self, endDate: datePicker!.date)
 		}
+	}
+	
+	override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+		super.init(style: style, reuseIdentifier: reuseIdentifier)
 	}
 	
 	required init(coder aDecoder: NSCoder) {

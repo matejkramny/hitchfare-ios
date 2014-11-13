@@ -7,29 +7,35 @@ class Journey {
 	
 	var owner: String? = "" //_id
 	var car: String? = "" //_id
-	var driver: String? = "" //_id
+	var isDriver: Bool = true
 	var availableSeats: Int? = 0
 	
 	var startDate: NSDate? = NSDate()
 	var startDateHuman: NSString? = ""
+	var startLocation: NSString? = ""
 	var startLat: Double? = 0
 	var startLng: Double? = 0
 	
 	var endDate: NSDate? = NSDate()
 	var endDateHuman: NSString? = ""
+	var endLocation: NSString? = ""
 	var endLat: Double? = 0
 	var endLng: Double? = 0
 	
-	var price: Double? = 0
+	var price: Float = 10.00
 	
-	init(){}
+	init(){
+	}
 	
 	init(_response: [NSString: AnyObject]) {
 		self.name = _response["name"] as? String
 		
 		self.owner = _response["owner"] as? String
 		self.car = _response["car"] as? String
-		self.driver = _response["driver"] as? String
+		var isDriver = _response["isDriver"] as? Bool
+		if isDriver != nil {
+			self.isDriver = isDriver!
+		}
 		self.availableSeats = _response["availableSeats"] as? Int
 		
 		var start = _response["start"] as [String: AnyObject]
@@ -39,6 +45,7 @@ class Journey {
 		}
 		
 		self.startDateHuman = start["human"] as? String
+		self.startLocation = start["location"] as? String
 		self.startLat = start["lat"] as? Double
 		self.startLng = start["lng"] as? Double
 		
@@ -49,10 +56,11 @@ class Journey {
 		}
 		
 		self.endDateHuman = end["human"] as? String
+		self.endLocation = end["location"] as? String
 		self.endLat = end["lat"] as? Double
 		self.endLng = end["lng"] as? Double
 		
-		self.price = end["price"] as? Double
+		self.price = end["price"] as Float
 	}
 	
 	func json() -> [NSObject: AnyObject] {
@@ -65,22 +73,24 @@ class Journey {
 		
 		if self.owner != nil { json["owner"] = self.owner }
 		if self.car != nil { json["car"] = self.car }
-		if self.driver != nil { json["driver"] = self.driver }
+		json["isDriver"] = self.isDriver
 		if self.availableSeats != nil { json["availableSeats"] = self.availableSeats }
 		
 		if self.startDate != nil { startJson["date"] = self.startDate!.timeIntervalSince1970 }
 		if self.startDateHuman != nil { startJson["human"] = self.startDateHuman }
+		if self.startLocation != nil { startJson["location"] = self.startLocation }
 		if self.startLat != nil { startJson["startLat"] = self.startLat }
 		if self.startLng != nil { startJson["startLng"] = self.startLng }
 		json["start"] = startJson
 		
 		if self.endDate != nil { endJson["date"] = self.endDate!.timeIntervalSince1970 }
 		if self.endDateHuman != nil { endJson["human"] = self.endDateHuman }
+		if self.endLocation != nil { endJson["location"] = self.endLocation }
 		if self.endLat != nil { endJson["startLat"] = self.endLat }
 		if self.endLng != nil { endJson["startLng"] = self.endLng }
 		json["end"] = endJson
 		
-		if self.price != nil { json["price"] = self.price }
+		json["price"] = self.price
 		
 		return json
 	}
@@ -110,7 +120,7 @@ class Journey {
 			request = makeRequest("/journey/" + self._id!, "PUT")
 		}
 		
-		doRequest(request, callback, nil)
+		doPostRequest(request, callback, self.json())
 	}
 	
 	func delete (callback: (err: NSError?, data: AnyObject?) -> Void) {

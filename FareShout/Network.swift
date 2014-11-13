@@ -2,12 +2,14 @@
 import Foundation
 
 // Debug
-//let kAPIProtocol = "http://"
-//let kAPIEndpoint = kAPIProtocol + "localhost:3000"
+let kAPIProtocol = "http://"
+let kAPIEndpoint = kAPIProtocol + "localhost:3000"
 
 // Production
-let kAPIProtocol = "https://"
-let kAPIEndpoint = kAPIProtocol + "fareshout-matejkramny.ngapp.io"
+//let kAPIProtocol = "https://"
+//let kAPIEndpoint = kAPIProtocol + "fareshout-matejkramny.ngapp.io"
+
+let kNetworkDomainError = "Invalid Response"
 
 var storage: SharedStorage = SharedStorage()
 var currentUser: User?
@@ -147,6 +149,15 @@ func doRequest (request: NSMutableURLRequest, callback: (err: NSError?, data: An
 		var cookie = httpRes.allHeaderFields["set-cookie"] as? String
 		if cookie != nil {
 			sessionCookie = cookie!.componentsSeparatedByString(";")[0] as String
+		}
+		
+		var statusCode = httpRes.statusCode
+		if statusCode >= 400 {
+			dispatch_async(dispatch_get_main_queue(), { () -> Void in
+				callback(err: NSError(domain: kNetworkDomainError, code: 0, userInfo: nil), data: nil)
+			})
+			
+			return
 		}
 		
 		var jsonData: NSData = (NSString(data: data

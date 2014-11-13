@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F1AD16D1A139AF90047BEE8 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD16B1A139AF90047BEE8 /* TextFieldTableViewCell.swift */; };
-		4F1AD16E1A139AF90047BEE8 /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F1AD16C1A139AF90047BEE8 /* TextFieldTableViewCell.xib */; };
 		4F1AD1711A139B490047BEE8 /* FSTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD16F1A139B490047BEE8 /* FSTextFieldTableViewCell.swift */; };
 		4F1AD1721A139B490047BEE8 /* FSTextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F1AD1701A139B490047BEE8 /* FSTextFieldTableViewCell.xib */; };
+		4F1AD1771A14F6640047BEE8 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD1761A14F6640047BEE8 /* SVProgressHUD.m */; };
+		4F1AD1791A14F6A70047BEE8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1AD1781A14F6A70047BEE8 /* QuartzCore.framework */; };
 		4F2773751A08E5BA0012B779 /* AddCarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2773741A08E5BA0012B779 /* AddCarTableViewController.swift */; };
 		4F4E363D1A13622100934D6B /* SharedStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E363C1A13622100934D6B /* SharedStorage.swift */; };
 		4F525F371A05958B00EDD696 /* Journey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F361A05958B00EDD696 /* Journey.swift */; };
@@ -58,10 +58,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4F1AD16B1A139AF90047BEE8 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
-		4F1AD16C1A139AF90047BEE8 /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		4F1AD16F1A139B490047BEE8 /* FSTextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSTextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		4F1AD1701A139B490047BEE8 /* FSTextFieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FSTextFieldTableViewCell.xib; sourceTree = "<group>"; };
+		4F1AD1751A14F6640047BEE8 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVProgressHUD.h; path = SVProgressHUD/SVProgressHUD.h; sourceTree = "<group>"; };
+		4F1AD1761A14F6640047BEE8 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVProgressHUD.m; path = SVProgressHUD/SVProgressHUD.m; sourceTree = "<group>"; };
+		4F1AD1781A14F6A70047BEE8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4F2773741A08E5BA0012B779 /* AddCarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCarTableViewController.swift; sourceTree = "<group>"; };
 		4F4E363C1A13622100934D6B /* SharedStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedStorage.swift; sourceTree = "<group>"; };
 		4F525F361A05958B00EDD696 /* Journey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Journey.swift; sourceTree = "<group>"; };
@@ -105,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F1AD1791A14F6A70047BEE8 /* QuartzCore.framework in Frameworks */,
 				4FC1E60C19FEB866002F743B /* Accounts.framework in Frameworks */,
 				4FC1E60A19FEB839002F743B /* Social.framework in Frameworks */,
 			);
@@ -120,12 +122,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F1AD1731A14F62D0047BEE8 /* Deps */ = {
+			isa = PBXGroup;
+			children = (
+				4F1AD1781A14F6A70047BEE8 /* QuartzCore.framework */,
+				4FC1E60B19FEB866002F743B /* Accounts.framework */,
+				4FC1E60919FEB839002F743B /* Social.framework */,
+				4F1AD1741A14F6320047BEE8 /* SVProgressHUD */,
+			);
+			name = Deps;
+			sourceTree = "<group>";
+		};
+		4F1AD1741A14F6320047BEE8 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				4F1AD1751A14F6640047BEE8 /* SVProgressHUD.h */,
+				4F1AD1761A14F6640047BEE8 /* SVProgressHUD.m */,
+			);
+			name = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 		4F95342819FFF6E70058210D /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				4F95342919FFF7060058210D /* ProfileTableViewCell.swift */,
-				4F1AD16B1A139AF90047BEE8 /* TextFieldTableViewCell.swift */,
-				4F1AD16C1A139AF90047BEE8 /* TextFieldTableViewCell.xib */,
 				4F1AD16F1A139B490047BEE8 /* FSTextFieldTableViewCell.swift */,
 				4F1AD1701A139B490047BEE8 /* FSTextFieldTableViewCell.xib */,
 				4F8856AB1A1118240039EA6E /* SwitchTableViewCell.swift */,
@@ -154,8 +174,7 @@
 		4FC1E5D719FEB518002F743B = {
 			isa = PBXGroup;
 			children = (
-				4FC1E60B19FEB866002F743B /* Accounts.framework */,
-				4FC1E60919FEB839002F743B /* Social.framework */,
+				4F1AD1731A14F62D0047BEE8 /* Deps */,
 				4FA9F15819FED8CA009D0F33 /* Models */,
 				4FC1E60519FEB6E8002F743B /* Scenes */,
 				4F95342819FFF6E70058210D /* Cells */,
@@ -328,7 +347,6 @@
 				4FD346E51A127CB3006026DD /* PriceTableViewCell.xib in Resources */,
 				4FC1E5F019FEB518002F743B /* LaunchScreen.xib in Resources */,
 				4FC1E5ED19FEB518002F743B /* Images.xcassets in Resources */,
-				4F1AD16E1A139AF90047BEE8 /* TextFieldTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,10 +381,10 @@
 				4FD346E41A127CB3006026DD /* PriceTableViewCell.swift in Sources */,
 				4FC1E60819FEB751002F743B /* LoginViewController.swift in Sources */,
 				4F95342719FFEFDF0058210D /* UserTableViewController.swift in Sources */,
+				4F1AD1771A14F6640047BEE8 /* SVProgressHUD.m in Sources */,
 				4F525F391A05A10800EDD696 /* NearbyJourneysTableViewController.swift in Sources */,
 				4F2773751A08E5BA0012B779 /* AddCarTableViewController.swift in Sources */,
 				4FC1E5E619FEB518002F743B /* AppDelegate.swift in Sources */,
-				4F1AD16D1A139AF90047BEE8 /* TextFieldTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

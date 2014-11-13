@@ -1,7 +1,7 @@
 
 import UIKit
 
-class AddJourneyTableViewController: UITableViewController, StartEndTableViewCellProtocol, CarSelectionProtocol, StepperCellDelegate {
+class AddJourneyTableViewController: UITableViewController, StartEndTableViewCellProtocol, CarSelectionProtocol, StepperCellDelegate, FSTextFieldCellProtocol, SwitchCellProtocol, PriceCellDelegate {
 	
 	var startEndCellHeight: CGFloat = 88.0
 	var journey: Journey = Journey()
@@ -28,7 +28,17 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	}
 	
 	func save(sender: AnyObject) {
+		SVProgressHUD.showProgress(0, status: "Saving..", maskType: SVProgressHUDMaskType.Black)
 		
+		journey.update({ (err: NSError?, data: AnyObject?) -> Void in
+			if err != nil {
+				SVProgressHUD.showErrorWithStatus(err?.domain)
+				return
+			}
+			
+			SVProgressHUD.showSuccessWithStatus("Saved.")
+			self.navigationController!.dismissViewControllerAnimated(true, completion: nil)
+		})
 	}
 	
 	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -48,16 +58,22 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		if indexPath.section == 0 {
-			var cell = tableView.dequeueReusableCellWithIdentifier("TextField", forIndexPath: indexPath) as FSTextFieldTableViewCell
+			var cell = tableView.dequeueReusableCellWithIdentifier("TextField", forIndexPath: indexPath) as? FSTextFieldTableViewCell
+			if cell == nil {
+				cell = FSTextFieldTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "TextField")
+			}
 			
-			cell.label.text = "Title"
-			cell.field.placeholder = "Name of your Hitch"
+			cell!.label.text = "Title"
+			cell!.field.placeholder = "Name of your Hitch"
+			cell!.field.text = journey.name
+			cell!.delegate = self
+			cell!.initialize()
 			
-			return cell as UITableViewCell
+			return cell! as UITableViewCell
 		} else if indexPath.section == 1 {
-			var cell = tableView.dequeueReusableCellWithIdentifier("carSelector", forIndexPath: indexPath) as UITableViewCell
+			var cell = tableView.dequeueReusableCellWithIdentifier("carSelector", forIndexPath: indexPath) as? UITableViewCell
 			
-			cell.textLabel.text = "Car"
+			cell!.textLabel.text = "Car"
 			
 			var car_id = ""
 			if journey.car != nil {
@@ -66,63 +82,97 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 			
 			var car = storage.findCarWithId(car_id)
 			if car != nil {
-				cell.detailTextLabel!.text = car!.name
+				cell!.detailTextLabel!.text = car!.name
 			} else {
-				cell.detailTextLabel!.text = ""
+				cell!.detailTextLabel!.text = ""
 			}
 			
-			return cell
+			return cell!
 		} else if indexPath.section == 2 {
-			var cell = tableView.dequeueReusableCellWithIdentifier("TextField", forIndexPath: indexPath) as FSTextFieldTableViewCell
+			var cell = tableView.dequeueReusableCellWithIdentifier("TextField", forIndexPath: indexPath) as? FSTextFieldTableViewCell
+			if cell == nil {
+				cell = FSTextFieldTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "TextField")
+			}
+			
+			cell!.delegate = self
+			cell!.initialize()
 			
 			if indexPath.row == 0 {
-				cell.label.text = "Departure"
-				cell.field.placeholder = "Departing from ..."
+				cell!.label.text = "Departure"
+				cell!.field.placeholder = "Departing from ..."
+				cell!.field.text = journey.startLocation
 			} else if indexPath.row == 1 {
-				cell.label.text = "Destination"
-				cell.field.placeholder = "Going to ..."
+				cell!.label.text = "Destination"
+				cell!.field.placeholder = "Going to ..."
+				cell!.field.text = journey.endLocation
 			}
 			
-			return cell
+			return cell!
 		} else if indexPath.section == 3 {
 			// I am a driver / Passenger switch
-			var cell = tableView.dequeueReusableCellWithIdentifier("Switch", forIndexPath: indexPath) as SwitchTableViewCell
-			
-			cell.toggle.removeAllSegments()
-			cell.toggle.insertSegmentWithTitle("I am a Driver", atIndex: 0, animated: false)
-			cell.toggle.insertSegmentWithTitle("Passenger", atIndex: 1, animated: false)
-			cell.toggle.selectedSegmentIndex = 0
-			
-			return cell as UITableViewCell
-		} else if indexPath.section == 4 && indexPath.row == 0 {
-			// Availability
-			var cell = tableView.dequeueReusableCellWithIdentifier("Stepper", forIndexPath: indexPath) as StepperTableViewCell
-			
-			cell.label.text = "Availability"
-			if journey.availableSeats != nil {
-				cell.label.text = cell.label.text! + ": " + String(journey.availableSeats!)
+			var cell = tableView.dequeueReusableCellWithIdentifier("Switch", forIndexPath: indexPath) as? SwitchTableViewCell
+			if cell == nil {
+				cell = SwitchTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Switch")
 			}
 			
-			cell.initialize()
-			cell.delegate = self
+			cell!.initialize()
+			cell!.delegate = self
+			cell!.toggle.removeAllSegments()
+			cell!.toggle.insertSegmentWithTitle("I am a Driver", atIndex: 0, animated: false)
+			cell!.toggle.insertSegmentWithTitle("Passenger", atIndex: 1, animated: false)
 			
-			return cell as UITableViewCell
+			if journey.isDriver {
+				cell!.toggle.selectedSegmentIndex = 0
+			} else {
+				cell!.toggle.selectedSegmentIndex = 1
+			}
+			
+			return cell! as UITableViewCell
+		} else if indexPath.section == 4 && indexPath.row == 0 {
+			// Availability
+			var cell = tableView.dequeueReusableCellWithIdentifier("Stepper", forIndexPath: indexPath) as? StepperTableViewCell
+			if cell == nil {
+				cell = StepperTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Stepper")
+			}
+			
+			cell!.label.text = "Availability"
+			if journey.availableSeats != nil {
+				cell!.label.text = cell!.label.text! + ": " + String(journey.availableSeats!)
+			}
+			
+			cell!.initialize()
+			cell!.delegate = self
+			
+			return cell! as UITableViewCell
 		} else if indexPath.section == 4 && indexPath.row == 1 {
 			// Price
-			var cell = tableView.dequeueReusableCellWithIdentifier("Price", forIndexPath: indexPath) as PriceTableViewCell
+			var cell = tableView.dequeueReusableCellWithIdentifier("Price", forIndexPath: indexPath) as? PriceTableViewCell
+			if cell == nil {
+				cell = PriceTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Price")
+			}
 			
-			cell.label.text = "Price"
-			cell.initialize()
+			cell!.initialize()
+			cell!.delegate = self
 			
-			return cell as UITableViewCell
+			cell!.label.text = "Price"
+			cell!.slider.value = Float(journey.price)
+			cell!.updatePrice()
+			
+			return cell! as UITableViewCell
 		} else if indexPath.section == 5 {
 			// Start & End Date
-			var cell = tableView.dequeueReusableCellWithIdentifier("StartEnd", forIndexPath: indexPath) as StartEndTableViewCell
+			var cell = tableView.dequeueReusableCellWithIdentifier("StartEnd", forIndexPath: indexPath) as? StartEndTableViewCell
 			
-			cell.initialize()
-			cell.delegate = self
+			if cell == nil {
+				cell = StartEndTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "StartEnd")
+			}
 			
-			return cell as UITableViewCell
+			cell!.initialize()
+			cell!.delegate = self
+			cell!.startDateField.text = journey.startDateHuman
+			cell!.endDateField.text = journey.endDateHuman
+			
+			return cell! as UITableViewCell
 		} else {
 			return tableView.dequeueReusableCellWithIdentifier("rightDetail", forIndexPath: indexPath) as UITableViewCell
 		}
@@ -182,15 +232,25 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 		startEndCellHeight = cell.preferredHeight
 		
 		var indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 5)
-		self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+		self.tableView.reloadData()
 		self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+	}
+	
+	func StartEndTableViewCellDateChanged(cell: StartEndTableViewCell, startDate: NSDate) {
+		journey.startDate = startDate
+	}
+	
+	func StartEndTableViewCellDateChanged(cell: StartEndTableViewCell, endDate: NSDate) {
+		journey.endDate = endDate
 	}
 	
 	// CarSelectionProtocol
 	
 	func didSelectCar(car: Car) {
 		journey.car = car._id
-		self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 1)], withRowAnimation: UITableViewRowAnimation.None)
+		
+		self.tableView.reloadData()
+		self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: false, scrollPosition: UITableViewScrollPosition.None)
 	}
 	
 	// StepperCellDelegate
@@ -198,7 +258,36 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	func StepperValueChanged(cell: StepperTableViewCell, value: Double) {
 		// Availability
 		journey.availableSeats = Int(value)
-		self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 4)], withRowAnimation: UITableViewRowAnimation.None)
+		
+		let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 4)) as StepperTableViewCell
+		cell.label.text = "Availability"
+		if journey.availableSeats != nil {
+			cell.label.text = cell.label.text! + ": " + String(journey.availableSeats!)
+		}
+	}
+	
+	// FSTextFieldCellDelegate
+	
+	func FSTextFieldCellValueChanged(cell: FSTextFieldTableViewCell, value: NSString?) {
+		if cell == self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) {
+			journey.name = value
+		} else if cell == self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2)) {
+			journey.startLocation = value
+		} else if cell == self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 2)) {
+			journey.endLocation = value
+		}
+	}
+	
+	// SwitchCellProtocol
+	
+	func SwitchCellValueChanged(cell: SwitchTableViewCell) {
+		journey.isDriver = cell.toggle.selectedSegmentIndex == 0
+	}
+	
+	// PriceCellDelegate
+	
+	func PriceCellValueChanged(cell: PriceTableViewCell) {
+		journey.price = cell.slider.value
 	}
 	
 }

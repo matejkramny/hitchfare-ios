@@ -618,7 +618,7 @@
             </objects>
             <point key="canvasLocation" x="2520" y="148.5"/>
         </scene>
-        <!--Close Rides-->
+        <!--Close Fares-->
         <scene sceneID="nI3-su-lpA">
             <objects>
                 <tableViewController id="Vvx-gm-nLf" customClass="NearbyJourneysTableViewCell" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
@@ -703,7 +703,7 @@
                             <outlet property="delegate" destination="Vvx-gm-nLf" id="V2O-Ay-P6s"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Close Rides" id="zJn-JP-1g7"/>
+                    <navigationItem key="navigationItem" title="Close Fares" id="zJn-JP-1g7"/>
                     <connections>
                         <segue destination="7wh-7X-zfG" kind="presentation" identifier="addJourney" id="cK3-Rz-WSY"/>
                     </connections>
@@ -776,7 +776,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="idd-OF-6bD"/>
-        <segue reference="xrD-Vx-1Ty"/>
+        <segue reference="WWy-7h-XJa"/>
+        <segue reference="QZn-wy-0cd"/>
     </inferredMetricsTieBreakers>
 </document>

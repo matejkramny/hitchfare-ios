@@ -1,12 +1,17 @@
 
 import UIKit
 
+protocol PriceCellDelegate {
+	func PriceCellValueChanged(cell: PriceTableViewCell)
+}
+
 class PriceTableViewCell: UITableViewCell {
 	
 	@IBOutlet weak var label: UILabel!
-	@IBOutlet weak var symbolLabel: UILabel!
 	@IBOutlet weak var field: UITextField!
 	@IBOutlet weak var slider: UISlider!
+	
+	var delegate: PriceCellDelegate?
 	
 	func initialize() {
 		self.slider.addTarget(self, action: "sliderChangedValue:", forControlEvents: UIControlEvents.ValueChanged)
@@ -18,7 +23,19 @@ class PriceTableViewCell: UITableViewCell {
 	}
 	
 	func sliderChangedValue (sender: AnyObject?) {
+		self.updatePrice()
+		
+		if self.delegate != nil {
+			self.delegate!.PriceCellValueChanged(self)
+		}
+	}
+	
+	func updatePrice () {
 		self.field.text = NSString(format: "£%.2f", self.slider.value)
+	}
+	
+	override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+		super.init(style: style, reuseIdentifier: reuseIdentifier)
 	}
 	
 	required init(coder aDecoder: NSCoder) {
