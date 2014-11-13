@@ -11,6 +11,19 @@
 		4F1AD1721A139B490047BEE8 /* FSTextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F1AD1701A139B490047BEE8 /* FSTextFieldTableViewCell.xib */; };
 		4F1AD1771A14F6640047BEE8 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD1761A14F6640047BEE8 /* SVProgressHUD.m */; };
 		4F1AD1791A14F6A70047BEE8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1AD1781A14F6A70047BEE8 /* QuartzCore.framework */; };
+		4F1AD1811A153E620047BEE8 /* JourneyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD17F1A153E620047BEE8 /* JourneyTableViewCell.swift */; };
+		4F1AD1821A153E620047BEE8 /* JourneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F1AD1801A153E620047BEE8 /* JourneyTableViewCell.xib */; };
+		4F1AD19B1A155C460047BEE8 /* FAImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD1931A155C460047BEE8 /* FAImageView.m */; };
+		4F1AD19C1A155C460047BEE8 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD1951A155C460047BEE8 /* NSString+FontAwesome.m */; };
+		4F1AD19D1A155C460047BEE8 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD1961A155C460047BEE8 /* README.md */; };
+		4F1AD19E1A155C460047BEE8 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F1AD1981A155C460047BEE8 /* FontAwesome.ttf */; };
+		4F1AD19F1A155C460047BEE8 /* UIFont+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD19A1A155C460047BEE8 /* UIFont+FontAwesome.m */; };
+		4F1AD1A11A155FB90047BEE8 /* SVProgressHUD.h in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD1751A14F6640047BEE8 /* SVProgressHUD.h */; };
+		4F1AD1A21A155FB90047BEE8 /* FAImageView.h in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD1921A155C460047BEE8 /* FAImageView.h */; };
+		4F1AD1A31A155FB90047BEE8 /* NSString+FontAwesome.h in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD1941A155C460047BEE8 /* NSString+FontAwesome.h */; };
+		4F1AD1A41A155FB90047BEE8 /* UIFont+FontAwesome.h in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD1991A155C460047BEE8 /* UIFont+FontAwesome.h */; };
+		4F1AD1A51A155FB90047BEE8 /* FacebookCtrl.h in Sources */ = {isa = PBXBuildFile; fileRef = 4FC1E60E19FEB891002F743B /* FacebookCtrl.h */; };
+		4F1AD1A81A1562760047BEE8 /* HikesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD1A71A1562760047BEE8 /* HikesTableViewController.swift */; };
 		4F2773751A08E5BA0012B779 /* AddCarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2773741A08E5BA0012B779 /* AddCarTableViewController.swift */; };
 		4F4E363D1A13622100934D6B /* SharedStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E363C1A13622100934D6B /* SharedStorage.swift */; };
 		4F525F371A05958B00EDD696 /* Journey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F361A05958B00EDD696 /* Journey.swift */; };
@@ -63,6 +76,17 @@
 		4F1AD1751A14F6640047BEE8 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVProgressHUD.h; path = SVProgressHUD/SVProgressHUD.h; sourceTree = "<group>"; };
 		4F1AD1761A14F6640047BEE8 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SVProgressHUD.m; path = SVProgressHUD/SVProgressHUD.m; sourceTree = "<group>"; };
 		4F1AD1781A14F6A70047BEE8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4F1AD17F1A153E620047BEE8 /* JourneyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JourneyTableViewCell.swift; sourceTree = "<group>"; };
+		4F1AD1801A153E620047BEE8 /* JourneyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JourneyTableViewCell.xib; sourceTree = "<group>"; };
+		4F1AD1921A155C460047BEE8 /* FAImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FAImageView.h; path = "ios-fontawesome/FAImageView.h"; sourceTree = "<group>"; };
+		4F1AD1931A155C460047BEE8 /* FAImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FAImageView.m; path = "ios-fontawesome/FAImageView.m"; sourceTree = "<group>"; };
+		4F1AD1941A155C460047BEE8 /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+FontAwesome.h"; path = "ios-fontawesome/NSString+FontAwesome.h"; sourceTree = "<group>"; };
+		4F1AD1951A155C460047BEE8 /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+FontAwesome.m"; path = "ios-fontawesome/NSString+FontAwesome.m"; sourceTree = "<group>"; };
+		4F1AD1961A155C460047BEE8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = "ios-fontawesome/README.md"; sourceTree = "<group>"; };
+		4F1AD1981A155C460047BEE8 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		4F1AD1991A155C460047BEE8 /* UIFont+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIFont+FontAwesome.h"; path = "ios-fontawesome/UIFont+FontAwesome.h"; sourceTree = "<group>"; };
+		4F1AD19A1A155C460047BEE8 /* UIFont+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIFont+FontAwesome.m"; path = "ios-fontawesome/UIFont+FontAwesome.m"; sourceTree = "<group>"; };
+		4F1AD1A71A1562760047BEE8 /* HikesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HikesTableViewController.swift; sourceTree = "<group>"; };
 		4F2773741A08E5BA0012B779 /* AddCarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCarTableViewController.swift; sourceTree = "<group>"; };
 		4F4E363C1A13622100934D6B /* SharedStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedStorage.swift; sourceTree = "<group>"; };
 		4F525F361A05958B00EDD696 /* Journey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Journey.swift; sourceTree = "<group>"; };
@@ -129,6 +153,7 @@
 				4FC1E60B19FEB866002F743B /* Accounts.framework */,
 				4FC1E60919FEB839002F743B /* Social.framework */,
 				4F1AD1741A14F6320047BEE8 /* SVProgressHUD */,
+				4F1AD1901A155C2B0047BEE8 /* FontAwesome */,
 			);
 			name = Deps;
 			sourceTree = "<group>";
@@ -140,6 +165,39 @@
 				4F1AD1761A14F6640047BEE8 /* SVProgressHUD.m */,
 			);
 			name = SVProgressHUD;
+			sourceTree = "<group>";
+		};
+		4F1AD1901A155C2B0047BEE8 /* FontAwesome */ = {
+			isa = PBXGroup;
+			children = (
+				4F1AD1921A155C460047BEE8 /* FAImageView.h */,
+				4F1AD1931A155C460047BEE8 /* FAImageView.m */,
+				4F1AD1941A155C460047BEE8 /* NSString+FontAwesome.h */,
+				4F1AD1951A155C460047BEE8 /* NSString+FontAwesome.m */,
+				4F1AD1961A155C460047BEE8 /* README.md */,
+				4F1AD1971A155C460047BEE8 /* Resources */,
+				4F1AD1991A155C460047BEE8 /* UIFont+FontAwesome.h */,
+				4F1AD19A1A155C460047BEE8 /* UIFont+FontAwesome.m */,
+			);
+			name = FontAwesome;
+			sourceTree = "<group>";
+		};
+		4F1AD1971A155C460047BEE8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4F1AD1981A155C460047BEE8 /* FontAwesome.ttf */,
+			);
+			name = Resources;
+			path = "ios-fontawesome/Resources";
+			sourceTree = "<group>";
+		};
+		4F1AD1A61A15625F0047BEE8 /* Cars */ = {
+			isa = PBXGroup;
+			children = (
+				4F525F3C1A06A46500EDD696 /* CarsTableViewController.swift */,
+				4F2773741A08E5BA0012B779 /* AddCarTableViewController.swift */,
+			);
+			name = Cars;
 			sourceTree = "<group>";
 		};
 		4F95342819FFF6E70058210D /* Cells */ = {
@@ -156,6 +214,8 @@
 				4FD346E31A127CB3006026DD /* PriceTableViewCell.xib */,
 				4FD346E61A12831B006026DD /* StartEndTableViewCell.swift */,
 				4FD346E71A12831B006026DD /* StartEndTableViewCell.xib */,
+				4F1AD17F1A153E620047BEE8 /* JourneyTableViewCell.swift */,
+				4F1AD1801A153E620047BEE8 /* JourneyTableViewCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -242,9 +302,9 @@
 				4FC1E60619FEB71D002F743B /* Login */,
 				4F95342619FFEFDF0058210D /* UserTableViewController.swift */,
 				4F525F381A05A10800EDD696 /* NearbyJourneysTableViewController.swift */,
+				4F1AD1A71A1562760047BEE8 /* HikesTableViewController.swift */,
 				4F525F3A1A05A26C00EDD696 /* AddJourneyTableViewController.swift */,
-				4F525F3C1A06A46500EDD696 /* CarsTableViewController.swift */,
-				4F2773741A08E5BA0012B779 /* AddCarTableViewController.swift */,
+				4F1AD1A61A15625F0047BEE8 /* Cars */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -340,9 +400,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FC1E5EB19FEB518002F743B /* Main.storyboard in Resources */,
+				4F1AD19E1A155C460047BEE8 /* FontAwesome.ttf in Resources */,
 				4FD346E11A127A76006026DD /* StepperTableViewCell.xib in Resources */,
 				4F1AD1721A139B490047BEE8 /* FSTextFieldTableViewCell.xib in Resources */,
 				4FD346E91A12831B006026DD /* StartEndTableViewCell.xib in Resources */,
+				4F1AD1821A153E620047BEE8 /* JourneyTableViewCell.xib in Resources */,
 				4F8856AE1A1118240039EA6E /* SwitchTableViewCell.xib in Resources */,
 				4FD346E51A127CB3006026DD /* PriceTableViewCell.xib in Resources */,
 				4FC1E5F019FEB518002F743B /* LaunchScreen.xib in Resources */,
@@ -364,6 +426,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F1AD1A11A155FB90047BEE8 /* SVProgressHUD.h in Sources */,
+				4F1AD1A21A155FB90047BEE8 /* FAImageView.h in Sources */,
+				4F1AD1A31A155FB90047BEE8 /* NSString+FontAwesome.h in Sources */,
+				4F1AD1A41A155FB90047BEE8 /* UIFont+FontAwesome.h in Sources */,
+				4F1AD1A51A155FB90047BEE8 /* FacebookCtrl.h in Sources */,
 				4FA9F15A19FED9B7009D0F33 /* User.swift in Sources */,
 				4F95342A19FFF7060058210D /* ProfileTableViewCell.swift in Sources */,
 				4FD6D2921A0551F600199082 /* Car.swift in Sources */,
@@ -376,14 +443,20 @@
 				4F525F3B1A05A26C00EDD696 /* AddJourneyTableViewController.swift in Sources */,
 				4FD346E81A12831B006026DD /* StartEndTableViewCell.swift in Sources */,
 				4F4E363D1A13622100934D6B /* SharedStorage.swift in Sources */,
+				4F1AD19D1A155C460047BEE8 /* README.md in Sources */,
 				4FD6D2961A05560B00199082 /* Network.swift in Sources */,
+				4F1AD19B1A155C460047BEE8 /* FAImageView.m in Sources */,
+				4F1AD1A81A1562760047BEE8 /* HikesTableViewController.swift in Sources */,
+				4F1AD19F1A155C460047BEE8 /* UIFont+FontAwesome.m in Sources */,
 				4F8856AD1A1118240039EA6E /* SwitchTableViewCell.swift in Sources */,
 				4FD346E41A127CB3006026DD /* PriceTableViewCell.swift in Sources */,
 				4FC1E60819FEB751002F743B /* LoginViewController.swift in Sources */,
 				4F95342719FFEFDF0058210D /* UserTableViewController.swift in Sources */,
 				4F1AD1771A14F6640047BEE8 /* SVProgressHUD.m in Sources */,
 				4F525F391A05A10800EDD696 /* NearbyJourneysTableViewController.swift in Sources */,
+				4F1AD19C1A155C460047BEE8 /* NSString+FontAwesome.m in Sources */,
 				4F2773751A08E5BA0012B779 /* AddCarTableViewController.swift in Sources */,
+				4F1AD1811A153E620047BEE8 /* JourneyTableViewCell.swift in Sources */,
 				4FC1E5E619FEB518002F743B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

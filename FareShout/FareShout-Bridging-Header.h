@@ -4,3 +4,6 @@
 
 #import "FacebookCtrl.h"
 #import "SVProgressHUD.h"
+#import "FAImageView.h"
+#import "NSString+FontAwesome.h"
+#import "UIFont+FontAwesome.h"

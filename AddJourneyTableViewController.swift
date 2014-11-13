@@ -9,6 +9,8 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		self.navigationController!.navigationBar.barStyle = UIBarStyle.Black
+		
 		self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancel:")
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: "save:")
 		
@@ -17,6 +19,10 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 		self.tableView.registerNib(UINib(nibName: "StepperTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Stepper")
 		self.tableView.registerNib(UINib(nibName: "PriceTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Price")
 		self.tableView.registerNib(UINib(nibName: "StartEndTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "StartEnd")
+	}
+	
+	override func preferredStatusBarStyle() -> UIStatusBarStyle {
+		return UIStatusBarStyle.LightContent
 	}
 	
 	override func viewWillAppear(animated: Bool) {

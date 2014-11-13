@@ -621,7 +621,7 @@
         <!--Close Fares-->
         <scene sceneID="nI3-su-lpA">
             <objects>
-                <tableViewController id="Vvx-gm-nLf" customClass="NearbyJourneysTableViewCell" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Vvx-gm-nLf" customClass="NearbyJourneysTableViewController" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9xV-0m-EnX">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -715,7 +715,7 @@
         <!--Hike-->
         <scene sceneID="5Hk-42-cXv">
             <objects>
-                <tableViewController id="cU5-fp-Ekr" sceneMemberID="viewController">
+                <tableViewController id="cU5-fp-Ekr" customClass="HikesTableViewCell" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="eEW-fn-jCj">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -776,7 +776,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="WWy-7h-XJa"/>
+        <segue reference="cK3-Rz-WSY"/>
         <segue reference="QZn-wy-0cd"/>
     </inferredMetricsTieBreakers>
 </document>

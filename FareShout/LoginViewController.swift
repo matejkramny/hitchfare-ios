@@ -26,6 +26,10 @@ class LoginViewController: UIViewController, FacebookCtrlDelegate, UIScrollViewD
 		FacebookCtrl.sharedInstance().requestAccessToFacebook()
 	}
 	
+	override func preferredStatusBarStyle() -> UIStatusBarStyle {
+		return UIStatusBarStyle.LightContent
+	}
+	
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 		
