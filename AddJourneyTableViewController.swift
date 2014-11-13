@@ -172,6 +172,14 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 			cell!.startDateField.text = journey.startDateHuman
 			cell!.endDateField.text = journey.endDateHuman
 			
+			if NSString(string: cell!.startDateField.text).length == 0 {
+				cell!.startDateField.text = cell!.getDateFormatter().stringFromDate(NSDate())
+			}
+			
+			if NSString(string: cell!.endDateField.text).length == 0 {
+				cell!.endDateField.text = cell!.getDateFormatter().stringFromDate(NSDate())
+			}
+			
 			return cell! as UITableViewCell
 		} else {
 			return tableView.dequeueReusableCellWithIdentifier("rightDetail", forIndexPath: indexPath) as UITableViewCell
@@ -238,10 +246,12 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	
 	func StartEndTableViewCellDateChanged(cell: StartEndTableViewCell, startDate: NSDate) {
 		journey.startDate = startDate
+		journey.startDateHuman = cell.getDateFormatter().stringFromDate(startDate)
 	}
 	
 	func StartEndTableViewCellDateChanged(cell: StartEndTableViewCell, endDate: NSDate) {
 		journey.endDate = endDate
+		journey.endDateHuman = cell.getDateFormatter().stringFromDate(endDate)
 	}
 	
 	// CarSelectionProtocol

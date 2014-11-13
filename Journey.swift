@@ -60,7 +60,10 @@ class Journey {
 		self.endLat = end["lat"] as? Double
 		self.endLng = end["lng"] as? Double
 		
-		self.price = end["price"] as Float
+		var price = end["price"] as? Float
+		if price != nil {
+			self.price = price!
+		}
 	}
 	
 	func json() -> [NSObject: AnyObject] {

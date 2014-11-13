@@ -34,6 +34,13 @@ class StartEndTableViewCell: UITableViewCell, UITextFieldDelegate {
 		endDateField.placeholder = "End Date"
 	}
 	
+	func getDateFormatter() -> NSDateFormatter {
+		let dateFormatter = NSDateFormatter()
+		dateFormatter.dateFormat = "dd/MM/yyyy"
+		
+		return dateFormatter
+	}
+	
 	func showDatePicker (field: StartEndTableViewCellField) {
 		showsDatePicker = true
 		preferredHeight = 304.0
@@ -52,14 +59,15 @@ class StartEndTableViewCell: UITableViewCell, UITextFieldDelegate {
 		}
 		
 		if dateString.length > 0 {
-			var dateFormatter = NSDateFormatter()
-			dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
+			var dateFormatter = getDateFormatter()
 			
 			var date = dateFormatter.dateFromString(dateString)
 			
 			if date != nil {
 				datePicker!.date = date!
 			}
+		} else {
+			datePicker!.date = NSDate()
 		}
 		
 		currentDatePicker = field
@@ -96,12 +104,14 @@ class StartEndTableViewCell: UITableViewCell, UITextFieldDelegate {
 	}
 	
 	func datePickerValueChanged (sender: AnyObject?) {
+		var dateFormatter = self.getDateFormatter()
+		
 		if currentDatePicker == StartEndTableViewCellField.Start {
 			// Needs some formatting
-			startDateField.text = datePicker!.date.description
+			startDateField.text = dateFormatter.stringFromDate(datePicker!.date)
 			self.delegate!.StartEndTableViewCellDateChanged(self, startDate: datePicker!.date)
 		} else if currentDatePicker == StartEndTableViewCellField.End {
-			endDateField.text = datePicker!.date.description
+			endDateField.text = dateFormatter.stringFromDate(datePicker!.date)
 			self.delegate!.StartEndTableViewCellDateChanged(self, endDate: datePicker!.date)
 		}
 	}
