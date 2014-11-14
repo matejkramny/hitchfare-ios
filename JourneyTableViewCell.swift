@@ -18,8 +18,21 @@ class JourneyTableViewCell: UITableViewCell {
 	
 	func populate(journey: Journey) {
 		self.journeyNameLabel.text = journey.name
-		self.departureLabel.text = "Departure: " + journey.startLocation!
-		self.destinationLabel.text = "Destination: " + journey.endLocation!
+		
+		var startLocation = journey.startLocation
+		if startLocation != nil {
+			self.departureLabel.text = "Departure: " + startLocation!
+		} else {
+			self.departureLabel.text = "Departure: N/A"
+		}
+		
+		var endLocation = journey.endLocation
+		if endLocation != nil {
+			self.destinationLabel.text = "Destination: " + endLocation!
+		} else {
+			self.destinationLabel.text = "Destination: N/A"
+		}
+		
 		var date = journey.startDateHuman
 		if date != nil {
 			self.dateLabel.text = "Date: " + date!

@@ -28,7 +28,7 @@ class UserTableViewController: UITableViewController, ProfileTableViewCellDelega
 	}
 	
 	func refreshData (sender: AnyObject?) {
-		Journey.getAll({ (err: NSError?, data: [Journey]) -> Void in
+		Journey.getMyJourneys({ (err: NSError?, data: [Journey]) -> Void in
 			self.journeys = data
 			self.refreshControl!.endRefreshing()
 			self.tableView.reloadData()

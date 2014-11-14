@@ -99,7 +99,15 @@ class Journey {
 	}
 	
 	class func getAll (callback: (err: NSError?, data: [Journey]) -> Void) {
-		doRequest(makeRequest("/journeys", "GET"), { (err: NSError?, data: AnyObject?) -> Void in
+		getJourneys("/journeys", method: "GET", callback: callback)
+	}
+	
+	class func getMyJourneys (callback: (err: NSError?, data: [Journey]) -> Void) {
+		getJourneys("/journeys/my", method: "GET", callback: callback)
+	}
+	
+	class func getJourneys(url: NSString, method: NSString, callback: (err: NSError?, data: [Journey]) -> Void) {
+		doRequest(makeRequest(url, method), { (err: NSError?, data: AnyObject?) -> Void in
 			var cars: [Journey] = []
 			
 			if data != nil {
@@ -111,7 +119,7 @@ class Journey {
 			}
 			
 			callback(err: err, data: cars)
-			}, nil)
+		}, nil)
 	}
 	
 	func update (callback: (err: NSError?, data: AnyObject?) -> Void) {
