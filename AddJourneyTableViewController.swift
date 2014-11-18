@@ -9,6 +9,8 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		self.navigationController?.navigationBar.translucent = false
+		
 		self.navigationController!.navigationBar.barStyle = UIBarStyle.Black
 		
 		self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancel:")

@@ -52,7 +52,7 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		self.titleBarText.textColor = UIColor.whiteColor()
 		self.titleBarText.font = UIFont.boldSystemFontOfSize(18.0)
 		
-		self.pageIndicator = UIPageControl(frame: CGRectMake(101, 10, 39, 37))
+		self.pageIndicator = UIPageControl(frame: CGRectMake(self.titleView.frame.size.width / 2 - 39 / 2, 10, 39, 37))
 		self.pageIndicator.numberOfPages = 3
 		self.pageIndicator.currentPage = 1
 		

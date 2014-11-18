@@ -1,6 +1,8 @@
 
 import UIKit
 
+let iOS8 = floor(NSFoundationVersionNumber) > floor(NSFoundationVersionNumber_iOS_7_1)
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 	var window: UIWindow?
@@ -26,7 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func styleApplication() {
 		UIApplication.sharedApplication().statusBarStyle = .LightContent
 		
-		UINavigationBar.appearance().translucent = false
+		if iOS8 {
+			UINavigationBar.appearance().translucent = false
+		}
+		
 		UINavigationBar.appearance().barTintColor = UIColor(red: 207/255, green: 0, blue: 20/255, alpha: 0.0)
 		UINavigationBar.appearance().tintColor = UIColor.whiteColor()
 		

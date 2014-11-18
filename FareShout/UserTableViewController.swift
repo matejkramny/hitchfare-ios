@@ -8,6 +8,8 @@ class UserTableViewController: UITableViewController, ProfileTableViewCellDelega
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		self.navigationController?.navigationBar.translucent = false
+		
 		self.refreshControl = UIRefreshControl()
 		self.refreshControl!.addTarget(self, action: "refreshData:", forControlEvents: UIControlEvents.ValueChanged)
 		

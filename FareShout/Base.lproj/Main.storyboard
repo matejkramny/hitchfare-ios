@@ -675,7 +675,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ngl-A9-mYB">
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ngl-A9-mYB">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="lQV-zX-sIB"/>
@@ -895,7 +895,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="QZn-wy-0cd"/>
-        <segue reference="WWy-7h-XJa"/>
-        <segue reference="Eoa-mH-lsb"/>
+        <segue reference="cK3-Rz-WSY"/>
+        <segue reference="VJA-kc-wSl"/>
     </inferredMetricsTieBreakers>
 </document>
