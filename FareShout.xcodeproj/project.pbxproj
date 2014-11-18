@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F1A62541A1A90B300826ECE /* MessagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1A62531A1A90B300826ECE /* MessagesTableViewController.swift */; };
+		4F1A62561A1A90EE00826ECE /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1A62551A1A90EE00826ECE /* Message.swift */; };
 		4F1AD1711A139B490047BEE8 /* FSTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD16F1A139B490047BEE8 /* FSTextFieldTableViewCell.swift */; };
 		4F1AD1721A139B490047BEE8 /* FSTextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F1AD1701A139B490047BEE8 /* FSTextFieldTableViewCell.xib */; };
 		4F1AD1771A14F6640047BEE8 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD1761A14F6640047BEE8 /* SVProgressHUD.m */; };
@@ -71,6 +73,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F1A62531A1A90B300826ECE /* MessagesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesTableViewController.swift; sourceTree = "<group>"; };
+		4F1A62551A1A90EE00826ECE /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		4F1AD16F1A139B490047BEE8 /* FSTextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSTextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		4F1AD1701A139B490047BEE8 /* FSTextFieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FSTextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		4F1AD1751A14F6640047BEE8 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SVProgressHUD.h; path = SVProgressHUD/SVProgressHUD.h; sourceTree = "<group>"; };
@@ -227,6 +231,7 @@
 				4F4E363C1A13622100934D6B /* SharedStorage.swift */,
 				4FD6D2911A0551F600199082 /* Car.swift */,
 				4F525F361A05958B00EDD696 /* Journey.swift */,
+				4F1A62551A1A90EE00826ECE /* Message.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -304,6 +309,7 @@
 				4F525F381A05A10800EDD696 /* NearbyJourneysTableViewController.swift */,
 				4F1AD1A71A1562760047BEE8 /* HikesTableViewController.swift */,
 				4F525F3A1A05A26C00EDD696 /* AddJourneyTableViewController.swift */,
+				4F1A62531A1A90B300826ECE /* MessagesTableViewController.swift */,
 				4F1AD1A61A15625F0047BEE8 /* Cars */,
 			);
 			name = Scenes;
@@ -429,6 +435,7 @@
 				4F1AD1A11A155FB90047BEE8 /* SVProgressHUD.h in Sources */,
 				4F1AD1A21A155FB90047BEE8 /* FAImageView.h in Sources */,
 				4F1AD1A31A155FB90047BEE8 /* NSString+FontAwesome.h in Sources */,
+				4F1A62561A1A90EE00826ECE /* Message.swift in Sources */,
 				4F1AD1A41A155FB90047BEE8 /* UIFont+FontAwesome.h in Sources */,
 				4F1AD1A51A155FB90047BEE8 /* FacebookCtrl.h in Sources */,
 				4FA9F15A19FED9B7009D0F33 /* User.swift in Sources */,
@@ -451,6 +458,7 @@
 				4F8856AD1A1118240039EA6E /* SwitchTableViewCell.swift in Sources */,
 				4FD346E41A127CB3006026DD /* PriceTableViewCell.swift in Sources */,
 				4FC1E60819FEB751002F743B /* LoginViewController.swift in Sources */,
+				4F1A62541A1A90B300826ECE /* MessagesTableViewController.swift in Sources */,
 				4F95342719FFEFDF0058210D /* UserTableViewController.swift in Sources */,
 				4F1AD1771A14F6640047BEE8 /* SVProgressHUD.m in Sources */,
 				4F525F391A05A10800EDD696 /* NearbyJourneysTableViewController.swift in Sources */,

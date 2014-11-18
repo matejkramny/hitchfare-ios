@@ -20,14 +20,20 @@ class User {
 	init(){}
 	
 	init(_response: [NSString: AnyObject]) {
+		self.parse(_response)
+	}
+	
+	func parse (_response: [NSString: AnyObject]) {
 		var pictureData: [String: AnyObject] = _response["picture"] as [String: AnyObject]
 		if pictureData["url"] == nil {
 			pictureData = pictureData["data"] as [String: AnyObject]
 		}
 		
 		self.picture = UserPicture()
-		self.picture?.isSilhouette = pictureData["is_silhouette"] as Bool
-		self.picture?.url = pictureData["url"] as String?
+		
+		var isSilhouette = pictureData["is_silhouette"] as? Bool
+		self.picture!.isSilhouette = isSilhouette != nil && isSilhouette! == true
+		self.picture!.url = pictureData["url"] as String?
 		
 		self._id = _response["_id"] as String?
 		self.email = _response["email"] as String?
@@ -37,9 +43,32 @@ class User {
 		self.name = _response["name"] as String?
 	}
 	
-	func register (callback: (error: NSError?, data: AnyObject?) -> Void) {
+	func register (completion: (error: NSError?, data: AnyObject?) -> Void) {
 		var request = makeRequest("/register", "POST")
-		doPostRequest(request, callback, self.json())
+		doPostRequest(request, { (err: NSError?, data: AnyObject?) -> Void in
+			var error = err;
+			queueRequests = false
+			
+			doRequest(makeRequest("/me", "GET"), { (err: NSError?, data: AnyObject?) -> Void in
+				if data != nil {
+					var json: [NSString: AnyObject] = data as [NSString: AnyObject]
+					self.parse(json)
+				}
+				
+				queueRequests = false
+				completion(error: error, data: data)
+			}, nil)
+			
+			queueRequests = true
+		}, self.json())
+	}
+	
+	class func find(_id: NSString, callback: (user: User?) -> Void) {
+		doRequest(makeRequest("/user/"+_id, nil), { (err: NSError?, data: AnyObject?) -> Void in
+			var json: [NSString: AnyObject] = data as [NSString: AnyObject]
+			var user = User(_response: json)
+			callback(user: user)
+		}, nil)
 	}
 	
 	func json() -> [NSObject: AnyObject] {

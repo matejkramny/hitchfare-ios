@@ -59,4 +59,38 @@ class NearbyJourneysTableViewController: UITableViewController {
 		return 126.0
 	}
 	
+	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+		var journey = journeys[indexPath.row]
+		
+		MessageList.getLists({ (err: NSError?, data: [MessageList]) -> Void in
+			var foundList: MessageList?
+			
+			for list in data {
+				if journey.owner! == list.receiver._id! || journey.owner! == list.sender._id! {
+					foundList = list
+					break
+				}
+			}
+			
+			var callback: (list: MessageList) -> Void = { (list: MessageList) -> Void in
+				self.performSegueWithIdentifier("openMessages", sender: list)
+			}
+			
+			if foundList == nil {
+				MessageList.createList(journey.owner!, callback: { (err: NSError?, data: MessageList?) -> Void in
+					if data != nil {
+						callback(list: data!)
+					}
+				})
+			} else {
+				callback(list: foundList!)
+			}
+		})
+	}
+	
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		var vc: MessagesViewController = segue.destinationViewController as MessagesViewController
+		vc.list = sender as MessageList
+	}
+	
 }
