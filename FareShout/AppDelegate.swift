@@ -26,12 +26,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func styleApplication() {
 		UIApplication.sharedApplication().statusBarStyle = .LightContent
 		
+		UINavigationBar.appearance().translucent = false
 		UINavigationBar.appearance().barTintColor = UIColor(red: 170/255, green: 128/255, blue: 169/255, alpha: 1.0)
 		UINavigationBar.appearance().tintColor = UIColor.whiteColor()
 		
-		var shadow = NSShadow()
-		shadow.shadowColor = UIColor.blackColor()
-		shadow.shadowOffset = CGSizeMake(-1, 0)
+		//var shadow = NSShadow()
+		//shadow.shadowColor = UIColor.blackColor()
+		//shadow.shadowOffset = CGSizeMake(-1, 0)
 		
 		var attributes: [NSObject: AnyObject] = [
 			NSForegroundColorAttributeName: UIColor.whiteColor(),

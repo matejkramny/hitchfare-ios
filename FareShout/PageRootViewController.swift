@@ -1,12 +1,69 @@
 
 import UIKit
 
-class PageRootViewController: UIViewController, UIPageViewControllerDataSource {
+var mainNavigationDelegate: FareShoutNavigationDelegate!
+
+protocol FareShoutNavigationDelegate {
+	func showNavigationBar()
+	func hideNavigationBar()
+}
+
+@objc protocol PageRootDelegate {
+	func pageRootTitle() -> NSString?
+	func presentHike()
+}
+
+class PageRootViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, FareShoutNavigationDelegate, UIScrollViewDelegate {
 	var vcs: [AnyObject] = []
 	var pageCtrl: UIPageViewController?
 
+	@IBOutlet weak var navigationBar: UINavigationBar!
+	@IBOutlet weak var rightButton: UIBarButtonItem!
+	@IBOutlet weak var titleView: UIView!
+	
+	var titleBarText: UILabel!
+	var currentViewIndex: Int = 1
+	
+	var maskLayer: CAGradientLayer!
+	var scrollView: UIScrollView!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		mainNavigationDelegate = self
+		
+		var attributes: [NSObject: AnyObject] = [
+			NSFontAttributeName: UIFont(name: "FontAwesome", size: 20)!
+		]
+		self.rightButton.setTitleTextAttributes(attributes, forState: UIControlState.Normal)
+		self.rightButton.title = NSString.fontAwesomeIconStringForEnum(FAIcon.FAThumbsOUp)
+		
+		self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+		self.navigationBar.shadowImage = UIImage()
+		self.navigationBar.translucent = true
+		// set navigbar.hidden = true to hide
+		
+		self.titleBarText = UILabel(frame: CGRectMake(0, 0, self.titleView.frame.size.width, self.titleView.frame.size.height))
+		self.titleBarText.textAlignment = NSTextAlignment.Center
+		self.titleBarText.textColor = UIColor.whiteColor()
+		self.titleBarText.font = UIFont.boldSystemFontOfSize(18.0)
+		
+		self.titleView.clipsToBounds = true
+		self.titleView.backgroundColor = UIColor.clearColor()
+		self.titleView.addSubview(self.titleBarText)
+		
+		// Shadow mask
+		self.maskLayer = CAGradientLayer()
+		var outerColor: CGColorRef = UIColor(red: 170/255, green: 128/255, blue: 169/255, alpha: 1.0).CGColor
+		var innerColor: CGColorRef = UIColor(red: 170/255, green: 128/255, blue: 169/255, alpha: 0.0).CGColor
+		self.maskLayer.colors = [outerColor, innerColor, innerColor, outerColor]
+		self.maskLayer.locations = [0.0, 0.2, 0.8, 1.0]
+		self.maskLayer.bounds = CGRectMake(0, 0, self.titleView.frame.size.width, self.titleView.frame.size.height)
+		self.maskLayer.anchorPoint = CGPointZero
+		self.maskLayer.startPoint = CGPointMake(0.0, 0.5)
+		self.maskLayer.endPoint = CGPointMake(1.0, 0.5)
+		
+		self.titleView.layer.addSublayer(self.maskLayer)
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -14,7 +71,10 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource {
 		
 		if pageCtrl == nil && currentUser != nil {
 			pageCtrl = UIPageViewController(transitionStyle: UIPageViewControllerTransitionStyle.Scroll, navigationOrientation: UIPageViewControllerNavigationOrientation.Horizontal, options: nil)
+			
 			pageCtrl!.dataSource = self
+			pageCtrl!.delegate = self
+			
 			pageCtrl!.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
 			
 			self.addChildViewController(pageCtrl!)
@@ -27,7 +87,20 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource {
 			vcs.append(storyboard.instantiateViewControllerWithIdentifier("friends"))
 			
 			self.pageCtrl!.setViewControllers([vcs[1]], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
+			
+			for view in self.pageCtrl!.view.subviews {
+				if let v = view as? UIScrollView {
+					var scrollView = view as UIScrollView
+					scrollView.delegate = self
+					
+					self.scrollView = scrollView
+				}
+			}
+			
+			setTitleBarText()
 		}
+		
+		self.view.bringSubviewToFront(navigationBar)
 	}
 	
 	override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -69,6 +142,82 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource {
 		}
 		
 		return nil
+	}
+	
+	func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
+		var viewControllers = self.pageCtrl!.viewControllers
+		for (i, v) in enumerate(vcs) {
+			if v === viewControllers[0] {
+				currentViewIndex = i
+				break
+			}
+		}
+	}
+	
+	func showNavigationBar() {
+		self.navigationBar.hidden = false
+		self.scrollView.scrollEnabled = true
+	}
+	
+	func hideNavigationBar() {
+		self.navigationBar.hidden = true
+		self.scrollView.scrollEnabled = false
+	}
+	
+	func setTitleBarText () {
+		var vc: PageRootDelegate = vcs[currentViewIndex].viewControllers![0] as PageRootDelegate
+		self.titleBarText.text = vc.pageRootTitle()
+	}
+	
+	func scrollViewDidScroll(scrollView: UIScrollView) {
+		var d = scrollView.contentOffset.x - self.view.frame.width
+		var ratio = d / self.view.frame.width
+		
+		//println(ratio)
+		
+		print(scrollView.contentOffset.x)
+		print(", ")
+		print(ratio)
+		println()
+		
+		// prevent scroll further than bounds
+		if ratio <= 0 && currentViewIndex == 0 {
+			println("NONO")
+			scrollView.setContentOffset(CGPointMake(self.view.frame.width, scrollView.contentOffset.y), animated: false)
+			ratio = 0
+		} else if ratio >= 0 && currentViewIndex == 2 {
+			println("NONO")
+			scrollView.setContentOffset(CGPointMake(self.view.frame.width, scrollView.contentOffset.y), animated: false)
+			ratio = 0
+		}
+		
+		var newX = self.titleView.frame.size.width * ratio * -2
+		var width = self.titleView.frame.size.width * 2
+		
+		var vcIndex = currentViewIndex
+		var frame: CGRect = self.titleBarText.frame
+		
+		if ratio >= 0.5 && currentViewIndex < 2 {
+			vcIndex = currentViewIndex + 1
+			frame = CGRectMake(newX + width, 0, frame.size.width, frame.size.height)
+		} else if ratio <= -0.5 && currentViewIndex > 0 {
+			vcIndex = currentViewIndex - 1
+			frame = CGRectMake(newX - width, 0, frame.size.width, frame.size.height)
+		} else {
+			frame = CGRectMake(newX, 0, frame.size.width, frame.size.height)
+		}
+		
+		// Update text frame
+		self.titleBarText.frame = frame
+		
+		// Update title
+		var vc: PageRootDelegate = vcs[vcIndex].viewControllers![0] as PageRootDelegate
+		self.titleBarText.text = vc.pageRootTitle()
+	}
+	
+	@IBAction func didPressHike(sender: AnyObject) {
+		var vc: PageRootDelegate = vcs[currentViewIndex].viewControllers![0] as PageRootDelegate
+		vc.presentHike()
 	}
 	
 }

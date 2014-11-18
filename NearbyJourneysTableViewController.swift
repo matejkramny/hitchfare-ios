@@ -1,19 +1,12 @@
 
 import UIKit
 
-class NearbyJourneysTableViewController: UITableViewController {
+class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate {
 	
 	var journeys: [Journey] = []
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FAThumbsOUp), style: UIBarButtonItemStyle.Plain, target: self, action: "addHike:")
-		
-		var attributes: [NSObject: AnyObject] = [
-			NSFontAttributeName: UIFont(name: "FontAwesome", size: 20)!
-		]
-		self.navigationItem.rightBarButtonItem?.setTitleTextAttributes(attributes, forState: UIControlState.Normal)
 		
 		self.refreshControl = UIRefreshControl()
 		self.refreshControl!.addTarget(self, action: "refreshData:", forControlEvents: UIControlEvents.ValueChanged)
@@ -23,7 +16,13 @@ class NearbyJourneysTableViewController: UITableViewController {
 		self.refreshData(nil)
 	}
 	
-	func addHike (sender: AnyObject) {
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		mainNavigationDelegate.showNavigationBar()
+	}
+	
+	func presentHike () {
 		self.performSegueWithIdentifier("addJourney", sender: nil)
 	}
 	
@@ -89,8 +88,16 @@ class NearbyJourneysTableViewController: UITableViewController {
 	}
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-		var vc: MessagesViewController = segue.destinationViewController as MessagesViewController
-		vc.list = sender as MessageList
+		mainNavigationDelegate.hideNavigationBar()
+		
+		if segue.identifier == "openMessages" {
+			var vc: MessagesViewController = segue.destinationViewController as MessagesViewController
+			vc.list = sender as MessageList
+		}
+	}
+	
+	func pageRootTitle() -> NSString? {
+		return "Close Fares"
 	}
 	
 }

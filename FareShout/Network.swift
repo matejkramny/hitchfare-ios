@@ -2,12 +2,12 @@
 import Foundation
 
 // Debug
-let kAPIProtocol = "http://"
-let kAPIEndpoint = kAPIProtocol + "127.0.0.1:3000"
+//let kAPIProtocol = "http://"
+//let kAPIEndpoint = kAPIProtocol + "10.0.1.3:3000"
 
 // Production
-//let kAPIProtocol = "https://"
-//let kAPIEndpoint = kAPIProtocol + "fareshout-matejkramny.ngapp.io"
+let kAPIProtocol = "https://"
+let kAPIEndpoint = kAPIProtocol + "fareshout-matejkramny.ngapp.io"
 
 let kNetworkDomainError = "Invalid Response"
 
