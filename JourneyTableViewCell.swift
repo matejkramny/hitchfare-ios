@@ -39,7 +39,7 @@ class JourneyTableViewCell: UITableViewCell {
 		} else {
 			self.dateLabel.text = "Date: N/A"
 		}
-		self.priceLabel.text = NSString(format: "£%.2f", journey.price)
+		self.priceLabel.text = NSString(format: "£%d", Int(journey.price))
 		self.availabilityLabel.text = NSString(format: "%d", journey.availableSeats!)
 	}
 	

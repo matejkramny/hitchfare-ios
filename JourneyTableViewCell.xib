@@ -62,7 +62,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wut-aC-5PG">
                         <rect key="frame" x="278" y="35" width="27" height="27"/>
-                        <color key="backgroundColor" red="0.89411764705882357" green="0.26666666666666666" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="27" id="C2K-GD-f71"/>
                             <constraint firstAttribute="width" constant="27" id="Uai-dI-BhV"/>

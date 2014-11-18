@@ -19,9 +19,11 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 
 	@IBOutlet weak var navigationBar: UINavigationBar!
 	@IBOutlet weak var rightButton: UIBarButtonItem!
+	@IBOutlet weak var leftButton: UIBarButtonItem!
 	@IBOutlet weak var titleView: UIView!
 	
 	var titleBarText: UILabel!
+	var pageIndicator: UIPageControl!
 	var currentViewIndex: Int = 1
 	
 	var maskLayer: CAGradientLayer!
@@ -36,17 +38,23 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 			NSFontAttributeName: UIFont(name: "FontAwesome", size: 20)!
 		]
 		self.rightButton.setTitleTextAttributes(attributes, forState: UIControlState.Normal)
-		self.rightButton.title = NSString.fontAwesomeIconStringForEnum(FAIcon.FAThumbsOUp)
+		self.leftButton.setTitleTextAttributes(attributes, forState: UIControlState.Normal)
+		self.rightButton.title = NSString(format: "%@  %@", NSString.fontAwesomeIconStringForEnum(FAIcon.FASearch), NSString.fontAwesomeIconStringForEnum(FAIcon.FAThumbsOUp))
+		self.leftButton.title = NSString.fontAwesomeIconStringForEnum(FAIcon.FACog)
 		
 		self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
 		self.navigationBar.shadowImage = UIImage()
 		self.navigationBar.translucent = true
 		// set navigbar.hidden = true to hide
 		
-		self.titleBarText = UILabel(frame: CGRectMake(0, 0, self.titleView.frame.size.width, self.titleView.frame.size.height))
+		self.titleBarText = UILabel(frame: CGRectMake(0, 0, self.titleView.frame.size.width, self.titleView.frame.size.height - 10))
 		self.titleBarText.textAlignment = NSTextAlignment.Center
 		self.titleBarText.textColor = UIColor.whiteColor()
 		self.titleBarText.font = UIFont.boldSystemFontOfSize(18.0)
+		
+		self.pageIndicator = UIPageControl(frame: CGRectMake(101, 10, 39, 37))
+		self.pageIndicator.numberOfPages = 3
+		self.pageIndicator.currentPage = 1
 		
 		self.titleView.clipsToBounds = true
 		self.titleView.backgroundColor = UIColor.clearColor()
@@ -54,8 +62,8 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		
 		// Shadow mask
 		self.maskLayer = CAGradientLayer()
-		var outerColor: CGColorRef = UIColor(red: 170/255, green: 128/255, blue: 169/255, alpha: 1.0).CGColor
-		var innerColor: CGColorRef = UIColor(red: 170/255, green: 128/255, blue: 169/255, alpha: 0.0).CGColor
+		var outerColor: CGColorRef = UIColor(red: 207/255, green: 0, blue: 20/255, alpha: 1.0).CGColor
+		var innerColor: CGColorRef = UIColor(red: 207/255, green: 0, blue: 20/255, alpha: 0.0).CGColor
 		self.maskLayer.colors = [outerColor, innerColor, innerColor, outerColor]
 		self.maskLayer.locations = [0.0, 0.2, 0.8, 1.0]
 		self.maskLayer.bounds = CGRectMake(0, 0, self.titleView.frame.size.width, self.titleView.frame.size.height)
@@ -64,6 +72,7 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		self.maskLayer.endPoint = CGPointMake(1.0, 0.5)
 		
 		self.titleView.layer.addSublayer(self.maskLayer)
+		self.titleView.addSubview(self.pageIndicator)
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -149,6 +158,7 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		for (i, v) in enumerate(vcs) {
 			if v === viewControllers[0] {
 				currentViewIndex = i
+				self.pageIndicator.currentPage = currentViewIndex
 				break
 			}
 		}
@@ -175,18 +185,11 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		
 		//println(ratio)
 		
-		print(scrollView.contentOffset.x)
-		print(", ")
-		print(ratio)
-		println()
-		
 		// prevent scroll further than bounds
 		if ratio <= 0 && currentViewIndex == 0 {
-			println("NONO")
 			scrollView.setContentOffset(CGPointMake(self.view.frame.width, scrollView.contentOffset.y), animated: false)
 			ratio = 0
 		} else if ratio >= 0 && currentViewIndex == 2 {
-			println("NONO")
 			scrollView.setContentOffset(CGPointMake(self.view.frame.width, scrollView.contentOffset.y), animated: false)
 			ratio = 0
 		}

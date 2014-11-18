@@ -683,6 +683,7 @@
                                 <items>
                                     <navigationItem id="cBx-UA-IZE">
                                         <nil key="title"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Item" id="oBx-3s-USr"/>
                                         <view key="titleView" contentMode="scaleToFill" id="9DA-o2-ksv">
                                             <rect key="frame" x="180" y="5.5" width="240" height="33"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -706,6 +707,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="9eA-3Z-gBj"/>
                     <connections>
+                        <outlet property="leftButton" destination="oBx-3s-USr" id="Kip-s0-lC2"/>
                         <outlet property="navigationBar" destination="Ngl-A9-mYB" id="FBu-iC-Qu5"/>
                         <outlet property="rightButton" destination="GHO-vx-Xzy" id="xGu-Y9-og6"/>
                         <outlet property="titleView" destination="9DA-o2-ksv" id="j8R-JI-nYQ"/>

@@ -19,7 +19,7 @@ class PriceTableViewCell: UITableViewCell {
 		self.slider.maximumValue = 100.0
 		self.slider.minimumValue = 0.0
 		self.slider.value = 10.0
-		self.field.text = "£10.00"
+		self.field.text = "£10"
 	}
 	
 	func sliderChangedValue (sender: AnyObject?) {
@@ -31,7 +31,7 @@ class PriceTableViewCell: UITableViewCell {
 	}
 	
 	func updatePrice () {
-		self.field.text = NSString(format: "£%.2f", self.slider.value)
+		self.field.text = NSString(format: "£%d", Int(self.slider.value))
 	}
 	
 	override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
