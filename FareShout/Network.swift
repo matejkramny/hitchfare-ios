@@ -3,7 +3,7 @@ import Foundation
 
 // Debug
 //let kAPIProtocol = "http://"
-//let kAPIEndpoint = kAPIProtocol + "10.0.1.3:3000"
+//let kAPIEndpoint = kAPIProtocol + "Matejs-MBP.local:3000"
 
 // Production
 let kAPIProtocol = "https://"
@@ -16,6 +16,7 @@ var currentUser: User?
 var sessionCookie: String?
 var queueRequests: Bool = false
 var queuedRequests: [Request] = []
+var didRequestForNotifications: Bool = false
 
 class Request: NSObject {
 	var request: NSMutableURLRequest
@@ -70,6 +71,11 @@ func readSettings () -> Bool {
 		currentUser = User(_response: settings!["user"] as [String: AnyObject])
 	}
 	
+	var reqForNotifs = settings!["didRequestForNotifications"] as? Bool
+	if reqForNotifs != nil {
+		didRequestForNotifications = reqForNotifs!
+	}
+	
 	return true
 }
 
@@ -77,6 +83,7 @@ func saveSettings () -> Bool {
 	var settings: [String: AnyObject] = [:]
 	settings["sessionCookie"] = sessionCookie
 	settings["user"] = currentUser?.json()
+	settings["didRequestForNotifications"] = didRequestForNotifications
 	
 	var docDir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
 	
@@ -178,4 +185,27 @@ func doRequest (request: NSMutableURLRequest, callback: (err: NSError?, data: An
 	}
 	
 	task.resume()
+}
+
+func findMessageList (to: NSString, callback: (list: MessageList?) -> Void) {
+	MessageList.getLists({ (err: NSError?, data: [MessageList]) -> Void in
+		var foundList: MessageList?
+		
+		for list in data {
+			if to == list.receiver._id! || to == list.sender._id! {
+				foundList = list
+				break
+			}
+		}
+		
+		if foundList == nil {
+			MessageList.createList(to, callback: { (err: NSError?, data: MessageList?) -> Void in
+				if data != nil {
+					callback(list: data!)
+				}
+			})
+		} else {
+			callback(list: foundList!)
+		}
+	})
 }

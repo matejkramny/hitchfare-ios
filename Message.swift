@@ -83,6 +83,20 @@ class MessageList {
 		}, nil)
 	}
 	
+	class func getList(_id: NSString, callback: (err: NSError?, data: MessageList?) -> Void) {
+		doRequest(makeRequest("/messages/list/" + _id, "GET"), { (err: NSError?, data: AnyObject?) -> Void in
+			var list: MessageList?
+			
+			if data != nil {
+				var dataObj = data as [String: AnyObject]
+				
+				list = MessageList(_response: dataObj)
+			}
+			
+			callback(err: err, data: list)
+		}, nil)
+	}
+	
 	class func createList (user_id: NSString, callback: (err: NSError?, data: MessageList?) -> Void) {
 		doRequest(makeRequest("/messages/" + user_id, "PUT"), { (err: NSError?, data: AnyObject?) -> Void in
 			var list: MessageList?

@@ -31,6 +31,13 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 		super.viewWillAppear(animated)
 	}
 	
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+		appDelegate.requestForNotifications()
+	}
+	
 	func cancel(sender: AnyObject) {
 		self.dismissViewControllerAnimated(true, completion: nil)
 	}
@@ -81,7 +88,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 		} else if indexPath.section == 1 {
 			var cell = tableView.dequeueReusableCellWithIdentifier("carSelector", forIndexPath: indexPath) as? UITableViewCell
 			
-			cell!.textLabel.text = "Car"
+			cell!.textLabel!.text = "Car"
 			
 			var car_id = ""
 			if journey.car != nil {

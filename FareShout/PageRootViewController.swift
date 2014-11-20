@@ -11,6 +11,8 @@ protocol FareShoutNavigationDelegate {
 @objc protocol PageRootDelegate {
 	func pageRootTitle() -> NSString?
 	func presentHike()
+	
+	func openMessageNotification(listId: NSString)
 }
 
 class PageRootViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, FareShoutNavigationDelegate, UIScrollViewDelegate {
@@ -110,6 +112,10 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		}
 		
 		self.view.bringSubviewToFront(navigationBar)
+	}
+	
+	func getCurrentViewController() -> UINavigationController {
+		return self.vcs[currentViewIndex] as UINavigationController
 	}
 	
 	override func preferredStatusBarStyle() -> UIStatusBarStyle {

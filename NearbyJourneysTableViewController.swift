@@ -63,29 +63,8 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		var journey = journeys[indexPath.row]
 		
-		MessageList.getLists({ (err: NSError?, data: [MessageList]) -> Void in
-			var foundList: MessageList?
-			
-			for list in data {
-				if journey.owner! == list.receiver._id! || journey.owner! == list.sender._id! {
-					foundList = list
-					break
-				}
-			}
-			
-			var callback: (list: MessageList) -> Void = { (list: MessageList) -> Void in
-				self.performSegueWithIdentifier("openMessages", sender: list)
-			}
-			
-			if foundList == nil {
-				MessageList.createList(journey.owner!, callback: { (err: NSError?, data: MessageList?) -> Void in
-					if data != nil {
-						callback(list: data!)
-					}
-				})
-			} else {
-				callback(list: foundList!)
-			}
+		findMessageList(journey.owner!, { (list: MessageList?) -> Void in
+			self.performSegueWithIdentifier("openMessages", sender: list)
 		})
 	}
 	
@@ -100,6 +79,16 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
 	
 	func pageRootTitle() -> NSString? {
 		return "Close Fares"
+	}
+	
+	func openMessageNotification(listId: NSString) {
+		MessageList.getList(listId, callback: { (err: NSError?, data: MessageList?) -> Void in
+			if data == nil {
+				return
+			}
+			
+			self.performSegueWithIdentifier("openMessages", sender: data!)
+		})
 	}
 	
 }

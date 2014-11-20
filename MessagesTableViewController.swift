@@ -8,10 +8,13 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var textField: UITextField!
 	@IBOutlet weak var sendButton: UIButton!
+	@IBOutlet weak var textHolderView: UIView!
+	@IBOutlet weak var textHolderBottomLayoutGuide: NSLayoutConstraint!
 	
 	var toolbar: UIToolbar!
 	var refreshControl: UIRefreshControl!
-	var originalY: CGFloat!
+	var originalHeight: CGFloat!
+	var ignoreKeyboardNotifications: Bool = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -33,9 +36,12 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 		self.sendButton.addTarget(self, action: "sendMessage:", forControlEvents: UIControlEvents.TouchUpInside)
 		self.textField.placeholder = "Message.."
 		self.textField.addTarget(self, action: "valueChanged:", forControlEvents: UIControlEvents.EditingChanged)
+		self.textField.keyboardType = UIKeyboardType.Default
+		self.textField.autocapitalizationType = UITextAutocapitalizationType.Sentences
+		self.textField.autocorrectionType = UITextAutocorrectionType.Default
 		
 		self.sendButton.enabled = false
-		self.refreshData(nil)
+		self.refreshData(false)
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -44,6 +50,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 		var notificationCenter = NSNotificationCenter.defaultCenter()
 		notificationCenter.addObserver(self, selector: "keyboardWillShowNotification:", name: UIKeyboardWillShowNotification, object: nil)
 		notificationCenter.addObserver(self, selector: "keyboardWillHideNotification:", name: UIKeyboardWillHideNotification, object: nil)
+		notificationCenter.addObserver(self, selector: "didReceiveMessage:", name: "ReceivedMessage", object: nil)
 	}
 	
 	override func viewWillDisappear(animated: Bool) {
@@ -61,6 +68,12 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 		SVProgressHUD.showProgress(0, status: "Sending..", maskType: SVProgressHUDMaskType.Black)
 		message.sendMessage({ (err: NSError?, data: AnyObject?) -> Void in
 			self.textField.text = ""
+			self.sendButton.enabled = false
+			
+			self.ignoreKeyboardNotifications = true
+			self.textField.resignFirstResponder()
+			self.textField.becomeFirstResponder()
+			self.ignoreKeyboardNotifications = false
 			
 			SVProgressHUD.showSuccessWithStatus("Sent.")
 			self.refreshData(nil)
@@ -82,6 +95,10 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 	}
 	
 	func scrollKeyboard (notification: NSNotification, directionUp: Bool) {
+		if ignoreKeyboardNotifications == true {
+			return
+		}
+		
 		var userInfo: NSDictionary = notification.userInfo!
 		
 		var duration: NSTimeInterval = userInfo.objectForKey(UIKeyboardAnimationDurationUserInfoKey) as NSTimeInterval
@@ -92,30 +109,47 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 		var kbFrameValue = userInfo[UIKeyboardFrameEndUserInfoKey] as NSValue
 		var kbFrame = kbFrameValue.CGRectValue()
 		
-		UIView.beginAnimations(nil, context: nil)
-		UIView.setAnimationDuration(duration)
-		UIView.setAnimationCurve(curve)
-		
-		var y: CGFloat = self.view.frame.origin.y
-		
-		if directionUp {
-			originalY = y
-			y -= kbFrame.size.height
-		} else {
-			y = originalY
-		}
-		
-		self.view.frame = CGRectMake(self.view.frame.origin.x, y, self.view.frame.size.width, self.view.frame.size.height)
-		
-		UIView.commitAnimations()
+		UIView.animateWithDuration(duration, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+			var height: CGFloat = self.tableView.contentSize.height
+			
+			if directionUp {
+				self.originalHeight = height
+				height -= kbFrame.size.height
+				self.textHolderBottomLayoutGuide.constant = kbFrame.size.height
+			} else {
+				height = self.originalHeight
+				self.textHolderBottomLayoutGuide.constant = 0
+			}
+			
+			self.tableView.layoutIfNeeded()
+			self.textHolderView.layoutIfNeeded()
+			
+			self.tableView.contentSize = CGSizeMake(self.tableView.contentSize.width, height)
+			self.tableView.reloadData()
+			if self.list.messages.count > 0 {
+				self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: self.list.messages.count-1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+			}
+		}, completion: { (something: Bool) -> Void in
+		})
 	}
 	
 	func refreshData (sender: AnyObject?) {
 		self.refreshControl.endRefreshing()
 		
+		var animated: Bool!
+		var animatedMaybe = sender as? Bool
+		if animatedMaybe != nil {
+			animated = animatedMaybe!
+		} else {
+			animated = true
+		}
+		
 		self.list.getMessages({ (err: NSError?, data: [Message]) -> Void in
 			self.refreshControl.endRefreshing()
 			self.tableView.reloadData()
+			if self.list.messages.count > 0 {
+				self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: self.list.messages.count-1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: animated)
+			}
 		})
 	}
 	
@@ -131,15 +165,29 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 		var cell: UITableViewCell? = tableView.dequeueReusableCellWithIdentifier("basic", forIndexPath: indexPath) as? UITableViewCell
 		
 		var message: Message = list.messages[indexPath.row]
-		cell!.textLabel.text = message.message
+		cell!.textLabel!.text = message.message
 		
 		if message.sender == currentUser!._id {
-			cell!.textLabel.textAlignment = NSTextAlignment.Right
+			cell!.textLabel!.textAlignment = NSTextAlignment.Right
 		} else {
-			cell!.textLabel.textAlignment = NSTextAlignment.Left
+			cell!.textLabel!.textAlignment = NSTextAlignment.Left
 		}
 		
+		cell!.selectionStyle = UITableViewCellSelectionStyle.None
+		
 		return cell!
+	}
+	
+	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+		self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+	}
+	
+	func didReceiveMessage(notification: NSNotification) {
+		var info = notification.userInfo!
+		
+		if info["list"] as NSString == list._id {
+			self.refreshData(nil)
+		}
 	}
 	
 }

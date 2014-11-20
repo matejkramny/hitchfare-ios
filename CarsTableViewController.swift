@@ -46,7 +46,7 @@ class CarsTableViewController: UITableViewController {
 		let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("rightDetail", forIndexPath: indexPath) as UITableViewCell
 		
 		var car = storage.cars[indexPath.row]
-		cell.textLabel.text = car.name
+		cell.textLabel!.text = car.name
 		
 		if selectCarMode == true {
 			cell.accessoryType = UITableViewCellAccessoryType.None

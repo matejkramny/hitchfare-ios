@@ -108,6 +108,10 @@ class UserTableViewController: UITableViewController, ProfileTableViewCellDelega
 		}
 	}
 	
+	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+	}
+	
 	func openCars(sender: UIButton) {
 		self.performSegueWithIdentifier("openCars", sender: nil)
 	}
@@ -118,6 +122,16 @@ class UserTableViewController: UITableViewController, ProfileTableViewCellDelega
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		mainNavigationDelegate.hideNavigationBar()
+	}
+	
+	func openMessageNotification(listId: NSString) {
+		MessageList.getList(listId, callback: { (err: NSError?, data: MessageList?) -> Void in
+			if data == nil {
+				return
+			}
+			
+			self.performSegueWithIdentifier("openMessages", sender: data!)
+		})
 	}
 	
 }
