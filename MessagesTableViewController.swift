@@ -25,6 +25,11 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 			self.navigationItem.title = list.receiver.name
 		}
 		
+		if !didRequestForNotifications {
+			var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+			appDelegate.requestForNotifications()
+		}
+		
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 

@@ -34,8 +34,10 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 		
-		var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-		appDelegate.requestForNotifications()
+		if !didRequestForNotifications {
+			var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+			appDelegate.requestForNotifications()
+		}
 	}
 	
 	func cancel(sender: AnyObject) {

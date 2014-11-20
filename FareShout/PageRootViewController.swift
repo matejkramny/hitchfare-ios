@@ -49,14 +49,17 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		self.navigationBar.translucent = true
 		// set navigbar.hidden = true to hide
 		
-		self.titleBarText = UILabel(frame: CGRectMake(0, 0, self.titleView.frame.size.width, self.titleView.frame.size.height - 10))
+		self.titleBarText = UILabel(frame: CGRectMake(0, 0, self.titleView.frame.size.width, self.titleView.frame.size.height - 6))
 		self.titleBarText.textAlignment = NSTextAlignment.Center
 		self.titleBarText.textColor = UIColor.whiteColor()
-		self.titleBarText.font = UIFont.boldSystemFontOfSize(18.0)
+		self.titleBarText.font = UIFont.boldSystemFontOfSize(17.0)
 		
 		self.pageIndicator = UIPageControl(frame: CGRectMake(self.titleView.frame.size.width / 2 - 39 / 2, 10, 39, 37))
 		self.pageIndicator.numberOfPages = 3
 		self.pageIndicator.currentPage = 1
+		self.pageIndicator.pageIndicatorTintColor = UIColor.blackColor()
+		// Hacks the pageIndicator to be smaller.. Alternative is to subclass. This is less messy.
+		self.pageIndicator.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.75, 0.75)
 		
 		self.titleView.clipsToBounds = true
 		self.titleView.backgroundColor = UIColor.clearColor()
