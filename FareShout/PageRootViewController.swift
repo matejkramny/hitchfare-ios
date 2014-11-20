@@ -58,6 +58,7 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		self.pageIndicator.numberOfPages = 3
 		self.pageIndicator.currentPage = 1
 		self.pageIndicator.pageIndicatorTintColor = UIColor.blackColor()
+		self.pageIndicator.userInteractionEnabled = false
 		// Hacks the pageIndicator to be smaller.. Alternative is to subclass. This is less messy.
 		self.pageIndicator.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.75, 0.75)
 		
@@ -100,7 +101,7 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 			vcs.append(storyboard.instantiateViewControllerWithIdentifier("recent"))
 			vcs.append(storyboard.instantiateViewControllerWithIdentifier("friends"))
 			
-			self.pageCtrl!.setViewControllers([vcs[1]], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
+			self.pageCtrl!.setViewControllers([vcs[1]], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
 			
 			for view in self.pageCtrl!.view.subviews {
 				if let v = view as? UIScrollView {
@@ -138,7 +139,19 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		for (i, v) in enumerate(vcs) {
 			if v as UIViewController == viewController {
 				if i < vcs.count - 1 {
-					return vcs[i+1] as? UIViewController
+					var view = vcs[i+1] as? UIViewController
+					
+					if view != nil {
+						view!.viewWillAppear(false)
+						view!.viewDidAppear(false)
+						
+						view!.view.setNeedsDisplay()
+						
+						view!.viewWillDisappear(false)
+						view!.viewDidDisappear(false)
+					}
+					
+					return view
 				} else {
 					return nil
 				}
@@ -152,7 +165,19 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		for (i, v) in enumerate(vcs) {
 			if v as UIViewController == viewController {
 				if i > 0 {
-					return vcs[i-1] as? UIViewController
+					var view = vcs[i-1] as? UIViewController
+					
+					if view != nil {
+						view!.viewWillAppear(false)
+						view!.viewDidAppear(false)
+						
+						view!.view.setNeedsDisplay()
+						
+						view!.viewWillDisappear(false)
+						view!.viewDidDisappear(false)
+					}
+					
+					return view
 				} else {
 					return nil
 				}
@@ -218,6 +243,8 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		} else {
 			frame = CGRectMake(newX, 0, frame.size.width, frame.size.height)
 		}
+		
+		self.pageIndicator.currentPage = vcIndex
 		
 		// Update text frame
 		self.titleBarText.frame = frame
