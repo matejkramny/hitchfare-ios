@@ -1,12 +1,12 @@
 
 import UIKit
 
-protocol ProfileTableViewCellDelegate {
+protocol FSProfileTableViewCellDelegate {
 	func openCars(sender: UIButton)
 }
 
-class ProfileTableViewCell: UITableViewCell {
-	var delegate: ProfileTableViewCellDelegate!
+class FSProfileTableViewCell: UITableViewCell {
+	var delegate: FSProfileTableViewCellDelegate!
 	
 	@IBOutlet weak var nameLabel: UILabel!
 	@IBOutlet weak var descriptionLabel: UILabel!
@@ -20,7 +20,7 @@ class ProfileTableViewCell: UITableViewCell {
 	override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 	}
-
+	
 	required init(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 	}

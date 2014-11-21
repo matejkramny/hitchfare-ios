@@ -45,6 +45,12 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 		self.textField.autocapitalizationType = UITextAutocapitalizationType.Sentences
 		self.textField.autocorrectionType = UITextAutocorrectionType.Default
 		
+		self.tableView.registerNib(UINib(nibName: "LeftChatTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "LeftChatCell")
+		self.tableView.registerNib(UINib(nibName: "RightChatTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "RightChatCell")
+		self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+		self.tableView.backgroundColor = UIColor(red: 113/255, green: 0, blue: 2/255, alpha: 1.0)
+		self.tableView.backgroundView = nil
+		
 		self.sendButton.enabled = false
 		self.refreshData(false)
 	}
@@ -167,24 +173,81 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		var cell: UITableViewCell? = tableView.dequeueReusableCellWithIdentifier("basic", forIndexPath: indexPath) as? UITableViewCell
-		
-		var message: Message = list.messages[indexPath.row]
-		cell!.textLabel!.text = message.message
+		let message: Message = list.messages[indexPath.row]
+		let bgColor: UIColor = UIColor(red: 241/255, green: 245/255, blue: 253/255, alpha: 1.0)
+		let textColor: UIColor = UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 1.0)
+		let cornerRadius: CGFloat = 26/2
 		
 		if message.sender == currentUser!._id {
-			cell!.textLabel!.textAlignment = NSTextAlignment.Right
+			var cell: RightChatTableViewCell? = tableView.dequeueReusableCellWithIdentifier("RightChatCell", forIndexPath: indexPath) as? RightChatTableViewCell
+			
+			if cell == nil {
+				cell = RightChatTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "RightChatCell")
+			}
+			
+			cell!.backgroundView = nil
+			cell!.backgroundColor = UIColor.clearColor()
+			cell!.label.text = message.message
+			cell!.label.textColor = textColor
+			cell!.bgView.layer.backgroundColor = bgColor.CGColor
+			cell!.bgView.layer.cornerRadius = cornerRadius
+			
+			cell!.selectionStyle = UITableViewCellSelectionStyle.None
+			
+			return cell!
 		} else {
-			cell!.textLabel!.textAlignment = NSTextAlignment.Left
+			var cell: LeftChatTableViewCell? = tableView.dequeueReusableCellWithIdentifier("LeftChatCell", forIndexPath: indexPath) as? LeftChatTableViewCell
+			
+			if cell == nil {
+				cell = LeftChatTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "LeftChatCell")
+			}
+			
+			cell!.backgroundView = nil
+			cell!.backgroundColor = UIColor.clearColor()
+			cell!.label.text = message.message
+			cell!.label.textColor = textColor
+			cell!.bgView.layer.backgroundColor = bgColor.CGColor
+			cell!.bgView.layer.cornerRadius = cornerRadius
+			
+			cell!.selectionStyle = UITableViewCellSelectionStyle.None
+			
+			return cell!
 		}
+	}
+	
+	func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+		let message: Message = list.messages[indexPath.row]
 		
-		cell!.selectionStyle = UITableViewCellSelectionStyle.None
+		var attributes: [NSObject: AnyObject] = [
+			NSFontAttributeName: UIFont.systemFontOfSize(18)
+		]
+		var expectedRect: CGRect = message.message.boundingRectWithSize(CGSizeMake(tableView.frame.width - 84, 99999999), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attributes, context: nil)
 		
-		return cell!
+		if message.sender == currentUser!._id {
+			var c: RightChatTableViewCell = cell as RightChatTableViewCell
+			
+			c.bgViewWidth.constant = expectedRect.width + 16
+		} else {
+			var c: LeftChatTableViewCell = cell as LeftChatTableViewCell
+			
+			c.bgViewWidth.constant = expectedRect.width + 16
+		}
 	}
 	
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+	}
+	
+	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		var message: Message = list.messages[indexPath.row]
+		
+		var attributes: [NSObject: AnyObject] = [
+			NSFontAttributeName: UIFont.systemFontOfSize(18)
+		]
+		//var expectedSize: CGSize = message.message.sizeWithAttributes(attributes)
+		var expectedRect: CGRect = message.message.boundingRectWithSize(CGSizeMake(tableView.frame.width - 99, 99999999), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attributes, context: nil)
+		
+		return expectedRect.height + 16 + 16
 	}
 	
 	func didReceiveMessage(notification: NSNotification) {

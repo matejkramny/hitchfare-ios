@@ -4,6 +4,8 @@ import UIKit
 class HikesTableViewCell: UITableViewController, PageRootDelegate {
 	
 	var messages: [MessageList] = []
+	var didAppear: Bool = false
+	var isInSegue: Bool = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -20,6 +22,28 @@ class HikesTableViewCell: UITableViewController, PageRootDelegate {
 		super.viewWillAppear(animated)
 		
 		mainNavigationDelegate.showNavigationBar()
+	}
+	
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		self.isInSegue = false
+		self.didAppear = true
+	}
+	
+	override func viewWillDisappear(animated: Bool) {
+		super.viewWillDisappear(animated)
+		
+		if self.didAppear == false && self.isInSegue == true {
+			// Disappearing before appeared.
+			mainNavigationDelegate.hideNavigationBar()
+		}
+	}
+	
+	override func viewDidDisappear(animated: Bool) {
+		super.viewDidDisappear(animated)
+		
+		self.didAppear = false
 	}
 	
 	func presentHike () {
@@ -73,6 +97,7 @@ class HikesTableViewCell: UITableViewController, PageRootDelegate {
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		mainNavigationDelegate.hideNavigationBar()
+		isInSegue = true
 		
 		if segue.identifier == "openMessages" {
 			var vc: MessagesViewController = segue.destinationViewController as MessagesViewController

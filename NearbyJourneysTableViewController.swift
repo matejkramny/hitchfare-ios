@@ -4,6 +4,8 @@ import UIKit
 class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate {
 	
 	var journeys: [Journey] = []
+	var didAppear: Bool = false
+	var isInSegue: Bool = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -22,6 +24,28 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
 		super.viewWillAppear(animated)
 		
 		mainNavigationDelegate.showNavigationBar()
+	}
+	
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		self.isInSegue = false
+		self.didAppear = true
+	}
+	
+	override func viewWillDisappear(animated: Bool) {
+		super.viewWillDisappear(animated)
+		
+		if self.didAppear == false && self.isInSegue == true {
+			// Disappearing before appeared.
+			mainNavigationDelegate.hideNavigationBar()
+		}
+	}
+	
+	override func viewDidDisappear(animated: Bool) {
+		super.viewDidDisappear(animated)
+		
+		self.didAppear = false
 	}
 	
 	func presentHike () {
@@ -69,6 +93,7 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
 	}
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		isInSegue = true
 		mainNavigationDelegate.hideNavigationBar()
 		
 		if segue.identifier == "openMessages" {

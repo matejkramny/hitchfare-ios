@@ -1,11 +1,37 @@
 
 import Foundation
 
-class UserPicture {
+class UserPicture: NSObject {
 	var isSilhouette: Bool = false
-	var url: NSString? = nil
+	var url: NSString!
 	var width: NSString? = nil
 	var height: NSString? = nil
+	
+	var UUID: String
+	var sourceImageUUID: String
+	
+	init(url: NSString) {
+		self.url = url
+		
+		let str = self.url.cStringUsingEncoding(NSUTF8StringEncoding)
+		let strLen = CC_LONG(self.url.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
+		let digestLen = Int(CC_MD5_DIGEST_LENGTH)
+		let result = UnsafeMutablePointer<CUnsignedChar>.alloc(digestLen)
+		
+		CC_MD5(str, strLen, result)
+		
+		var hash = NSMutableString()
+		for i in 0..<digestLen {
+			hash.appendFormat("%02x", result[i])
+		}
+		
+		result.destroy()
+		
+		self.UUID = String(hash)
+		self.sourceImageUUID = self.UUID
+		
+		super.init()
+	}
 }
 
 class User {
@@ -24,16 +50,16 @@ class User {
 	}
 	
 	func parse (_response: [NSString: AnyObject]) {
-		var pictureData: [String: AnyObject] = _response["picture"] as [String: AnyObject]
-		if pictureData["url"] == nil {
+		var pictureData: [NSObject: AnyObject] = _response["picture"] as [String: AnyObject]
+		let url: NSString? = pictureData["url"] as? NSString
+		if url == nil {
 			pictureData = pictureData["data"] as [String: AnyObject]
 		}
 		
-		self.picture = UserPicture()
+		self.picture = UserPicture(url: url!)
 		
 		var isSilhouette = pictureData["is_silhouette"] as? Bool
 		self.picture!.isSilhouette = isSilhouette != nil && isSilhouette! == true
-		self.picture!.url = pictureData["url"] as String?
 		
 		self._id = _response["_id"] as String?
 		self.email = _response["email"] as String?

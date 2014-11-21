@@ -1,9 +1,11 @@
 
 import UIKit
 
-class UserTableViewController: UITableViewController, ProfileTableViewCellDelegate, PageRootDelegate {
+class UserTableViewController: UITableViewController, FSProfileTableViewCellDelegate, PageRootDelegate {
 	
 	var journeys: [Journey] = []
+	var didAppear: Bool = false
+	var isInSegue: Bool = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -14,6 +16,7 @@ class UserTableViewController: UITableViewController, ProfileTableViewCellDelega
 		self.refreshControl!.addTarget(self, action: "refreshData:", forControlEvents: UIControlEvents.ValueChanged)
 		
 		self.tableView.registerNib(UINib(nibName: "JourneyTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Journey")
+		self.tableView.registerNib(UINib(nibName: "FSProfileTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "profileCell")
 		
 		self.refreshData(nil)
 	}
@@ -24,6 +27,28 @@ class UserTableViewController: UITableViewController, ProfileTableViewCellDelega
 		mainNavigationDelegate.showNavigationBar()
 	}
 	
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		self.isInSegue = false
+		self.didAppear = true
+	}
+	
+	override func viewWillDisappear(animated: Bool) {
+		super.viewWillDisappear(animated)
+		
+		if self.didAppear == false && self.isInSegue == true {
+			// Disappearing before appeared.
+			mainNavigationDelegate.hideNavigationBar()
+		}
+	}
+	
+	override func viewDidDisappear(animated: Bool) {
+		super.viewDidDisappear(animated)
+		
+		self.didAppear = false
+	}
+	
 	func presentHike () {
 		self.performSegueWithIdentifier("addJourney", sender: nil)
 	}
@@ -31,6 +56,7 @@ class UserTableViewController: UITableViewController, ProfileTableViewCellDelega
 	func refreshData (sender: AnyObject?) {
 		Journey.getMyJourneys({ (err: NSError?, data: [Journey]) -> Void in
 			self.journeys = data
+			
 			self.refreshControl!.endRefreshing()
 			self.tableView.reloadData()
 		})
@@ -56,14 +82,17 @@ class UserTableViewController: UITableViewController, ProfileTableViewCellDelega
 			var cell = tableView.dequeueReusableCellWithIdentifier(cellIDForIndexPath(indexPath), forIndexPath: indexPath) as? UITableViewCell
 			
 			if cell == nil {
-				cell = ProfileTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: cellIDForIndexPath(indexPath))
+				cell = FSProfileTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: cellIDForIndexPath(indexPath))
 			}
 			
-			if indexPath.section == 0 {
-				var c = cell as ProfileTableViewCell
-				c.delegate = self
-				c.nameLabel.text = currentUser!.name
-			}
+			var c = cell as FSProfileTableViewCell
+			
+			var url = NSURL(string: currentUser!.picture!.url)
+			c.profileImageView.sd_setImageWithURL(url!)
+			c.profileImageView.layer.cornerRadius = 45
+			c.profileImageView.layer.masksToBounds = true
+			c.delegate = self
+			c.nameLabel.text = currentUser!.name
 			
 			return cell!
 		} else if indexPath.section == 1 {
@@ -121,6 +150,7 @@ class UserTableViewController: UITableViewController, ProfileTableViewCellDelega
 	}
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		self.isInSegue = true
 		mainNavigationDelegate.hideNavigationBar()
 	}
 	

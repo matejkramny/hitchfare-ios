@@ -44,9 +44,9 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		self.rightButton.title = NSString(format: "%@  %@", NSString.fontAwesomeIconStringForEnum(FAIcon.FASearch), NSString.fontAwesomeIconStringForEnum(FAIcon.FAThumbsOUp))
 		self.leftButton.title = NSString.fontAwesomeIconStringForEnum(FAIcon.FACog)
 		
-		self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-		self.navigationBar.shadowImage = UIImage()
-		self.navigationBar.translucent = true
+		//self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+		//self.navigationBar.shadowImage = UIImage()
+		//self.navigationBar.translucent = true
 		// set navigbar.hidden = true to hide
 		
 		self.titleBarText = UILabel(frame: CGRectMake(0, 0, self.titleView.frame.size.width, self.titleView.frame.size.height - 6))
