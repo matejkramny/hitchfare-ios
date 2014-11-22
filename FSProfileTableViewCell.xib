@@ -22,8 +22,8 @@
                             <constraint firstAttribute="width" secondItem="imn-Uc-2me" secondAttribute="height" multiplier="1:1" id="0Ub-rp-fEg"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="First Last" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O9a-HI-Jn5">
-                        <rect key="frame" x="123" y="15" width="73.5" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Last" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O9a-HI-Jn5">
+                        <rect key="frame" x="123" y="15" width="142" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="s7L-pP-sWi"/>
                         </constraints>
@@ -71,10 +71,10 @@
                     <constraint firstAttribute="bottom" secondItem="Ggb-UN-Lhe" secondAttribute="bottom" constant="25.5" id="Qxh-Pb-ut6"/>
                     <constraint firstAttribute="bottom" secondItem="imn-Uc-2me" secondAttribute="bottom" constant="14.5" id="ZoP-Tu-I8N"/>
                     <constraint firstItem="Ggb-UN-Lhe" firstAttribute="leading" secondItem="imn-Uc-2me" secondAttribute="trailing" constant="18" id="a0y-GZ-tBR"/>
+                    <constraint firstItem="xdU-5V-iHU" firstAttribute="leading" secondItem="O9a-HI-Jn5" secondAttribute="trailing" constant="8" id="dQT-5q-Xn6"/>
                     <constraint firstItem="yqm-BE-DfO" firstAttribute="top" secondItem="xdU-5V-iHU" secondAttribute="bottom" constant="8" id="dhJ-Dy-VrJ"/>
                     <constraint firstItem="Ggb-UN-Lhe" firstAttribute="top" secondItem="yqm-BE-DfO" secondAttribute="bottom" constant="8" id="iLE-ED-VKi"/>
                     <constraint firstItem="yqm-BE-DfO" firstAttribute="leading" secondItem="imn-Uc-2me" secondAttribute="trailing" constant="18" id="ixa-H2-tuX"/>
-                    <constraint firstItem="xdU-5V-iHU" firstAttribute="leading" relation="lessThanOrEqual" secondItem="O9a-HI-Jn5" secondAttribute="trailing" constant="8" id="mQ8-CD-OHi"/>
                     <constraint firstItem="imn-Uc-2me" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="wCg-JC-ngp"/>
                 </constraints>
             </tableViewCellContentView>

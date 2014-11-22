@@ -11,43 +11,22 @@
 		4F1A62561A1A90EE00826ECE /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1A62551A1A90EE00826ECE /* Message.swift */; };
 		4F1AD1711A139B490047BEE8 /* FSTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD16F1A139B490047BEE8 /* FSTextFieldTableViewCell.swift */; };
 		4F1AD1721A139B490047BEE8 /* FSTextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F1AD1701A139B490047BEE8 /* FSTextFieldTableViewCell.xib */; };
-		4F1AD1771A14F6640047BEE8 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD1761A14F6640047BEE8 /* SVProgressHUD.m */; };
 		4F1AD1791A14F6A70047BEE8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1AD1781A14F6A70047BEE8 /* QuartzCore.framework */; };
 		4F1AD1811A153E620047BEE8 /* JourneyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD17F1A153E620047BEE8 /* JourneyTableViewCell.swift */; };
 		4F1AD1821A153E620047BEE8 /* JourneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F1AD1801A153E620047BEE8 /* JourneyTableViewCell.xib */; };
-		4F1AD19B1A155C460047BEE8 /* FAImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD1931A155C460047BEE8 /* FAImageView.m */; };
-		4F1AD19C1A155C460047BEE8 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD1951A155C460047BEE8 /* NSString+FontAwesome.m */; };
-		4F1AD19D1A155C460047BEE8 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD1961A155C460047BEE8 /* README.md */; };
 		4F1AD19E1A155C460047BEE8 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F1AD1981A155C460047BEE8 /* FontAwesome.ttf */; };
-		4F1AD19F1A155C460047BEE8 /* UIFont+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD19A1A155C460047BEE8 /* UIFont+FontAwesome.m */; };
-		4F1AD1A11A155FB90047BEE8 /* SVProgressHUD.h in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD1751A14F6640047BEE8 /* SVProgressHUD.h */; };
-		4F1AD1A21A155FB90047BEE8 /* FAImageView.h in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD1921A155C460047BEE8 /* FAImageView.h */; };
-		4F1AD1A31A155FB90047BEE8 /* NSString+FontAwesome.h in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD1941A155C460047BEE8 /* NSString+FontAwesome.h */; };
-		4F1AD1A41A155FB90047BEE8 /* UIFont+FontAwesome.h in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD1991A155C460047BEE8 /* UIFont+FontAwesome.h */; };
-		4F1AD1A51A155FB90047BEE8 /* FacebookCtrl.h in Sources */ = {isa = PBXBuildFile; fileRef = 4FC1E60E19FEB891002F743B /* FacebookCtrl.h */; };
 		4F1AD1A81A1562760047BEE8 /* HikesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD1A71A1562760047BEE8 /* HikesTableViewController.swift */; };
 		4F2773751A08E5BA0012B779 /* AddCarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2773741A08E5BA0012B779 /* AddCarTableViewController.swift */; };
 		4F4E363D1A13622100934D6B /* SharedStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E363C1A13622100934D6B /* SharedStorage.swift */; };
 		4F4FFD691A1F5F80004EE524 /* ChatLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FFD681A1F5F80004EE524 /* ChatLabel.swift */; };
-		4F4FFDA21A1FBBE2004EE524 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FFD821A1FBBE2004EE524 /* MKAnnotationView+WebCache.m */; };
-		4F4FFDA31A1FBBE2004EE524 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FFD841A1FBBE2004EE524 /* NSData+ImageContentType.m */; };
-		4F4FFDA41A1FBBE2004EE524 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FFD861A1FBBE2004EE524 /* SDImageCache.m */; };
-		4F4FFDA51A1FBBE2004EE524 /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FFD881A1FBBE2004EE524 /* SDWebImageCompat.m */; };
-		4F4FFDA61A1FBBE2004EE524 /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FFD8A1A1FBBE2004EE524 /* SDWebImageDecoder.m */; };
-		4F4FFDA71A1FBBE2004EE524 /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FFD8C1A1FBBE2004EE524 /* SDWebImageDownloader.m */; };
-		4F4FFDA81A1FBBE2004EE524 /* SDWebImageDownloaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FFD8E1A1FBBE2004EE524 /* SDWebImageDownloaderOperation.m */; };
-		4F4FFDA91A1FBBE2004EE524 /* SDWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FFD901A1FBBE2004EE524 /* SDWebImageManager.m */; };
-		4F4FFDAA1A1FBBE2004EE524 /* SDWebImagePrefetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FFD931A1FBBE2004EE524 /* SDWebImagePrefetcher.m */; };
-		4F4FFDAB1A1FBBE2004EE524 /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FFD951A1FBBE2004EE524 /* UIButton+WebCache.m */; };
-		4F4FFDAC1A1FBBE2004EE524 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FFD971A1FBBE2004EE524 /* UIImage+GIF.m */; };
-		4F4FFDAD1A1FBBE2004EE524 /* UIImage+MultiFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FFD991A1FBBE2004EE524 /* UIImage+MultiFormat.m */; };
-		4F4FFDAE1A1FBBE2004EE524 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FFD9B1A1FBBE2004EE524 /* UIImage+WebP.m */; };
-		4F4FFDAF1A1FBBE2004EE524 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FFD9D1A1FBBE2004EE524 /* UIImageView+HighlightedWebCache.m */; };
-		4F4FFDB01A1FBBE2004EE524 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FFD9F1A1FBBE2004EE524 /* UIImageView+WebCache.m */; };
-		4F4FFDB11A1FBBE2004EE524 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FFDA11A1FBBE2004EE524 /* UIView+WebCacheOperation.m */; };
 		4F4FFDB31A1FBC31004EE524 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F4FFDB21A1FBC31004EE524 /* ImageIO.framework */; };
 		4F4FFDBA1A1FC3AD004EE524 /* FSProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FFDB81A1FC3AD004EE524 /* FSProfileTableViewCell.swift */; };
 		4F4FFDBB1A1FC3AD004EE524 /* FSProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F4FFDB91A1FC3AD004EE524 /* FSProfileTableViewCell.xib */; };
+		4F4FFDBC1A20AB2B004EE524 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD1761A14F6640047BEE8 /* SVProgressHUD.m */; };
+		4F4FFDBD1A20AB35004EE524 /* FacebookCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC1E60F19FEB891002F743B /* FacebookCtrl.m */; };
+		4F4FFDBE1A20AC63004EE524 /* FAImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD1931A155C460047BEE8 /* FAImageView.m */; };
+		4F4FFDBF1A20AC63004EE524 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD1951A155C460047BEE8 /* NSString+FontAwesome.m */; };
+		4F4FFDC01A20AC63004EE524 /* UIFont+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD19A1A155C460047BEE8 /* UIFont+FontAwesome.m */; };
 		4F525F371A05958B00EDD696 /* Journey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F361A05958B00EDD696 /* Journey.swift */; };
 		4F525F391A05A10800EDD696 /* NearbyJourneysTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F381A05A10800EDD696 /* NearbyJourneysTableViewController.swift */; };
 		4F525F3B1A05A26C00EDD696 /* AddJourneyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F3A1A05A26C00EDD696 /* AddJourneyTableViewController.swift */; };
@@ -64,7 +43,6 @@
 		4FC1E60819FEB751002F743B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC1E60719FEB751002F743B /* LoginViewController.swift */; };
 		4FC1E60A19FEB839002F743B /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FC1E60919FEB839002F743B /* Social.framework */; };
 		4FC1E60C19FEB866002F743B /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FC1E60B19FEB866002F743B /* Accounts.framework */; };
-		4FC1E61019FEB891002F743B /* FacebookCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC1E60F19FEB891002F743B /* FacebookCtrl.m */; };
 		4FD346E01A127A76006026DD /* StepperTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD346DE1A127A76006026DD /* StepperTableViewCell.swift */; };
 		4FD346E11A127A76006026DD /* StepperTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FD346DF1A127A76006026DD /* StepperTableViewCell.xib */; };
 		4FD346E41A127CB3006026DD /* PriceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD346E21A127CB3006026DD /* PriceTableViewCell.swift */; };
@@ -491,59 +469,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F4FFDAF1A1FBBE2004EE524 /* UIImageView+HighlightedWebCache.m in Sources */,
-				4F1AD1A11A155FB90047BEE8 /* SVProgressHUD.h in Sources */,
-				4F1AD1A21A155FB90047BEE8 /* FAImageView.h in Sources */,
-				4F1AD1A31A155FB90047BEE8 /* NSString+FontAwesome.h in Sources */,
+				4F4FFDBE1A20AC63004EE524 /* FAImageView.m in Sources */,
+				4F4FFDBF1A20AC63004EE524 /* NSString+FontAwesome.m in Sources */,
+				4F4FFDC01A20AC63004EE524 /* UIFont+FontAwesome.m in Sources */,
+				4F4FFDBD1A20AB35004EE524 /* FacebookCtrl.m in Sources */,
+				4F4FFDBC1A20AB2B004EE524 /* SVProgressHUD.m in Sources */,
 				4F1A62561A1A90EE00826ECE /* Message.swift in Sources */,
-				4F1AD1A41A155FB90047BEE8 /* UIFont+FontAwesome.h in Sources */,
-				4F1AD1A51A155FB90047BEE8 /* FacebookCtrl.h in Sources */,
 				4FA9F15A19FED9B7009D0F33 /* User.swift in Sources */,
 				4FD6D2921A0551F600199082 /* Car.swift in Sources */,
 				4FA9F16119FFD3CA009D0F33 /* PageRootViewController.swift in Sources */,
 				4F525F371A05958B00EDD696 /* Journey.swift in Sources */,
 				4F525F3D1A06A46500EDD696 /* CarsTableViewController.swift in Sources */,
-				4F4FFDA91A1FBBE2004EE524 /* SDWebImageManager.m in Sources */,
-				4F4FFDB01A1FBBE2004EE524 /* UIImageView+WebCache.m in Sources */,
-				4FC1E61019FEB891002F743B /* FacebookCtrl.m in Sources */,
 				4FD346E01A127A76006026DD /* StepperTableViewCell.swift in Sources */,
 				4F1AD1711A139B490047BEE8 /* FSTextFieldTableViewCell.swift in Sources */,
-				4F4FFDA21A1FBBE2004EE524 /* MKAnnotationView+WebCache.m in Sources */,
-				4F4FFDA31A1FBBE2004EE524 /* NSData+ImageContentType.m in Sources */,
 				4F525F3B1A05A26C00EDD696 /* AddJourneyTableViewController.swift in Sources */,
 				4FD346E81A12831B006026DD /* StartEndTableViewCell.swift in Sources */,
 				4F4FFD691A1F5F80004EE524 /* ChatLabel.swift in Sources */,
 				4F4E363D1A13622100934D6B /* SharedStorage.swift in Sources */,
-				4F1AD19D1A155C460047BEE8 /* README.md in Sources */,
-				4F4FFDA81A1FBBE2004EE524 /* SDWebImageDownloaderOperation.m in Sources */,
 				4FD6D2961A05560B00199082 /* Network.swift in Sources */,
-				4F1AD19B1A155C460047BEE8 /* FAImageView.m in Sources */,
 				4F1AD1A81A1562760047BEE8 /* HikesTableViewController.swift in Sources */,
-				4F4FFDAE1A1FBBE2004EE524 /* UIImage+WebP.m in Sources */,
-				4F4FFDA71A1FBBE2004EE524 /* SDWebImageDownloader.m in Sources */,
-				4F1AD19F1A155C460047BEE8 /* UIFont+FontAwesome.m in Sources */,
 				4F8856AD1A1118240039EA6E /* SwitchTableViewCell.swift in Sources */,
 				4FD346E41A127CB3006026DD /* PriceTableViewCell.swift in Sources */,
-				4F4FFDAD1A1FBBE2004EE524 /* UIImage+MultiFormat.m in Sources */,
-				4F4FFDA61A1FBBE2004EE524 /* SDWebImageDecoder.m in Sources */,
 				4FC1E60819FEB751002F743B /* LoginViewController.swift in Sources */,
 				4F1A62541A1A90B300826ECE /* MessagesTableViewController.swift in Sources */,
 				4F95342719FFEFDF0058210D /* UserTableViewController.swift in Sources */,
-				4F1AD1771A14F6640047BEE8 /* SVProgressHUD.m in Sources */,
-				4F4FFDAB1A1FBBE2004EE524 /* UIButton+WebCache.m in Sources */,
 				4F525F391A05A10800EDD696 /* NearbyJourneysTableViewController.swift in Sources */,
-				4F4FFDAA1A1FBBE2004EE524 /* SDWebImagePrefetcher.m in Sources */,
-				4F4FFDB11A1FBBE2004EE524 /* UIView+WebCacheOperation.m in Sources */,
-				4F1AD19C1A155C460047BEE8 /* NSString+FontAwesome.m in Sources */,
 				4F2773751A08E5BA0012B779 /* AddCarTableViewController.swift in Sources */,
 				4FF31FFA1A1F57AD005805D7 /* LeftChatTableViewCell.swift in Sources */,
-				4F4FFDAC1A1FBBE2004EE524 /* UIImage+GIF.m in Sources */,
 				4F4FFDBA1A1FC3AD004EE524 /* FSProfileTableViewCell.swift in Sources */,
 				4FF31FF61A1F4EC9005805D7 /* RightChatTableViewCell.swift in Sources */,
 				4F1AD1811A153E620047BEE8 /* JourneyTableViewCell.swift in Sources */,
 				4FC1E5E619FEB518002F743B /* AppDelegate.swift in Sources */,
-				4F4FFDA51A1FBBE2004EE524 /* SDWebImageCompat.m in Sources */,
-				4F4FFDA41A1FBBE2004EE524 /* SDImageCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

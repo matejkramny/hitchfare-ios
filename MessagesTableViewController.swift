@@ -35,6 +35,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 
 		self.refreshControl = UIRefreshControl()
 		self.refreshControl.addTarget(self, action: "refreshData:", forControlEvents: UIControlEvents.ValueChanged)
+		self.refreshControl.tintColor = UIColor.whiteColor()
 		
 		self.tableView.addSubview(self.refreshControl)
 		
