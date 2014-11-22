@@ -51,9 +51,10 @@ class User {
 	
 	func parse (_response: [NSString: AnyObject]) {
 		var pictureData: [NSObject: AnyObject] = _response["picture"] as [String: AnyObject]
-		let url: NSString? = pictureData["url"] as? NSString
+		var url: NSString? = pictureData["url"] as? NSString
 		if url == nil {
 			pictureData = pictureData["data"] as [String: AnyObject]
+			url = pictureData["url"] as? NSString
 		}
 		
 		self.picture = UserPicture(url: url!)

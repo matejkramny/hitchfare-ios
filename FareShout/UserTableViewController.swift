@@ -91,6 +91,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			c.profileImageView.sd_setImageWithURL(url!)
 			c.profileImageView.layer.cornerRadius = 45
 			c.profileImageView.layer.masksToBounds = true
+			c.profileImageView.layer.shouldRasterize = true
 			c.delegate = self
 			c.nameLabel.text = currentUser!.name
 			
