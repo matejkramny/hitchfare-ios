@@ -7,10 +7,14 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	var didAppear: Bool = false
 	var isInSegue: Bool = false
 	
+	// set to true before loading to indicate the view isn't loaded from UIPage thing
+	var presentedFromElsewhere = false
+	var shownUser: User!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.navigationController?.navigationBar.translucent = false
+		self.navigationController!.navigationBar.translucent = false
 		
 		self.refreshControl = UIRefreshControl()
 		self.refreshControl!.addTarget(self, action: "refreshData:", forControlEvents: UIControlEvents.ValueChanged)
@@ -18,13 +22,23 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		self.tableView.registerNib(UINib(nibName: "JourneyTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Journey")
 		self.tableView.registerNib(UINib(nibName: "FSProfileTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "profileCell")
 		
+		if shownUser == nil {
+			shownUser = currentUser!
+		}
+		
+		if presentedFromElsewhere == true {
+			self.navigationItem.title = shownUser.name
+		}
+		
 		self.refreshData(nil)
 	}
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		mainNavigationDelegate.showNavigationBar()
+		if presentedFromElsewhere == false {
+			mainNavigationDelegate.showNavigationBar()
+		}
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -37,7 +51,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	override func viewWillDisappear(animated: Bool) {
 		super.viewWillDisappear(animated)
 		
-		if self.didAppear == false && self.isInSegue == true {
+		if self.didAppear == false && self.isInSegue == true && presentedFromElsewhere == false {
 			// Disappearing before appeared.
 			mainNavigationDelegate.hideNavigationBar()
 		}
@@ -54,12 +68,18 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	}
 	
 	func refreshData (sender: AnyObject?) {
-		Journey.getMyJourneys({ (err: NSError?, data: [Journey]) -> Void in
+		var callback: (err: NSError?, data: [Journey]) -> Void = { (err: NSError?, data: [Journey]) -> Void in
 			self.journeys = data
 			
 			self.refreshControl!.endRefreshing()
 			self.tableView.reloadData()
-		})
+		}
+		
+		if presentedFromElsewhere {
+			Journey.getUserJourneys(shownUser, callback: callback)
+		} else {
+			Journey.getMyJourneys(callback)
+		}
 	}
 	
 	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -87,13 +107,17 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			
 			var c = cell as FSProfileTableViewCell
 			
-			var url = NSURL(string: currentUser!.picture!.url)
+			if presentedFromElsewhere {
+				c.carButton.hidden = true
+			}
+			
+			var url = NSURL(string: shownUser.picture!.url)
 			c.profileImageView.sd_setImageWithURL(url!)
 			c.profileImageView.layer.cornerRadius = 45
 			c.profileImageView.layer.masksToBounds = true
 			c.profileImageView.layer.shouldRasterize = true
 			c.delegate = self
-			c.nameLabel.text = currentUser!.name
+			c.nameLabel.text = shownUser.name
 			c.selectionStyle = UITableViewCellSelectionStyle.None
 			
 			return cell!
@@ -105,16 +129,18 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 				cell = JourneyTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Journey")
 			}
 			
-			var deleteBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FATrashO), backgroundColor: UIColor.redColor())
-			var editBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FAPencilSquareO), backgroundColor: UIColor.blueColor())
-			var passengerBtn = MGSwipeButton(title: "Passengers", backgroundColor: UIColor.blackColor())
-			
-			deleteBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
-			editBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
-			
-			cell!.leftButtons = [deleteBtn, editBtn, passengerBtn]
-			cell!.leftSwipeSettings.transition = MGSwipeTransition.Transition3D
-			cell!.delegate = self
+			if presentedFromElsewhere == false {
+				var deleteBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FATrashO), backgroundColor: UIColor.redColor())
+				var editBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FAPencilSquareO), backgroundColor: UIColor.blueColor())
+				var passengerBtn = MGSwipeButton(title: "Passengers", backgroundColor: UIColor.blackColor())
+				
+				deleteBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
+				editBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
+				
+				cell!.leftButtons = [deleteBtn, editBtn, passengerBtn]
+				cell!.leftSwipeSettings.transition = MGSwipeTransition.Transition3D
+				cell!.delegate = self
+			}
 			
 			cell!.style()
 			cell!.populate(journey)

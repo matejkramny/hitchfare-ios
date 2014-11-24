@@ -106,6 +106,10 @@ class Journey {
 		getJourneys("/journeys/my", method: "GET", callback: callback)
 	}
 	
+	class func getUserJourneys (user: User, callback: (err: NSError?, data: [Journey]) -> Void) {
+		getJourneys("/journeys/" + user._id!, method: "GET", callback: callback)
+	}
+	
 	class func getJourneys(url: NSString, method: NSString, callback: (err: NSError?, data: [Journey]) -> Void) {
 		doRequest(makeRequest(url, method), { (err: NSError?, data: AnyObject?) -> Void in
 			var cars: [Journey] = []

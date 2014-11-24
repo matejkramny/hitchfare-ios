@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6213"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -33,18 +34,27 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right ChatBox" translatesAutoresizingMaskIntoConstraints="NO" id="Wg2-UM-hHA">
+                        <rect key="frame" x="301" y="17" width="11" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="11" id="Ekm-qG-KKY"/>
+                            <constraint firstAttribute="height" constant="14" id="sXm-al-htR"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="2gN-IO-Rrm" secondAttribute="trailing" constant="23" id="9gK-bv-vcI"/>
                     <constraint firstItem="6cS-Tk-WQ2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Gpr-VZ-TwD"/>
                     <constraint firstItem="2gN-IO-Rrm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6cS-Tk-WQ2" secondAttribute="trailing" constant="8" id="HLr-4W-n0F"/>
                     <constraint firstAttribute="bottom" secondItem="RmU-28-XmL" secondAttribute="bottom" constant="8" id="Hcl-og-8X6"/>
+                    <constraint firstItem="Wg2-UM-hHA" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="IXB-7i-SAy"/>
                     <constraint firstAttribute="bottom" secondItem="2gN-IO-Rrm" secondAttribute="bottom" constant="8" id="RBf-j3-BGN"/>
                     <constraint firstItem="2gN-IO-Rrm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Rbf-Us-vLH"/>
                     <constraint firstItem="RmU-28-XmL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="UrB-XI-bJo"/>
                     <constraint firstAttribute="trailing" secondItem="RmU-28-XmL" secondAttribute="trailing" constant="15" id="WTz-ju-ISP"/>
                     <constraint firstAttribute="bottom" secondItem="6cS-Tk-WQ2" secondAttribute="bottom" constant="8" id="bAP-sA-kMK"/>
                     <constraint firstItem="6cS-Tk-WQ2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="jQq-J2-na7"/>
+                    <constraint firstItem="Wg2-UM-hHA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="9" id="kj9-Vm-Afo"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -55,4 +65,7 @@
             <point key="canvasLocation" x="358" y="283"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="right ChatBox" width="11" height="14"/>
+    </resources>
 </document>

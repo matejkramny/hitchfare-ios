@@ -12,6 +12,7 @@ class FSProfileTableViewCell: UITableViewCell {
 	@IBOutlet weak var descriptionLabel: UILabel!
 	@IBOutlet weak var ratingImageView: UIImageView!
 	@IBOutlet weak var profileImageView: UIImageView!
+	@IBOutlet weak var carButton: UIButton!
 	
 	@IBAction func openCars(sender: UIButton) {
 		self.delegate.openCars(sender)

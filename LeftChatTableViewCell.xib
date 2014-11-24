@@ -41,22 +41,31 @@
                         </constraints>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="94q-Sl-xgs">
-                        <rect key="frame" x="15" y="8" width="28" height="28"/>
+                        <rect key="frame" x="8" y="4" width="35" height="35"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="28" id="lRO-0I-OGb"/>
-                            <constraint firstAttribute="width" constant="28" id="mPE-Jh-zac"/>
+                            <constraint firstAttribute="width" constant="35" id="Hk0-T4-fW5"/>
+                            <constraint firstAttribute="height" constant="35" id="y3d-qp-RlC"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Left ChatBox" translatesAutoresizingMaskIntoConstraints="NO" id="wCy-4y-UyS">
+                        <rect key="frame" x="45" y="13" width="11" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="11" id="Jn2-By-15S"/>
+                            <constraint firstAttribute="height" constant="14" id="gyT-ls-EOn"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="94q-Sl-xgs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="1ed-Vp-cKm"/>
-                    <constraint firstItem="cbt-1P-jjo" firstAttribute="leading" secondItem="94q-Sl-xgs" secondAttribute="trailing" constant="8" id="3fF-Ea-MMl"/>
                     <constraint firstItem="cbt-1P-jjo" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="55d-KG-Ajs"/>
+                    <constraint firstItem="wCy-4y-UyS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="37" id="BYQ-O2-9Yd"/>
+                    <constraint firstItem="cbt-1P-jjo" firstAttribute="leading" secondItem="94q-Sl-xgs" secondAttribute="trailing" constant="8" id="FgS-eG-iYm"/>
                     <constraint firstAttribute="bottom" secondItem="xIT-Uz-fJO" secondAttribute="bottom" constant="7.5" id="G08-qj-js3"/>
                     <constraint firstItem="cbt-1P-jjo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Jn2-ye-NzK"/>
+                    <constraint firstItem="94q-Sl-xgs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="UbI-0X-ACP"/>
                     <constraint firstAttribute="trailing" secondItem="xIT-Uz-fJO" secondAttribute="trailing" constant="15" id="Xc5-sX-Ugt"/>
-                    <constraint firstItem="94q-Sl-xgs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="a0y-g0-EyA"/>
                     <constraint firstItem="xIT-Uz-fJO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="ghl-oI-okv"/>
+                    <constraint firstItem="94q-Sl-xgs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="jLn-mo-7cV"/>
+                    <constraint firstItem="wCy-4y-UyS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="k1P-pW-2Wx"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -68,4 +77,7 @@
             <point key="canvasLocation" x="139" y="283"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="Left ChatBox" width="11" height="14"/>
+    </resources>
 </document>

@@ -480,6 +480,7 @@
                         <outlet property="textField" destination="5f5-fm-jfg" id="Lnt-3y-eY3"/>
                         <outlet property="textHolderBottomLayoutGuide" destination="dTV-yY-MSy" id="sMh-NF-b9X"/>
                         <outlet property="textHolderView" destination="qoF-W6-VwT" id="Xa0-Xs-QQr"/>
+                        <segue destination="332-jX-tJv" kind="show" identifier="showUser" id="SOi-a8-qTY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oXy-7B-DdK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -709,8 +710,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="QZn-wy-0cd"/>
-        <segue reference="WWy-7h-XJa"/>
+        <segue reference="SOi-a8-qTY"/>
         <segue reference="Eoa-mH-lsb"/>
+        <segue reference="WWy-7h-XJa"/>
+        <segue reference="QZn-wy-0cd"/>
     </inferredMetricsTieBreakers>
 </document>

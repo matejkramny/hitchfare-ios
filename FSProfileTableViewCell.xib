@@ -79,6 +79,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="carButton" destination="xdU-5V-iHU" id="Yiw-ru-PSI"/>
                 <outlet property="descriptionLabel" destination="yqm-BE-DfO" id="YPS-i4-RKX"/>
                 <outlet property="nameLabel" destination="O9a-HI-Jn5" id="l6X-bm-JPb"/>
                 <outlet property="profileImageView" destination="imn-Uc-2me" id="8Qq-u0-uAA"/>

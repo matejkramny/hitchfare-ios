@@ -16,6 +16,9 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 	var originalHeight: CGFloat!
 	var ignoreKeyboardNotifications: Bool = false
 	
+	var tapGestureRecognizer: UITapGestureRecognizer!
+	var titleView: UIView!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -59,6 +62,13 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 		self.tableView.backgroundColor = UIColor(red: 113/255, green: 0, blue: 2/255, alpha: 1.0)
 		self.tableView.backgroundView = nil
 		
+		tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "titleTap:")
+		tapGestureRecognizer.numberOfTapsRequired = 1
+		titleView = UIView(frame: CGRectMake(self.navigationController!.navigationBar.frame.width / 4, 0, self.navigationController!.navigationBar.frame.width / 2, 44))
+		titleView.backgroundColor = UIColor.clearColor()
+		titleView.addGestureRecognizer(tapGestureRecognizer)
+		self.navigationController!.navigationBar.addSubview(titleView)
+		
 		self.sendButton.enabled = false
 		self.refreshData(false)
 	}
@@ -70,12 +80,23 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 		notificationCenter.addObserver(self, selector: "keyboardWillShowNotification:", name: UIKeyboardWillShowNotification, object: nil)
 		notificationCenter.addObserver(self, selector: "keyboardWillHideNotification:", name: UIKeyboardWillHideNotification, object: nil)
 		notificationCenter.addObserver(self, selector: "didReceiveMessage:", name: "ReceivedMessage", object: nil)
+		
+		tapGestureRecognizer.enabled = true
+		self.navigationController!.navigationBar.addSubview(titleView)
 	}
 	
 	override func viewWillDisappear(animated: Bool) {
 		super.viewWillDisappear(animated)
 		
+		// Prevents inception and going to Limbo
+		tapGestureRecognizer.enabled = false
+		titleView.removeFromSuperview()
+		
 		NSNotificationCenter.defaultCenter().removeObserver(self)
+	}
+	
+	func titleTap (sender: AnyObject) {
+		self.performSegueWithIdentifier("showUser", sender: nil)
 	}
 	
 	func sendMessage (sender: AnyObject?) {
@@ -218,7 +239,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 			var url: NSURL = NSURL(string: user.picture!.url)!
 			cell!.profileImageView.sd_setImageWithURL(url)
 			cell!.profileImageView.layer.masksToBounds = true
-			cell!.profileImageView.layer.cornerRadius = 28/2
+			cell!.profileImageView.layer.cornerRadius = 35/2
 			cell!.profileImageView.layer.shouldRasterize = true
 			
 			cell!.backgroundView = nil
@@ -240,9 +261,13 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 		var attributes: [NSObject: AnyObject] = [
 			NSFontAttributeName: UIFont.systemFontOfSize(18)
 		]
-		var expectedRect: CGRect = message.message.boundingRectWithSize(CGSizeMake(tableView.frame.width - 84, 99999999), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attributes, context: nil)
 		
-		if message.sender == currentUser!._id {
+		var isSender = message.sender == currentUser!._id
+		var maxWidth: CGFloat = isSender ? 84 : 84 + 8 + 35
+		
+		var expectedRect: CGRect = message.message.boundingRectWithSize(CGSizeMake(tableView.frame.width - maxWidth, 99999999), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attributes, context: nil)
+		
+		if isSender {
 			var c: RightChatTableViewCell = cell as RightChatTableViewCell
 			
 			c.bgViewWidth.constant = expectedRect.width + 16
@@ -274,6 +299,22 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 		
 		if info["list"] as NSString == list._id {
 			self.refreshData(nil)
+		}
+	}
+	
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		if segue.identifier == "showUser" {
+			var vc: UserTableViewController = segue.destinationViewController as UserTableViewController
+			vc.presentedFromElsewhere = true
+			
+			if list.receiver._id == currentUser!._id! {
+				vc.shownUser = list.sender
+			} else {
+				vc.shownUser = list.receiver
+			}
+			
+			// sets 'Back' for the pushed vc
+			self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Bordered, target: nil, action: nil)
 		}
 	}
 	
