@@ -105,10 +105,14 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 				cell = JourneyTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Journey")
 			}
 			
-			var deleteBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FATrashO), backgroundColor: UIColor.blackColor())
-			deleteBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
+			var deleteBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FATrashO), backgroundColor: UIColor.redColor())
+			var editBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FAPencilSquareO), backgroundColor: UIColor.blueColor())
+			var passengerBtn = MGSwipeButton(title: "Passengers", backgroundColor: UIColor.blackColor())
 			
-			cell!.leftButtons = [deleteBtn]
+			deleteBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
+			editBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
+			
+			cell!.leftButtons = [deleteBtn, editBtn, passengerBtn]
 			cell!.leftSwipeSettings.transition = MGSwipeTransition.Transition3D
 			cell!.delegate = self
 			

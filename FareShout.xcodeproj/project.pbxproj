@@ -36,6 +36,7 @@
 		4F20D37B1A23412400A1CAC5 /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F20D3791A23412400A1CAC5 /* MGSwipeTableCell.m */; };
 		4F20D37E1A23477600A1CAC5 /* HikeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F20D37C1A23477600A1CAC5 /* HikeTableViewCell.swift */; };
 		4F20D37F1A23477600A1CAC5 /* HikeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F20D37D1A23477600A1CAC5 /* HikeTableViewCell.xib */; };
+		4F20D3811A235B9500A1CAC5 /* OCRAStd.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4F20D3801A235B9500A1CAC5 /* OCRAStd.otf */; };
 		4F2773751A08E5BA0012B779 /* AddCarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2773741A08E5BA0012B779 /* AddCarTableViewController.swift */; };
 		4F4E363D1A13622100934D6B /* SharedStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E363C1A13622100934D6B /* SharedStorage.swift */; };
 		4F4FFD691A1F5F80004EE524 /* ChatLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FFD681A1F5F80004EE524 /* ChatLabel.swift */; };
@@ -135,6 +136,7 @@
 		4F20D3791A23412400A1CAC5 /* MGSwipeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeTableCell.m; sourceTree = "<group>"; };
 		4F20D37C1A23477600A1CAC5 /* HikeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HikeTableViewCell.swift; sourceTree = "<group>"; };
 		4F20D37D1A23477600A1CAC5 /* HikeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HikeTableViewCell.xib; sourceTree = "<group>"; };
+		4F20D3801A235B9500A1CAC5 /* OCRAStd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OCRAStd.otf; sourceTree = "<group>"; };
 		4F2773741A08E5BA0012B779 /* AddCarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCarTableViewController.swift; sourceTree = "<group>"; };
 		4F4E363C1A13622100934D6B /* SharedStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedStorage.swift; sourceTree = "<group>"; };
 		4F4FFD681A1F5F80004EE524 /* ChatLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLabel.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 		4F1AD1731A14F62D0047BEE8 /* Deps */ = {
 			isa = PBXGroup;
 			children = (
+				4F20D3801A235B9500A1CAC5 /* OCRAStd.otf */,
 				4F20D3751A23412400A1CAC5 /* MGSwipeTableViewCell */,
 				4F20D3431A23354E00A1CAC5 /* SDWebImage */,
 				4F4FFDB21A1FBC31004EE524 /* ImageIO.framework */,
@@ -494,6 +497,7 @@
 				4FF31FFB1A1F57AD005805D7 /* LeftChatTableViewCell.xib in Resources */,
 				4F1AD1721A139B490047BEE8 /* FSTextFieldTableViewCell.xib in Resources */,
 				4FD346E91A12831B006026DD /* StartEndTableViewCell.xib in Resources */,
+				4F20D3811A235B9500A1CAC5 /* OCRAStd.otf in Resources */,
 				4F1AD1821A153E620047BEE8 /* JourneyTableViewCell.xib in Resources */,
 				4F8856AE1A1118240039EA6E /* SwitchTableViewCell.xib in Resources */,
 				4FD346E51A127CB3006026DD /* PriceTableViewCell.xib in Resources */,

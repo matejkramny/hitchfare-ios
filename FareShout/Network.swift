@@ -3,7 +3,7 @@ import Foundation
 
 // Debug
 //let kAPIProtocol = "http://"
-//let kAPIEndpoint = kAPIProtocol + "Matejs-MBP.local:3000"
+//let kAPIEndpoint = kAPIProtocol + "localhost:3000"
 
 // Production
 let kAPIProtocol = "https://"

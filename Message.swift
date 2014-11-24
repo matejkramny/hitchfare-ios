@@ -50,6 +50,7 @@ class MessageList {
 	var sender: User!
 	var receiver: User!
 	var messages: [Message] = []
+	var lastMessage: Message? = nil
 	
 	init(){}
 	
@@ -64,6 +65,11 @@ class MessageList {
 		var receiver = _response["receiver"] as? [NSString: AnyObject]
 		if receiver != nil {
 			self.receiver = User(_response: receiver!)
+		}
+		
+		var lastMessage = _response["lastMessage"] as? [NSString: AnyObject]
+		if lastMessage != nil {
+			self.lastMessage = Message(_response: lastMessage!)
 		}
 	}
 	

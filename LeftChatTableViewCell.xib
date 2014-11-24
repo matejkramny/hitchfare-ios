@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6213"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,42 +16,54 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cbt-1P-jjo">
-                        <rect key="frame" x="15" y="8" width="229" height="28"/>
+                        <rect key="frame" x="51" y="8" width="193" height="28"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2eQ-I5-7oV" customClass="ChatLabel" customModule="FareShout" customModuleProvider="target">
+                                <rect key="frame" x="8" y="0.0" width="42" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="229" id="nat-Uq-X7c"/>
+                            <constraint firstItem="2eQ-I5-7oV" firstAttribute="leading" secondItem="cbt-1P-jjo" secondAttribute="leading" constant="8" id="AEr-cx-sY4"/>
+                            <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="2eQ-I5-7oV" secondAttribute="trailing" constant="8" id="OCW-QQ-2ge"/>
+                            <constraint firstAttribute="width" constant="193" id="UzI-2w-9FN"/>
+                            <constraint firstItem="2eQ-I5-7oV" firstAttribute="top" secondItem="cbt-1P-jjo" secondAttribute="top" id="bZA-Ja-nN6"/>
+                            <constraint firstAttribute="bottom" secondItem="2eQ-I5-7oV" secondAttribute="bottom" id="sZm-nF-tuu"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xIT-Uz-fJO">
                         <rect key="frame" x="252" y="8" width="53" height="28"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="53" id="TvZ-kw-ppa"/>
+                            <constraint firstAttribute="width" constant="53" id="9Xt-IR-fvI"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2eQ-I5-7oV" customClass="ChatLabel" customModule="FareShout" customModuleProvider="target">
-                        <rect key="frame" x="23" y="8" width="42" height="28"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="94q-Sl-xgs">
+                        <rect key="frame" x="15" y="8" width="28" height="28"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="28" id="lRO-0I-OGb"/>
+                            <constraint firstAttribute="width" constant="28" id="mPE-Jh-zac"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="2eQ-I5-7oV" secondAttribute="bottom" constant="8" id="6ee-ig-UMx"/>
-                    <constraint firstAttribute="trailing" secondItem="xIT-Uz-fJO" secondAttribute="trailing" constant="15" id="VJB-tn-hcf"/>
-                    <constraint firstItem="xIT-Uz-fJO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="aMg-1I-GQf"/>
-                    <constraint firstItem="cbt-1P-jjo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="akx-o6-K2i"/>
-                    <constraint firstItem="cbt-1P-jjo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="eSJ-3c-E6T"/>
-                    <constraint firstItem="2eQ-I5-7oV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="23" id="iVp-VS-QJw"/>
-                    <constraint firstAttribute="bottom" secondItem="cbt-1P-jjo" secondAttribute="bottom" constant="8" id="jvp-Xp-WFm"/>
-                    <constraint firstAttribute="bottom" secondItem="xIT-Uz-fJO" secondAttribute="bottom" constant="8" id="mre-JI-JvG"/>
-                    <constraint firstItem="xIT-Uz-fJO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2eQ-I5-7oV" secondAttribute="trailing" constant="8" id="wOE-qo-L3T"/>
-                    <constraint firstItem="2eQ-I5-7oV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="xM4-3p-58O"/>
+                    <constraint firstItem="94q-Sl-xgs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="1ed-Vp-cKm"/>
+                    <constraint firstItem="cbt-1P-jjo" firstAttribute="leading" secondItem="94q-Sl-xgs" secondAttribute="trailing" constant="8" id="3fF-Ea-MMl"/>
+                    <constraint firstItem="cbt-1P-jjo" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="55d-KG-Ajs"/>
+                    <constraint firstAttribute="bottom" secondItem="xIT-Uz-fJO" secondAttribute="bottom" constant="7.5" id="G08-qj-js3"/>
+                    <constraint firstItem="cbt-1P-jjo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Jn2-ye-NzK"/>
+                    <constraint firstAttribute="trailing" secondItem="xIT-Uz-fJO" secondAttribute="trailing" constant="15" id="Xc5-sX-Ugt"/>
+                    <constraint firstItem="94q-Sl-xgs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="a0y-g0-EyA"/>
+                    <constraint firstItem="xIT-Uz-fJO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="ghl-oI-okv"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="bgView" destination="cbt-1P-jjo" id="ede-X1-QYg"/>
-                <outlet property="bgViewWidth" destination="nat-Uq-X7c" id="Xc9-3n-nae"/>
+                <outlet property="bgViewWidth" destination="UzI-2w-9FN" id="EtR-pn-wEs"/>
                 <outlet property="label" destination="2eQ-I5-7oV" id="5oI-O3-94W"/>
+                <outlet property="profileImageView" destination="94q-Sl-xgs" id="W8B-XQ-bU7"/>
             </connections>
             <point key="canvasLocation" x="139" y="283"/>
         </tableViewCell>

@@ -210,6 +210,17 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 				cell = LeftChatTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "LeftChatCell")
 			}
 			
+			var user = list.receiver
+			if user._id != message.sender {
+				user = list.sender
+			}
+			
+			var url: NSURL = NSURL(string: user.picture!.url)!
+			cell!.profileImageView.sd_setImageWithURL(url)
+			cell!.profileImageView.layer.masksToBounds = true
+			cell!.profileImageView.layer.cornerRadius = 28/2
+			cell!.profileImageView.layer.shouldRasterize = true
+			
 			cell!.backgroundView = nil
 			cell!.backgroundColor = UIColor.clearColor()
 			cell!.label.text = message.message

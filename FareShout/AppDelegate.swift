@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		var attributes: [NSObject: AnyObject] = [
 			NSForegroundColorAttributeName: UIColor.whiteColor(),
-			//NSFontAttributeName: UIFont(name: "Avenir Next", size: 18)!
+			NSFontAttributeName: UIFont(name: "OCRAStd", size: 18)!
 		]
 		
 		UINavigationBar.appearance().titleTextAttributes = attributes

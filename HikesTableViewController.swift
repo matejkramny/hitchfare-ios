@@ -75,9 +75,11 @@ class HikesTableViewCell: UITableViewController, PageRootDelegate {
 			cell = HikeTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Hike")
 		}
 		
-		var user = messages[indexPath.row].receiver
+		var message = messages[indexPath.row]
+		
+		var user = message.receiver
 		if user._id == currentUser!._id! {
-			user = messages[indexPath.row].sender
+			user = message.sender
 		}
 		
 		cell!.nameLabel.text = user.name
@@ -87,11 +89,22 @@ class HikesTableViewCell: UITableViewController, PageRootDelegate {
 			cell!.pictureImageView.layer.cornerRadius = 72/2
 		}
 		
-		var deleteBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FATrashO), backgroundColor: UIColor.blackColor())
-		deleteBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
+		if message.lastMessage != nil {
+			cell!.messageLabel.text = message.lastMessage!.message
+		} else {
+			cell!.messageLabel.text = ""
+		}
 		
-		cell!.rightButtons = [deleteBtn]
-		cell!.rightSwipeSettings.transition = MGSwipeTransition.Transition3D
+		var deleteBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FATrashO), backgroundColor: UIColor.blackColor())
+		var infoBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FAInfo), backgroundColor: UIColor.blackColor())
+		var reportBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FAExclamationTriangle), backgroundColor: UIColor.blackColor())
+		
+		deleteBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
+		infoBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
+		reportBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
+		
+		cell!.rightButtons = [deleteBtn, infoBtn, reportBtn]
+		cell!.rightSwipeSettings.transition = MGSwipeTransition.TransitionDrag
 		
 		cell!.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
 		

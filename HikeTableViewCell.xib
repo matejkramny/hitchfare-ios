@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6213"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -31,43 +30,28 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Departure: London" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TfD-sP-vmA">
-                        <rect key="frame" x="95" y="60" width="183" height="17"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="17" id="qv0-n0-xbK"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Destination: Oxford" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KhT-4O-w5p">
-                        <rect key="frame" x="95" y="37" width="183" height="17"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="17" id="cyQ-3y-UhG"/>
-                        </constraints>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last message" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TfD-sP-vmA">
+                        <rect key="frame" x="96" y="37" width="183" height="43"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="TfD-sP-vmA" firstAttribute="leading" secondItem="4oq-jR-YmQ" secondAttribute="trailing" constant="9" id="1xU-98-sbh"/>
+                    <constraint firstAttribute="bottom" secondItem="TfD-sP-vmA" secondAttribute="bottom" constant="8" id="38w-1h-eP6"/>
                     <constraint firstItem="4oq-jR-YmQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="3ty-xB-RgZ"/>
-                    <constraint firstItem="KhT-4O-w5p" firstAttribute="leading" secondItem="4oq-jR-YmQ" secondAttribute="trailing" constant="8" id="JOR-la-XTh"/>
+                    <constraint firstAttribute="trailing" secondItem="TfD-sP-vmA" secondAttribute="trailing" constant="8" id="JL5-ep-McI"/>
+                    <constraint firstItem="TfD-sP-vmA" firstAttribute="top" secondItem="pMh-Ey-O18" secondAttribute="bottom" constant="8" id="Kar-Td-Eoq"/>
                     <constraint firstAttribute="bottom" secondItem="4oq-jR-YmQ" secondAttribute="bottom" constant="7.5" id="Lth-Su-h03"/>
                     <constraint firstAttribute="trailing" secondItem="pMh-Ey-O18" secondAttribute="trailing" constant="8" id="Miz-4C-NR8"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="TfD-sP-vmA" secondAttribute="trailing" constant="8" id="SNz-BD-8Qe"/>
-                    <constraint firstItem="KhT-4O-w5p" firstAttribute="top" secondItem="pMh-Ey-O18" secondAttribute="bottom" constant="8" id="T90-0N-3dI"/>
-                    <constraint firstItem="TfD-sP-vmA" firstAttribute="top" secondItem="KhT-4O-w5p" secondAttribute="bottom" constant="6" id="X7c-JH-0mg"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="KhT-4O-w5p" secondAttribute="trailing" constant="1" id="bwh-di-hRO"/>
-                    <constraint firstItem="TfD-sP-vmA" firstAttribute="leading" secondItem="4oq-jR-YmQ" secondAttribute="trailing" constant="8" id="dDd-OM-EmT"/>
                     <constraint firstItem="4oq-jR-YmQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="gef-T1-qnq"/>
                     <constraint firstItem="pMh-Ey-O18" firstAttribute="leading" secondItem="4oq-jR-YmQ" secondAttribute="trailing" constant="8" id="hsw-Nr-Lux"/>
                     <constraint firstItem="pMh-Ey-O18" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="sSZ-mf-vMN"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="departureLabel" destination="TfD-sP-vmA" id="pkx-Hn-kxh"/>
-                <outlet property="destinationLabel" destination="KhT-4O-w5p" id="5gj-Kn-pxG"/>
+                <outlet property="messageLabel" destination="TfD-sP-vmA" id="gEG-Iu-bPm"/>
                 <outlet property="nameLabel" destination="pMh-Ey-O18" id="TZh-9b-Kfr"/>
                 <outlet property="pictureImageView" destination="4oq-jR-YmQ" id="fOo-fL-Dbr"/>
             </connections>
