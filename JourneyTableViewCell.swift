@@ -2,7 +2,7 @@
 import UIKit
 import QuartzCore
 
-class JourneyTableViewCell: UITableViewCell {
+class JourneyTableViewCell: MGSwipeTableCell {
 	
 	@IBOutlet weak var journeyNameLabel: UILabel!
 	@IBOutlet weak var destinationLabel: UILabel!

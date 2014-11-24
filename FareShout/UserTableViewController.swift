@@ -1,7 +1,7 @@
 
 import UIKit
 
-class UserTableViewController: UITableViewController, FSProfileTableViewCellDelegate, PageRootDelegate {
+class UserTableViewController: UITableViewController, FSProfileTableViewCellDelegate, PageRootDelegate, MGSwipeTableCellDelegate {
 	
 	var journeys: [Journey] = []
 	var didAppear: Bool = false
@@ -94,6 +94,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			c.profileImageView.layer.shouldRasterize = true
 			c.delegate = self
 			c.nameLabel.text = currentUser!.name
+			c.selectionStyle = UITableViewCellSelectionStyle.None
 			
 			return cell!
 		} else if indexPath.section == 1 {
@@ -103,6 +104,13 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			if cell == nil {
 				cell = JourneyTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Journey")
 			}
+			
+			var deleteBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FATrashO), backgroundColor: UIColor.blackColor())
+			deleteBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
+			
+			cell!.leftButtons = [deleteBtn]
+			cell!.leftSwipeSettings.transition = MGSwipeTransition.Transition3D
+			cell!.delegate = self
 			
 			cell!.style()
 			cell!.populate(journey)
@@ -163,6 +171,17 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			
 			self.performSegueWithIdentifier("openMessages", sender: data!)
 		})
+	}
+	
+	func swipeTableCell(cell: MGSwipeTableCell!, canSwipe direction: MGSwipeDirection) -> Bool {
+		return direction == MGSwipeDirection.LeftToRight
+	}
+	
+	func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
+		var cell: JourneyTableViewCell = cell as JourneyTableViewCell
+		UIAlertView(title: "Delete Journey", message: cell.journeyNameLabel.text!, delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "Okay").show()
+		
+		return true
 	}
 	
 }

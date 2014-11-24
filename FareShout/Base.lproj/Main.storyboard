@@ -660,22 +660,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="basic" textLabel="Qwn-C9-5EL" style="IBUITableViewCellStyleDefault" id="qDG-C1-gI1">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qDG-C1-gI1" id="Ep1-XM-be6">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qwn-C9-5EL">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="cU5-fp-Ekr" id="SeW-82-F9p"/>
                             <outlet property="delegate" destination="cU5-fp-Ekr" id="e5E-gr-4PI"/>
@@ -726,7 +710,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="QZn-wy-0cd"/>
-        <segue reference="idd-OF-6bD"/>
-        <segue reference="VJA-kc-wSl"/>
+        <segue reference="WWy-7h-XJa"/>
+        <segue reference="Eoa-mH-lsb"/>
     </inferredMetricsTieBreakers>
 </document>

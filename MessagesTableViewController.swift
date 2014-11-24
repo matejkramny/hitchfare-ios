@@ -25,6 +25,13 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 			self.navigationItem.title = list.receiver.name
 		}
 		
+		var buttonTitle = NSString.fontAwesomeIconStringForEnum(FAIcon.FAPlusSquareO)
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: buttonTitle, style: UIBarButtonItemStyle.Plain, target: self, action: "pressedRide:")
+		var attributes: [NSObject: AnyObject] = [
+			NSFontAttributeName: UIFont(name: "FontAwesome", size: 22)!
+		]
+		self.navigationItem.rightBarButtonItem!.setTitleTextAttributes(attributes, forState: UIControlState.Normal)
+		
 		if !didRequestForNotifications {
 			var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
 			appDelegate.requestForNotifications()
@@ -257,6 +264,10 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 		if info["list"] as NSString == list._id {
 			self.refreshData(nil)
 		}
+	}
+	
+	func pressedRide (sender: AnyObject?) {
+		
 	}
 	
 }

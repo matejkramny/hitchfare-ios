@@ -15,6 +15,8 @@ class HikesTableViewCell: UITableViewController, PageRootDelegate {
 		self.refreshControl = UIRefreshControl()
 		self.refreshControl!.addTarget(self, action: "refreshData:", forControlEvents: UIControlEvents.ValueChanged)
 		
+		self.tableView.registerNib(UINib(nibName: "HikeTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Hike")
+		
 		self.refreshData(nil)
 	}
 	
@@ -67,17 +69,37 @@ class HikesTableViewCell: UITableViewController, PageRootDelegate {
 	}
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		var cell = tableView.dequeueReusableCellWithIdentifier("basic", forIndexPath: indexPath) as? UITableViewCell
+		var cell = tableView.dequeueReusableCellWithIdentifier("Hike", forIndexPath: indexPath) as? HikeTableViewCell
+		
+		if cell == nil {
+			cell = HikeTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Hike")
+		}
 		
 		var user = messages[indexPath.row].receiver
 		if user._id == currentUser!._id! {
 			user = messages[indexPath.row].sender
 		}
 		
+		cell!.nameLabel.text = user.name
+		if user.picture != nil {
+			cell!.pictureImageView.sd_setImageWithURL(NSURL(string: user.picture!.url))
+			cell!.pictureImageView.clipsToBounds = true
+			cell!.pictureImageView.layer.cornerRadius = 72/2
+		}
+		
+		var deleteBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FATrashO), backgroundColor: UIColor.blackColor())
+		deleteBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
+		
+		cell!.rightButtons = [deleteBtn]
+		cell!.rightSwipeSettings.transition = MGSwipeTransition.Transition3D
+		
 		cell!.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-		cell!.textLabel!.text = user.name
 		
 		return cell!
+	}
+	
+	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		return 88
 	}
 	
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -86,6 +108,7 @@ class HikesTableViewCell: UITableViewController, PageRootDelegate {
 			user = messages[indexPath.row].sender
 		}
 		
+		SVProgressHUD.showProgress(0, status: "Loading Message..", maskType: SVProgressHUDMaskType.Black)
 		findMessageList(user._id!, { (list: MessageList?) -> Void in
 			self.performSegueWithIdentifier("openMessages", sender: list)
 		})
@@ -96,6 +119,8 @@ class HikesTableViewCell: UITableViewController, PageRootDelegate {
 	}
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		SVProgressHUD.dismiss()
+		
 		mainNavigationDelegate.hideNavigationBar()
 		isInSegue = true
 		
@@ -106,6 +131,8 @@ class HikesTableViewCell: UITableViewController, PageRootDelegate {
 	}
 	
 	func openMessageNotification(listId: NSString) {
+		SVProgressHUD.showProgress(0, status: "Loading Message..", maskType: SVProgressHUDMaskType.Black)
+		
 		MessageList.getList(listId, callback: { (err: NSError?, data: MessageList?) -> Void in
 			if data == nil {
 				return

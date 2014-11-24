@@ -11,3 +11,8 @@
 #import "UIFont+FontAwesome.h"
 
 #import "UIImageView+WebCache.h"
+#import "SDWebImageCompat.h"
+#import "SDWebImageManager.h"
+
+#import "MGSwipeTableCell.h"
+#import "MGSwipeButton.h"

@@ -87,12 +87,15 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		var journey = journeys[indexPath.row]
 		
+		SVProgressHUD.showProgress(0, status: "Loading Message..", maskType: SVProgressHUDMaskType.Black)
+		
 		findMessageList(journey.owner!, { (list: MessageList?) -> Void in
 			self.performSegueWithIdentifier("openMessages", sender: list)
 		})
 	}
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		SVProgressHUD.dismiss()
 		isInSegue = true
 		mainNavigationDelegate.hideNavigationBar()
 		
@@ -107,6 +110,8 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
 	}
 	
 	func openMessageNotification(listId: NSString) {
+		SVProgressHUD.showProgress(0, status: "Loading Message..", maskType: SVProgressHUDMaskType.Black)
+		
 		MessageList.getList(listId, callback: { (err: NSError?, data: MessageList?) -> Void in
 			if data == nil {
 				return
