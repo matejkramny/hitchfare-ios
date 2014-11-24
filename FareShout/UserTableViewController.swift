@@ -4,6 +4,7 @@ import UIKit
 class UserTableViewController: UITableViewController, FSProfileTableViewCellDelegate, PageRootDelegate, MGSwipeTableCellDelegate {
 	
 	var journeys: [Journey] = []
+	var pendingRequests: [JourneyPassenger] = []
 	var didAppear: Bool = false
 	var isInSegue: Bool = false
 	
@@ -78,20 +79,27 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		if presentedFromElsewhere {
 			Journey.getUserJourneys(shownUser, callback: callback)
 		} else {
+			JourneyPassenger.getMyJourneyRequests({ (err: NSError?, data: [JourneyPassenger]) -> Void in
+				self.pendingRequests = data
+				self.tableView.reloadData()
+			})
+			
 			Journey.getMyJourneys(callback)
 		}
 	}
 	
 	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-		return 2
+		return 3
 	}
 	
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		switch section {
 		case 0:
 			return 1
-		case 1:
+		case 2:
 			return journeys.count
+		case 1:
+			return pendingRequests.count
 		default:
 			return 0
 		}
@@ -122,6 +130,17 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			
 			return cell!
 		} else if indexPath.section == 1 {
+			var req = pendingRequests[indexPath.row]
+			
+			var cell = tableView.dequeueReusableCellWithIdentifier("basic", forIndexPath: indexPath) as? UITableViewCell
+			if cell == nil {
+				//				cell = JourneyTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Journey")
+			}
+			
+			cell!.textLabel!.text = req.journey.name
+			
+			return cell!
+		} else if indexPath.section == 2 {
 			var journey = journeys[indexPath.row]
 			
 			var cell = tableView.dequeueReusableCellWithIdentifier("Journey", forIndexPath: indexPath) as? JourneyTableViewCell
@@ -152,8 +171,11 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	}
 	
 	override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		if section == 1 {
+		if section == 2 {
 			return "Current Journeys"
+		}
+		if section == 1 {
+			return "Pending Requests"
 		}
 		
 		return nil
@@ -177,6 +199,16 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	}
 	
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+		if presentedFromElsewhere && indexPath.section == 2 {
+			var journey = journeys[indexPath.row]
+			
+			SVProgressHUD.showProgress(1.0, status: "Requesting to Join", maskType: SVProgressHUDMaskType.Black)
+			
+			journey.requestJoin({ (err: NSError?) -> Void in
+				SVProgressHUD.dismiss()
+			})
+		}
+		
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
 	}
 	
