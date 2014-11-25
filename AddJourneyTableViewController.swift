@@ -83,6 +83,10 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 			cell!.label.text = "Title"
 			cell!.field.placeholder = "Name of your Hitch"
 			cell!.field.text = journey.name
+			cell!.field.keyboardType = UIKeyboardType.Default
+			cell!.field.autocapitalizationType = UITextAutocapitalizationType.Words
+			cell!.field.autocorrectionType = UITextAutocorrectionType.No
+			
 			cell!.delegate = self
 			cell!.initialize()
 			
@@ -113,6 +117,10 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 			
 			cell!.delegate = self
 			cell!.initialize()
+			
+			cell!.field.keyboardType = UIKeyboardType.Default
+			cell!.field.autocapitalizationType = UITextAutocapitalizationType.Words
+			cell!.field.autocorrectionType = UITextAutocorrectionType.No
 			
 			if indexPath.row == 0 {
 				cell!.label.text = "Departure"

@@ -37,8 +37,12 @@ class AddCarTableViewController: UITableViewController {
 		}
 		
 		car.seats = seats!
+		
+		SVProgressHUD.showProgress(1.0, status: "Saving...", maskType: SVProgressHUDMaskType.Black)
 		car.update({ (err: NSError?, data: AnyObject?) -> Void in
-			self.navigationController?.popViewControllerAnimated(true)
+			SVProgressHUD.dismiss()
+			
+			self.navigationController!.popViewControllerAnimated(true)
 			return
 		})
 	}

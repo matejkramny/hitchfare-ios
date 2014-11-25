@@ -19,12 +19,16 @@ class CarsTableViewController: UITableViewController {
 		
 		self.refreshControl = UIRefreshControl()
 		self.refreshControl!.addTarget(self, action: "refreshCars:", forControlEvents: UIControlEvents.ValueChanged)
-		
-		self.refreshCars(nil)
 	}
 	
 	func addCar (sender: AnyObject) {
 		self.performSegueWithIdentifier("addCar", sender: nil)
+	}
+	
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		self.refreshCars(nil)
 	}
 	
 	func refreshCars (sender: AnyObject?) {
@@ -47,6 +51,10 @@ class CarsTableViewController: UITableViewController {
 		
 		var car = storage.cars[indexPath.row]
 		cell.textLabel!.text = car.name
+		cell.detailTextLabel!.text = String(car.seats) + " Seat"
+		if car.seats > 1 {
+			cell.detailTextLabel!.text = cell.detailTextLabel!.text! + "s"
+		}
 		
 		if selectCarMode == true {
 			cell.accessoryType = UITableViewCellAccessoryType.None
