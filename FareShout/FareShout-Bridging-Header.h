@@ -16,3 +16,7 @@
 
 #import "MGSwipeTableCell.h"
 #import "MGSwipeButton.h"
+
+#import "JCNotificationBannerPresenter.h"
+#import "JCNotificationCenter.h"
+#import "JCNotificationBannerPresenterSmokeStyle.h"

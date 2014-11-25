@@ -41,7 +41,7 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		]
 		self.rightButton.setTitleTextAttributes(attributes, forState: UIControlState.Normal)
 		self.leftButton.setTitleTextAttributes(attributes, forState: UIControlState.Normal)
-		self.rightButton.title = NSString(format: "%@  %@", NSString.fontAwesomeIconStringForEnum(FAIcon.FASearch), NSString.fontAwesomeIconStringForEnum(FAIcon.FAThumbsOUp))
+		self.rightButton.title = NSString(format: "%@", NSString.fontAwesomeIconStringForEnum(FAIcon.FAThumbsOUp))
 		self.leftButton.title = NSString.fontAwesomeIconStringForEnum(FAIcon.FACog)
 		
 		//self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)

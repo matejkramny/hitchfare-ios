@@ -95,7 +95,7 @@ class HikesTableViewCell: UITableViewController, PageRootDelegate {
 			cell!.messageLabel.text = ""
 		}
 		
-		var deleteBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FATrashO), backgroundColor: UIColor.blackColor())
+		var deleteBtn = MGSwipeButton(title: " " + NSString.fontAwesomeIconStringForEnum(FAIcon.FATrashO) + " ", backgroundColor: UIColor.blackColor())
 		var infoBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FAInfo), backgroundColor: UIColor.blackColor())
 		var reportBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FAExclamationTriangle), backgroundColor: UIColor.blackColor())
 		

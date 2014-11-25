@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		var attributes: [NSObject: AnyObject] = [
 			NSForegroundColorAttributeName: UIColor.whiteColor(),
-			NSFontAttributeName: UIFont(name: "OCRAStd", size: 18)!
+			NSFontAttributeName: UIFont(name: "OCRAStd", size: 16)!
 		]
 		
 		UINavigationBar.appearance().titleTextAttributes = attributes
@@ -60,24 +60,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 	
 	func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+		if application.applicationState == UIApplicationState.Active {
+			println(userInfo)
+			NSNotificationCenter.defaultCenter().postNotificationName("ReceivedMessage", object: self, userInfo: userInfo)
+			
+			var messageText = (userInfo["aps"] as [NSString: AnyObject])["alert"] as NSString
+			
+			JCNotificationCenter.sharedCenter().presenter = JCNotificationBannerPresenterSmokeStyle()
+			JCNotificationCenter.enqueueNotificationWithTitle("New Message", message: messageText, tapHandler: { () -> Void in
+				self.openMessageNotification(userInfo["list"] as NSString)
+			})
+			
+			return
+		}
+		
 		// if entered foreground in the last second.
 		if NSDate().timeIntervalSince1970 - enteredForeground.timeIntervalSince1970 < 1 {
-			// Navigate the user to the message screen
-			var vc: PageRootViewController = self.window!.rootViewController! as PageRootViewController
-			var navController = vc.getCurrentViewController()
-			//navController.visibleViewController.navigationController!.popToRootViewControllerAnimated(false)
-			if navController.visibleViewController.presentingViewController != nil {
-				navController.visibleViewController.navigationController!.dismissViewControllerAnimated(false, completion: nil)
-			}
-			
-			navController.popToRootViewControllerAnimated(false)
-			var pageRootDelegate = navController.viewControllers[0] as PageRootDelegate
-			pageRootDelegate.openMessageNotification(userInfo["list"] as NSString)
-		} else {
-			NSNotificationCenter.defaultCenter().postNotificationName("ReceivedMessage", object: self, userInfo: userInfo)
+			self.openMessageNotification(userInfo["list"] as NSString)
 		}
 		
 		return
+	}
+	
+	func openMessageNotification (listID: NSString) {
+		// Navigate the user to the message screen
+		var vc: PageRootViewController = self.window!.rootViewController! as PageRootViewController
+		var navController = vc.getCurrentViewController()
+		//navController.visibleViewController.navigationController!.popToRootViewControllerAnimated(false)
+		if navController.visibleViewController.presentingViewController != nil {
+			navController.visibleViewController.navigationController!.dismissViewControllerAnimated(false, completion: nil)
+		}
+		
+		navController.popToRootViewControllerAnimated(false)
+		var pageRootDelegate = navController.viewControllers[0] as PageRootDelegate
+		pageRootDelegate.openMessageNotification(listID)
 	}
 	
 	func applicationWillEnterForeground(application: UIApplication) {

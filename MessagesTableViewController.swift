@@ -28,8 +28,8 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 			self.navigationItem.title = list.receiver.name
 		}
 		
-		var buttonTitle = NSString.fontAwesomeIconStringForEnum(FAIcon.FAPlusSquareO)
-		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: buttonTitle, style: UIBarButtonItemStyle.Plain, target: self, action: "pressedRide:")
+		var buttonTitle = NSString.fontAwesomeIconStringForEnum(FAIcon.FAcar)
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: buttonTitle, style: UIBarButtonItemStyle.Plain, target: self, action: "titleTap:")
 		var attributes: [NSObject: AnyObject] = [
 			NSFontAttributeName: UIFont(name: "FontAwesome", size: 22)!
 		]
@@ -316,10 +316,6 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 			// sets 'Back' for the pushed vc
 			self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Bordered, target: nil, action: nil)
 		}
-	}
-	
-	func pressedRide (sender: AnyObject?) {
-		
 	}
 	
 }

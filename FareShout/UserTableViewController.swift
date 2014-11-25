@@ -1,10 +1,12 @@
 
 import UIKit
 
-class UserTableViewController: UITableViewController, FSProfileTableViewCellDelegate, PageRootDelegate, MGSwipeTableCellDelegate {
+class UserTableViewController: UITableViewController, FSProfileTableViewCellDelegate, PageRootDelegate, MGSwipeTableCellDelegate, JourneyRequestDelegate, AcceptJourneyRequestDelegate {
 	
 	var journeys: [Journey] = []
+	var myPendingRequests: [JourneyPassenger] = []
 	var pendingRequests: [JourneyPassenger] = []
+	
 	var didAppear: Bool = false
 	var isInSegue: Bool = false
 	
@@ -12,8 +14,12 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	var presentedFromElsewhere = false
 	var shownUser: User!
 	
+	let requestedJourneyDateFormatter: NSDateFormatter = NSDateFormatter()
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		self.requestedJourneyDateFormatter.dateFormat = "dd/MM/yyyy"
 		
 		self.navigationController!.navigationBar.translucent = false
 		
@@ -22,6 +28,8 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		
 		self.tableView.registerNib(UINib(nibName: "JourneyTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Journey")
 		self.tableView.registerNib(UINib(nibName: "FSProfileTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "profileCell")
+		self.tableView.registerNib(UINib(nibName: "JourneyRequestTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "journeyRequest")
+		self.tableView.registerNib(UINib(nibName: "AcceptJourneyRequestTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "acceptJourneyRequest")
 		
 		if shownUser == nil {
 			shownUser = currentUser!
@@ -80,7 +88,32 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			Journey.getUserJourneys(shownUser, callback: callback)
 		} else {
 			JourneyPassenger.getMyJourneyRequests({ (err: NSError?, data: [JourneyPassenger]) -> Void in
+				self.myPendingRequests = data
+				
+				var iDone = 0
+				for req in self.myPendingRequests {
+					req.journey.getOwner({ () -> Void in
+						if ++iDone == self.myPendingRequests.count {
+							self.tableView.reloadData()
+						}
+					})
+				}
+				
+				self.tableView.reloadData()
+			})
+			
+			JourneyPassenger.getAllJourneyRequests({ (err: NSError?, data: [JourneyPassenger]) -> Void in
 				self.pendingRequests = data
+				
+				var iDone = 0
+				for req in self.pendingRequests {
+					req.journey.getOwner({ () -> Void in
+						if ++iDone == self.pendingRequests.count {
+							self.tableView.reloadData()
+						}
+					})
+				}
+				
 				self.tableView.reloadData()
 			})
 			
@@ -89,15 +122,17 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	}
 	
 	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-		return 3
+		return 4
 	}
 	
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		switch section {
 		case 0:
 			return 1
-		case 2:
+		case 3:
 			return journeys.count
+		case 2:
+			return myPendingRequests.count
 		case 1:
 			return pendingRequests.count
 		default:
@@ -132,15 +167,58 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		} else if indexPath.section == 1 {
 			var req = pendingRequests[indexPath.row]
 			
-			var cell = tableView.dequeueReusableCellWithIdentifier("basic", forIndexPath: indexPath) as? UITableViewCell
+			var cell: AcceptJourneyRequestTableViewCell? = tableView.dequeueReusableCellWithIdentifier("acceptJourneyRequest", forIndexPath: indexPath) as? AcceptJourneyRequestTableViewCell
 			if cell == nil {
-				//				cell = JourneyTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Journey")
+				cell = AcceptJourneyRequestTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "acceptJourneyRequest")
 			}
 			
-			cell!.textLabel!.text = req.journey.name
+			cell!.journeyName.text = req.journey.name
+			
+			if req.requested != nil {
+				cell!.requestedLabel.text = "Requested on " + requestedJourneyDateFormatter.stringFromDate(req.requested!)
+			} else {
+				cell!.requestedLabel.text = ""
+			}
+			
+			if req.journey.ownerObj != nil {
+				var url = NSURL(string: req.journey.ownerObj!.picture!.url)
+				cell!.profileImageView.sd_setImageWithURL(url!)
+				cell!.profileImageView.layer.cornerRadius = 25
+				cell!.profileImageView.layer.masksToBounds = true
+				cell!.profileImageView.layer.shouldRasterize = true
+			}
+			
+			cell!.delegate = self
 			
 			return cell!
 		} else if indexPath.section == 2 {
+			var req = myPendingRequests[indexPath.row]
+			
+			var cell: JourneyRequestTableViewCell? = tableView.dequeueReusableCellWithIdentifier("journeyRequest", forIndexPath: indexPath) as? JourneyRequestTableViewCell
+			if cell == nil {
+				cell = JourneyRequestTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "journeyRequest")
+			}
+			
+			cell!.journeyName.text = req.journey.name
+			
+			if req.requested != nil {
+				cell!.requestedLabel.text = "Requested on " + requestedJourneyDateFormatter.stringFromDate(req.requested!)
+			} else {
+				cell!.requestedLabel.text = ""
+			}
+			
+			if req.journey.ownerObj != nil {
+				var url = NSURL(string: req.journey.ownerObj!.picture!.url)
+				cell!.profileImageView.sd_setImageWithURL(url!)
+				cell!.profileImageView.layer.cornerRadius = 25
+				cell!.profileImageView.layer.masksToBounds = true
+				cell!.profileImageView.layer.shouldRasterize = true
+			}
+			
+			cell!.delegate = self
+			
+			return cell!
+		} else if indexPath.section == 3 {
 			var journey = journeys[indexPath.row]
 			
 			var cell = tableView.dequeueReusableCellWithIdentifier("Journey", forIndexPath: indexPath) as? JourneyTableViewCell
@@ -149,15 +227,16 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			}
 			
 			if presentedFromElsewhere == false {
-				var deleteBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FATrashO), backgroundColor: UIColor.redColor())
-				var editBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FAPencilSquareO), backgroundColor: UIColor.blueColor())
-				var passengerBtn = MGSwipeButton(title: "Passengers", backgroundColor: UIColor.blackColor())
+				var deleteBtn = MGSwipeButton(title: " " + NSString.fontAwesomeIconStringForEnum(FAIcon.FATrashO) + " ", backgroundColor: UIColor.redColor())
+				var editBtn = MGSwipeButton(title: " " + NSString.fontAwesomeIconStringForEnum(FAIcon.FAPencilSquareO) + " ", backgroundColor: UIColor.blueColor())
+				var passengerBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FAUsers), backgroundColor: UIColor.blackColor())
 				
 				deleteBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
 				editBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
+				passengerBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
 				
 				cell!.leftButtons = [deleteBtn, editBtn, passengerBtn]
-				cell!.leftSwipeSettings.transition = MGSwipeTransition.Transition3D
+				cell!.leftSwipeSettings.transition = MGSwipeTransition.TransitionDrag
 				cell!.delegate = self
 			}
 			
@@ -171,11 +250,14 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	}
 	
 	override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		if section == 2 {
+		if section == 3 {
 			return "Current Journeys"
 		}
+		if section == 2 {
+			return self.myPendingRequests.count > 0 ? "Pending Requests" : nil
+		}
 		if section == 1 {
-			return "Pending Requests"
+			return self.pendingRequests.count > 0 ? "Journey Requests" : nil
 		}
 		
 		return nil
@@ -184,6 +266,8 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 		if indexPath.section == 0 {
 			return 120.0
+		} else if indexPath.section == 1 || indexPath.section == 2 {
+			return 66.0
 		} else {
 			return 126.0
 		}
@@ -199,13 +283,17 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	}
 	
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		if presentedFromElsewhere && indexPath.section == 2 {
+		if presentedFromElsewhere && indexPath.section == 3 {
 			var journey = journeys[indexPath.row]
 			
 			SVProgressHUD.showProgress(1.0, status: "Requesting to Join", maskType: SVProgressHUDMaskType.Black)
 			
 			journey.requestJoin({ (err: NSError?) -> Void in
-				SVProgressHUD.dismiss()
+				if err != nil {
+					SVProgressHUD.showErrorWithStatus("Error Joining Journey. Perhaps already requested.")
+				} else {
+					SVProgressHUD.showSuccessWithStatus("Success")
+				}
 			})
 		}
 		
@@ -244,6 +332,75 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		UIAlertView(title: "Delete Journey", message: cell.journeyNameLabel.text!, delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "Okay").show()
 		
 		return true
+	}
+	
+	// JourneyRequestDelegate
+	
+	func JourneyRequestDidPressDelete(cell: JourneyRequestTableViewCell) {
+		var req: JourneyPassenger? = self.getRequestFromCollection(cell as UITableViewCell, collection: self.myPendingRequests as [AnyObject]) as? JourneyPassenger
+		if req == nil {
+			return
+		}
+		
+		SVProgressHUD.showProgress(1.0, status: "Loading...", maskType: SVProgressHUDMaskType.Black)
+		req!.rejectRequest({ (err: NSError?) -> Void in
+			if err != nil {
+				SVProgressHUD.showErrorWithStatus("Error Loading.")
+				return
+			}
+			
+			SVProgressHUD.dismiss()
+			self.refreshData(nil)
+		})
+	}
+	
+	// AcceptJourneyRequestDelegate
+	
+	func AcceptJourneyRequestDidPressAccept(cell: AcceptJourneyRequestTableViewCell) {
+		// accept journey request
+		var req: JourneyPassenger? = self.getRequestFromCollection(cell as UITableViewCell, collection: self.pendingRequests as [AnyObject]) as? JourneyPassenger
+		if req == nil {
+			return
+		}
+		
+		SVProgressHUD.showProgress(1.0, status: "Loading...", maskType: SVProgressHUDMaskType.Black)
+		req!.approveRequest({ (err: NSError?) -> Void in
+			if err != nil {
+				SVProgressHUD.showErrorWithStatus("Error Loading.")
+				return
+			}
+			
+			SVProgressHUD.dismiss()
+			self.refreshData(nil)
+		})
+	}
+	
+	func AcceptJourneyRequestDidPressReject(cell: AcceptJourneyRequestTableViewCell) {
+		// reject journey request
+		var req: JourneyPassenger? = self.getRequestFromCollection(cell as UITableViewCell, collection: self.pendingRequests as [AnyObject]) as? JourneyPassenger
+		if req == nil {
+			return
+		}
+		
+		req!.rejectRequest({ (err: NSError?) -> Void in
+			if err != nil {
+				SVProgressHUD.showErrorWithStatus("Error Loading.")
+				return
+			}
+			
+			SVProgressHUD.dismiss()
+			self.refreshData(nil)
+		})
+	}
+	
+	func getRequestFromCollection (cell: UITableViewCell, collection: [AnyObject]) -> AnyObject? {
+		var indexPath: NSIndexPath? = self.tableView.indexPathForCell(cell as UITableViewCell)
+		
+		if indexPath == nil {
+			return nil
+		}
+		
+		return collection[indexPath!.row]
 	}
 	
 }

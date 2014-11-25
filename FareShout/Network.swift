@@ -1,9 +1,12 @@
 
 import Foundation
 
+//let kAPIProtocol = "http://"
+//let kAPIEndpoint = kAPIProtocol + "localhost:3000"
+
 // Debug
-let kAPIProtocol = "http://"
-let kAPIEndpoint = kAPIProtocol + "localhost:3000"
+let kAPIProtocol = "https://"
+let kAPIEndpoint = kAPIProtocol + "fareshout-dev-matejkramny.ngapp.io"
 
 // Production
 //let kAPIProtocol = "https://"

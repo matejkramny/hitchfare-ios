@@ -38,6 +38,19 @@
 		4F20D37F1A23477600A1CAC5 /* HikeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F20D37D1A23477600A1CAC5 /* HikeTableViewCell.xib */; };
 		4F20D3811A235B9500A1CAC5 /* OCRAStd.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4F20D3801A235B9500A1CAC5 /* OCRAStd.otf */; };
 		4F2773751A08E5BA0012B779 /* AddCarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2773741A08E5BA0012B779 /* AddCarTableViewController.swift */; };
+		4F412D611A24B89700019241 /* JCNotificationBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F412D4B1A24B89700019241 /* JCNotificationBanner.m */; };
+		4F412D621A24B89700019241 /* JCNotificationBannerPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F412D4E1A24B89700019241 /* JCNotificationBannerPresenter.m */; };
+		4F412D631A24B89700019241 /* JCNotificationBannerPresenterIOS7Style.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F412D501A24B89700019241 /* JCNotificationBannerPresenterIOS7Style.m */; };
+		4F412D641A24B89700019241 /* JCNotificationBannerPresenterIOSStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F412D521A24B89700019241 /* JCNotificationBannerPresenterIOSStyle.m */; };
+		4F412D651A24B89700019241 /* JCNotificationBannerPresenterSmokeStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F412D541A24B89700019241 /* JCNotificationBannerPresenterSmokeStyle.m */; };
+		4F412D661A24B89700019241 /* JCNotificationBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F412D561A24B89700019241 /* JCNotificationBannerView.m */; };
+		4F412D671A24B89700019241 /* JCNotificationBannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F412D581A24B89700019241 /* JCNotificationBannerViewController.m */; };
+		4F412D681A24B89700019241 /* JCNotificationBannerViewIOS7Style.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F412D5A1A24B89700019241 /* JCNotificationBannerViewIOS7Style.m */; };
+		4F412D691A24B89700019241 /* JCNotificationBannerViewIOSStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F412D5C1A24B89700019241 /* JCNotificationBannerViewIOSStyle.m */; };
+		4F412D6A1A24B89700019241 /* JCNotificationBannerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F412D5E1A24B89700019241 /* JCNotificationBannerWindow.m */; };
+		4F412D6B1A24B89700019241 /* JCNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F412D601A24B89700019241 /* JCNotificationCenter.m */; };
+		4F412D6E1A24C72C00019241 /* AcceptJourneyRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F412D6C1A24C72C00019241 /* AcceptJourneyRequestTableViewCell.swift */; };
+		4F412D6F1A24C72C00019241 /* AcceptJourneyRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F412D6D1A24C72C00019241 /* AcceptJourneyRequestTableViewCell.xib */; };
 		4F4E363D1A13622100934D6B /* SharedStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E363C1A13622100934D6B /* SharedStorage.swift */; };
 		4F4FFD691A1F5F80004EE524 /* ChatLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FFD681A1F5F80004EE524 /* ChatLabel.swift */; };
 		4F4FFDB31A1FBC31004EE524 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F4FFDB21A1FBC31004EE524 /* ImageIO.framework */; };
@@ -70,6 +83,8 @@
 		4FD346E51A127CB3006026DD /* PriceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FD346E31A127CB3006026DD /* PriceTableViewCell.xib */; };
 		4FD346E81A12831B006026DD /* StartEndTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD346E61A12831B006026DD /* StartEndTableViewCell.swift */; };
 		4FD346E91A12831B006026DD /* StartEndTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FD346E71A12831B006026DD /* StartEndTableViewCell.xib */; };
+		4FD3C9D11A23FB10003058F6 /* JourneyRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3C9CF1A23FB10003058F6 /* JourneyRequestTableViewCell.swift */; };
+		4FD3C9D21A23FB10003058F6 /* JourneyRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FD3C9D01A23FB10003058F6 /* JourneyRequestTableViewCell.xib */; };
 		4FD6D2921A0551F600199082 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6D2911A0551F600199082 /* Car.swift */; };
 		4FD6D2961A05560B00199082 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6D2951A05560B00199082 /* Network.swift */; };
 		4FF31FF61A1F4EC9005805D7 /* RightChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF31FF41A1F4EC9005805D7 /* RightChatTableViewCell.swift */; };
@@ -138,6 +153,31 @@
 		4F20D37D1A23477600A1CAC5 /* HikeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HikeTableViewCell.xib; sourceTree = "<group>"; };
 		4F20D3801A235B9500A1CAC5 /* OCRAStd.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OCRAStd.otf; sourceTree = "<group>"; };
 		4F2773741A08E5BA0012B779 /* AddCarTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCarTableViewController.swift; sourceTree = "<group>"; };
+		4F412D4A1A24B89700019241 /* JCNotificationBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCNotificationBanner.h; sourceTree = "<group>"; };
+		4F412D4B1A24B89700019241 /* JCNotificationBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCNotificationBanner.m; sourceTree = "<group>"; };
+		4F412D4C1A24B89700019241 /* JCNotificationBannerPresenter_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCNotificationBannerPresenter_Private.h; sourceTree = "<group>"; };
+		4F412D4D1A24B89700019241 /* JCNotificationBannerPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCNotificationBannerPresenter.h; sourceTree = "<group>"; };
+		4F412D4E1A24B89700019241 /* JCNotificationBannerPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCNotificationBannerPresenter.m; sourceTree = "<group>"; };
+		4F412D4F1A24B89700019241 /* JCNotificationBannerPresenterIOS7Style.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCNotificationBannerPresenterIOS7Style.h; sourceTree = "<group>"; };
+		4F412D501A24B89700019241 /* JCNotificationBannerPresenterIOS7Style.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCNotificationBannerPresenterIOS7Style.m; sourceTree = "<group>"; };
+		4F412D511A24B89700019241 /* JCNotificationBannerPresenterIOSStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCNotificationBannerPresenterIOSStyle.h; sourceTree = "<group>"; };
+		4F412D521A24B89700019241 /* JCNotificationBannerPresenterIOSStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCNotificationBannerPresenterIOSStyle.m; sourceTree = "<group>"; };
+		4F412D531A24B89700019241 /* JCNotificationBannerPresenterSmokeStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCNotificationBannerPresenterSmokeStyle.h; sourceTree = "<group>"; };
+		4F412D541A24B89700019241 /* JCNotificationBannerPresenterSmokeStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCNotificationBannerPresenterSmokeStyle.m; sourceTree = "<group>"; };
+		4F412D551A24B89700019241 /* JCNotificationBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCNotificationBannerView.h; sourceTree = "<group>"; };
+		4F412D561A24B89700019241 /* JCNotificationBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCNotificationBannerView.m; sourceTree = "<group>"; };
+		4F412D571A24B89700019241 /* JCNotificationBannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCNotificationBannerViewController.h; sourceTree = "<group>"; };
+		4F412D581A24B89700019241 /* JCNotificationBannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCNotificationBannerViewController.m; sourceTree = "<group>"; };
+		4F412D591A24B89700019241 /* JCNotificationBannerViewIOS7Style.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCNotificationBannerViewIOS7Style.h; sourceTree = "<group>"; };
+		4F412D5A1A24B89700019241 /* JCNotificationBannerViewIOS7Style.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCNotificationBannerViewIOS7Style.m; sourceTree = "<group>"; };
+		4F412D5B1A24B89700019241 /* JCNotificationBannerViewIOSStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCNotificationBannerViewIOSStyle.h; sourceTree = "<group>"; };
+		4F412D5C1A24B89700019241 /* JCNotificationBannerViewIOSStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCNotificationBannerViewIOSStyle.m; sourceTree = "<group>"; };
+		4F412D5D1A24B89700019241 /* JCNotificationBannerWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCNotificationBannerWindow.h; sourceTree = "<group>"; };
+		4F412D5E1A24B89700019241 /* JCNotificationBannerWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCNotificationBannerWindow.m; sourceTree = "<group>"; };
+		4F412D5F1A24B89700019241 /* JCNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCNotificationCenter.h; sourceTree = "<group>"; };
+		4F412D601A24B89700019241 /* JCNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCNotificationCenter.m; sourceTree = "<group>"; };
+		4F412D6C1A24C72C00019241 /* AcceptJourneyRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcceptJourneyRequestTableViewCell.swift; sourceTree = "<group>"; };
+		4F412D6D1A24C72C00019241 /* AcceptJourneyRequestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AcceptJourneyRequestTableViewCell.xib; sourceTree = "<group>"; };
 		4F4E363C1A13622100934D6B /* SharedStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedStorage.swift; sourceTree = "<group>"; };
 		4F4FFD681A1F5F80004EE524 /* ChatLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLabel.swift; sourceTree = "<group>"; };
 		4F4FFDB21A1FBC31004EE524 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
@@ -172,6 +212,8 @@
 		4FD346E31A127CB3006026DD /* PriceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PriceTableViewCell.xib; sourceTree = "<group>"; };
 		4FD346E61A12831B006026DD /* StartEndTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartEndTableViewCell.swift; sourceTree = "<group>"; };
 		4FD346E71A12831B006026DD /* StartEndTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartEndTableViewCell.xib; sourceTree = "<group>"; };
+		4FD3C9CF1A23FB10003058F6 /* JourneyRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JourneyRequestTableViewCell.swift; sourceTree = "<group>"; };
+		4FD3C9D01A23FB10003058F6 /* JourneyRequestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JourneyRequestTableViewCell.xib; sourceTree = "<group>"; };
 		4FD6D2911A0551F600199082 /* Car.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
 		4FD6D2951A05560B00199082 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		4FD6D2981A05564500199082 /* CarTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarTest.swift; sourceTree = "<group>"; };
@@ -199,6 +241,7 @@
 		4F1AD1731A14F62D0047BEE8 /* Deps */ = {
 			isa = PBXGroup;
 			children = (
+				4F412D491A24B88700019241 /* JCNotificationBanner */,
 				4F20D3801A235B9500A1CAC5 /* OCRAStd.otf */,
 				4F20D3751A23412400A1CAC5 /* MGSwipeTableViewCell */,
 				4F20D3431A23354E00A1CAC5 /* SDWebImage */,
@@ -305,6 +348,36 @@
 			path = MGSwipeTableViewCell;
 			sourceTree = "<group>";
 		};
+		4F412D491A24B88700019241 /* JCNotificationBanner */ = {
+			isa = PBXGroup;
+			children = (
+				4F412D4A1A24B89700019241 /* JCNotificationBanner.h */,
+				4F412D4B1A24B89700019241 /* JCNotificationBanner.m */,
+				4F412D4C1A24B89700019241 /* JCNotificationBannerPresenter_Private.h */,
+				4F412D4D1A24B89700019241 /* JCNotificationBannerPresenter.h */,
+				4F412D4E1A24B89700019241 /* JCNotificationBannerPresenter.m */,
+				4F412D4F1A24B89700019241 /* JCNotificationBannerPresenterIOS7Style.h */,
+				4F412D501A24B89700019241 /* JCNotificationBannerPresenterIOS7Style.m */,
+				4F412D511A24B89700019241 /* JCNotificationBannerPresenterIOSStyle.h */,
+				4F412D521A24B89700019241 /* JCNotificationBannerPresenterIOSStyle.m */,
+				4F412D531A24B89700019241 /* JCNotificationBannerPresenterSmokeStyle.h */,
+				4F412D541A24B89700019241 /* JCNotificationBannerPresenterSmokeStyle.m */,
+				4F412D551A24B89700019241 /* JCNotificationBannerView.h */,
+				4F412D561A24B89700019241 /* JCNotificationBannerView.m */,
+				4F412D571A24B89700019241 /* JCNotificationBannerViewController.h */,
+				4F412D581A24B89700019241 /* JCNotificationBannerViewController.m */,
+				4F412D591A24B89700019241 /* JCNotificationBannerViewIOS7Style.h */,
+				4F412D5A1A24B89700019241 /* JCNotificationBannerViewIOS7Style.m */,
+				4F412D5B1A24B89700019241 /* JCNotificationBannerViewIOSStyle.h */,
+				4F412D5C1A24B89700019241 /* JCNotificationBannerViewIOSStyle.m */,
+				4F412D5D1A24B89700019241 /* JCNotificationBannerWindow.h */,
+				4F412D5E1A24B89700019241 /* JCNotificationBannerWindow.m */,
+				4F412D5F1A24B89700019241 /* JCNotificationCenter.h */,
+				4F412D601A24B89700019241 /* JCNotificationCenter.m */,
+			);
+			name = JCNotificationBanner;
+			sourceTree = "<group>";
+		};
 		4F95342819FFF6E70058210D /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -329,6 +402,10 @@
 				4F4FFD681A1F5F80004EE524 /* ChatLabel.swift */,
 				4F20D37C1A23477600A1CAC5 /* HikeTableViewCell.swift */,
 				4F20D37D1A23477600A1CAC5 /* HikeTableViewCell.xib */,
+				4FD3C9CF1A23FB10003058F6 /* JourneyRequestTableViewCell.swift */,
+				4FD3C9D01A23FB10003058F6 /* JourneyRequestTableViewCell.xib */,
+				4F412D6C1A24C72C00019241 /* AcceptJourneyRequestTableViewCell.swift */,
+				4F412D6D1A24C72C00019241 /* AcceptJourneyRequestTableViewCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -497,6 +574,8 @@
 				4FF31FFB1A1F57AD005805D7 /* LeftChatTableViewCell.xib in Resources */,
 				4F1AD1721A139B490047BEE8 /* FSTextFieldTableViewCell.xib in Resources */,
 				4FD346E91A12831B006026DD /* StartEndTableViewCell.xib in Resources */,
+				4FD3C9D21A23FB10003058F6 /* JourneyRequestTableViewCell.xib in Resources */,
+				4F412D6F1A24C72C00019241 /* AcceptJourneyRequestTableViewCell.xib in Resources */,
 				4F20D3811A235B9500A1CAC5 /* OCRAStd.otf in Resources */,
 				4F1AD1821A153E620047BEE8 /* JourneyTableViewCell.xib in Resources */,
 				4F8856AE1A1118240039EA6E /* SwitchTableViewCell.xib in Resources */,
@@ -514,10 +593,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F412D671A24B89700019241 /* JCNotificationBannerViewController.m in Sources */,
+				4F412D631A24B89700019241 /* JCNotificationBannerPresenterIOS7Style.m in Sources */,
 				4F4FFDBE1A20AC63004EE524 /* FAImageView.m in Sources */,
+				4FD3C9D11A23FB10003058F6 /* JourneyRequestTableViewCell.swift in Sources */,
 				4F20D36D1A23354E00A1CAC5 /* SDWebImagePrefetcher.m in Sources */,
 				4F20D37E1A23477600A1CAC5 /* HikeTableViewCell.swift in Sources */,
 				4F20D3741A23354E00A1CAC5 /* UIView+WebCacheOperation.m in Sources */,
+				4F412D6E1A24C72C00019241 /* AcceptJourneyRequestTableViewCell.swift in Sources */,
 				4F20D3651A23354E00A1CAC5 /* MKAnnotationView+WebCache.m in Sources */,
 				4F4FFDBF1A20AC63004EE524 /* NSString+FontAwesome.m in Sources */,
 				4F4FFDC01A20AC63004EE524 /* UIFont+FontAwesome.m in Sources */,
@@ -525,6 +608,7 @@
 				4F4FFDBC1A20AB2B004EE524 /* SVProgressHUD.m in Sources */,
 				4F20D3701A23354E00A1CAC5 /* UIImage+MultiFormat.m in Sources */,
 				4F1A62561A1A90EE00826ECE /* Message.swift in Sources */,
+				4F412D641A24B89700019241 /* JCNotificationBannerPresenterIOSStyle.m in Sources */,
 				4F20D37B1A23412400A1CAC5 /* MGSwipeTableCell.m in Sources */,
 				4FA9F15A19FED9B7009D0F33 /* User.swift in Sources */,
 				4FD6D2921A0551F600199082 /* Car.swift in Sources */,
@@ -532,12 +616,16 @@
 				4F20D3661A23354E00A1CAC5 /* NSData+ImageContentType.m in Sources */,
 				4F20D36F1A23354E00A1CAC5 /* UIImage+GIF.m in Sources */,
 				4F525F371A05958B00EDD696 /* Journey.swift in Sources */,
+				4F412D611A24B89700019241 /* JCNotificationBanner.m in Sources */,
+				4F412D651A24B89700019241 /* JCNotificationBannerPresenterSmokeStyle.m in Sources */,
 				4F20D36A1A23354E00A1CAC5 /* SDWebImageDownloader.m in Sources */,
 				4F20D3681A23354E00A1CAC5 /* SDWebImageCompat.m in Sources */,
+				4F412D6B1A24B89700019241 /* JCNotificationCenter.m in Sources */,
 				4F20D37A1A23412400A1CAC5 /* MGSwipeButton.m in Sources */,
 				4F525F3D1A06A46500EDD696 /* CarsTableViewController.swift in Sources */,
 				4F20D3721A23354E00A1CAC5 /* UIImageView+HighlightedWebCache.m in Sources */,
 				4FD346E01A127A76006026DD /* StepperTableViewCell.swift in Sources */,
+				4F412D691A24B89700019241 /* JCNotificationBannerViewIOSStyle.m in Sources */,
 				4F1AD1711A139B490047BEE8 /* FSTextFieldTableViewCell.swift in Sources */,
 				4F20D3691A23354E00A1CAC5 /* SDWebImageDecoder.m in Sources */,
 				4F20D36C1A23354E00A1CAC5 /* SDWebImageManager.m in Sources */,
@@ -547,7 +635,9 @@
 				4F4E363D1A13622100934D6B /* SharedStorage.swift in Sources */,
 				4F20D36B1A23354E00A1CAC5 /* SDWebImageDownloaderOperation.m in Sources */,
 				4FD6D2961A05560B00199082 /* Network.swift in Sources */,
+				4F412D621A24B89700019241 /* JCNotificationBannerPresenter.m in Sources */,
 				4F1AD1A81A1562760047BEE8 /* HikesTableViewController.swift in Sources */,
+				4F412D661A24B89700019241 /* JCNotificationBannerView.m in Sources */,
 				4F8856AD1A1118240039EA6E /* SwitchTableViewCell.swift in Sources */,
 				4FD346E41A127CB3006026DD /* PriceTableViewCell.swift in Sources */,
 				4FC1E60819FEB751002F743B /* LoginViewController.swift in Sources */,
@@ -557,8 +647,10 @@
 				4F525F391A05A10800EDD696 /* NearbyJourneysTableViewController.swift in Sources */,
 				4F2773751A08E5BA0012B779 /* AddCarTableViewController.swift in Sources */,
 				4FF31FFA1A1F57AD005805D7 /* LeftChatTableViewCell.swift in Sources */,
+				4F412D6A1A24B89700019241 /* JCNotificationBannerWindow.m in Sources */,
 				4F20D3671A23354E00A1CAC5 /* SDImageCache.m in Sources */,
 				4F4FFDBA1A1FC3AD004EE524 /* FSProfileTableViewCell.swift in Sources */,
+				4F412D681A24B89700019241 /* JCNotificationBannerViewIOS7Style.m in Sources */,
 				4FF31FF61A1F4EC9005805D7 /* RightChatTableViewCell.swift in Sources */,
 				4F1AD1811A153E620047BEE8 /* JourneyTableViewCell.swift in Sources */,
 				4FC1E5E619FEB518002F743B /* AppDelegate.swift in Sources */,
