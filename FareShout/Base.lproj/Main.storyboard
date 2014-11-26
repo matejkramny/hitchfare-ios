@@ -250,7 +250,7 @@
                     <navigationItem key="navigationItem" id="N4x-4m-BQF"/>
                     <connections>
                         <segue destination="7wh-7X-zfG" kind="presentation" identifier="addJourney" id="idd-OF-6bD"/>
-                        <segue destination="6A2-Vh-4zX" kind="show" identifier="openCars" id="QZn-wy-0cd"/>
+                        <segue destination="8bB-pc-DAg" kind="show" identifier="openCars" id="iyo-aa-cqh"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w35-fP-mZg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -258,53 +258,37 @@
             <point key="canvasLocation" x="3313.5" y="148.5"/>
         </scene>
         <!--Cars Table View Controller-->
-        <scene sceneID="Uq1-p5-Ags">
+        <scene sceneID="HT5-bm-w2q">
             <objects>
-                <tableViewController id="6A2-Vh-4zX" customClass="CarsTableViewController" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="TY3-Zj-eLy">
+                <viewController id="8bB-pc-DAg" customClass="CarsTableViewController" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZGW-QJ-2ir"/>
+                        <viewControllerLayoutGuide type="bottom" id="T4L-cI-QNy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YkW-uJ-Xvq">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxA-oE-xYV">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="rightDetail" textLabel="BxT-62-jjO" detailTextLabel="uIM-MN-0cw" style="IBUITableViewCellStyleValue1" id="UII-io-DRr">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UII-io-DRr" id="Nfd-nm-gab">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BxT-62-jjO">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                            <variation key="heightClass=regular-widthClass=compact">
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            </variation>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uIM-MN-0cw">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                            <variation key="heightClass=regular-widthClass=compact">
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            </variation>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="6A2-Vh-4zX" id="7Gw-uP-NKJ"/>
-                            <outlet property="delegate" destination="6A2-Vh-4zX" id="N19-3V-XaM"/>
-                        </connections>
-                    </tableView>
+                        <constraints>
+                            <constraint firstItem="xxA-oE-xYV" firstAttribute="top" secondItem="YkW-uJ-Xvq" secondAttribute="top" id="8XT-bf-4C8"/>
+                            <constraint firstAttribute="trailing" secondItem="xxA-oE-xYV" secondAttribute="trailing" id="QVe-aA-Lpk"/>
+                            <constraint firstItem="xxA-oE-xYV" firstAttribute="leading" secondItem="YkW-uJ-Xvq" secondAttribute="leading" id="W4R-Ts-QOS"/>
+                            <constraint firstItem="T4L-cI-QNy" firstAttribute="top" secondItem="xxA-oE-xYV" secondAttribute="bottom" id="yKS-H3-Zb3"/>
+                        </constraints>
+                    </view>
                     <connections>
-                        <segue destination="zA3-vq-tZF" kind="show" identifier="addCar" id="veh-4V-9Zw"/>
+                        <outlet property="scrollView" destination="xxA-oE-xYV" id="pcU-Jp-9qq"/>
+                        <segue destination="zA3-vq-tZF" kind="show" identifier="addCar" id="hv6-2j-2ww"/>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mRj-Mq-BuC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rgx-x1-RFQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4614" y="-36"/>
+            <point key="canvasLocation" x="4581" y="-36"/>
         </scene>
         <!--Add Car Table View Controller-->
         <scene sceneID="XmL-6V-9Wb">
@@ -314,6 +298,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="basic" textLabel="KjM-oV-K0L" style="IBUITableViewCellStyleDefault" id="Wcd-7R-g1B">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Wcd-7R-g1B" id="orA-Wz-MwY">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KjM-oV-K0L">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="zA3-vq-tZF" id="KbW-bf-qSN"/>
                             <outlet property="delegate" destination="zA3-vq-tZF" id="H4j-hM-kll"/>
@@ -393,7 +393,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Add Hitch" id="E1k-pn-Zl2"/>
                     <connections>
-                        <segue destination="6A2-Vh-4zX" kind="show" identifier="openCars" id="xrD-Vx-1Ty"/>
+                        <segue destination="8bB-pc-DAg" kind="show" identifier="openCars" id="wWa-xd-VQh"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xys-qB-ns7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -727,9 +727,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="SOi-a8-qTY"/>
         <segue reference="Eoa-mH-lsb"/>
+        <segue reference="SOi-a8-qTY"/>
         <segue reference="idd-OF-6bD"/>
-        <segue reference="QZn-wy-0cd"/>
+        <segue reference="wWa-xd-VQh"/>
     </inferredMetricsTieBreakers>
 </document>

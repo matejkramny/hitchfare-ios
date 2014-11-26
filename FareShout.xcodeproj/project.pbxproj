@@ -51,6 +51,12 @@
 		4F412D6B1A24B89700019241 /* JCNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F412D601A24B89700019241 /* JCNotificationCenter.m */; };
 		4F412D6E1A24C72C00019241 /* AcceptJourneyRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F412D6C1A24C72C00019241 /* AcceptJourneyRequestTableViewCell.swift */; };
 		4F412D6F1A24C72C00019241 /* AcceptJourneyRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F412D6D1A24C72C00019241 /* AcceptJourneyRequestTableViewCell.xib */; };
+		4F412DA41A25266200019241 /* CarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F412DA21A25266200019241 /* CarViewController.swift */; };
+		4F412DA51A25266200019241 /* CarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F412DA31A25266200019241 /* CarViewController.xib */; };
+		4F412DA81A254E2800019241 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F412DA61A254E2800019241 /* ImageTableViewCell.swift */; };
+		4F412DA91A254E2800019241 /* ImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F412DA71A254E2800019241 /* ImageTableViewCell.xib */; };
+		4F412DAC1A2550A000019241 /* FSTextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F412DAA1A2550A000019241 /* FSTextViewTableViewCell.swift */; };
+		4F412DAD1A2550A000019241 /* FSTextViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F412DAB1A2550A000019241 /* FSTextViewTableViewCell.xib */; };
 		4F4E363D1A13622100934D6B /* SharedStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E363C1A13622100934D6B /* SharedStorage.swift */; };
 		4F4FFD691A1F5F80004EE524 /* ChatLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FFD681A1F5F80004EE524 /* ChatLabel.swift */; };
 		4F4FFDB31A1FBC31004EE524 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F4FFDB21A1FBC31004EE524 /* ImageIO.framework */; };
@@ -178,6 +184,12 @@
 		4F412D601A24B89700019241 /* JCNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCNotificationCenter.m; sourceTree = "<group>"; };
 		4F412D6C1A24C72C00019241 /* AcceptJourneyRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AcceptJourneyRequestTableViewCell.swift; sourceTree = "<group>"; };
 		4F412D6D1A24C72C00019241 /* AcceptJourneyRequestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AcceptJourneyRequestTableViewCell.xib; sourceTree = "<group>"; };
+		4F412DA21A25266200019241 /* CarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarViewController.swift; sourceTree = "<group>"; };
+		4F412DA31A25266200019241 /* CarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CarViewController.xib; sourceTree = "<group>"; };
+		4F412DA61A254E2800019241 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
+		4F412DA71A254E2800019241 /* ImageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageTableViewCell.xib; sourceTree = "<group>"; };
+		4F412DAA1A2550A000019241 /* FSTextViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSTextViewTableViewCell.swift; sourceTree = "<group>"; };
+		4F412DAB1A2550A000019241 /* FSTextViewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FSTextViewTableViewCell.xib; sourceTree = "<group>"; };
 		4F4E363C1A13622100934D6B /* SharedStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedStorage.swift; sourceTree = "<group>"; };
 		4F4FFD681A1F5F80004EE524 /* ChatLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLabel.swift; sourceTree = "<group>"; };
 		4F4FFDB21A1FBC31004EE524 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
@@ -293,6 +305,8 @@
 			children = (
 				4F525F3C1A06A46500EDD696 /* CarsTableViewController.swift */,
 				4F2773741A08E5BA0012B779 /* AddCarTableViewController.swift */,
+				4F412DA21A25266200019241 /* CarViewController.swift */,
+				4F412DA31A25266200019241 /* CarViewController.xib */,
 			);
 			name = Cars;
 			sourceTree = "<group>";
@@ -385,6 +399,8 @@
 				4F4FFDB91A1FC3AD004EE524 /* FSProfileTableViewCell.xib */,
 				4F1AD16F1A139B490047BEE8 /* FSTextFieldTableViewCell.swift */,
 				4F1AD1701A139B490047BEE8 /* FSTextFieldTableViewCell.xib */,
+				4F412DAA1A2550A000019241 /* FSTextViewTableViewCell.swift */,
+				4F412DAB1A2550A000019241 /* FSTextViewTableViewCell.xib */,
 				4F8856AB1A1118240039EA6E /* SwitchTableViewCell.swift */,
 				4F8856AC1A1118240039EA6E /* SwitchTableViewCell.xib */,
 				4FD346DE1A127A76006026DD /* StepperTableViewCell.swift */,
@@ -406,6 +422,8 @@
 				4FD3C9D01A23FB10003058F6 /* JourneyRequestTableViewCell.xib */,
 				4F412D6C1A24C72C00019241 /* AcceptJourneyRequestTableViewCell.swift */,
 				4F412D6D1A24C72C00019241 /* AcceptJourneyRequestTableViewCell.xib */,
+				4F412DA61A254E2800019241 /* ImageTableViewCell.swift */,
+				4F412DA71A254E2800019241 /* ImageTableViewCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -567,11 +585,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FC1E5EB19FEB518002F743B /* Main.storyboard in Resources */,
+				4F412DA51A25266200019241 /* CarViewController.xib in Resources */,
 				4F1AD19E1A155C460047BEE8 /* FontAwesome.ttf in Resources */,
 				4FD346E11A127A76006026DD /* StepperTableViewCell.xib in Resources */,
+				4F412DA91A254E2800019241 /* ImageTableViewCell.xib in Resources */,
 				4FF31FF71A1F4EC9005805D7 /* RightChatTableViewCell.xib in Resources */,
 				4F20D37F1A23477600A1CAC5 /* HikeTableViewCell.xib in Resources */,
 				4FF31FFB1A1F57AD005805D7 /* LeftChatTableViewCell.xib in Resources */,
+				4F412DAD1A2550A000019241 /* FSTextViewTableViewCell.xib in Resources */,
 				4F1AD1721A139B490047BEE8 /* FSTextFieldTableViewCell.xib in Resources */,
 				4FD346E91A12831B006026DD /* StartEndTableViewCell.xib in Resources */,
 				4FD3C9D21A23FB10003058F6 /* JourneyRequestTableViewCell.xib in Resources */,
@@ -597,9 +618,11 @@
 				4F412D631A24B89700019241 /* JCNotificationBannerPresenterIOS7Style.m in Sources */,
 				4F4FFDBE1A20AC63004EE524 /* FAImageView.m in Sources */,
 				4FD3C9D11A23FB10003058F6 /* JourneyRequestTableViewCell.swift in Sources */,
+				4F412DAC1A2550A000019241 /* FSTextViewTableViewCell.swift in Sources */,
 				4F20D36D1A23354E00A1CAC5 /* SDWebImagePrefetcher.m in Sources */,
 				4F20D37E1A23477600A1CAC5 /* HikeTableViewCell.swift in Sources */,
 				4F20D3741A23354E00A1CAC5 /* UIView+WebCacheOperation.m in Sources */,
+				4F412DA41A25266200019241 /* CarViewController.swift in Sources */,
 				4F412D6E1A24C72C00019241 /* AcceptJourneyRequestTableViewCell.swift in Sources */,
 				4F20D3651A23354E00A1CAC5 /* MKAnnotationView+WebCache.m in Sources */,
 				4F4FFDBF1A20AC63004EE524 /* NSString+FontAwesome.m in Sources */,
@@ -639,6 +662,7 @@
 				4F1AD1A81A1562760047BEE8 /* HikesTableViewController.swift in Sources */,
 				4F412D661A24B89700019241 /* JCNotificationBannerView.m in Sources */,
 				4F8856AD1A1118240039EA6E /* SwitchTableViewCell.swift in Sources */,
+				4F412DA81A254E2800019241 /* ImageTableViewCell.swift in Sources */,
 				4FD346E41A127CB3006026DD /* PriceTableViewCell.swift in Sources */,
 				4FC1E60819FEB751002F743B /* LoginViewController.swift in Sources */,
 				4F1A62541A1A90B300826ECE /* MessagesTableViewController.swift in Sources */,

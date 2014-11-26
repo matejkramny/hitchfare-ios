@@ -5,20 +5,21 @@ protocol CarSelectionProtocol {
 	func didSelectCar (car: Car)
 }
 
-class CarsTableViewController: UITableViewController {
+class CarsTableViewController: UIViewController {
+	
+	@IBOutlet weak var scrollView: UIScrollView!
 	
 	var selectCarMode: Bool = false
 	var selectedCar: Car? = nil
 	var delegate: CarSelectionProtocol? = nil
+	
+	var carViews: [CarViewController] = []
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		self.navigationItem.title = "Cars"
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addCar:")
-		
-		self.refreshControl = UIRefreshControl()
-		self.refreshControl!.addTarget(self, action: "refreshCars:", forControlEvents: UIControlEvents.ValueChanged)
 	}
 	
 	func addCar (sender: AnyObject) {
@@ -33,41 +34,34 @@ class CarsTableViewController: UITableViewController {
 	
 	func refreshCars (sender: AnyObject?) {
 		storage.getCars({ (err: NSError?) -> Void in
-			self.refreshControl!.endRefreshing()
-			self.tableView.reloadData()
+			self.createCarVCs()
 		})
 	}
 	
-	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-		return 1
-	}
-	
-	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return storage.cars.count
-	}
-	
-	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("rightDetail", forIndexPath: indexPath) as UITableViewCell
-		
-		var car = storage.cars[indexPath.row]
-		cell.textLabel!.text = car.name
-		cell.detailTextLabel!.text = String(car.seats) + " Seat"
-		if car.seats > 1 {
-			cell.detailTextLabel!.text = cell.detailTextLabel!.text! + "s"
+	func createCarVCs () {
+		for vc in self.carViews {
+			vc.view.removeFromSuperview()
 		}
 		
-		if selectCarMode == true {
-			cell.accessoryType = UITableViewCellAccessoryType.None
+		for (i, car) in enumerate(storage.cars) {
 			
-			if car == selectedCar {
-				cell.accessoryType = UITableViewCellAccessoryType.Checkmark
-			}
+			var view: CarViewController = UINib(nibName: "CarViewController", bundle: NSBundle.mainBundle()).instantiateWithOwner(nil, options: nil)[0] as CarViewController
+			
+			view.carImageView.sd_setImageWithURL(NSURL(string: "http://www.autotrader.co.uk/articleresources/wp-content/uploads/2014/03/AudiTT_380.jpg"))
+			view.carNameLabel.text = car.name
+			view.carDescriptionLabel.text = car.carDescription
+			
+			view.view.frame = CGRectMake(view.view.frame.size.width * CGFloat(i), view.view.frame.origin.y, view.view.frame.size.width, view.view.frame.size.height)
+			
+			self.scrollView.addSubview(view.view)
+			
 		}
 		
-		return cell
+		self.scrollView.contentSize = CGSizeMake(self.view.frame.width * CGFloat(storage.cars.count), self.scrollView.contentSize.height)
+		
 	}
 	
-	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		if selectCarMode == true {
 			self.selectedCar = storage.cars[indexPath.row]
 			
