@@ -32,14 +32,20 @@ class JourneyTableViewCell: MGSwipeTableCell {
 		} else {
 			self.destinationLabel.text = "Destination: N/A"
 		}
-		
-		var date = journey.startDateHuman
+        
+		var date = journey.startDate
 		if date != nil {
-			self.dateLabel.text = "Date: " + date!
+            var dateFormatter = NSDateFormatter()
+            var timeZone = NSTimeZone.localTimeZone()                       // Local TimeZone
+            dateFormatter.timeZone = timeZone
+            dateFormatter.dateFormat = "dd/MM/YYYY"
+            var changedDate = dateFormatter.stringFromDate(date!)
+            
+			self.dateLabel.text = "Date: " + changedDate
 		} else {
 			self.dateLabel.text = "Date: N/A"
 		}
-		self.priceLabel.text = NSString(format: "£%d", Int(journey.price))
+		self.priceLabel.text = NSString(format: "£%.2f", journey.price)
 		self.availabilityLabel.text = NSString(format: "%d", journey.availableSeats!)
 	}
 	

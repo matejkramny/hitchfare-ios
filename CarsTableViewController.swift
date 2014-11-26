@@ -50,7 +50,7 @@ class CarsTableViewController: UITableViewController {
 		let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("rightDetail", forIndexPath: indexPath) as UITableViewCell
 		
 		var car = storage.cars[indexPath.row]
-		cell.textLabel!.text = car.name
+		cell.textLabel.text = car.name
 		cell.detailTextLabel!.text = String(car.seats) + " Seat"
 		if car.seats > 1 {
 			cell.detailTextLabel!.text = cell.detailTextLabel!.text! + "s"
