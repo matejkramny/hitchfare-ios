@@ -97,6 +97,7 @@
 		4FF31FF71A1F4EC9005805D7 /* RightChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FF31FF51A1F4EC9005805D7 /* RightChatTableViewCell.xib */; };
 		4FF31FFA1A1F57AD005805D7 /* LeftChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF31FF81A1F57AD005805D7 /* LeftChatTableViewCell.swift */; };
 		4FF31FFB1A1F57AD005805D7 /* LeftChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FF31FF91A1F57AD005805D7 /* LeftChatTableViewCell.xib */; };
+		DB57FE551A26F2C100D99648 /* Common.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB57FE541A26F2C100D99648 /* Common.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -233,6 +234,7 @@
 		4FF31FF51A1F4EC9005805D7 /* RightChatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RightChatTableViewCell.xib; sourceTree = "<group>"; };
 		4FF31FF81A1F57AD005805D7 /* LeftChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftChatTableViewCell.swift; sourceTree = "<group>"; };
 		4FF31FF91A1F57AD005805D7 /* LeftChatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftChatTableViewCell.xib; sourceTree = "<group>"; };
+		DB57FE541A26F2C100D99648 /* Common.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Common.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -443,6 +445,7 @@
 		4FC1E5D719FEB518002F743B = {
 			isa = PBXGroup;
 			children = (
+				DB57FE4A1A26E29200D99648 /* Resources */,
 				4F1AD1731A14F62D0047BEE8 /* Deps */,
 				4FA9F15819FED8CA009D0F33 /* Models */,
 				4FC1E60519FEB6E8002F743B /* Scenes */,
@@ -526,6 +529,22 @@
 			name = Login;
 			sourceTree = "<group>";
 		};
+		DB57FE4A1A26E29200D99648 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DB57FE4B1A26E2E900D99648 /* Common */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		DB57FE4B1A26E2E900D99648 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				DB57FE541A26F2C100D99648 /* Common.xcassets */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -588,6 +607,7 @@
 				4F412DA51A25266200019241 /* CarViewController.xib in Resources */,
 				4F1AD19E1A155C460047BEE8 /* FontAwesome.ttf in Resources */,
 				4FD346E11A127A76006026DD /* StepperTableViewCell.xib in Resources */,
+				DB57FE551A26F2C100D99648 /* Common.xcassets in Resources */,
 				4F412DA91A254E2800019241 /* ImageTableViewCell.xib in Resources */,
 				4FF31FF71A1F4EC9005805D7 /* RightChatTableViewCell.xib in Resources */,
 				4F20D37F1A23477600A1CAC5 /* HikeTableViewCell.xib in Resources */,

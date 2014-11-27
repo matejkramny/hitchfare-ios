@@ -47,7 +47,7 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 		car.seats = seats!
 		
 		SVProgressHUD.showProgress(1.0, status: "Saving...", maskType: SVProgressHUDMaskType.Black)
-		car.update(withImage: chosenImage, callback: { (err: NSError?, data: AnyObject?) -> Void in
+		car.update(chosenImage, callback: { (err: NSError?, data: AnyObject?) -> Void in
 			SVProgressHUD.dismiss()
 			
 			self.navigationController!.popViewControllerAnimated(true)
@@ -77,9 +77,9 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 			if indexPath.row == 0 {
 				var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("basic", forIndexPath: indexPath) as UITableViewCell
 				
-				cell.textLabel!.text = "Select Picture"
+				cell.textLabel.text = "Select Picture"
 				if chosenImage != nil {
-					cell.textLabel!.text = "Remove Picture"
+					cell.textLabel.text = "Remove Picture"
 				}
 				
 				return cell

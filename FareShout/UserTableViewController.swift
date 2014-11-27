@@ -121,6 +121,8 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		}
 	}
 	
+    //MARK: - TableView Delegate Method
+    
 	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 		return 4
 	}
@@ -248,6 +250,31 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		
 		return (tableView.dequeueReusableCellWithIdentifier("rightDetail", forIndexPath: indexPath) as? UITableViewCell)!
 	}
+    
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var sectionTitle : String! = self.tableView(tableView, titleForHeaderInSection: section)
+        if sectionTitle == nil {
+            return nil
+        }
+        
+        var rect : CGRect = CGRectZero
+        rect.size.width = tableView.frame.size.width;
+        rect.size.height = self.tableView(tableView, heightForHeaderInSection: section)
+        var view : UIView! = UIView(frame: rect)
+        view.backgroundColor = UIColor(red: 228/255.0, green: 30/255.0, blue: 38/255.0, alpha: 1)
+        
+        var label : UILabel! = UILabel(frame: CGRectMake(12, 0, tableView.bounds.size.width, tableView.sectionHeaderHeight))
+        label.text = sectionTitle
+        label.shadowOffset = CGSizeMake(0, 1)
+        label.shadowColor = UIColor.grayColor()
+        label.backgroundColor = UIColor.clearColor()
+        label.textColor = UIColor.whiteColor()
+        label.font = UIFont.boldSystemFontOfSize(16)
+        
+        view.addSubview(label)
+        
+        return view
+    }
 	
 	override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		if section == 3 {
@@ -262,6 +289,25 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		
 		return nil
 	}
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        var headerHeight : CGFloat = tableView.sectionHeaderHeight
+        if section == 0 {
+            // Profile Section is not header
+            return 0
+        }
+        if section == 3 {
+            return headerHeight
+        }
+        if section == 2 {
+            return self.myPendingRequests.count > 0 ? headerHeight : 0
+        }
+        if section == 1 {
+            return self.pendingRequests.count > 0 ? headerHeight : 0
+        }
+        
+        return 0
+    }
 	
 	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 		if indexPath.section == 0 {

@@ -39,10 +39,29 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		var attributes: [NSObject: AnyObject] = [
 			NSFontAttributeName: UIFont(name: "FontAwesome", size: 20)!
 		]
-		self.rightButton.setTitleTextAttributes(attributes, forState: UIControlState.Normal)
-		self.leftButton.setTitleTextAttributes(attributes, forState: UIControlState.Normal)
-		self.rightButton.title = NSString(format: "%@", NSString.fontAwesomeIconStringForEnum(FAIcon.FAThumbsOUp))
-		self.leftButton.title = NSString.fontAwesomeIconStringForEnum(FAIcon.FACog)
+//		self.rightButton.setTitleTextAttributes(attributes, forState: UIControlState.Normal)
+//		self.leftButton.setTitleTextAttributes(attributes, forState: UIControlState.Normal)
+//		self.rightButton.title = NSString(format: "%@", NSString.fontAwesomeIconStringForEnum(FAIcon.FAThumbsOUp))
+//		self.leftButton.title = NSString.fontAwesomeIconStringForEnum(FAIcon.FACog)
+
+        // Right Custom Button
+        var rightImage : UIImage! = UIImage(named: "HikingButton")
+        var rightImageView : UIImageView! = UIImageView(image: rightImage)
+        var customRightButton : UIButton! = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        customRightButton.frame = CGRectMake(0, 0, rightImage.size.width, rightImage.size.height)
+        customRightButton.setImage(rightImage, forState: UIControlState.Normal)
+        customRightButton.addTarget(self, action: "didPressHike:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.rightButton.customView = customRightButton
+        
+        // Left Custom Button
+        var leftImage : UIImage! = UIImage(named: "SettingButton")
+        var leftImageView : UIImageView! = UIImageView(image: leftImage)
+        var customLeftButton : UIButton! = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+        customLeftButton.frame = CGRectMake(0, 0, leftImage.size.width, leftImage.size.height)
+        customLeftButton.setImage(leftImage, forState: UIControlState.Normal)
+        // # This Method(Function) is not yet When Setting Button Clicked. (need setting later)
+//        customLeftButton.addTarget(self, action: <#Selector#>, forControlEvents: <#UIControlEvents#>)
+        self.leftButton.customView = customLeftButton
 		
 		//self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
 		//self.navigationBar.shadowImage = UIImage()
