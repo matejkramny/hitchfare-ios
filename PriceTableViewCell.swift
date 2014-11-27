@@ -31,7 +31,7 @@ class PriceTableViewCell: UITableViewCell {
 	}
 	
 	func updatePrice () {
-		self.field.text = NSString(format: "£%d", Int(self.slider.value))
+		self.field.text = NSString(format: "£%.2f", self.slider.value)
 	}
 	
 	override init(style: UITableViewCellStyle, reuseIdentifier: String?) {

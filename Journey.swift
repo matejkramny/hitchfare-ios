@@ -44,9 +44,19 @@ class Journey {
 		
 		var start = _response["start"] as [String: AnyObject]
 		var startDate = start["date"] as? Double
-		if startDate != nil {
-			self.startDate = NSDate(timeIntervalSince1970: startDate!)
+        
+        // StartDate is not Double Type.  ->  Server Time     exam) 2014-11-26T10:21:09.064Z
+        // Start Date Parsing Fixed. (Korea Develope Team Added.)
+        var startStr = start["date"] as? String
+		if startStr != nil {
+            var dateFormatter = NSDateFormatter()
+            var timeZone = NSTimeZone(name: "UTC")              // Server TimeZone
+            dateFormatter.timeZone = timeZone
+            dateFormatter.dateFormat = "YYYY-MM-dd\'T\'HH:mm:ss.SSS\'Z\'"
+            
+			self.startDate = dateFormatter.dateFromString(startStr!)
 		}
+        ////////////////////////////////////////////////////////////////////////////////////
 		
 		self.startDateHuman = start["human"] as? String
 		self.startLocation = start["location"] as? String
@@ -64,7 +74,7 @@ class Journey {
 		self.endLat = end["lat"] as? Double
 		self.endLng = end["lng"] as? Double
 		
-		var price = end["price"] as? Float
+		var price = _response["price"] as? Float
 		if price != nil {
 			self.price = price!
 		}
