@@ -81,9 +81,9 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 			if indexPath.row == 0 {
 				var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("basic", forIndexPath: indexPath) as UITableViewCell
 				
-				cell.textLabel.text = "Select Picture"
+				cell.textLabel?.text = "Select Picture"
 				if chosenImage != nil {
-					cell.textLabel.text = "Remove Picture"
+					cell.textLabel?.text = "Remove Picture"
 				}
 				
 				return cell

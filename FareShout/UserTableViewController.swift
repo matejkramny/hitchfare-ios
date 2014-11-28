@@ -2,6 +2,10 @@
 import UIKit
 
 class UserTableViewController: UITableViewController, FSProfileTableViewCellDelegate, PageRootDelegate, MGSwipeTableCellDelegate, JourneyRequestDelegate, AcceptJourneyRequestDelegate {
+    
+    // Section title color constant variables.
+    let kDefaultSectionTitleColor : UIColor! = UIColor(red: 103/255.0, green: 0/255.0, blue: 10/255.0, alpha: 1)
+    let kPastSectionTitleColor : UIColor! = UIColor.grayColor()
 	
 	var journeys: [Journey] = []
 	var pastJourneys: [Journey] = []
@@ -31,6 +35,12 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		self.tableView.registerNib(UINib(nibName: "FSProfileTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "profileCell")
 		self.tableView.registerNib(UINib(nibName: "JourneyRequestTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "journeyRequest")
 		self.tableView.registerNib(UINib(nibName: "AcceptJourneyRequestTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "acceptJourneyRequest")
+        
+        var image : UIImage! = UIImage(named: "BackGround")
+        var imageView : UIImageView! = UIImageView(image: image)
+        imageView.frame = UIScreen.mainScreen().bounds
+        self.tableView.backgroundView = imageView
+        self.tableView.separatorColor = UIColor(red: 145/255.0, green: 101/255.0, blue: 105/255.0, alpha: 1)
 		
 		if shownUser == nil {
 			shownUser = currentUser!
@@ -74,6 +84,18 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		
 		self.didAppear = false
 	}
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if self.tableView.respondsToSelector(Selector("setSeparatorInset:")) {
+            self.tableView.separatorInset = UIEdgeInsetsZero
+        }
+        
+        if self.tableView.respondsToSelector(Selector("setLayoutMargins:")) {
+            self.tableView.layoutMargins = UIEdgeInsetsZero
+        }
+    }
 	
 	func presentHike () {
 		self.performSegueWithIdentifier("addJourney", sender: nil)
@@ -289,7 +311,12 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
         rect.size.width = tableView.frame.size.width;
         rect.size.height = self.tableView(tableView, heightForHeaderInSection: section)
         var view : UIView! = UIView(frame: rect)
-        view.backgroundColor = UIColor(red: 228/255.0, green: 30/255.0, blue: 38/255.0, alpha: 1)
+        // If past journeys, section title color set gray tone color.
+        if section == 4 {
+            view.backgroundColor = kPastSectionTitleColor
+        } else {
+            view.backgroundColor = kDefaultSectionTitleColor
+        }
         
         var label : UILabel! = UILabel(frame: CGRectMake(12, 0, tableView.bounds.size.width, tableView.sectionHeaderHeight))
         label.text = sectionTitle
@@ -327,7 +354,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
             // Profile Section is not header
             return 0
         }
-        if section == 3 {
+        if section == 3 || section == 4 {
             return headerHeight
         }
         if section == 2 {
@@ -349,6 +376,15 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			return 126.0
 		}
 	}
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if cell.respondsToSelector(Selector("setSeparatorInset:")) {
+            cell.separatorInset = UIEdgeInsetsZero
+        }
+        if cell.respondsToSelector(Selector("setLayoutMargins:")) {
+            cell.layoutMargins = UIEdgeInsetsZero
+        }
+    }
 	
 	func cellIDForIndexPath(indexPath: NSIndexPath) -> NSString {
 		switch indexPath.section {

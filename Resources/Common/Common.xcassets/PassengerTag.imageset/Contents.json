@@ -7,11 +7,11 @@
     {
       "idiom" : "iphone",
       "scale" : "2x",
-      "filename" : "pa@2x.png"
+      "filename" : "passenger.png"
     },
     {
       "idiom" : "iphone",
-      "filename" : "pa@R4.png",
+      "filename" : "passenger-1.png",
       "subtype" : "retina4",
       "scale" : "2x"
     },
