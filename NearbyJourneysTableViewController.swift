@@ -16,6 +16,12 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
 		self.refreshControl!.addTarget(self, action: "refreshData:", forControlEvents: UIControlEvents.ValueChanged)
 		
 		self.tableView.registerNib(UINib(nibName: "JourneyTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Journey")
+        
+        var image : UIImage! = UIImage(named: "BackGround")
+        var imageView : UIImageView! = UIImageView(image: image)
+        imageView.frame = UIScreen.mainScreen().bounds
+        self.tableView.backgroundView = imageView
+        self.tableView.separatorColor = UIColor(red: 145/255.0, green: 101/255.0, blue: 105/255.0, alpha: 1)
 		
 		self.refreshData(nil)
 	}
@@ -47,6 +53,18 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
 		
 		self.didAppear = false
 	}
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if self.tableView.respondsToSelector(Selector("setSeparatorInset:")) {
+            self.tableView.separatorInset = UIEdgeInsetsZero
+        }
+        
+        if self.tableView.respondsToSelector(Selector("setLayoutMargins:")) {
+            self.tableView.layoutMargins = UIEdgeInsetsZero
+        }
+    }
 	
 	func presentHike () {
 		self.performSegueWithIdentifier("addJourney", sender: nil)
@@ -93,6 +111,15 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
 			self.performSegueWithIdentifier("openMessages", sender: list)
 		})
 	}
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if cell.respondsToSelector(Selector("setSeparatorInset:")) {
+            cell.separatorInset = UIEdgeInsetsZero
+        }
+        if cell.respondsToSelector(Selector("setLayoutMargins:")) {
+            cell.layoutMargins = UIEdgeInsetsZero
+        }
+    }
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		SVProgressHUD.dismiss()

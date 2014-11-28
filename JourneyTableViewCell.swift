@@ -11,7 +11,8 @@ class JourneyTableViewCell: MGSwipeTableCell {
 	@IBOutlet weak var priceLabel: UILabel!
 	@IBOutlet weak var availabilityLabel: UILabel!
     @IBOutlet weak var driverImageView: UIImageView!
-	
+    @IBOutlet weak var bgView: UIView!
+    
 	func style () {
 		self.availabilityLabel.layer.cornerRadius = 13.5
 		self.availabilityLabel.layer.masksToBounds = true
@@ -19,6 +20,15 @@ class JourneyTableViewCell: MGSwipeTableCell {
 	
 	func populate(journey: Journey) {
 		self.journeyNameLabel.text = journey.ownerObj!.first_name! + " " + journey.ownerObj!.last_name!.substringToIndex(1)
+        if journey.isDriver {
+            let driverColor : UIColor! = UIColor(red: 228/255.0, green: 30/255.0, blue: 38/255.0, alpha: 1)
+            self.journeyNameLabel.textColor = driverColor
+            self.driverImageView.image = UIImage(named: "DriverTag")
+            self.bgView.backgroundColor = driverColor.colorWithAlphaComponent(0.1)
+        } else {
+            self.journeyNameLabel.textColor = UIColor(red: 96/255.0, green: 99/255.0, blue: 102/255.0, alpha: 1)
+            self.driverImageView.image = UIImage(named: "PassengerTag")
+        }
 		
         if journey.owner! == currentUser!._id! {
             let driverColor : UIColor! = UIColor(red: 228/255.0, green: 30/255.0, blue: 38/255.0, alpha: 1)
