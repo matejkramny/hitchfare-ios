@@ -23,6 +23,12 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 		self.tableView.registerNib(UINib(nibName: "StepperTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Stepper")
 		self.tableView.registerNib(UINib(nibName: "PriceTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Price")
 		self.tableView.registerNib(UINib(nibName: "StartEndTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "StartEnd")
+		
+		var image : UIImage! = UIImage(named: "BackGround")
+		var imageView : UIImageView! = UIImageView(image: image)
+		imageView.frame = UIScreen.mainScreen().bounds
+		self.tableView.backgroundView = imageView
+		self.tableView.separatorColor = UIColor(red: 145/255.0, green: 101/255.0, blue: 105/255.0, alpha: 1)
 	}
 	
 	override func preferredStatusBarStyle() -> UIStatusBarStyle {

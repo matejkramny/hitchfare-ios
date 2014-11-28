@@ -30,6 +30,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		
 		self.refreshControl = UIRefreshControl()
 		self.refreshControl!.addTarget(self, action: "refreshData:", forControlEvents: UIControlEvents.ValueChanged)
+		self.refreshControl!.tintColor = UIColor.whiteColor()
 		
 		self.tableView.registerNib(UINib(nibName: "JourneyTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Journey")
 		self.tableView.registerNib(UINib(nibName: "FSProfileTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "profileCell")
@@ -41,6 +42,8 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
         imageView.frame = UIScreen.mainScreen().bounds
         self.tableView.backgroundView = imageView
         self.tableView.separatorColor = UIColor(red: 145/255.0, green: 101/255.0, blue: 105/255.0, alpha: 1)
+		// makes uirefreshcontrol visible..
+		self.tableView.backgroundView!.layer.zPosition -= 1;
 		
 		if shownUser == nil {
 			shownUser = currentUser!
@@ -416,9 +419,9 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 					SVProgressHUD.showSuccessWithStatus("Sent request to join Journey")
 				}
 			})
-		} else if indexPath.section == 3 {
+		} else if indexPath.section >= 3 {
 			// Open passengers list
-			self.performSegueWithIdentifier("openPassengers", sender: journeys[indexPath.row])
+			self.performSegueWithIdentifier("openPassengers", sender: indexPath.section == 3 ? journeys[indexPath.row] : pastJourneys[indexPath.row])
 			return
 		}
 		
