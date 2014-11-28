@@ -1,62 +1,47 @@
 
 import UIKit
 
-enum StartEndTableViewCellField: Int {
-	case None = 0
-	case Start = 1
-	case End = 2
-}
-
 protocol StartEndTableViewCellProtocol {
 	func StartEndTableViewCellAnimateCellHeight(cell: StartEndTableViewCell)
-	func StartEndTableViewCellDateChanged(cell: StartEndTableViewCell, startDate: NSDate)
-	func StartEndTableViewCellDateChanged(cell: StartEndTableViewCell, endDate: NSDate)
+	func StartEndTableViewCellDateChanged(cell: StartEndTableViewCell, toDate: NSDate)
 }
 
 class StartEndTableViewCell: UITableViewCell, UITextFieldDelegate {
 
 	@IBOutlet weak var startDateField: UITextField!
-	@IBOutlet weak var endDateField: UITextField!
 	
-	var preferredHeight: CGFloat = 88.0
+	var preferredHeight: CGFloat = 44.0
 	
 	var datePicker: UIDatePicker?
 	var showsDatePicker: Bool = false
-	var currentDatePicker: StartEndTableViewCellField = StartEndTableViewCellField.None
 	
 	var delegate: StartEndTableViewCellProtocol?
 	
 	func initialize() {
 		startDateField.delegate = self
-		endDateField.delegate = self
-		
-		startDateField.placeholder = "Start Date"
-		endDateField.placeholder = "End Date"
+		startDateField.placeholder = "Meeting Time"
 	}
 	
 	func getDateFormatter() -> NSDateFormatter {
 		let dateFormatter = NSDateFormatter()
-		dateFormatter.dateFormat = "dd/MM/yyyy"
+		dateFormatter.dateFormat = "dd/MM/yy hh:mm a"
 		
 		return dateFormatter
 	}
 	
-	func showDatePicker (field: StartEndTableViewCellField) {
+	func showDatePicker () {
 		showsDatePicker = true
-		preferredHeight = 304.0
+		preferredHeight = 260.0
 		
 		if datePicker == nil {
 			datePicker = UIDatePicker(frame: CGRectMake(0, startDateField.frame.origin.y + startDateField.frame.size.height, self.frame.width, 216.0))
-			datePicker!.datePickerMode = UIDatePickerMode.Date
+			datePicker!.datePickerMode = UIDatePickerMode.DateAndTime
+			datePicker!.minimumDate = NSDate()
 			datePicker!.addTarget(self, action: "datePickerValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
 		}
 		
 		var dateString: NSString = ""
-		if field == StartEndTableViewCellField.Start {
-			dateString = startDateField.text
-		} else if field == StartEndTableViewCellField.End {
-			dateString = endDateField.text
-		}
+		dateString = startDateField.text
 		
 		if dateString.length > 0 {
 			var dateFormatter = getDateFormatter()
@@ -70,32 +55,22 @@ class StartEndTableViewCell: UITableViewCell, UITextFieldDelegate {
 			datePicker!.date = NSDate()
 		}
 		
-		currentDatePicker = field
 		self.addSubview(datePicker!)
 		self.setNeedsDisplay()
 	}
 	
 	func hideDatePicker () {
 		showsDatePicker = false
-		preferredHeight = 88.0
+		preferredHeight = 44.0
 		
 		datePicker?.removeFromSuperview()
-		currentDatePicker = StartEndTableViewCellField.None
 	}
 	
 	func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-		if textField == startDateField {
-			if showsDatePicker && currentDatePicker == StartEndTableViewCellField.Start {
-				self.hideDatePicker()
-			} else {
-				self.showDatePicker(StartEndTableViewCellField.Start)
-			}
-		} else if textField == endDateField {
-			if showsDatePicker && currentDatePicker == StartEndTableViewCellField.End {
-				self.hideDatePicker()
-			} else {
-				self.showDatePicker(StartEndTableViewCellField.End)
-			}
+		if showsDatePicker {
+			self.hideDatePicker()
+		} else {
+			self.showDatePicker()
 		}
 		
 		delegate!.StartEndTableViewCellAnimateCellHeight(self)
@@ -106,14 +81,9 @@ class StartEndTableViewCell: UITableViewCell, UITextFieldDelegate {
 	func datePickerValueChanged (sender: AnyObject?) {
 		var dateFormatter = self.getDateFormatter()
 		
-		if currentDatePicker == StartEndTableViewCellField.Start {
-			// Needs some formatting
-			startDateField.text = dateFormatter.stringFromDate(datePicker!.date)
-			self.delegate!.StartEndTableViewCellDateChanged(self, startDate: datePicker!.date)
-		} else if currentDatePicker == StartEndTableViewCellField.End {
-			endDateField.text = dateFormatter.stringFromDate(datePicker!.date)
-			self.delegate!.StartEndTableViewCellDateChanged(self, endDate: datePicker!.date)
-		}
+		// Needs some formatting
+		startDateField.text = dateFormatter.stringFromDate(datePicker!.date)
+		self.delegate!.StartEndTableViewCellDateChanged(self, toDate: datePicker!.date)
 	}
 	
 	override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -128,7 +98,6 @@ class StartEndTableViewCell: UITableViewCell, UITextFieldDelegate {
 		
 		datePicker = aDecoder.decodeObjectOfClass(UIDatePicker.self, forKey: "datePicker") as? UIDatePicker
 		showsDatePicker = aDecoder.decodeBoolForKey("showsDatePicker")
-		currentDatePicker = StartEndTableViewCellField(rawValue: aDecoder.decodeIntegerForKey("currentDatePicker"))!
 		
 		super.init(coder: aDecoder)
 	}
@@ -137,7 +106,6 @@ class StartEndTableViewCell: UITableViewCell, UITextFieldDelegate {
 		aCoder.encodeDouble(Double(preferredHeight), forKey: "preferredHeight")
 		aCoder.encodeObject(datePicker, forKey: "datePicker")
 		aCoder.encodeBool(showsDatePicker, forKey: "showsDatePicker")
-		aCoder.encodeInteger(currentDatePicker.rawValue, forKey: "currentDatePicker")
 		
 		super.encodeWithCoder(aCoder)
 	}

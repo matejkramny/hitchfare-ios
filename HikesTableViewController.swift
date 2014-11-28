@@ -154,5 +154,9 @@ class HikesTableViewCell: UITableViewController, PageRootDelegate {
 			self.performSegueWithIdentifier("openMessages", sender: data!)
 		})
 	}
+	
+	func openJourneyNotification(reload: Bool, info: [NSString : AnyObject]) {
+		
+	}
 		
 }

@@ -251,11 +251,41 @@
                     <connections>
                         <segue destination="7wh-7X-zfG" kind="presentation" identifier="addJourney" id="idd-OF-6bD"/>
                         <segue destination="8bB-pc-DAg" kind="show" identifier="openCars" id="iyo-aa-cqh"/>
+                        <segue destination="iEh-lV-fiU" kind="show" identifier="openPassengers" id="EqZ-Ae-PCs"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w35-fP-mZg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3313.5" y="148.5"/>
+        </scene>
+        <!--Passengers Table View Controller-->
+        <scene sceneID="caP-e4-5Hz">
+            <objects>
+                <tableViewController id="iEh-lV-fiU" customClass="PassengersTableViewController" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="0sg-91-PML">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="gV4-qw-dUW">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gV4-qw-dUW" id="utL-Va-48B">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="iEh-lV-fiU" id="qyC-Xc-Bvq"/>
+                            <outlet property="delegate" destination="iEh-lV-fiU" id="clJ-Np-ZV1"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="w99-yo-k3r" kind="show" identifier="openMessage" id="8Iw-xR-reM"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f3e-mY-CKf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4129" y="-722"/>
         </scene>
         <!--Cars Table View Controller-->
         <scene sceneID="HT5-bm-w2q">
@@ -727,9 +757,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Eoa-mH-lsb"/>
         <segue reference="SOi-a8-qTY"/>
+        <segue reference="8Iw-xR-reM"/>
+        <segue reference="iyo-aa-cqh"/>
         <segue reference="idd-OF-6bD"/>
-        <segue reference="wWa-xd-VQh"/>
     </inferredMetricsTieBreakers>
 </document>

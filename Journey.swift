@@ -17,8 +17,6 @@ class Journey {
 	var startLat: Double? = 0
 	var startLng: Double? = 0
 	
-	var endDate: NSDate? = NSDate()
-	var endDateHuman: NSString? = ""
 	var endLocation: NSString? = ""
 	var endLat: Double? = 0
 	var endLng: Double? = 0
@@ -67,17 +65,7 @@ class Journey {
 		self.startLng = start["lng"] as? Double
 		
 		var end = _response["end"] as [String: AnyObject]
-		var endStr = start["date"] as? String
-		if endStr != nil {
-			var dateFormatter = NSDateFormatter()
-			var timeZone = NSTimeZone(name: "UTC")              // Server TimeZone
-			dateFormatter.timeZone = timeZone
-			dateFormatter.dateFormat = kISODateFormat
-			
-			self.endDate = dateFormatter.dateFromString(endStr!)
-		}
 		
-		self.endDateHuman = end["human"] as? String
 		self.endLocation = end["location"] as? String
 		self.endLat = end["lat"] as? Double
 		self.endLng = end["lng"] as? Double
@@ -107,8 +95,6 @@ class Journey {
 		if self.startLng != nil { startJson["startLng"] = self.startLng }
 		json["start"] = startJson
 		
-		if self.endDate != nil { endJson["date"] = self.endDate!.timeIntervalSince1970 }
-		if self.endDateHuman != nil { endJson["human"] = self.endDateHuman }
 		if self.endLocation != nil { endJson["location"] = self.endLocation }
 		if self.endLat != nil { endJson["startLat"] = self.endLat }
 		if self.endLng != nil { endJson["startLng"] = self.endLng }
@@ -184,131 +170,24 @@ class Journey {
 		
 		doRequest(makeRequest("/journey/" + self._id!, "DELETE"), callback, nil)
 	}
-}
-
-class JourneyPassenger {
-	var _id: NSString?
 	
-	var journey: Journey!
-	var user: User!
-	
-	var approved: Bool = false
-	var didApprove: Bool = false
-	var approvedWhen: NSDate? = nil
-	
-	var rated: Bool = false
-	var rating: Int = 0
-	
-	var requested: NSDate? = nil
-	
-	init(journey: Journey, user: User){
-		self.journey = journey
-		self.user = user
-	}
-	
-	init(_response: [NSString: AnyObject]) {
-		self._id = _response["_id"] as? NSString
-		
-		self.journey = Journey(_response: _response["journey"] as [NSString: AnyObject])
-		self.user = User(_response: _response["user"] as [NSString: AnyObject])
-		
-		var approved = _response["approved"] as? Bool
-		if approved != nil {
-			self.approved = approved!
-		}
-		
-		var didApprove = _response["didApprove"] as? Bool
-		if didApprove != nil {
-			self.didApprove = didApprove!
-		}
-		
-		var approvedWhen = _response["approvedWhen"] as? Double
-		if approvedWhen != nil {
-			self.approvedWhen = NSDate(timeIntervalSince1970: approvedWhen! / 1000)
-		}
-		
-		var rated = _response["rated"] as? Bool
-		if rated != nil {
-			self.rated = rated!
-		}
-		
-		var rating = _response["rating"] as? Int
-		if rating != nil {
-			self.rating = rating!
-		}
-		
-		var requested = _response["requested"] as? Double
-		if requested != nil {
-			self.requested = NSDate(timeIntervalSince1970: requested! / 1000)
-		}
-	}
-	
-	func json() -> [NSObject: AnyObject] {
-		var json: [NSObject: AnyObject] = [:]
-		
-		if self._id != nil { json["_id"] = self._id }
-		
-		json["journey"] = self.journey._id!
-		json["user"] = self.user._id!
-		
-		json["approved"] = self.approved
-		json["didApprove"] = self.didApprove
-		if self.approvedWhen != nil { json["approvedWhen"] = self.approvedWhen!.timeIntervalSince1970 }
-		
-		json["rated"] = self.rated
-		json["rating"] = self.rating
-		
-		if self.requested != nil { json["requested"] = self.requested!.timeIntervalSince1970 }
-		
-		return json
-	}
-	
-	class func getJourneyRequests (forJourney journey: Journey, withCallback callback: (err: NSError?, data: [JourneyPassenger]) -> Void) {
-		doRequest(makeRequest("/journey/" + journey._id! + "/requests", "GET"), { (err: NSError?, data: AnyObject?) -> Void in
+	func getPassengers (callback: (err: NSError?, data: [JourneyPassenger]) -> Void) {
+		doRequest(makeRequest("/journey/" + self._id! + "/passengers", "GET"), { (err: NSError?, data: AnyObject?) -> Void in
+			if err != nil {
+				callback(err: err, data: [])
+				return
+			}
 			
-		}, nil)
-	}
-	
-	class func getAllJourneyRequests (callback: (err: NSError?, data: [JourneyPassenger]) -> Void) {
-		doRequest(makeRequest("/journeys/requests", "GET"), { (err: NSError?, data: AnyObject?) -> Void in
-			var reqs: [JourneyPassenger] = []
-			
-			var json: [[NSString: AnyObject]]? = data as? [[NSString: AnyObject]]
+			var passengers: [JourneyPassenger] = []
+			let json: [[NSString: AnyObject]]? = data as? [[NSString: AnyObject]]
 			if json != nil {
-				for obj in json! {
-					reqs.append(JourneyPassenger(_response: obj))
+				for j in json! {
+					passengers.append(JourneyPassenger(_response: j))
 				}
 			}
 			
-			callback(err: err, data: reqs)
+			callback(err: nil, data: passengers)
 		}, nil)
 	}
 	
-	class func getMyJourneyRequests (callback: (err: NSError?, data: [JourneyPassenger]) -> Void) {
-		doRequest(makeRequest("/journeys/myrequests", "GET"), { (err: NSError?, data: AnyObject?) -> Void in
-			var reqs: [JourneyPassenger] = []
-			
-			var json: [[NSString: AnyObject]]? = data as? [[NSString: AnyObject]]
-			if json != nil {
-				for obj in json! {
-					reqs.append(JourneyPassenger(_response: obj))
-				}
-			}
-			
-			callback(err: err, data: reqs)
-		}, nil)
-	}
-	
-	func approveRequest (callback: (err: NSError?) -> Void) {
-		doRequest(makeRequest("/journey/" + self.journey._id! + "/request/" + self._id!, "PUT"), { (err: NSError?, data: AnyObject?) -> Void in
-			callback(err: err)
-		}, nil)
-	}
-	
-	func rejectRequest (callback: (err: NSError?) -> Void) {
-		doRequest(makeRequest("/journey/" + self.journey._id! + "/request/" + self._id!, "DELETE"), { (err: NSError?, data: AnyObject?) -> Void in
-			callback(err: err)
-		}, nil)
-	}
-
 }

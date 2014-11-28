@@ -13,6 +13,7 @@ protocol FareShoutNavigationDelegate {
 	func presentHike()
 	
 	func openMessageNotification(listId: NSString)
+	func openJourneyNotification(reload: Bool, info: [NSString: AnyObject])
 }
 
 class PageRootViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, FareShoutNavigationDelegate, UIScrollViewDelegate {

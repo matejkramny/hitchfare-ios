@@ -3,8 +3,10 @@ import UIKit
 
 class AddJourneyTableViewController: UITableViewController, StartEndTableViewCellProtocol, CarSelectionProtocol, StepperCellDelegate, FSTextFieldCellProtocol, SwitchCellProtocol, PriceCellDelegate {
 	
-	var startEndCellHeight: CGFloat = 88.0
+	var startEndCellHeight: CGFloat = 44.0
 	var journey: Journey = Journey()
+	
+	var originalStepperColor: UIColor?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -77,7 +79,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 		if indexPath.section == 0 {
 			var cell = tableView.dequeueReusableCellWithIdentifier("carSelector", forIndexPath: indexPath) as? UITableViewCell
 			
-			cell!.textLabel.text = "Car"
+			cell!.textLabel!.text = "Car"
 			
 			var car_id = ""
 			if journey.car != nil {
@@ -182,14 +184,9 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 			cell!.initialize()
 			cell!.delegate = self
 			cell!.startDateField.text = journey.startDateHuman
-			cell!.endDateField.text = journey.endDateHuman
 			
 			if NSString(string: cell!.startDateField.text).length == 0 {
 				cell!.startDateField.text = cell!.getDateFormatter().stringFromDate(NSDate())
-			}
-			
-			if NSString(string: cell!.endDateField.text).length == 0 {
-				cell!.endDateField.text = cell!.getDateFormatter().stringFromDate(NSDate())
 			}
 			
 			return cell! as UITableViewCell
@@ -256,14 +253,9 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 		self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
 	}
 	
-	func StartEndTableViewCellDateChanged(cell: StartEndTableViewCell, startDate: NSDate) {
-		journey.startDate = startDate
-		journey.startDateHuman = cell.getDateFormatter().stringFromDate(startDate)
-	}
-	
-	func StartEndTableViewCellDateChanged(cell: StartEndTableViewCell, endDate: NSDate) {
-		journey.endDate = endDate
-		journey.endDateHuman = cell.getDateFormatter().stringFromDate(endDate)
+	func StartEndTableViewCellDateChanged(cell: StartEndTableViewCell, toDate: NSDate) {
+		journey.startDate = toDate
+		journey.startDateHuman = cell.getDateFormatter().stringFromDate(toDate)
 	}
 	
 	// CarSelectionProtocol
@@ -309,6 +301,19 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	
 	func SwitchCellValueChanged(cell: SwitchTableViewCell) {
 		journey.isDriver = cell.toggle.selectedSegmentIndex == 0
+		
+		var stepperCell: StepperTableViewCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 3)) as StepperTableViewCell
+		
+		if journey.isDriver {
+			stepperCell.stepper.enabled = true
+			if self.originalStepperColor != nil {
+				stepperCell.stepper.tintColor = self.originalStepperColor!
+			}
+		} else {
+			stepperCell.stepper.enabled = false
+			self.originalStepperColor = stepperCell.stepper.tintColor
+			stepperCell.stepper.tintColor = UIColor.grayColor()
+		}
 	}
 	
 	// PriceCellDelegate

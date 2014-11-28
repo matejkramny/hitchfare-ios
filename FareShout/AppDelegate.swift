@@ -118,8 +118,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		}
 		
 		navController.popToRootViewControllerAnimated(false)
-		var pageRootDelegate = navController.viewControllers[0] as PageRootDelegate
-		pageRootDelegate.openMessageNotification("")
+		
+		vc.pageCtrl!.setViewControllers([vc.vcs[0]], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
+		var pageRootDelegate = (vc.vcs[0] as UINavigationController).viewControllers[0] as PageRootDelegate
+		pageRootDelegate.openJourneyNotification(true, info: userInfo)
 	}
 	
 	func openMessageNotification (listID: NSString) {
@@ -128,9 +130,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		var navController = vc.getCurrentViewController()
 		//navController.visibleViewController.navigationController!.popToRootViewControllerAnimated(false)
 		if navController.visibleViewController.presentingViewController != nil {
+			// dismisses modally presented nav controller
 			navController.visibleViewController.navigationController!.dismissViewControllerAnimated(false, completion: nil)
 		}
 		
+		// navigates back to pageRootVC
 		navController.popToRootViewControllerAnimated(false)
 		var pageRootDelegate = navController.viewControllers[0] as PageRootDelegate
 		pageRootDelegate.openMessageNotification(listID)

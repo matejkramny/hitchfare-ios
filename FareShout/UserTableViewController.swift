@@ -86,13 +86,15 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			self.journeys = []
 			self.pastJourneys = []
 			for j in data {
-				if j.endDate == nil {
+				if j.startDate == nil {
 					self.journeys.append(j)
 					continue
 				}
 				
-				if timeIntervalNow > j.endDate!.timeIntervalSince1970 {
-					self.pastJourneys.append(j)
+				if timeIntervalNow > j.startDate!.timeIntervalSince1970 {
+					if self.presentedFromElsewhere != true {
+						self.pastJourneys.append(j)
+					}
 				} else {
 					self.journeys.append(j)
 				}
@@ -264,7 +266,12 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 				deleteBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
 				editBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
 				
-				cell!.leftButtons = indexPath.section == 3 ? [deleteBtn, editBtn] : []
+				if currentUser!._id! == journey.owner! {
+					cell!.leftButtons = indexPath.section == 3 ? [deleteBtn, editBtn] : []
+				} else {
+					cell!.leftButtons = indexPath.section == 3 ? [deleteBtn] : []
+				}
+				
 				cell!.leftSwipeSettings.transition = MGSwipeTransition.TransitionDrag
 				cell!.delegate = self
 			}
@@ -280,18 +287,18 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	}
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var sectionTitle : String! = self.tableView(tableView, titleForHeaderInSection: section)
+        var sectionTitle: String? = self.tableView(tableView, titleForHeaderInSection: section)
         if sectionTitle == nil {
             return nil
         }
         
-        var rect : CGRect = CGRectZero
+        var rect: CGRect = CGRectZero
         rect.size.width = tableView.frame.size.width;
         rect.size.height = self.tableView(tableView, heightForHeaderInSection: section)
-        var view : UIView! = UIView(frame: rect)
+        var view: UIView! = UIView(frame: rect)
         view.backgroundColor = UIColor(red: 228/255.0, green: 30/255.0, blue: 38/255.0, alpha: 1)
         
-        var label : UILabel! = UILabel(frame: CGRectMake(12, 0, tableView.bounds.size.width, tableView.sectionHeaderHeight))
+        var label: UILabel! = UILabel(frame: CGRectMake(12, 0, tableView.bounds.size.width, tableView.sectionHeaderHeight))
         label.text = sectionTitle
         label.shadowOffset = CGSizeMake(0, 1)
         label.shadowColor = UIColor.grayColor()
@@ -309,7 +316,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			return "Current Journeys"
 		}
 		if section == 4 {
-			return "Past Journeys"
+			return self.pastJourneys.count > 0 ? "Past Journeys" : nil
 		}
 		if section == 2 {
 			return self.myPendingRequests.count > 0 ? "Pending Requests" : nil
@@ -320,25 +327,25 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		
 		return nil
 	}
-    
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        var headerHeight : CGFloat = tableView.sectionHeaderHeight
-        if section == 0 {
-            // Profile Section is not header
-            return 0
-        }
-        if section == 3 {
-            return headerHeight
-        }
-        if section == 2 {
-            return self.myPendingRequests.count > 0 ? headerHeight : 0
-        }
-        if section == 1 {
-            return self.pendingRequests.count > 0 ? headerHeight : 0
-        }
-        
-        return 0
-    }
+	
+	override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		var headerHeight : CGFloat = tableView.sectionHeaderHeight
+		
+		if section == 4 {
+			return self.pastJourneys.count > 0 ? headerHeight : 0
+		}
+		if section == 3 {
+			return headerHeight
+		}
+		if section == 2 {
+			return self.myPendingRequests.count > 0 ? headerHeight : 0
+		}
+		if section == 1 {
+			return self.pendingRequests.count > 0 ? headerHeight : 0
+		}
+		
+		return 0
+	}
 	
 	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 		if indexPath.section == 0 {
@@ -372,6 +379,10 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 					SVProgressHUD.showSuccessWithStatus("Sent request to join Journey")
 				}
 			})
+		} else if indexPath.section == 3 {
+			// Open passengers list
+			self.performSegueWithIdentifier("openPassengers", sender: journeys[indexPath.row])
+			return
 		}
 		
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -388,6 +399,11 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		self.isInSegue = true
 		mainNavigationDelegate.hideNavigationBar()
+		
+		if segue.identifier == "openPassengers" {
+			var vc: PassengersTableViewController = segue.destinationViewController as PassengersTableViewController
+			vc.journey = sender as Journey
+		}
 	}
 	
 	func openMessageNotification(listId: NSString) {
@@ -400,6 +416,12 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		})
 	}
 	
+	func openJourneyNotification(reload: Bool, info: [NSString : AnyObject]) {
+		if reload != false {
+			self.refreshData(nil)
+		}
+	}
+	
 	func swipeTableCell(cell: MGSwipeTableCell!, canSwipe direction: MGSwipeDirection) -> Bool {
 		return direction == MGSwipeDirection.LeftToRight
 	}
@@ -408,10 +430,43 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		var cell: JourneyTableViewCell = cell as JourneyTableViewCell
 		var indexPath: NSIndexPath = self.tableView.indexPathForCell(cell as UITableViewCell)!
 		
+		let journey = self.journeys[indexPath.row]
+		
 		if index == 0 {
 			// Delete
+			if currentUser!._id! != journey.owner! {
+				// Delete the passenger request.
+				SVProgressHUD.showProgress(1.0, status: "Removing..", maskType: SVProgressHUDMaskType.Black)
+				
+				journey.getPassengers({ (err: NSError?, data: [JourneyPassenger]) -> Void in
+					var found: JourneyPassenger?
+					
+					for d in data {
+						if d.user._id! == currentUser!._id! {
+							found = d
+							break
+						}
+					}
+					
+					if found == nil {
+						return SVProgressHUD.showErrorWithStatus("Could not find passenger. Reload data!")
+					}
+					
+					found!.rejectRequest({ (err: NSError?) -> Void in
+						if err != nil {
+							return SVProgressHUD.showErrorWithStatus("Could not remove passenger.")
+						}
+						
+						SVProgressHUD.dismiss()
+						self.refreshData(nil)
+					})
+				})
+				
+				return true
+			}
+			
 			SVProgressHUD.showProgress(1.0, status: "Deleting...", maskType: SVProgressHUDMaskType.Black)
-			self.journeys[indexPath.row].delete({ (err: NSError?, data: AnyObject?) -> Void in
+			journey.delete({ (err: NSError?, data: AnyObject?) -> Void in
 				SVProgressHUD.dismiss()
 				self.refreshData(nil)
 			})

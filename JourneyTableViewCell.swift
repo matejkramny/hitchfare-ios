@@ -20,7 +20,7 @@ class JourneyTableViewCell: MGSwipeTableCell {
 	func populate(journey: Journey) {
 		self.journeyNameLabel.text = journey.ownerObj!.first_name! + " " + journey.ownerObj!.last_name!.substringToIndex(1)
 		
-        if journey.isDriver {
+        if journey.owner! == currentUser!._id! {
             let driverColor : UIColor! = UIColor(red: 228/255.0, green: 30/255.0, blue: 38/255.0, alpha: 1)
             self.journeyNameLabel.textColor = driverColor
             self.driverImageView.image = UIImage(named: "DriverTag")

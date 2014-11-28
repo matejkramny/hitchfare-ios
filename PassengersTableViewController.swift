@@ -1,0 +1,101 @@
+
+import UIKit
+
+class PassengersTableViewController: UITableViewController {
+	var journey: Journey!
+	var passengers: [JourneyPassenger] = []
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		
+		self.refreshControl = UIRefreshControl()
+		self.refreshControl!.addTarget(self, action: "refreshData:", forControlEvents: UIControlEvents.ValueChanged)
+		
+		self.tableView.registerNib(UINib(nibName: "HikeTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Hike")
+		
+		self.navigationItem.title = "Passengers"
+		
+		if journey.owner! != currentUser!._id! {
+			self.navigationItem.title = "Other Passengers"
+		}
+		
+		self.refreshData(nil)
+	}
+	
+	func refreshData (sender: AnyObject?) {
+		self.journey.getPassengers({ (err: NSError?, data: [JourneyPassenger]) -> Void in
+			self.passengers = []
+			
+			for d in data {
+				if d.user._id! == currentUser!._id! {
+					continue
+				}
+				
+				self.passengers.append(d)
+			}
+			
+			self.refreshControl!.endRefreshing()
+			self.tableView.reloadData()
+		})
+	}
+	
+	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+		return 1
+	}
+	
+	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return self.passengers.count
+	}
+	
+	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+		var cell = tableView.dequeueReusableCellWithIdentifier("Hike", forIndexPath: indexPath) as? HikeTableViewCell
+		
+		if cell == nil {
+			cell = HikeTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Hike")
+		}
+		
+		var passenger = self.passengers[indexPath.row]
+		var user = passenger.user
+		
+		cell!.nameLabel.text = user.name
+		if user.picture != nil {
+			cell!.pictureImageView.sd_setImageWithURL(NSURL(string: user.picture!.url))
+			cell!.pictureImageView.clipsToBounds = true
+			cell!.pictureImageView.layer.cornerRadius = 72/2
+		}
+		
+		var deleteBtn = MGSwipeButton(title: " " + NSString.fontAwesomeIconStringForEnum(FAIcon.FATrashO) + " ", backgroundColor: UIColor.blackColor())
+		var infoBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FAInfo), backgroundColor: UIColor.blackColor())
+		var reportBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FAExclamationTriangle), backgroundColor: UIColor.blackColor())
+		
+		deleteBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
+		
+		cell!.rightButtons = [deleteBtn]
+		cell!.rightSwipeSettings.transition = MGSwipeTransition.TransitionDrag
+		
+		cell!.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+		
+		return cell!
+	}
+	
+	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		return 88
+	}
+	
+	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+		var passenger = self.passengers[indexPath.row]
+		findMessageList(passenger.user._id!, { (list: MessageList?) -> Void in
+			self.performSegueWithIdentifier("openMessage", sender: list)
+		})
+	}
+	
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		SVProgressHUD.dismiss()
+		
+		if segue.identifier == "openMessage" {
+			var vc: MessagesViewController = segue.destinationViewController as MessagesViewController
+			vc.list = sender as MessageList
+		}
+	}
+	
+}

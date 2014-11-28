@@ -7,61 +7,41 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="80" id="KGk-i7-Jjw" customClass="StartEndTableViewCell" customModule="FareShout" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="44" id="KGk-i7-Jjw" customClass="StartEndTableViewCell" customModule="FareShout" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pjn-9f-gWD">
-                        <rect key="frame" x="164" y="37" width="141" height="30"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits"/>
-                    </textField>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meeting Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfl-ki-bBj">
+                        <rect key="frame" x="8" y="7" width="138" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="138" id="qod-YZ-6ra"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sx6-RU-eo3">
-                        <rect key="frame" x="15" y="37" width="141" height="30"/>
+                        <rect key="frame" x="154" y="8" width="158" height="30"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfl-ki-bBj">
-                        <rect key="frame" x="15" y="8" width="141" height="21"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PKW-vk-sbq">
-                        <rect key="frame" x="164" y="8" width="141" height="21"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="bfl-ki-bBj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="0OE-cG-9RN"/>
-                    <constraint firstItem="Pjn-9f-gWD" firstAttribute="leading" secondItem="sx6-RU-eo3" secondAttribute="trailing" constant="8" id="1xQ-Ma-Cg1"/>
-                    <constraint firstItem="Pjn-9f-gWD" firstAttribute="top" secondItem="PKW-vk-sbq" secondAttribute="bottom" constant="8" id="3NO-nq-8Ky"/>
-                    <constraint firstAttribute="trailing" secondItem="PKW-vk-sbq" secondAttribute="trailing" constant="15" id="7Tz-iv-cOg"/>
-                    <constraint firstItem="sx6-RU-eo3" firstAttribute="top" secondItem="bfl-ki-bBj" secondAttribute="bottom" constant="8" id="Qvi-ZZ-Oag"/>
-                    <constraint firstItem="PKW-vk-sbq" firstAttribute="leading" secondItem="bfl-ki-bBj" secondAttribute="trailing" constant="8" id="UC6-r3-yFg"/>
-                    <constraint firstItem="Pjn-9f-gWD" firstAttribute="leading" secondItem="sx6-RU-eo3" secondAttribute="trailing" constant="8" id="WTw-np-apR"/>
-                    <constraint firstItem="bfl-ki-bBj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="WZy-XZ-4DO"/>
-                    <constraint firstItem="sx6-RU-eo3" firstAttribute="top" secondItem="bfl-ki-bBj" secondAttribute="bottom" constant="8" id="XRe-aJ-t65"/>
-                    <constraint firstItem="sx6-RU-eo3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="ZmT-OC-7Py"/>
-                    <constraint firstItem="PKW-vk-sbq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="ZmZ-I4-puh"/>
-                    <constraint firstItem="bfl-ki-bBj" firstAttribute="width" secondItem="PKW-vk-sbq" secondAttribute="width" id="h6i-Od-2tQ"/>
-                    <constraint firstItem="bfl-ki-bBj" firstAttribute="width" secondItem="Pjn-9f-gWD" secondAttribute="width" id="lI5-BZ-4er"/>
-                    <constraint firstItem="Pjn-9f-gWD" firstAttribute="top" secondItem="PKW-vk-sbq" secondAttribute="bottom" constant="8" id="mzg-yI-4hd"/>
-                    <constraint firstItem="bfl-ki-bBj" firstAttribute="width" secondItem="sx6-RU-eo3" secondAttribute="width" id="pEp-bx-dlk"/>
-                    <constraint firstItem="PKW-vk-sbq" firstAttribute="leading" secondItem="bfl-ki-bBj" secondAttribute="trailing" constant="8" id="wHQ-p3-jpe"/>
-                    <constraint firstAttribute="trailing" secondItem="Pjn-9f-gWD" secondAttribute="trailing" constant="15" id="zk1-Dl-NNT"/>
+                    <constraint firstItem="bfl-ki-bBj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="B7t-AU-lLl"/>
+                    <constraint firstItem="sx6-RU-eo3" firstAttribute="leading" secondItem="bfl-ki-bBj" secondAttribute="trailing" constant="8" id="NNl-eF-p51"/>
+                    <constraint firstItem="bfl-ki-bBj" firstAttribute="height" secondItem="sx6-RU-eo3" secondAttribute="height" id="OXA-yL-eSb"/>
+                    <constraint firstItem="bfl-ki-bBj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="dxT-2a-NcF"/>
+                    <constraint firstAttribute="trailing" secondItem="sx6-RU-eo3" secondAttribute="trailing" constant="8" id="tg2-i0-auV"/>
+                    <constraint firstItem="sx6-RU-eo3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="vy6-w7-qiU"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="endDateField" destination="Pjn-9f-gWD" id="VU4-HY-PUI"/>
                 <outlet property="startDateField" destination="sx6-RU-eo3" id="fA8-Jq-8s9"/>
             </connections>
-            <point key="canvasLocation" x="418" y="261"/>
+            <point key="canvasLocation" x="418" y="243"/>
         </tableViewCell>
     </objects>
 </document>

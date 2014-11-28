@@ -121,4 +121,8 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
 		})
 	}
 	
+	func openJourneyNotification(reload: Bool, info: [NSString : AnyObject]) {
+		
+	}
+	
 }
