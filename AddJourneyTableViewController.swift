@@ -77,7 +77,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 		if indexPath.section == 0 {
 			var cell = tableView.dequeueReusableCellWithIdentifier("carSelector", forIndexPath: indexPath) as? UITableViewCell
 			
-			cell!.textLabel!.text = "Car"
+			cell!.textLabel.text = "Car"
 			
 			var car_id = ""
 			if journey.car != nil {

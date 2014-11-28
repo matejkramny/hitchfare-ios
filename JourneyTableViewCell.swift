@@ -10,6 +10,7 @@ class JourneyTableViewCell: MGSwipeTableCell {
 	@IBOutlet weak var dateLabel: UILabel!
 	@IBOutlet weak var priceLabel: UILabel!
 	@IBOutlet weak var availabilityLabel: UILabel!
+    @IBOutlet weak var driverImageView: UIImageView!
 	
 	func style () {
 		self.availabilityLabel.layer.cornerRadius = 13.5
