@@ -14,6 +14,10 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 		self.tableView.registerNib(UINib(nibName: "FSTextViewTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "TextView")
 		
 		self.navigationItem.title = "Add Car"
+		if self.car._id != nil {
+			self.navigationItem.title = "Edit Car"
+		}
+		
 		self.navigationItem.hidesBackButton = true
 		self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancelAdd:")
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: "add:")
@@ -47,7 +51,7 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 		car.seats = seats!
 		
 		SVProgressHUD.showProgress(1.0, status: "Saving...", maskType: SVProgressHUDMaskType.Black)
-		car.update(withImage: chosenImage, callback: { (err: NSError?, data: AnyObject?) -> Void in
+		car.update(chosenImage, callback: { (err: NSError?, data: AnyObject?) -> Void in
 			SVProgressHUD.dismiss()
 			
 			self.navigationController!.popViewControllerAnimated(true)
@@ -60,7 +64,7 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 	}
 	
 	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-		return 3
+		return self.car._id == nil ? 3 : 4
 	}
 	
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -94,6 +98,13 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 				
 				return cell! as UITableViewCell
 			}
+		} else if indexPath.section == 3 {
+			var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("basic", forIndexPath: indexPath) as UITableViewCell
+			
+			cell.textLabel!.text = "Delete Car"
+			cell.textLabel!.textColor = UIColor.redColor()
+			
+			return cell
 		}
 		
 		if (indexPath.section == 0 && indexPath.row == 0) || indexPath.section == 1 {
@@ -110,12 +121,17 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 			switch indexPath.section {
 			case 0:
 				cell!.label.text = "Name"
+				cell!.field.text = self.car.name
 				cell!.field.placeholder = "Car Name"
 				cell!.field.keyboardType = UIKeyboardType.Default
 				cell!.field.autocapitalizationType = UITextAutocapitalizationType.Words
 				
 				break
 			case 1:
+				if self.car.seats > 0 {
+					cell!.field.text = String(self.car.seats)
+				}
+				
 				cell!.label.text = "Number of Seats"
 				cell!.field.placeholder = "4"
 				cell!.field.keyboardType = UIKeyboardType.NumberPad
@@ -171,6 +187,14 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 			
 			// Pick/remove image
 			self.selectOrRemoveImage()
+			
+			return
+		} else if indexPath.section == 3 {
+			SVProgressHUD.showProgress(1.0, status: "Deleting...", maskType: SVProgressHUDMaskType.Black)
+			car.remove({ (err: NSError?, data: AnyObject?) -> Void in
+				SVProgressHUD.dismiss()
+				self.navigationController!.popViewControllerAnimated(true)
+			})
 			
 			return
 		}

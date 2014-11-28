@@ -1,6 +1,8 @@
 
 import Foundation
 
+let kISODateFormat = "YYYY-MM-dd\'T\'HH:mm:ss.SSS\'Z\'"
+
 //let kAPIProtocol = "http://"
 //let kAPIEndpoint = kAPIProtocol + "localhost:3000"
 

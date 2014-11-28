@@ -24,7 +24,7 @@ class Car: NSObject {
 			self.carDescription = desc!
 		}
 		
-		self.picture = _response["picture"] as? String
+		self.picture = _response["url"] as? String
 	}
 	
 	func json() -> [NSObject: AnyObject] {
@@ -33,7 +33,7 @@ class Car: NSObject {
 		if self._id != nil { json["_id"] = self._id }
 		json["name"] = self.name
 		json["seats"] = self.seats
-		json["description"] = self.description
+		json["description"] = self.carDescription
 		
 		if self.owner != nil { json["owner"] = self.owner!._id }
 		
@@ -97,9 +97,6 @@ class Car: NSObject {
 		
 		var bodyContent = NSMutableString()
 		bodyContent.appendFormat("\r\n--%@\r\n", boundary)
-		bodyContent.appendString("Content-Disposition: form-data; name=\"title\"\r\n\r\n")
-		bodyContent.appendFormat("\r\n--%@\r\n", boundary)
-		
 		bodyContent.appendString("Content-Disposition: form-data; name=\"picture\"; filename=\"image.jpeg\"\r\n")
 		bodyContent.appendString("Content-Type: application/octet-stream\r\n")
 		bodyContent.appendString("Content-Transfer-Encoding: binary\r\n")

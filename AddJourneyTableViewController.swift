@@ -59,14 +59,14 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	}
 	
 	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-		return 6
+		return 5
 	}
 	
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		switch section {
-		case 0, 1, 3, 5:
+		case 0, 2, 4:
 			return 1
-		case 2, 4:
+		case 1, 3:
 			return 2
 		default:
 			return 0
@@ -75,23 +75,6 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		if indexPath.section == 0 {
-			var cell = tableView.dequeueReusableCellWithIdentifier("TextField", forIndexPath: indexPath) as? FSTextFieldTableViewCell
-			if cell == nil {
-				cell = FSTextFieldTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "TextField")
-			}
-			
-			cell!.label.text = "Title"
-			cell!.field.placeholder = "Name of your Hitch"
-			cell!.field.text = journey.name
-			cell!.field.keyboardType = UIKeyboardType.Default
-			cell!.field.autocapitalizationType = UITextAutocapitalizationType.Words
-			cell!.field.autocorrectionType = UITextAutocorrectionType.No
-			
-			cell!.delegate = self
-			cell!.initialize()
-			
-			return cell! as UITableViewCell
-		} else if indexPath.section == 1 {
 			var cell = tableView.dequeueReusableCellWithIdentifier("carSelector", forIndexPath: indexPath) as? UITableViewCell
 			
 			cell!.textLabel!.text = "Car"
@@ -109,7 +92,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 			}
 			
 			return cell!
-		} else if indexPath.section == 2 {
+		} else if indexPath.section == 1 {
 			var cell = tableView.dequeueReusableCellWithIdentifier("TextField", forIndexPath: indexPath) as? FSTextFieldTableViewCell
 			if cell == nil {
 				cell = FSTextFieldTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "TextField")
@@ -133,7 +116,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 			}
 			
 			return cell!
-		} else if indexPath.section == 3 {
+		} else if indexPath.section == 2 {
 			// I am a driver / Passenger switch
 			var cell = tableView.dequeueReusableCellWithIdentifier("Switch", forIndexPath: indexPath) as? SwitchTableViewCell
 			if cell == nil {
@@ -153,23 +136,27 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 			}
 			
 			return cell! as UITableViewCell
-		} else if indexPath.section == 4 && indexPath.row == 0 {
+		} else if indexPath.section == 3 && indexPath.row == 0 {
 			// Availability
 			var cell = tableView.dequeueReusableCellWithIdentifier("Stepper", forIndexPath: indexPath) as? StepperTableViewCell
 			if cell == nil {
 				cell = StepperTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Stepper")
 			}
 			
+			cell!.stepper.maximumValue = 6
+			cell!.stepper.minimumValue = 0
+			
 			cell!.label.text = "Availability"
 			if journey.availableSeats != nil {
 				cell!.label.text = cell!.label.text! + ": " + String(journey.availableSeats!)
+				cell!.stepper.value = Double(journey.availableSeats!)
 			}
 			
 			cell!.initialize()
 			cell!.delegate = self
 			
 			return cell! as UITableViewCell
-		} else if indexPath.section == 4 && indexPath.row == 1 {
+		} else if indexPath.section == 3 && indexPath.row == 1 {
 			// Price
 			var cell = tableView.dequeueReusableCellWithIdentifier("Price", forIndexPath: indexPath) as? PriceTableViewCell
 			if cell == nil {
@@ -184,7 +171,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 			cell!.updatePrice()
 			
 			return cell! as UITableViewCell
-		} else if indexPath.section == 5 {
+		} else if indexPath.section == 4 {
 			// Start & End Date
 			var cell = tableView.dequeueReusableCellWithIdentifier("StartEnd", forIndexPath: indexPath) as? StartEndTableViewCell
 			
@@ -212,10 +199,10 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	}
 	
 	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-		if indexPath.section == 4 && indexPath.row == 1 {
+		if indexPath.section == 3 && indexPath.row == 1 {
 			return 88
 		}
-		if indexPath.section == 5 {
+		if indexPath.section == 4 {
 			return startEndCellHeight
 		}
 		
@@ -224,10 +211,10 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		switch indexPath.section {
-		case 0, 2:
+		case 1:
 			var cell: FSTextFieldTableViewCell = tableView.cellForRowAtIndexPath(indexPath) as FSTextFieldTableViewCell
 			cell.field.becomeFirstResponder()
-		case 1:
+		case 0:
 			self.performSegueWithIdentifier("openCars", sender: nil)
 			return
 		default:
@@ -264,7 +251,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 		
 		startEndCellHeight = cell.preferredHeight
 		
-		var indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 5)
+		var indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 4)
 		self.tableView.reloadData()
 		self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
 	}
@@ -283,9 +270,16 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	
 	func didSelectCar(car: Car) {
 		journey.car = car._id
+		journey.availableSeats = car.seats - 1
 		
-		self.tableView.reloadData()
-		self.tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), animated: false, scrollPosition: UITableViewScrollPosition.None)
+		var cell: StepperTableViewCell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 3)) as StepperTableViewCell
+		cell.stepper.value = Double(journey.availableSeats!)
+		cell.label.text = "Availability: " + String(journey.availableSeats!)
+		
+		var carCell: UITableViewCell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))!
+		carCell.detailTextLabel!.text = car.name
+		carCell.setNeedsDisplay()
+		self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
 	}
 	
 	// StepperCellDelegate
@@ -294,7 +288,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 		// Availability
 		journey.availableSeats = Int(value)
 		
-		let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 4)) as StepperTableViewCell
+		let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 3)) as StepperTableViewCell
 		cell.label.text = "Availability"
 		if journey.availableSeats != nil {
 			cell.label.text = cell.label.text! + ": " + String(journey.availableSeats!)
@@ -304,11 +298,9 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	// FSTextFieldCellDelegate
 	
 	func FSTextFieldCellValueChanged(cell: FSTextFieldTableViewCell, value: NSString?) {
-		if cell == self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) {
-			journey.name = value
-		} else if cell == self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2)) {
+		if cell == self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1)) {
 			journey.startLocation = value
-		} else if cell == self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 2)) {
+		} else if cell == self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 1)) {
 			journey.endLocation = value
 		}
 	}

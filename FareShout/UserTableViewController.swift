@@ -4,6 +4,7 @@ import UIKit
 class UserTableViewController: UITableViewController, FSProfileTableViewCellDelegate, PageRootDelegate, MGSwipeTableCellDelegate, JourneyRequestDelegate, AcceptJourneyRequestDelegate {
 	
 	var journeys: [Journey] = []
+	var pastJourneys: [Journey] = []
 	var myPendingRequests: [JourneyPassenger] = []
 	var pendingRequests: [JourneyPassenger] = []
 	
@@ -55,6 +56,8 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		
 		self.isInSegue = false
 		self.didAppear = true
+		
+		self.refreshData(nil)
 	}
 	
 	override func viewWillDisappear(animated: Bool) {
@@ -78,7 +81,22 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	
 	func refreshData (sender: AnyObject?) {
 		var callback: (err: NSError?, data: [Journey]) -> Void = { (err: NSError?, data: [Journey]) -> Void in
-			self.journeys = data
+			var timeIntervalNow: NSTimeInterval = NSDate().timeIntervalSince1970
+			
+			self.journeys = []
+			self.pastJourneys = []
+			for j in data {
+				if j.endDate == nil {
+					self.journeys.append(j)
+					continue
+				}
+				
+				if timeIntervalNow > j.endDate!.timeIntervalSince1970 {
+					self.pastJourneys.append(j)
+				} else {
+					self.journeys.append(j)
+				}
+			}
 			
 			self.refreshControl!.endRefreshing()
 			self.tableView.reloadData()
@@ -122,7 +140,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	}
 	
 	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-		return 4
+		return 5
 	}
 	
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -131,6 +149,8 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			return 1
 		case 3:
 			return journeys.count
+		case 4:
+			return pastJourneys.count
 		case 2:
 			return myPendingRequests.count
 		case 1:
@@ -172,7 +192,9 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 				cell = AcceptJourneyRequestTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "acceptJourneyRequest")
 			}
 			
-			cell!.journeyName.text = req.journey.name
+			if req.journey.ownerObj != nil {
+				cell!.journeyName.text = req.journey.ownerObj!.first_name! + " " + req.journey.ownerObj!.last_name!.substringToIndex(1)
+			}
 			
 			if req.requested != nil {
 				cell!.requestedLabel.text = "Requested on " + requestedJourneyDateFormatter.stringFromDate(req.requested!)
@@ -199,7 +221,9 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 				cell = JourneyRequestTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "journeyRequest")
 			}
 			
-			cell!.journeyName.text = req.journey.name
+			if req.journey.ownerObj != nil {
+				cell!.journeyName.text = req.journey.ownerObj!.first_name! + " " + req.journey.ownerObj!.last_name!.substringToIndex(1)
+			}
 			
 			if req.requested != nil {
 				cell!.requestedLabel.text = "Requested on " + requestedJourneyDateFormatter.stringFromDate(req.requested!)
@@ -218,8 +242,13 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			cell!.delegate = self
 			
 			return cell!
-		} else if indexPath.section == 3 {
-			var journey = journeys[indexPath.row]
+		} else if indexPath.section == 3 || indexPath.section == 4 {
+			var list: [Journey] = journeys
+			if indexPath.section == 4 {
+				list = pastJourneys
+			}
+			
+			var journey = list[indexPath.row]
 			
 			var cell = tableView.dequeueReusableCellWithIdentifier("Journey", forIndexPath: indexPath) as? JourneyTableViewCell
 			if cell == nil {
@@ -229,19 +258,18 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			if presentedFromElsewhere == false {
 				var deleteBtn = MGSwipeButton(title: " " + NSString.fontAwesomeIconStringForEnum(FAIcon.FATrashO) + " ", backgroundColor: UIColor.redColor())
 				var editBtn = MGSwipeButton(title: " " + NSString.fontAwesomeIconStringForEnum(FAIcon.FAPencilSquareO) + " ", backgroundColor: UIColor.blueColor())
-				var passengerBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FAUsers), backgroundColor: UIColor.blackColor())
 				
 				deleteBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
 				editBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
-				passengerBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
 				
-				cell!.leftButtons = [deleteBtn, editBtn, passengerBtn]
+				cell!.leftButtons = indexPath.section == 3 ? [deleteBtn, editBtn] : []
 				cell!.leftSwipeSettings.transition = MGSwipeTransition.TransitionDrag
 				cell!.delegate = self
 			}
 			
 			cell!.style()
 			cell!.populate(journey)
+			cell!.journeyNameLabel.text = journey.ownerObj!.name
 			
 			return cell!
 		}
@@ -252,6 +280,9 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		if section == 3 {
 			return "Current Journeys"
+		}
+		if section == 4 {
+			return "Past Journeys"
 		}
 		if section == 2 {
 			return self.myPendingRequests.count > 0 ? "Pending Requests" : nil
@@ -292,7 +323,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 				if err != nil {
 					SVProgressHUD.showErrorWithStatus("Error Joining Journey. Perhaps already requested.")
 				} else {
-					SVProgressHUD.showSuccessWithStatus("Success")
+					SVProgressHUD.showSuccessWithStatus("Sent request to join Journey")
 				}
 			})
 		}
@@ -329,7 +360,16 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	
 	func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
 		var cell: JourneyTableViewCell = cell as JourneyTableViewCell
-		UIAlertView(title: "Delete Journey", message: cell.journeyNameLabel.text!, delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "Okay").show()
+		var indexPath: NSIndexPath = self.tableView.indexPathForCell(cell as UITableViewCell)!
+		
+		if index == 0 {
+			// Delete
+			SVProgressHUD.showProgress(1.0, status: "Deleting...", maskType: SVProgressHUDMaskType.Black)
+			self.journeys[indexPath.row].delete({ (err: NSError?, data: AnyObject?) -> Void in
+				SVProgressHUD.dismiss()
+				self.refreshData(nil)
+			})
+		}
 		
 		return true
 	}

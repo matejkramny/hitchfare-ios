@@ -17,7 +17,7 @@ class JourneyTableViewCell: MGSwipeTableCell {
 	}
 	
 	func populate(journey: Journey) {
-		self.journeyNameLabel.text = journey.name
+		self.journeyNameLabel.text = journey.ownerObj!.first_name! + " " + journey.ownerObj!.last_name!.substringToIndex(1)
 		
 		var startLocation = journey.startLocation
 		if startLocation != nil {

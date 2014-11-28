@@ -60,15 +60,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 	
 	func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+		let action = userInfo["action"] as NSString
+		
 		if application.applicationState == UIApplicationState.Active {
 			println(userInfo)
-			NSNotificationCenter.defaultCenter().postNotificationName("ReceivedMessage", object: self, userInfo: userInfo)
+			if action == "newMessage" {
+				NSNotificationCenter.defaultCenter().postNotificationName("ReceivedMessage", object: self, userInfo: userInfo)
+			}
 			
 			var messageText = (userInfo["aps"] as [NSString: AnyObject])["alert"] as NSString
+			var messageTitle = "New Message"
+			
+			if action == "requestReject" {
+				messageTitle = "Request Rejected"
+			} else if action == "requestApprove" {
+				messageTitle = "Request Approved"
+			} else if action == "journeyRequest" {
+				messageTitle = "Journey Request"
+			}
 			
 			JCNotificationCenter.sharedCenter().presenter = JCNotificationBannerPresenterSmokeStyle()
-			JCNotificationCenter.enqueueNotificationWithTitle("New Message", message: messageText, tapHandler: { () -> Void in
-				self.openMessageNotification(userInfo["list"] as NSString)
+			JCNotificationCenter.enqueueNotificationWithTitle(messageTitle, message: messageText, tapHandler: { () -> Void in
+				switch action {
+				case "newMessage":
+					self.openMessageNotification(userInfo["list"] as NSString)
+				case "requestReject", "requestApprove", "journeyRequest":
+					self.openRequestNotification(userInfo as [NSString: AnyObject])
+				default:
+					break
+				}
 			})
 			
 			return
@@ -76,10 +96,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		// if entered foreground in the last second.
 		if NSDate().timeIntervalSince1970 - enteredForeground.timeIntervalSince1970 < 1 {
-			self.openMessageNotification(userInfo["list"] as NSString)
+			switch action {
+			case "newMessage":
+				self.openMessageNotification(userInfo["list"] as NSString)
+			case "requestReject", "requestApprove", "journeyRequest":
+				self.openRequestNotification(userInfo as [NSString: AnyObject])
+			default:
+				break
+			}
 		}
 		
 		return
+	}
+	
+	func openRequestNotification (userInfo: [NSString: AnyObject]) {
+		var vc: PageRootViewController = self.window!.rootViewController! as PageRootViewController
+		var navController = vc.getCurrentViewController()
+		//navController.visibleViewController.navigationController!.popToRootViewControllerAnimated(false)
+		if navController.visibleViewController.presentingViewController != nil {
+			navController.visibleViewController.navigationController!.dismissViewControllerAnimated(false, completion: nil)
+		}
+		
+		navController.popToRootViewControllerAnimated(false)
+		var pageRootDelegate = navController.viewControllers[0] as PageRootDelegate
+		pageRootDelegate.openMessageNotification("")
 	}
 	
 	func openMessageNotification (listID: NSString) {

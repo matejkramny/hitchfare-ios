@@ -25,41 +25,52 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zYm-dp-Xo9">
-                        <rect key="frame" x="16" y="337" width="568" height="255"/>
+                        <rect key="frame" x="16" y="337" width="568" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IV7-3P-XVE">
-                        <rect key="frame" x="16" y="308" width="568" height="21"/>
+                        <rect key="frame" x="16" y="308" width="514" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="E16-85-qAX"/>
+                            <constraint firstAttribute="height" constant="21" id="NAW-Mz-93X"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="naz-kb-uuL">
+                        <rect key="frame" x="538" y="308" width="46" height="20.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20.5" id="6br-ji-VTd"/>
+                            <constraint firstAttribute="width" constant="46" id="vsf-gr-ijO"/>
+                        </constraints>
+                        <state key="normal" title="Edit">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="cWo-uS-kOO" firstAttribute="leading" secondItem="vGg-8p-dFf" secondAttribute="leading" id="2QS-ll-55z"/>
-                    <constraint firstItem="zYm-dp-Xo9" firstAttribute="top" secondItem="IV7-3P-XVE" secondAttribute="bottom" constant="8" id="7bc-cF-Gbz"/>
-                    <constraint firstItem="KUc-hw-amX" firstAttribute="top" secondItem="zYm-dp-Xo9" secondAttribute="bottom" constant="8" id="8UZ-a9-S9X"/>
+                    <constraint firstItem="naz-kb-uuL" firstAttribute="top" secondItem="cWo-uS-kOO" secondAttribute="bottom" constant="8" id="AFY-dm-miP"/>
                     <constraint firstAttribute="trailing" secondItem="cWo-uS-kOO" secondAttribute="trailing" id="AKo-Qz-dOa"/>
-                    <constraint firstItem="IV7-3P-XVE" firstAttribute="top" secondItem="cWo-uS-kOO" secondAttribute="bottom" constant="8" id="AhG-9e-i8l"/>
-                    <constraint firstItem="zYm-dp-Xo9" firstAttribute="trailing" secondItem="vGg-8p-dFf" secondAttribute="trailingMargin" id="ICk-WV-qqJ"/>
+                    <constraint firstItem="zYm-dp-Xo9" firstAttribute="top" secondItem="IV7-3P-XVE" secondAttribute="bottom" constant="8" id="HDY-2l-YLz"/>
+                    <constraint firstItem="IV7-3P-XVE" firstAttribute="top" secondItem="cWo-uS-kOO" secondAttribute="bottom" constant="8" id="IWE-y8-wWQ"/>
+                    <constraint firstItem="KUc-hw-amX" firstAttribute="top" relation="greaterThanOrEqual" secondItem="zYm-dp-Xo9" secondAttribute="bottom" constant="8" id="MAp-Jt-44Y"/>
                     <constraint firstItem="cWo-uS-kOO" firstAttribute="top" secondItem="vGg-8p-dFf" secondAttribute="top" id="Qe1-b1-zas"/>
-                    <constraint firstItem="IV7-3P-XVE" firstAttribute="trailing" secondItem="vGg-8p-dFf" secondAttribute="trailingMargin" id="YPM-7Z-u4h"/>
-                    <constraint firstItem="zYm-dp-Xo9" firstAttribute="top" secondItem="IV7-3P-XVE" secondAttribute="bottom" constant="8" id="cHp-Lt-Vlp"/>
-                    <constraint firstItem="IV7-3P-XVE" firstAttribute="top" secondItem="cWo-uS-kOO" secondAttribute="bottom" constant="8" id="d33-KF-lV4"/>
-                    <constraint firstItem="IV7-3P-XVE" firstAttribute="leading" secondItem="vGg-8p-dFf" secondAttribute="leadingMargin" id="hYz-BO-vuO"/>
-                    <constraint firstItem="zYm-dp-Xo9" firstAttribute="leading" secondItem="vGg-8p-dFf" secondAttribute="leadingMargin" id="zf5-I1-K9A"/>
+                    <constraint firstItem="naz-kb-uuL" firstAttribute="leading" secondItem="IV7-3P-XVE" secondAttribute="trailing" constant="8" id="Um5-Rk-4va"/>
+                    <constraint firstItem="IV7-3P-XVE" firstAttribute="leading" secondItem="vGg-8p-dFf" secondAttribute="leadingMargin" id="Vd7-Xm-ymm"/>
+                    <constraint firstAttribute="trailing" secondItem="naz-kb-uuL" secondAttribute="trailing" constant="16" id="ll6-In-y80"/>
+                    <constraint firstAttribute="trailing" secondItem="zYm-dp-Xo9" secondAttribute="trailing" constant="16" id="pjn-8R-75x"/>
+                    <constraint firstItem="zYm-dp-Xo9" firstAttribute="leading" secondItem="vGg-8p-dFf" secondAttribute="leading" constant="16" id="qMK-Mh-Uda"/>
                 </constraints>
             </view>
             <connections>
                 <outlet property="carDescriptionLabel" destination="zYm-dp-Xo9" id="wDP-lT-EPF"/>
                 <outlet property="carImageView" destination="cWo-uS-kOO" id="tx4-gP-T4o"/>
                 <outlet property="carNameLabel" destination="IV7-3P-XVE" id="7Re-XV-YOQ"/>
+                <outlet property="editBtn" destination="naz-kb-uuL" id="BUR-tJ-nJQ"/>
             </connections>
             <point key="canvasLocation" x="-152" y="-89"/>
         </viewController>

@@ -18,7 +18,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cbt-1P-jjo">
                         <rect key="frame" x="51" y="8" width="193" height="28"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2eQ-I5-7oV" customClass="ChatLabel" customModule="FareShout" customModuleProvider="target">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2eQ-I5-7oV" customClass="ChatLabel" customModule="FareShout" customModuleProvider="target">
                                 <rect key="frame" x="8" y="0.0" width="42" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -28,7 +28,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="2eQ-I5-7oV" firstAttribute="leading" secondItem="cbt-1P-jjo" secondAttribute="leading" constant="8" id="AEr-cx-sY4"/>
-                            <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="2eQ-I5-7oV" secondAttribute="trailing" constant="8" id="OCW-QQ-2ge"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2eQ-I5-7oV" secondAttribute="trailing" constant="8" id="OCW-QQ-2ge"/>
                             <constraint firstAttribute="width" constant="193" id="UzI-2w-9FN"/>
                             <constraint firstItem="2eQ-I5-7oV" firstAttribute="top" secondItem="cbt-1P-jjo" secondAttribute="top" id="bZA-Ja-nN6"/>
                             <constraint firstAttribute="bottom" secondItem="2eQ-I5-7oV" secondAttribute="bottom" id="sZm-nF-tuu"/>

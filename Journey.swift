@@ -3,7 +3,6 @@ import Foundation
 
 class Journey {
 	var _id: NSString? = nil
-	var name: String? = ""
 	
 	var owner: String? = "" //_id
 	var ownerObj: User? = nil
@@ -32,9 +31,14 @@ class Journey {
 	init(_response: [NSString: AnyObject]) {
 		self._id = _response["_id"] as? String
 		
-		self.name = _response["name"] as? String
-		
 		self.owner = _response["owner"] as? String
+		
+		var _ownerObj: [NSString: AnyObject]? = _response["owner"] as? [NSString: AnyObject]
+		if _ownerObj != nil {
+			self.ownerObj = User(_response: _ownerObj!)
+			self.owner = self.ownerObj!._id
+		}
+		
 		self.car = _response["car"] as? String
 		var isDriver = _response["isDriver"] as? Bool
 		if isDriver != nil {
@@ -43,20 +47,19 @@ class Journey {
 		self.availableSeats = _response["availableSeats"] as? Int
 		
 		var start = _response["start"] as [String: AnyObject]
-		var startDate = start["date"] as? Double
-        
-        // StartDate is not Double Type.  ->  Server Time     exam) 2014-11-26T10:21:09.064Z
-        // Start Date Parsing Fixed. (Korea Develope Team Added.)
-        var startStr = start["date"] as? String
+		
+		// StartDate is not Double Type.  ->  Server Time     exam) 2014-11-26T10:21:09.064Z
+		// Start Date Parsing Fixed. (Korea Develope Team Added.)
+		var startStr = start["date"] as? String
 		if startStr != nil {
-            var dateFormatter = NSDateFormatter()
-            var timeZone = NSTimeZone(name: "UTC")              // Server TimeZone
-            dateFormatter.timeZone = timeZone
-            dateFormatter.dateFormat = "YYYY-MM-dd\'T\'HH:mm:ss.SSS\'Z\'"
-            
+			var dateFormatter = NSDateFormatter()
+			var timeZone = NSTimeZone(name: "UTC")              // Server TimeZone
+			dateFormatter.timeZone = timeZone
+			dateFormatter.dateFormat = kISODateFormat
+			
 			self.startDate = dateFormatter.dateFromString(startStr!)
 		}
-        ////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////
 		
 		self.startDateHuman = start["human"] as? String
 		self.startLocation = start["location"] as? String
@@ -64,9 +67,14 @@ class Journey {
 		self.startLng = start["lng"] as? Double
 		
 		var end = _response["end"] as [String: AnyObject]
-		var endDate = start["date"] as? Double
-		if endDate != nil {
-			self.endDate = NSDate(timeIntervalSince1970: startDate!)
+		var endStr = start["date"] as? String
+		if endStr != nil {
+			var dateFormatter = NSDateFormatter()
+			var timeZone = NSTimeZone(name: "UTC")              // Server TimeZone
+			dateFormatter.timeZone = timeZone
+			dateFormatter.dateFormat = kISODateFormat
+			
+			self.endDate = dateFormatter.dateFromString(endStr!)
 		}
 		
 		self.endDateHuman = end["human"] as? String
@@ -86,7 +94,6 @@ class Journey {
 		var endJson: [NSObject: AnyObject] = [:]
 		
 		if self._id != nil { json["_id"] = self._id }
-		if self.name != nil { json["name"] = self.name }
 		
 		if self.owner != nil { json["owner"] = self.owner }
 		if self.car != nil { json["car"] = self.car }
