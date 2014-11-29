@@ -51,7 +51,7 @@ class JourneyTableViewCell: MGSwipeTableCell {
             var dateFormatter = NSDateFormatter()
             var timeZone = NSTimeZone.localTimeZone()                       // Local TimeZone
             dateFormatter.timeZone = timeZone
-            dateFormatter.dateFormat = "dd/MM/YYYY"
+            dateFormatter.dateFormat = "dd/MM/YY hh:mm"
             var changedDate = dateFormatter.stringFromDate(date!)
             
 			self.dateLabel.text = "Date: " + changedDate

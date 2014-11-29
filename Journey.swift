@@ -1,5 +1,6 @@
 
 import Foundation
+import MapKit
 
 class Journey {
 	var _id: NSString? = nil
@@ -61,14 +62,20 @@ class Journey {
 		
 		self.startDateHuman = start["human"] as? String
 		self.startLocation = start["location"] as? String
-		self.startLat = start["lat"] as? Double
-		self.startLng = start["lng"] as? Double
+		var loc = start["loc"] as? [Double]
+		if loc != nil && loc!.count == 2 {
+			self.startLat = loc![0]
+			self.startLng = loc![1]
+		}
 		
 		var end = _response["end"] as [String: AnyObject]
 		
 		self.endLocation = end["location"] as? String
-		self.endLat = end["lat"] as? Double
-		self.endLng = end["lng"] as? Double
+		loc = end["loc"] as? [Double]
+		if loc != nil && loc!.count == 2 {
+			self.endLat = loc![0]
+			self.endLng = loc![1]
+		}
 		
 		var price = _response["price"] as? Float
 		if price != nil {
@@ -91,13 +98,15 @@ class Journey {
 		if self.startDate != nil { startJson["date"] = self.startDate!.timeIntervalSince1970 }
 		if self.startDateHuman != nil { startJson["human"] = self.startDateHuman }
 		if self.startLocation != nil { startJson["location"] = self.startLocation }
-		if self.startLat != nil { startJson["startLat"] = self.startLat }
-		if self.startLng != nil { startJson["startLng"] = self.startLng }
+		if self.startLat != nil && self.startLng != nil {
+			startJson["loc"] = [self.startLng!, self.startLat!] as [Double]
+		}
 		json["start"] = startJson
 		
 		if self.endLocation != nil { endJson["location"] = self.endLocation }
-		if self.endLat != nil { endJson["startLat"] = self.endLat }
-		if self.endLng != nil { endJson["startLng"] = self.endLng }
+		if self.endLat != nil && self.endLng != nil {
+			endJson["loc"] = [self.endLng!, self.endLat!] as [Double]
+		}
 		json["end"] = endJson
 		
 		json["price"] = self.price
@@ -118,6 +127,10 @@ class Journey {
 	
 	class func getAll (callback: (err: NSError?, data: [Journey]) -> Void) {
 		getJourneys("/journeys", method: "GET", callback: callback)
+	}
+	
+	class func getAllByLocation (location: CLLocationCoordinate2D, callback: (err: NSError?, data: [Journey]) -> Void) {
+		getJourneys(NSString(format: "/journeys?lat=%f&lng=%f", location.latitude, location.longitude), method: "GET", callback: callback)
 	}
 	
 	class func getMyJourneys (callback: (err: NSError?, data: [Journey]) -> Void) {

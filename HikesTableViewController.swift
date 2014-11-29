@@ -25,7 +25,7 @@ class HikesTableViewCell: UITableViewController, PageRootDelegate {
         self.tableView.separatorColor = UIColor(red: 145/255.0, green: 101/255.0, blue: 105/255.0, alpha: 1)
 		
 		// makes uirefreshcontrol visible..
-		self.tableView.backgroundView!.layer.zPosition -= 1;
+		self.tableView.backgroundView!.layer.zPosition -= 1
 		
 		self.refreshData(nil)
 	}

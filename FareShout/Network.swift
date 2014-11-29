@@ -1,18 +1,21 @@
 
 import Foundation
+import MapKit
 
 let kISODateFormat = "YYYY-MM-dd\'T\'HH:mm:ss.SSS\'Z\'"
 
-//let kAPIProtocol = "http://"
-//let kAPIEndpoint = kAPIProtocol + "10.0.1.69:3000"
+let kAPIProtocol = "http://"
+let kAPIEndpoint = kAPIProtocol + "10.0.1.69:3000"
 
 // Debug
 //let kAPIProtocol = "https://"
 //let kAPIEndpoint = kAPIProtocol + "fareshout-dev-matejkramny.ngapp.io"
 
 // Production
-let kAPIProtocol = "https://"
-let kAPIEndpoint = kAPIProtocol + "fareshout-matejkramny.ngapp.io"
+//let kAPIProtocol = "https://"
+//let kAPIEndpoint = kAPIProtocol + "fareshout-matejkramny.ngapp.io"
+
+let kGeocodeApiEndpoint = "https://maps.googleapis.com/maps/api/geocode/json"
 
 let kNetworkDomainError = "Invalid Response"
 
@@ -22,6 +25,8 @@ var sessionCookie: String?
 var queueRequests: Bool = false
 var queuedRequests: [Request] = []
 var didRequestForNotifications: Bool = false
+
+var sharedGeolocationConnection: NSURLSessionDataTask? = nil
 
 class Request: NSObject {
 	var request: NSMutableURLRequest
@@ -137,12 +142,12 @@ func doPostRequest (request: NSMutableURLRequest, callback: (err: NSError?, data
 	doRequest(request, callback, data)
 }
 
-func doRequest (request: NSMutableURLRequest, callback: (err: NSError?, data: AnyObject?) -> Void, body: NSData?) {
+func doRequest (request: NSMutableURLRequest, callback: (err: NSError?, data: AnyObject?) -> Void, body: NSData?) -> NSURLSessionDataTask? {
 	if queueRequests {
 		var req: Request! = Request(request: request, callback: callback, body: body)
 		queuedRequests.append(req)
 		
-		return
+		return nil
 	}
 	
 	if body != nil {
@@ -190,6 +195,8 @@ func doRequest (request: NSMutableURLRequest, callback: (err: NSError?, data: An
 	}
 	
 	task.resume()
+	
+	return task
 }
 
 func findMessageList (to: NSString, callback: (list: MessageList?) -> Void) {
@@ -213,4 +220,66 @@ func findMessageList (to: NSString, callback: (list: MessageList?) -> Void) {
 			callback(list: foundList!)
 		}
 	})
+}
+
+func geocodeAddress(address: String, callback: (err: NSError?, data: [[NSString: AnyObject]]) -> Void) {
+	if sharedGeolocationConnection != nil {
+		sharedGeolocationConnection!.cancel()
+		sharedGeolocationConnection = nil
+	}
+	
+	var urlAddress = kGeocodeApiEndpoint + "?address=" + String(address.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!)
+	var request = NSMutableURLRequest(URL: NSURL(string: urlAddress)!)
+	request.setValue("application/json", forHTTPHeaderField: "Accept")
+	request.HTTPMethod = "GET"
+	
+	sharedGeolocationConnection = doRequest(request, { (err: NSError?, data: AnyObject?) -> Void in
+		if err != nil {
+			return callback(err: err, data: [])
+		}
+		
+		var json = data as? [NSString: AnyObject]
+		if json == nil {
+			return callback(err: nil, data: [])
+		}
+		
+		let status = json!["status"] as NSString
+		if status != "OK" {
+			return callback(err: nil, data: [])
+		}
+		
+		var results = json!["results"] as [[NSString: AnyObject]]
+		callback(err: nil, data: results)
+	}, nil)
+}
+
+func geocodeLocation(location: CLLocationCoordinate2D, callback: (err: NSError?, data: [[NSString: AnyObject]]) -> Void) {
+	if sharedGeolocationConnection != nil {
+		sharedGeolocationConnection!.cancel()
+		sharedGeolocationConnection = nil
+	}
+	
+	var urlAddress = NSString(format: "%@?latlng=%f,%f", kGeocodeApiEndpoint, location.latitude, location.longitude)
+	var request = NSMutableURLRequest(URL: NSURL(string: urlAddress)!)
+	request.setValue("application/json", forHTTPHeaderField: "Accept")
+	request.HTTPMethod = "GET"
+	
+	sharedGeolocationConnection = doRequest(request, { (err: NSError?, data: AnyObject?) -> Void in
+		if err != nil {
+			return callback(err: err, data: [])
+		}
+		
+		var json = data as? [NSString: AnyObject]
+		if json == nil {
+			return callback(err: nil, data: [])
+		}
+		
+		let status = json!["status"] as NSString
+		if status != "OK" {
+			return callback(err: nil, data: [])
+		}
+		
+		var results = json!["results"] as [[NSString: AnyObject]]
+		callback(err: nil, data: results)
+	}, nil)
 }

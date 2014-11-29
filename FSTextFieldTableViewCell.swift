@@ -2,7 +2,8 @@
 import UIKit
 
 protocol FSTextFieldCellProtocol {
-	func FSTextFieldCellValueChanged(cell: FSTextFieldTableViewCell, value: NSString?)
+	func FSTextFieldCellValueChanged(cell: FSTextFieldTableViewCell?, value: NSString?)
+	func FSTextFieldCellEditingBegan(cell: FSTextFieldTableViewCell?)
 }
 
 class FSTextFieldTableViewCell: UITableViewCell {
@@ -13,6 +14,7 @@ class FSTextFieldTableViewCell: UITableViewCell {
 	
 	func initialize () {
 		self.field.addTarget(self, action: "valueChanged:", forControlEvents: UIControlEvents.EditingChanged)
+		self.field.addTarget(self, action: "editingBegan:", forControlEvents: UIControlEvents.EditingDidBegin)
 	}
 	
 	func valueChanged(sender: AnyObject?) {
@@ -21,5 +23,13 @@ class FSTextFieldTableViewCell: UITableViewCell {
 		}
 		
 		self.delegate!.FSTextFieldCellValueChanged(self, value: self.field.text)
+	}
+	
+	func editingBegan(sender: AnyObject?) {
+		if delegate == nil {
+			return
+		}
+		
+		self.delegate!.FSTextFieldCellEditingBegan(self)
 	}
 }

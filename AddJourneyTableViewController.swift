@@ -1,10 +1,12 @@
 
 import UIKit
 
-class AddJourneyTableViewController: UITableViewController, StartEndTableViewCellProtocol, CarSelectionProtocol, StepperCellDelegate, FSTextFieldCellProtocol, SwitchCellProtocol, PriceCellDelegate {
+class AddJourneyTableViewController: UITableViewController, StartEndTableViewCellProtocol, CarSelectionProtocol, StepperCellDelegate, FSTextFieldCellProtocol, SwitchCellProtocol, PriceCellDelegate, LocationFinderDelegate {
 	
 	var startEndCellHeight: CGFloat = 44.0
 	var journey: Journey = Journey()
+	
+	var lookingForDeparture: Bool = false
 	
 	var originalStepperColor: UIColor?
 	
@@ -112,6 +114,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 			cell!.field.keyboardType = UIKeyboardType.Default
 			cell!.field.autocapitalizationType = UITextAutocapitalizationType.Words
 			cell!.field.autocorrectionType = UITextAutocorrectionType.No
+			cell!.field.enabled = true
 			
 			if indexPath.row == 0 {
 				cell!.label.text = "Departure"
@@ -242,6 +245,21 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 			if car != nil {
 				dc.selectedCar = car!
 			}
+		} else if segue.identifier == "openLocationFinder" {
+			var vc = segue.destinationViewController as LocationFinderTableViewController
+			
+			var isDeparture: Bool = sender as Bool
+			self.lookingForDeparture = isDeparture
+			
+			vc.delegate = self
+			
+			if isDeparture == true {
+				vc.navigationItem.title = "Departure"
+				vc.cellTitle = "Departing from ..."
+			} else {
+				vc.navigationItem.title = "Destination"
+				vc.cellTitle = "Going to ..."
+			}
 		}
 	}
 	
@@ -295,12 +313,26 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	
 	// FSTextFieldCellDelegate
 	
-	func FSTextFieldCellValueChanged(cell: FSTextFieldTableViewCell, value: NSString?) {
-		if cell == self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1)) {
+	func FSTextFieldCellValueChanged(cell: FSTextFieldTableViewCell?, value: NSString?) {
+		if cell! == self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1)) {
 			journey.startLocation = value
-		} else if cell == self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 1)) {
+		} else if cell! == self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 1)) {
 			journey.endLocation = value
 		}
+	}
+	
+	func FSTextFieldCellEditingBegan(cell: FSTextFieldTableViewCell?) {
+		dispatch_after(0, dispatch_get_main_queue(), {
+			cell!.field.resignFirstResponder()
+			
+			if cell! == self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1)) {
+				self.performSegueWithIdentifier("openLocationFinder", sender: true)
+			} else if cell! == self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 1)) {
+				self.performSegueWithIdentifier("openLocationFinder", sender: false)
+			}
+			
+			return
+		})
 	}
 	
 	// SwitchCellProtocol
@@ -326,6 +358,31 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	
 	func PriceCellValueChanged(cell: PriceTableViewCell) {
 		journey.price = cell.slider.value
+	}
+	
+	// LocationFinderDelegate
+
+	func didSelectLocation(location: LocationResult) {
+		var indexPath: NSIndexPath!
+		
+		if self.lookingForDeparture == true {
+			indexPath = NSIndexPath(forRow: 0, inSection: 1)
+		} else {
+			indexPath = NSIndexPath(forRow: 1, inSection: 1)
+		}
+		
+		var cell = self.tableView.cellForRowAtIndexPath(indexPath) as FSTextFieldTableViewCell
+		cell.field.text = location.name
+		
+		if self.lookingForDeparture == true {
+			self.journey.startLocation = location.name
+			self.journey.startLat = location.location.latitude
+			self.journey.startLng = location.location.longitude
+		} else {
+			self.journey.endLocation = location.name
+			self.journey.endLat = location.location.latitude
+			self.journey.endLng = location.location.longitude
+		}
 	}
 	
 }

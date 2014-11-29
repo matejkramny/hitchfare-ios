@@ -22,8 +22,9 @@ class CarsTableViewController: UIViewController {
 			self.navigationItem.title = "Select Car"
 		} else {
 			self.navigationItem.title = "Cars"
-			self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addCar:")
 		}
+		
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addCar:")
 	}
 	
 	func addCar (sender: AnyObject) {

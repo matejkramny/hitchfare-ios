@@ -95,6 +95,10 @@
 		4FD3C9D21A23FB10003058F6 /* JourneyRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FD3C9D01A23FB10003058F6 /* JourneyRequestTableViewCell.xib */; };
 		4FD6D2921A0551F600199082 /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6D2911A0551F600199082 /* Car.swift */; };
 		4FD6D2961A05560B00199082 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6D2951A05560B00199082 /* Network.swift */; };
+		4FEA2EA71A29F504008C1CE7 /* LocationFinderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEA2EA61A29F504008C1CE7 /* LocationFinderTableViewController.swift */; };
+		4FEA2EA91A29FB00008C1CE7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FEA2EA81A29FB00008C1CE7 /* MapKit.framework */; };
+		4FEA2EAC1A2A01AC008C1CE7 /* FSFullTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEA2EAA1A2A01AC008C1CE7 /* FSFullTextFieldTableViewCell.swift */; };
+		4FEA2EAD1A2A01AC008C1CE7 /* FSFullTextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FEA2EAB1A2A01AC008C1CE7 /* FSFullTextFieldTableViewCell.xib */; };
 		4FF31FF61A1F4EC9005805D7 /* RightChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF31FF41A1F4EC9005805D7 /* RightChatTableViewCell.swift */; };
 		4FF31FF71A1F4EC9005805D7 /* RightChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FF31FF51A1F4EC9005805D7 /* RightChatTableViewCell.xib */; };
 		4FF31FFA1A1F57AD005805D7 /* LeftChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF31FF81A1F57AD005805D7 /* LeftChatTableViewCell.swift */; };
@@ -234,6 +238,10 @@
 		4FD6D2911A0551F600199082 /* Car.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
 		4FD6D2951A05560B00199082 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		4FD6D2981A05564500199082 /* CarTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarTest.swift; sourceTree = "<group>"; };
+		4FEA2EA61A29F504008C1CE7 /* LocationFinderTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationFinderTableViewController.swift; sourceTree = "<group>"; };
+		4FEA2EA81A29FB00008C1CE7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		4FEA2EAA1A2A01AC008C1CE7 /* FSFullTextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSFullTextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		4FEA2EAB1A2A01AC008C1CE7 /* FSFullTextFieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FSFullTextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		4FF31FF41A1F4EC9005805D7 /* RightChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightChatTableViewCell.swift; sourceTree = "<group>"; };
 		4FF31FF51A1F4EC9005805D7 /* RightChatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RightChatTableViewCell.xib; sourceTree = "<group>"; };
 		4FF31FF81A1F57AD005805D7 /* LeftChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftChatTableViewCell.swift; sourceTree = "<group>"; };
@@ -246,6 +254,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FEA2EA91A29FB00008C1CE7 /* MapKit.framework in Frameworks */,
 				4F4FFDB31A1FBC31004EE524 /* ImageIO.framework in Frameworks */,
 				4F1AD1791A14F6A70047BEE8 /* QuartzCore.framework in Frameworks */,
 				4FC1E60C19FEB866002F743B /* Accounts.framework in Frameworks */,
@@ -259,6 +268,7 @@
 		4F1AD1731A14F62D0047BEE8 /* Deps */ = {
 			isa = PBXGroup;
 			children = (
+				4FEA2EA81A29FB00008C1CE7 /* MapKit.framework */,
 				4F412D491A24B88700019241 /* JCNotificationBanner */,
 				4F20D3801A235B9500A1CAC5 /* OCRAStd.otf */,
 				4F20D3751A23412400A1CAC5 /* MGSwipeTableViewCell */,
@@ -405,6 +415,8 @@
 				4F4FFDB91A1FC3AD004EE524 /* FSProfileTableViewCell.xib */,
 				4F1AD16F1A139B490047BEE8 /* FSTextFieldTableViewCell.swift */,
 				4F1AD1701A139B490047BEE8 /* FSTextFieldTableViewCell.xib */,
+				4FEA2EAA1A2A01AC008C1CE7 /* FSFullTextFieldTableViewCell.swift */,
+				4FEA2EAB1A2A01AC008C1CE7 /* FSFullTextFieldTableViewCell.xib */,
 				4F412DAA1A2550A000019241 /* FSTextViewTableViewCell.swift */,
 				4F412DAB1A2550A000019241 /* FSTextViewTableViewCell.xib */,
 				4F8856AB1A1118240039EA6E /* SwitchTableViewCell.swift */,
@@ -522,6 +534,7 @@
 				4F525F3A1A05A26C00EDD696 /* AddJourneyTableViewController.swift */,
 				4F1A62531A1A90B300826ECE /* MessagesTableViewController.swift */,
 				4F8B23ED1A288DCD0095EC1B /* PassengersTableViewController.swift */,
+				4FEA2EA61A29F504008C1CE7 /* LocationFinderTableViewController.swift */,
 				4F1AD1A61A15625F0047BEE8 /* Cars */,
 			);
 			name = Scenes;
@@ -609,6 +622,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FEA2EAD1A2A01AC008C1CE7 /* FSFullTextFieldTableViewCell.xib in Resources */,
 				4FC1E5EB19FEB518002F743B /* Main.storyboard in Resources */,
 				4F412DA51A25266200019241 /* CarViewController.xib in Resources */,
 				4F1AD19E1A155C460047BEE8 /* FontAwesome.ttf in Resources */,
@@ -651,6 +665,7 @@
 				4F412DA41A25266200019241 /* CarViewController.swift in Sources */,
 				4F412D6E1A24C72C00019241 /* AcceptJourneyRequestTableViewCell.swift in Sources */,
 				4F20D3651A23354E00A1CAC5 /* MKAnnotationView+WebCache.m in Sources */,
+				4FEA2EA71A29F504008C1CE7 /* LocationFinderTableViewController.swift in Sources */,
 				4F4FFDBF1A20AC63004EE524 /* NSString+FontAwesome.m in Sources */,
 				4F4FFDC01A20AC63004EE524 /* UIFont+FontAwesome.m in Sources */,
 				4F4FFDBD1A20AB35004EE524 /* FacebookCtrl.m in Sources */,
@@ -694,6 +709,7 @@
 				4FD346E41A127CB3006026DD /* PriceTableViewCell.swift in Sources */,
 				4FC1E60819FEB751002F743B /* LoginViewController.swift in Sources */,
 				4F1A62541A1A90B300826ECE /* MessagesTableViewController.swift in Sources */,
+				4FEA2EAC1A2A01AC008C1CE7 /* FSFullTextFieldTableViewCell.swift in Sources */,
 				4F95342719FFEFDF0058210D /* UserTableViewController.swift in Sources */,
 				4F20D36E1A23354E00A1CAC5 /* UIButton+WebCache.m in Sources */,
 				4F525F391A05A10800EDD696 /* NearbyJourneysTableViewController.swift in Sources */,

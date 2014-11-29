@@ -1,11 +1,16 @@
 
 import UIKit
+import MapKit
 
-class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate {
+class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate, CLLocationManagerDelegate {
 	
 	var journeys: [Journey] = []
 	var didAppear: Bool = false
 	var isInSegue: Bool = false
+	var lastLocation: CLLocationCoordinate2D? = nil
+	var didUpdateDataAfterLocation: Bool = false
+	
+	var locationManager: CLLocationManager!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -25,15 +30,36 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
         self.tableView.separatorColor = UIColor(red: 145/255.0, green: 101/255.0, blue: 105/255.0, alpha: 1)
 		
 		// makes uirefreshcontrol visible..
-		self.tableView.backgroundView!.layer.zPosition -= 1;
+		self.tableView.backgroundView!.layer.zPosition -= 1
+		
+		self.locationManager = CLLocationManager()
+		self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+		self.locationManager.distanceFilter = kCLDistanceFilterNone
+		self.locationManager.delegate = self
 		
 		self.refreshData(nil)
+	}
+	
+	func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!) {
+		self.lastLocation = newLocation.coordinate
+		
+		if self.didUpdateDataAfterLocation == false {
+			self.didUpdateDataAfterLocation = true
+			
+			self.refreshData(nil)
+		}
 	}
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		
 		mainNavigationDelegate.showNavigationBar()
+		
+		if iOS8 {
+			self.locationManager.requestWhenInUseAuthorization()
+		}
+		
+		self.locationManager.startUpdatingLocation()
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -75,11 +101,17 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
 	}
 	
 	func refreshData (sender: AnyObject?) {
-		Journey.getAll({ (err: NSError?, data: [Journey]) -> Void in
+		var callback: (err: NSError?, data: [Journey]) -> Void = { (err: NSError?, data: [Journey]) -> Void in
 			self.journeys = data
 			self.refreshControl!.endRefreshing()
 			self.tableView.reloadData()
-		})
+		}
+		
+		if self.lastLocation != nil {
+			Journey.getAllByLocation(self.lastLocation!, callback: callback)
+		} else {
+			Journey.getAll(callback)
+		}
 	}
 	
 	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
