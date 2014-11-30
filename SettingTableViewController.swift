@@ -107,8 +107,6 @@ class SettingTableViewController: UITableViewController, UIActionSheetDelegate, 
         default:
             break
         }
-		
-		return tableView.dequeueReusableCellWithIdentifier("", forIndexPath: indexPath) as UITableViewCell
     }
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
