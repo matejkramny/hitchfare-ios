@@ -29,8 +29,9 @@ class JourneyTableViewCell: MGSwipeTableCell {
 //			self.journeyNameLabel.textColor = UIColor(red: 96/255.0, green: 99/255.0, blue: 102/255.0, alpha: 1)
 //			self.driverImageView.image = UIImage(named: "PassengerTag")
 //		}
-        
-        if journey.isDriver {
+		
+		// Not 'journey.isDriver' -- which is correct. The below is expected behaviour by user.. and makes sense :/.
+        if journey.owner! == currentUser!._id! {
             self.journeyNameLabel.textColor = driverColor
             self.driverImageView.image = UIImage(named: "DriverTag")
         } else {

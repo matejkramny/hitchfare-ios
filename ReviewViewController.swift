@@ -39,6 +39,8 @@ class ReviewViewController: UIViewController {
 			
 			btn.enabled = true
 		}
+		
+		self.journeyName.text = journey.journey.ownerObj!.name
 	}
 	
 	func didTap (gestureRecognizer: UITapGestureRecognizer) {

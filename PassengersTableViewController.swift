@@ -10,6 +10,7 @@ class PassengersTableViewController: UITableViewController {
 		
 		self.refreshControl = UIRefreshControl()
 		self.refreshControl!.addTarget(self, action: "refreshData:", forControlEvents: UIControlEvents.ValueChanged)
+		self.refreshControl!.tintColor = UIColor.whiteColor()
 		
 		self.tableView.registerNib(UINib(nibName: "HikeTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Hike")
 		
@@ -24,6 +25,9 @@ class PassengersTableViewController: UITableViewController {
 		if journey.owner! != currentUser!._id! {
 			self.navigationItem.title = "Other Passengers"
 		}
+		
+		// makes uirefreshcontrol visible..
+		self.tableView.backgroundView!.layer.zPosition -= 1
 		
 		self.refreshData(nil)
 	}
@@ -50,7 +54,7 @@ class PassengersTableViewController: UITableViewController {
 	}
 	
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return self.passengers.count
+		return self.passengers.count + 1
 	}
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -60,7 +64,20 @@ class PassengersTableViewController: UITableViewController {
 			cell = HikeTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Hike")
 		}
 		
-		var passenger = self.passengers[indexPath.row]
+		if indexPath.row == 0 {
+			cell!.nameLabel.text = self.journey.ownerObj!.name
+			if self.journey.ownerObj!.picture != nil {
+				cell!.pictureImageView.sd_setImageWithURL(NSURL(string: self.journey.ownerObj!.picture!.url))
+				cell!.pictureImageView.clipsToBounds = true
+				cell!.pictureImageView.layer.cornerRadius = 72/2
+			}
+			
+			cell!.messageLabel.text = "Driver"
+			
+			return cell!
+		}
+		
+		var passenger = self.passengers[indexPath.row - 1]
 		var user = passenger.user
 		
 		cell!.nameLabel.text = user.name
@@ -68,6 +85,11 @@ class PassengersTableViewController: UITableViewController {
 			cell!.pictureImageView.sd_setImageWithURL(NSURL(string: user.picture!.url))
 			cell!.pictureImageView.clipsToBounds = true
 			cell!.pictureImageView.layer.cornerRadius = 72/2
+		}
+		
+		cell!.messageLabel.text = "Not Rated."
+		if passenger.rated == true {
+			cell!.messageLabel.text = "Rating: " + String(passenger.rating) + "/5"
 		}
 		
 		var deleteBtn = MGSwipeButton(title: " " + NSString.fontAwesomeIconStringForEnum(FAIcon.FATrashO) + " ", backgroundColor: UIColor.blackColor())
@@ -89,8 +111,21 @@ class PassengersTableViewController: UITableViewController {
 	}
 	
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		var passenger = self.passengers[indexPath.row]
-		findMessageList(passenger.user._id!, { (list: MessageList?) -> Void in
+		var userId: String!
+		
+		if indexPath.row == 0 {
+			if journey.owner! == currentUser!._id! {
+				tableView.deselectRowAtIndexPath(indexPath, animated: true)
+				return
+			}
+			
+			userId = journey.owner!
+		} else {
+			var passenger = self.passengers[indexPath.row - 1]
+			userId = passenger.user._id!
+		}
+		
+		findMessageList(userId, { (list: MessageList?) -> Void in
 			self.performSegueWithIdentifier("openMessage", sender: list)
 		})
 	}

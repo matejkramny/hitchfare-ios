@@ -56,5 +56,7 @@ class SettingTableViewController: UITableViewController {
         } else if indexPath.section == 1 {
             
         }
+		
+		return tableView.dequeueReusableCellWithIdentifier("", forIndexPath: indexPath) as UITableViewCell
     }
 }

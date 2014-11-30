@@ -16,7 +16,18 @@ class LocationResult {
 	}
 	
 	class func parse(res: [NSString: AnyObject]) -> LocationResult {
-		var name = res["formatted_address"] as String
+		var components = res["address_components"] as [[NSString: AnyObject]]
+		
+		var preference = ["postal_town", "administrative_area_level_3", "locality", "administrative_area_level_2", "political"]
+		
+		var name: String = res["formatted_address"] as String
+		for pref in preference {
+			var n = LocationResult.lookForComponentType(pref, components: components)
+			if n != nil {
+				name = n!
+				break
+			}
+		}
 		
 		var geo = res["geometry"] as [NSString: AnyObject]
 		var location = geo["location"] as [NSString: AnyObject]
@@ -24,6 +35,42 @@ class LocationResult {
 		var lng = location["lng"] as Double
 		
 		return LocationResult(name: name, location: CLLocationCoordinate2D(latitude: lat, longitude: lng))
+	}
+	
+	class func lookForComponentType (type: NSString, components: [[NSString: AnyObject]]) -> String? {
+		for component in components {
+			var types = component["types"] as [NSString]
+			for t in types {
+				if type.isEqualToString(t) {
+					return component["short_name"] as? String
+				}
+			}
+		}
+		
+		return nil
+	}
+	
+	class func reduceDups (results: [LocationResult]) -> [LocationResult] {
+		var res: [LocationResult] = []
+		
+		for (i, r) in enumerate(results) {
+			var isDup = false
+			
+			for (x, dup) in enumerate(res) {
+				if r.name == dup.name {
+					isDup = true
+					break
+				}
+			}
+			
+			if isDup {
+				continue
+			}
+			
+			res.append(r)
+		}
+		
+		return res
 	}
 }
 
@@ -149,9 +196,9 @@ class LocationFinderTableViewController: UITableViewController, FSTextFieldCellP
 				
 				SVProgressHUD.dismiss()
 				
-				var formatted = data[0]["formatted_address"] as String
+//				var formatted = data[0]["formatted_address"] as String
 				self.navigationController!.popViewControllerAnimated(true)
-				self.delegate!.didSelectLocation(LocationResult(name: formatted, location: coord))
+				self.delegate!.didSelectLocation(LocationResult.parse(data[0]))
 			})
 			
 			return
@@ -169,6 +216,8 @@ class LocationFinderTableViewController: UITableViewController, FSTextFieldCellP
 			for d in data {
 				self.results.append(LocationResult.parse(d))
 			}
+			
+			self.results = LocationResult.reduceDups(self.results)
 			
 			self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: UITableViewRowAnimation.Automatic)
 		})

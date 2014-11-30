@@ -160,7 +160,7 @@ class HikesTableViewCell: UITableViewController, PageRootDelegate, MGSwipeTableC
     }
 	
 	func pageRootTitle() -> NSString? {
-		return "Hike"
+		return "Hitch"
 	}
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

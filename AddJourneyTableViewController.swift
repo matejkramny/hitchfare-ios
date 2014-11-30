@@ -14,7 +14,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 		super.viewDidLoad()
 		
 		self.navigationController?.navigationBar.translucent = false
-		
+		self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
 		self.navigationController!.navigationBar.barStyle = UIBarStyle.Black
 		
 		self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancel:")
@@ -55,6 +55,22 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	}
 	
 	func save(sender: AnyObject) {
+		var error: NSString?
+		if journey.endLocation == nil || journey.endLocation!.length == 0 {
+			error = "No Destination Location Selected"
+		}
+		if journey.startLocation == nil || journey.startLocation!.length == 0 {
+			error = "No Departure Location Selected"
+		}
+		if journey.isDriver && (journey.car == nil || NSString(string: journey.car!).length == 0) {
+			error = "No Car Selected"
+		}
+		
+		if error != nil {
+			UIAlertView(title: "Cannot Save Journey", message: error!, delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "Ok").show()
+			return
+		}
+		
 		SVProgressHUD.showProgress(0, status: "Saving..", maskType: SVProgressHUDMaskType.Black)
 		
 		journey.update({ (err: NSError?, data: AnyObject?) -> Void in
@@ -73,6 +89,10 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	}
 	
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		if section == 2 && journey.isDriver == false {
+			return 0
+		}
+		
 		switch section {
 		case 0, 2, 4:
 			return 1
@@ -84,7 +104,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	}
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		if indexPath.section == 0 {
+		if indexPath.section == 2 {
 			var cell = tableView.dequeueReusableCellWithIdentifier("carSelector", forIndexPath: indexPath) as? UITableViewCell
 			
 			cell!.textLabel!.text = "Car"
@@ -93,6 +113,9 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 			if journey.car != nil {
 				car_id = journey.car!
 			}
+			
+			cell!.backgroundColor = UIColor.clearColor()
+			cell!.textLabel!.textColor = UIColor.whiteColor()
 			
 			var car = storage.findCarWithId(car_id)
 			if car != nil {
@@ -127,7 +150,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 			}
 			
 			return cell!
-		} else if indexPath.section == 2 {
+		} else if indexPath.section == 0 {
 			// I am a driver / Passenger switch
 			var cell = tableView.dequeueReusableCellWithIdentifier("Switch", forIndexPath: indexPath) as? SwitchTableViewCell
 			if cell == nil {
@@ -225,7 +248,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 		case 1:
 			var cell: FSTextFieldTableViewCell = tableView.cellForRowAtIndexPath(indexPath) as FSTextFieldTableViewCell
 			cell.field.becomeFirstResponder()
-		case 0:
+		case 2:
 			self.performSegueWithIdentifier("openCars", sender: nil)
 			return
 		default:
@@ -297,10 +320,10 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 		cell.stepper.value = Double(journey.availableSeats!)
 		cell.label.text = "Availability: " + String(journey.availableSeats!)
 		
-		var carCell: UITableViewCell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))!
+		var carCell: UITableViewCell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2))!
 		carCell.detailTextLabel!.text = car.name
 		carCell.setNeedsDisplay()
-		self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
+		self.tableView.reloadSections(NSIndexSet(index: 2), withRowAnimation: UITableViewRowAnimation.Fade)
 	}
 	
 	// StepperCellDelegate
@@ -357,6 +380,8 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 			self.originalStepperColor = stepperCell.stepper.tintColor
 			stepperCell.stepper.tintColor = UIColor.grayColor()
 		}
+		
+		self.tableView.reloadSections(NSIndexSet(index: 2), withRowAnimation: UITableViewRowAnimation.Automatic)
 	}
 	
 	// PriceCellDelegate

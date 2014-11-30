@@ -108,7 +108,10 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	
 	func refreshData (sender: AnyObject?) {
 		var callback: (err: NSError?, data: [Journey]) -> Void = { (err: NSError?, data: [Journey]) -> Void in
-			var timeIntervalNow: NSTimeInterval = NSDate().timeIntervalSince1970
+			let calendar: NSCalendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
+			let components: NSDateComponents = calendar.components(NSCalendarUnit.YearCalendarUnit|NSCalendarUnit.MonthCalendarUnit|NSCalendarUnit.DayCalendarUnit, fromDate: NSDate())
+			components.hour = 0
+			var timeIntervalNow: NSTimeInterval = calendar.dateFromComponents(components)!.timeIntervalSince1970
 			
 			self.journeys = []
 			self.pastJourneys = []
@@ -435,7 +438,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	}
 	
 	func pageRootTitle() -> NSString? {
-		return "Hitch"
+		return "Hike"
 	}
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
