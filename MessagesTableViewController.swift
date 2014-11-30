@@ -59,8 +59,13 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 		self.tableView.registerNib(UINib(nibName: "LeftChatTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "LeftChatCell")
 		self.tableView.registerNib(UINib(nibName: "RightChatTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "RightChatCell")
 		self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-		self.tableView.backgroundColor = UIColor(red: 113/255, green: 0, blue: 2/255, alpha: 1.0)
-		self.tableView.backgroundView = nil
+		//self.tableView.backgroundColor = UIColor(red: 113/255, green: 0, blue: 2/255, alpha: 1.0)
+        var image : UIImage! = UIImage(named: "BackGround")
+        var imageView : UIImageView! = UIImageView(image: image)
+        imageView.frame = UIScreen.mainScreen().bounds
+        self.tableView.backgroundView = imageView
+        self.tableView.separatorColor = UIColor(red: 145/255.0, green: 101/255.0, blue: 105/255.0, alpha: 1)
+        //self.tableView.backgroundView = nil
 		
 		tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "titleTap:")
 		tapGestureRecognizer.numberOfTapsRequired = 1

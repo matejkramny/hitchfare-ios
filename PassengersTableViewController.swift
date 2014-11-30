@@ -14,6 +14,12 @@ class PassengersTableViewController: UITableViewController {
 		self.tableView.registerNib(UINib(nibName: "HikeTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Hike")
 		
 		self.navigationItem.title = "Passengers"
+        
+        var image : UIImage! = UIImage(named: "BackGround")
+        var imageView : UIImageView! = UIImageView(image: image)
+        imageView.frame = UIScreen.mainScreen().bounds
+        self.tableView.backgroundView = imageView
+        self.tableView.separatorColor = UIColor(red: 145/255.0, green: 101/255.0, blue: 105/255.0, alpha: 1)
 		
 		if journey.owner! != currentUser!._id! {
 			self.navigationItem.title = "Other Passengers"
