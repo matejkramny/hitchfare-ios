@@ -7,11 +7,11 @@
     {
       "idiom" : "iphone",
       "scale" : "2x",
-      "filename" : "driver.png"
+      "filename" : "driver@2x.png"
     },
     {
       "idiom" : "iphone",
-      "filename" : "driver-1.png",
+      "filename" : "driver@R4.png",
       "subtype" : "retina4",
       "scale" : "2x"
     },
