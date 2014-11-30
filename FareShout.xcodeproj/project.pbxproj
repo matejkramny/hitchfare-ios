@@ -108,6 +108,8 @@
 		DB22377A1A2B242200BCE0F2 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2237781A2B242200BCE0F2 /* SettingTableViewCell.swift */; };
 		DB22377B1A2B242200BCE0F2 /* SettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB2237791A2B242200BCE0F2 /* SettingTableViewCell.xib */; };
 		DB22377D1A2B2F0300BCE0F2 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22377C1A2B2F0300BCE0F2 /* SettingTableViewController.swift */; };
+		DB22377F1A2B4F5500BCE0F2 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB22377E1A2B4F5500BCE0F2 /* MessageUI.framework */; };
+		DB2237811A2B5E6C00BCE0F2 /* FSWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2237801A2B5E6C00BCE0F2 /* FSWebViewController.swift */; };
 		DB57FE551A26F2C100D99648 /* Common.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB57FE541A26F2C100D99648 /* Common.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -256,6 +258,8 @@
 		DB2237781A2B242200BCE0F2 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		DB2237791A2B242200BCE0F2 /* SettingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingTableViewCell.xib; sourceTree = "<group>"; };
 		DB22377C1A2B2F0300BCE0F2 /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
+		DB22377E1A2B4F5500BCE0F2 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		DB2237801A2B5E6C00BCE0F2 /* FSWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSWebViewController.swift; sourceTree = "<group>"; };
 		DB57FE541A26F2C100D99648 /* Common.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Common.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -264,6 +268,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB22377F1A2B4F5500BCE0F2 /* MessageUI.framework in Frameworks */,
 				4FEA2EA91A29FB00008C1CE7 /* MapKit.framework in Frameworks */,
 				4F4FFDB31A1FBC31004EE524 /* ImageIO.framework in Frameworks */,
 				4F1AD1791A14F6A70047BEE8 /* QuartzCore.framework in Frameworks */,
@@ -289,6 +294,7 @@
 				4FC1E60919FEB839002F743B /* Social.framework */,
 				4F1AD1741A14F6320047BEE8 /* SVProgressHUD */,
 				4F1AD1901A155C2B0047BEE8 /* FontAwesome */,
+				DB22377E1A2B4F5500BCE0F2 /* MessageUI.framework */,
 			);
 			name = Deps;
 			sourceTree = "<group>";
@@ -551,6 +557,7 @@
 				4FEA2EAE1A2AD525008C1CE7 /* ReviewViewController.swift */,
 				4FEA2EAF1A2AD525008C1CE7 /* ReviewViewController.xib */,
 				4F1AD1A61A15625F0047BEE8 /* Cars */,
+				DB2237801A2B5E6C00BCE0F2 /* FSWebViewController.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -715,6 +722,7 @@
 				4F525F3B1A05A26C00EDD696 /* AddJourneyTableViewController.swift in Sources */,
 				4FD346E81A12831B006026DD /* StartEndTableViewCell.swift in Sources */,
 				4F4FFD691A1F5F80004EE524 /* ChatLabel.swift in Sources */,
+				DB2237811A2B5E6C00BCE0F2 /* FSWebViewController.swift in Sources */,
 				4F4E363D1A13622100934D6B /* SharedStorage.swift in Sources */,
 				4FEA2EB01A2AD525008C1CE7 /* ReviewViewController.swift in Sources */,
 				4F20D36B1A23354E00A1CAC5 /* SDWebImageDownloaderOperation.m in Sources */,
