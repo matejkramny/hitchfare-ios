@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6221" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="azI-hm-qWg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6221" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="azI-hm-qWg">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6213"/>
@@ -579,11 +579,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingCell" id="DKr-bU-t0h">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingCell" id="K0Q-Y3-wMa">
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DKr-bU-t0h" id="gXp-UJ-rrN">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="K0Q-Y3-wMa" id="F3H-WH-RV7">
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PrivacyCell" id="cVP-vq-q9f">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cVP-vq-q9f" id="SL1-9w-nCh">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Szf-xQ-AHC" kind="show" identifier="Privacy" id="ady-Dk-Mbv"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TermsofServiceCell" id="PZA-fr-r5k">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PZA-fr-r5k" id="up5-dR-X8h">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Szf-xQ-AHC" kind="show" identifier="Terms of Service" id="xAK-Gd-thH"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -596,6 +614,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lYO-a5-XJf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5247" y="2611"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="J3U-cx-uEs">
+            <objects>
+                <viewController id="Szf-xQ-AHC" customClass="FSWebViewController" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Z73-vW-436"/>
+                        <viewControllerLayoutGuide type="bottom" id="h8i-MN-eGb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="R3q-wS-m1m">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RiG-GB-3eq">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RiG-GB-3eq" firstAttribute="leading" secondItem="R3q-wS-m1m" secondAttribute="leading" id="AgX-J4-GNB"/>
+                            <constraint firstItem="RiG-GB-3eq" firstAttribute="top" secondItem="R3q-wS-m1m" secondAttribute="top" id="ESP-xB-0r5"/>
+                            <constraint firstAttribute="trailing" secondItem="RiG-GB-3eq" secondAttribute="trailing" id="Mbe-69-fhO"/>
+                            <constraint firstItem="h8i-MN-eGb" firstAttribute="top" secondItem="RiG-GB-3eq" secondAttribute="bottom" id="buz-Pm-J2d"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="_webView" destination="RiG-GB-3eq" id="tvM-D3-Z5N"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ikj-66-DcU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5987" y="2611"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Msh-ne-h7B">
@@ -639,7 +690,7 @@
                                             </connections>
                                         </barButtonItem>
                                         <view key="titleView" contentMode="scaleToFill" id="9DA-o2-ksv">
-                                            <rect key="frame" x="180" y="5.5" width="240" height="33"/>
+                                            <rect key="frame" x="180" y="6" width="240" height="33"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
@@ -847,5 +898,6 @@
         <segue reference="SOi-a8-qTY"/>
         <segue reference="8Iw-xR-reM"/>
         <segue reference="7sG-pP-VEH"/>
+        <segue reference="ady-Dk-Mbv"/>
     </inferredMetricsTieBreakers>
 </document>
