@@ -1,35 +1,44 @@
-//
-//  FSWebViewController.swift
-//  FareShout
-//
-//  Created by Kim Do-hyun on 2014. 11. 30..
-//  Copyright (c) 2014년 Matej Kramny. All rights reserved.
-//
 
 import UIKit
 
-class FSWebViewController: UIViewController {
+class FSWebViewController: UIViewController, UIWebViewDelegate {
+    @IBOutlet weak var _webView: UIWebView!
+    var _flag : String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-    }
+        
+        var image : UIImage! = UIImage(named: "BackGround")
+        var imageView : UIImageView! = UIImageView(image: image)
+        imageView.frame = UIScreen.mainScreen().bounds
+        self.view.addSubview(imageView)
+        _webView.delegate = self
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        // Endpoint Setting
+        var endpoint : String! = ""
+        if _flag == "Privacy" { endpoint = "/terms" }
+        else if _flag == "Terms of Service" { endpoint = "/terms" }
+        
+        var request = NSMutableURLRequest(URL: NSURL(string: kAPIEndpoint + endpoint)!)
+        if sessionCookie != nil {
+            request.setValue(sessionCookie, forHTTPHeaderField: "Cookie")
+        }
+        request.HTTPShouldHandleCookies = true
+        request.HTTPMethod = "GET"
+        
+        _webView.loadRequest(request)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func webViewDidFinishLoad(webView: UIWebView) {
+        self.view.exchangeSubviewAtIndex(self.view.subviews.count-1, withSubviewAtIndex: 0)
     }
-    */
-
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.title = _flag
+    }
 }

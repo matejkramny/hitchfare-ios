@@ -105,8 +105,6 @@
 		4FF31FF71A1F4EC9005805D7 /* RightChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FF31FF51A1F4EC9005805D7 /* RightChatTableViewCell.xib */; };
 		4FF31FFA1A1F57AD005805D7 /* LeftChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF31FF81A1F57AD005805D7 /* LeftChatTableViewCell.swift */; };
 		4FF31FFB1A1F57AD005805D7 /* LeftChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FF31FF91A1F57AD005805D7 /* LeftChatTableViewCell.xib */; };
-		DB22377A1A2B242200BCE0F2 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2237781A2B242200BCE0F2 /* SettingTableViewCell.swift */; };
-		DB22377B1A2B242200BCE0F2 /* SettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB2237791A2B242200BCE0F2 /* SettingTableViewCell.xib */; };
 		DB22377D1A2B2F0300BCE0F2 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB22377C1A2B2F0300BCE0F2 /* SettingTableViewController.swift */; };
 		DB22377F1A2B4F5500BCE0F2 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB22377E1A2B4F5500BCE0F2 /* MessageUI.framework */; };
 		DB2237811A2B5E6C00BCE0F2 /* FSWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2237801A2B5E6C00BCE0F2 /* FSWebViewController.swift */; };
@@ -255,8 +253,6 @@
 		4FF31FF51A1F4EC9005805D7 /* RightChatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RightChatTableViewCell.xib; sourceTree = "<group>"; };
 		4FF31FF81A1F57AD005805D7 /* LeftChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftChatTableViewCell.swift; sourceTree = "<group>"; };
 		4FF31FF91A1F57AD005805D7 /* LeftChatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftChatTableViewCell.xib; sourceTree = "<group>"; };
-		DB2237781A2B242200BCE0F2 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
-		DB2237791A2B242200BCE0F2 /* SettingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingTableViewCell.xib; sourceTree = "<group>"; };
 		DB22377C1A2B2F0300BCE0F2 /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		DB22377E1A2B4F5500BCE0F2 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		DB2237801A2B5E6C00BCE0F2 /* FSWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSWebViewController.swift; sourceTree = "<group>"; };
@@ -458,8 +454,6 @@
 				4F412D6D1A24C72C00019241 /* AcceptJourneyRequestTableViewCell.xib */,
 				4F412DA61A254E2800019241 /* ImageTableViewCell.swift */,
 				4F412DA71A254E2800019241 /* ImageTableViewCell.xib */,
-				DB2237781A2B242200BCE0F2 /* SettingTableViewCell.swift */,
-				DB2237791A2B242200BCE0F2 /* SettingTableViewCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -556,8 +550,8 @@
 				4FEA2EA61A29F504008C1CE7 /* LocationFinderTableViewController.swift */,
 				4FEA2EAE1A2AD525008C1CE7 /* ReviewViewController.swift */,
 				4FEA2EAF1A2AD525008C1CE7 /* ReviewViewController.xib */,
-				4F1AD1A61A15625F0047BEE8 /* Cars */,
 				DB2237801A2B5E6C00BCE0F2 /* FSWebViewController.swift */,
+				4F1AD1A61A15625F0047BEE8 /* Cars */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -646,7 +640,6 @@
 			files = (
 				4FEA2EAD1A2A01AC008C1CE7 /* FSFullTextFieldTableViewCell.xib in Resources */,
 				4FC1E5EB19FEB518002F743B /* Main.storyboard in Resources */,
-				DB22377B1A2B242200BCE0F2 /* SettingTableViewCell.xib in Resources */,
 				4FEA2EB11A2AD525008C1CE7 /* ReviewViewController.xib in Resources */,
 				4F412DA51A25266200019241 /* CarViewController.xib in Resources */,
 				4F1AD19E1A155C460047BEE8 /* FontAwesome.ttf in Resources */,
@@ -709,7 +702,6 @@
 				4F412D651A24B89700019241 /* JCNotificationBannerPresenterSmokeStyle.m in Sources */,
 				4F20D36A1A23354E00A1CAC5 /* SDWebImageDownloader.m in Sources */,
 				4F20D3681A23354E00A1CAC5 /* SDWebImageCompat.m in Sources */,
-				DB22377A1A2B242200BCE0F2 /* SettingTableViewCell.swift in Sources */,
 				4F412D6B1A24B89700019241 /* JCNotificationCenter.m in Sources */,
 				4F20D37A1A23412400A1CAC5 /* MGSwipeButton.m in Sources */,
 				4F525F3D1A06A46500EDD696 /* CarsTableViewController.swift in Sources */,

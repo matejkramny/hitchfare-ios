@@ -10,9 +10,6 @@ class SettingTableViewController: UITableViewController, UIActionSheetDelegate, 
         self.navigationController?.navigationBar.translucent = false
 		self.navigationController!.navigationBar.barStyle = UIBarStyle.Black
         
-//        self.tableView.registerNib(UINib(nibName: "SettingTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "SettingCell")
-        self.title = "Settings"
-        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "done:")
         
         var image : UIImage! = UIImage(named: "BackGround")
@@ -20,6 +17,31 @@ class SettingTableViewController: UITableViewController, UIActionSheetDelegate, 
         imageView.frame = UIScreen.mainScreen().bounds
         self.tableView.backgroundView = imageView
         self.tableView.separatorColor = UIColor.clearColor()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.title = "Back"
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.title = "Settings"
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        var vc: FSWebViewController = segue.destinationViewController as FSWebViewController
+        vc.title = segue.identifier
+        
+        if segue.identifier == "Privacy" {
+            var vc: FSWebViewController = segue.destinationViewController as FSWebViewController
+            vc._flag = segue.identifier
+        } else if segue.identifier == "Terms of Service" {
+            var vc: FSWebViewController = segue.destinationViewController as FSWebViewController
+            vc._flag = segue.identifier
+        }
     }
     
     // MARK: Action
@@ -59,9 +81,10 @@ class SettingTableViewController: UITableViewController, UIActionSheetDelegate, 
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("SettingCell", forIndexPath: indexPath) as? UITableViewCell
+        var cell : UITableViewCell? = nil
         
         if indexPath.section == 0 {
+                cell = tableView.dequeueReusableCellWithIdentifier("SettingCell", forIndexPath: indexPath) as? UITableViewCell
             if indexPath.row == 0 {
                 cell!.textLabel!.text = "Need help? Contact us"
             } else if indexPath.row == 1 {
@@ -69,9 +92,13 @@ class SettingTableViewController: UITableViewController, UIActionSheetDelegate, 
             }
         } else if indexPath.section == 1 {
             if indexPath.row == 0 {
+                cell = tableView.dequeueReusableCellWithIdentifier("PrivacyCell", forIndexPath: indexPath) as? UITableViewCell
                 cell!.textLabel!.text = "Privacy"
+                cell!.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             } else if indexPath.row == 1 {
+                cell = tableView.dequeueReusableCellWithIdentifier("TermsofServiceCell", forIndexPath: indexPath) as? UITableViewCell                
                 cell!.textLabel!.text = "Terms of Service"
+                cell!.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             }
         }
         
@@ -100,9 +127,9 @@ class SettingTableViewController: UITableViewController, UIActionSheetDelegate, 
             }
         case 1:
             if indexPath.row == 0 {
-                
+                // Privacy
             } else {
-                
+                // Terms of Service
             }
         default:
             break
@@ -180,6 +207,21 @@ class SettingTableViewController: UITableViewController, UIActionSheetDelegate, 
     }
     
     func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+        switch result.value {
+        case MFMailComposeResultCancelled.value:
+            break
+        case MFMailComposeResultSaved.value:
+            break
+        case MFMailComposeResultSent.value:
+            break
+        case MFMailComposeResultFailed.value:
+            // Result: Mail sending failed
+            break
+        default:
+            // Result: Mail not sent
+            break
+        }
+        
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             
         })
