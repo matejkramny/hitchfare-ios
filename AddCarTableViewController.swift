@@ -18,9 +18,17 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 			self.navigationItem.title = "Edit Car"
 		}
 		
+		self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+		
 		self.navigationItem.hidesBackButton = true
 		self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancelAdd:")
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: "add:")
+		
+		var image : UIImage! = UIImage(named: "BackGround")
+		var imageView : UIImageView! = UIImageView(image: image)
+		imageView.frame = UIScreen.mainScreen().bounds
+		self.tableView.backgroundView = imageView
+		self.tableView.separatorColor = UIColor(red: 145/255.0, green: 101/255.0, blue: 105/255.0, alpha: 1)
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -85,6 +93,9 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 				if chosenImage != nil {
 					cell.textLabel!.text = "Remove Picture"
 				}
+				
+				cell.backgroundColor = UIColor.clearColor()
+				cell.textLabel!.textColor = UIColor.whiteColor()
 				
 				return cell
 			} else {
@@ -151,6 +162,7 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 				cell = FSTextViewTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "TextView")
 			}
 			
+			cell!.backgroundColor = UIColor.clearColor()
 			cell!.fieldTitle.text = "Description"
 			cell!.textView.text = car.carDescription
 			

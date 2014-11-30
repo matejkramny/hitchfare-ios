@@ -25,6 +25,13 @@ class CarsTableViewController: UIViewController {
 		}
 		
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addCar:")
+		
+		UIGraphicsBeginImageContext(self.view.frame.size)
+		UIImage(named: "BackGround")!.drawInRect(self.view.bounds)
+		var image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+		UIGraphicsEndImageContext()
+		
+		self.view.backgroundColor = UIColor(patternImage: image)
 	}
 	
 	func addCar (sender: AnyObject) {
@@ -66,6 +73,13 @@ class CarsTableViewController: UIViewController {
 			view.carDescriptionLabel.text = car.carDescription
 			
 			view.view.frame = CGRectMake(view.view.frame.size.width * CGFloat(i), view.view.frame.origin.y, view.view.frame.size.width, view.view.frame.size.height)
+			
+			UIGraphicsBeginImageContext(view.view.frame.size)
+			UIImage(named: "BackGround")!.drawInRect(self.view.bounds)
+			var image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+			UIGraphicsEndImageContext()
+			
+			view.view.backgroundColor = UIColor(patternImage: image)
 			
 			view.editBtn.addTarget(self, action: "editBtnPressed:", forControlEvents: UIControlEvents.TouchUpInside)
 			

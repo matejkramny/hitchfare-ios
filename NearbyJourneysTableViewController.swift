@@ -22,12 +22,12 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
 		self.refreshControl!.tintColor = UIColor.whiteColor()
 		
 		self.tableView.registerNib(UINib(nibName: "JourneyTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Journey")
-        
-        var image : UIImage! = UIImage(named: "BackGround")
-        var imageView : UIImageView! = UIImageView(image: image)
-        imageView.frame = UIScreen.mainScreen().bounds
-        self.tableView.backgroundView = imageView
-        self.tableView.separatorColor = UIColor(red: 145/255.0, green: 101/255.0, blue: 105/255.0, alpha: 1)
+		
+		var image : UIImage! = UIImage(named: "BackGround")
+		var imageView : UIImageView! = UIImageView(image: image)
+		imageView.frame = UIScreen.mainScreen().bounds
+		self.tableView.backgroundView = imageView
+		self.tableView.separatorColor = UIColor(red: 145/255.0, green: 101/255.0, blue: 105/255.0, alpha: 1)
 		
 		// makes uirefreshcontrol visible..
 		self.tableView.backgroundView!.layer.zPosition -= 1
