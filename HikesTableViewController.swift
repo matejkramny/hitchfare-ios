@@ -1,7 +1,7 @@
 
 import UIKit
 
-class HikesTableViewCell: UITableViewController, PageRootDelegate {
+class HikesTableViewCell: UITableViewController, PageRootDelegate, MGSwipeTableCellDelegate {
 	
 	var messages: [MessageList] = []
 	var didAppear: Bool = false
@@ -26,14 +26,14 @@ class HikesTableViewCell: UITableViewController, PageRootDelegate {
 		
 		// makes uirefreshcontrol visible..
 		self.tableView.backgroundView!.layer.zPosition -= 1
-		
-		self.refreshData(nil)
 	}
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		
 		mainNavigationDelegate.showNavigationBar()
+		
+		self.refreshData(nil)
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -118,15 +118,12 @@ class HikesTableViewCell: UITableViewController, PageRootDelegate {
 		}
 		
 		var deleteBtn = MGSwipeButton(title: " " + NSString.fontAwesomeIconStringForEnum(FAIcon.FATrashO) + " ", backgroundColor: UIColor.blackColor())
-		var infoBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FAInfo), backgroundColor: UIColor.blackColor())
-		var reportBtn = MGSwipeButton(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FAExclamationTriangle), backgroundColor: UIColor.blackColor())
 		
 		deleteBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
-		infoBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
-		reportBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
 		
-		cell!.rightButtons = [deleteBtn, infoBtn, reportBtn]
+		cell!.rightButtons = [deleteBtn]
 		cell!.rightSwipeSettings.transition = MGSwipeTransition.TransitionDrag
+		cell!.delegate = self
 		
 		cell!.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
 		
@@ -189,5 +186,25 @@ class HikesTableViewCell: UITableViewController, PageRootDelegate {
 	func openJourneyNotification(reload: Bool, info: [NSString : AnyObject]) {
 		
 	}
+	
+	func swipeTableCell(cell: MGSwipeTableCell!, canSwipe direction: MGSwipeDirection) -> Bool {
+		return direction == MGSwipeDirection.RightToLeft
+	}
+	
+	func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
+		var indexPath: NSIndexPath = self.tableView.indexPathForCell(cell as UITableViewCell)!
 		
+		SVProgressHUD.showProgress(1.0, status: "Deleting...", maskType: SVProgressHUDMaskType.Black)
+		messages[indexPath.row].deleteList({ (err: NSError?) -> Void in
+			if err != nil {
+				return SVProgressHUD.showErrorWithStatus("Could not delete message")
+			}
+			
+			self.refreshData(nil)
+			SVProgressHUD.dismiss()
+		})
+		
+		return true
+	}
+	
 }

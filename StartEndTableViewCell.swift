@@ -40,8 +40,7 @@ class StartEndTableViewCell: UITableViewCell, UITextFieldDelegate {
 			datePicker!.addTarget(self, action: "datePickerValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
 		}
 		
-		var dateString: NSString = ""
-		dateString = startDateField.text
+		var dateString: NSString = startDateField.text
 		
 		if dateString.length > 0 {
 			var dateFormatter = getDateFormatter()

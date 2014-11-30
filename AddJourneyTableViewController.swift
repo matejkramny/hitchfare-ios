@@ -192,7 +192,12 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 			
 			cell!.initialize()
 			cell!.delegate = self
-			cell!.startDateField.text = journey.startDateHuman
+			
+			if journey.startDate != nil {
+				let dateFormatter = NSDateFormatter()
+				dateFormatter.dateFormat = "dd/MM/yy hh:mm a"
+				cell!.startDateField.text = dateFormatter.stringFromDate(journey.startDate!)
+			}
 			
 			if NSString(string: cell!.startDateField.text).length == 0 {
 				cell!.startDateField.text = cell!.getDateFormatter().stringFromDate(NSDate())
@@ -357,7 +362,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	// PriceCellDelegate
 	
 	func PriceCellValueChanged(cell: PriceTableViewCell) {
-		journey.price = cell.slider.value
+		journey.price = floor(cell.slider.value)
 	}
 	
 	// LocationFinderDelegate

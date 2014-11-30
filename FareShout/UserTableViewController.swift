@@ -52,8 +52,6 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		if presentedFromElsewhere == true {
 			self.navigationItem.title = shownUser.name
 		}
-		
-		self.refreshData(nil)
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -62,6 +60,8 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		if presentedFromElsewhere == false {
 			mainNavigationDelegate.showNavigationBar()
 		}
+		
+		self.refreshData(nil)
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -69,8 +69,6 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		
 		self.isInSegue = false
 		self.didAppear = true
-		
-		self.refreshData(nil)
 	}
 	
 	override func viewWillDisappear(animated: Bool) {
@@ -443,6 +441,9 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		if segue.identifier == "openPassengers" {
 			var vc: PassengersTableViewController = segue.destinationViewController as PassengersTableViewController
 			vc.journey = sender as Journey
+		} else if segue.identifier == "addJourney" && sender != nil {
+			var vc: AddJourneyTableViewController = (segue.destinationViewController as UINavigationController).viewControllers[0] as AddJourneyTableViewController
+			vc.journey = sender as Journey
 		}
 	}
 	
@@ -510,6 +511,8 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 				SVProgressHUD.dismiss()
 				self.refreshData(nil)
 			})
+		} else if index == 1 {
+			self.performSegueWithIdentifier("addJourney", sender: journey)
 		}
 		
 		return true

@@ -169,7 +169,7 @@ class Journey {
 		if self._id == nil || self._id?.length == 0 {
 			request = makeRequest("/journeys", "POST")
 		} else {
-			request = makeRequest("/journey/" + self._id!, "PUT")
+			request = makeRequest("/journey/" + self._id!, "POST")
 		}
 		
 		doPostRequest(request, callback, self.json())

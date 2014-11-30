@@ -133,6 +133,16 @@ class MessageList {
 		}, nil)
 	}
 	
+	func deleteList (callback: (err: NSError?) -> Void) {
+		doRequest(makeRequest("/message/" + self._id, "DELETE"), { (err: NSError?, data: AnyObject?) -> Void in
+			if err != nil {
+				return callback(err: err)
+			}
+			
+			callback(err: nil)
+		}, nil)
+	}
+	
 	func json() -> [NSObject: AnyObject] {
 		var json: [NSObject: AnyObject] = [:]
 		

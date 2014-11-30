@@ -36,8 +36,6 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
 		self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
 		self.locationManager.distanceFilter = kCLDistanceFilterNone
 		self.locationManager.delegate = self
-		
-		self.refreshData(nil)
 	}
 	
 	func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!) {
@@ -60,6 +58,8 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
 		}
 		
 		self.locationManager.startUpdatingLocation()
+		
+		self.refreshData(nil)
 	}
 	
 	override func viewDidAppear(animated: Bool) {
