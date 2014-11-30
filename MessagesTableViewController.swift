@@ -78,6 +78,12 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 		self.refreshData(false)
 	}
 	
+	override func viewDidAppear(animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		self.refreshNotificationBadgeCount()
+	}
+	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		
@@ -98,6 +104,18 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 		titleView.removeFromSuperview()
 		
 		NSNotificationCenter.defaultCenter().removeObserver(self)
+	}
+	
+	func refreshNotificationBadgeCount () {
+		doRequest(makeRequest("/messages/" + self.list._id + "/read", "PUT"), { (err: NSError?, data: AnyObject?) -> Void in
+			let json: [NSString: AnyObject]? = data as? [NSString: AnyObject]
+			if json != nil {
+				var unreadCount: Int? = json!["unreadCount"] as? Int
+				if unreadCount != nil {
+					UIApplication.sharedApplication().applicationIconBadgeNumber = unreadCount!
+				}
+			}
+		}, nil)
 	}
 	
 	func titleTap (sender: AnyObject) {
