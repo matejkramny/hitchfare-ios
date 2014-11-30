@@ -14,7 +14,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="adg-vt-eg0">
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="adg-vt-eg0">
                         <rect key="frame" x="0.0" y="1" width="320" height="125"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -116,10 +116,12 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="QhT-vd-t5i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="11" id="249-KT-Q3h"/>
+                    <constraint firstItem="adg-vt-eg0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="1" id="Dyf-wy-yqM"/>
                     <constraint firstItem="5DW-Ot-4VR" firstAttribute="top" secondItem="opU-Gg-NW6" secondAttribute="bottom" constant="8" id="GUZ-Ra-gQK"/>
                     <constraint firstItem="opU-Gg-NW6" firstAttribute="top" secondItem="wut-aC-5PG" secondAttribute="bottom" constant="4" id="JW5-LK-QrB"/>
                     <constraint firstItem="nW2-at-b8g" firstAttribute="top" secondItem="rda-NX-Hlj" secondAttribute="bottom" constant="16" id="PJ3-rU-gBJ"/>
                     <constraint firstItem="7hS-EJ-4Eh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="Rjz-kY-G6X"/>
+                    <constraint firstAttribute="trailing" secondItem="adg-vt-eg0" secondAttribute="trailing" id="T3b-lk-Hvf"/>
                     <constraint firstItem="QhT-vd-t5i" firstAttribute="top" secondItem="nW2-at-b8g" secondAttribute="bottom" constant="16" id="Usl-sV-3M7"/>
                     <constraint firstItem="l95-mR-cqf" firstAttribute="top" secondItem="bh2-8O-mmH" secondAttribute="bottom" constant="8" id="VnE-w9-scm"/>
                     <constraint firstItem="Ilo-gm-1YN" firstAttribute="leading" secondItem="l95-mR-cqf" secondAttribute="trailing" constant="11" id="WdP-aN-AWL"/>
@@ -127,6 +129,7 @@
                     <constraint firstItem="opU-Gg-NW6" firstAttribute="leading" secondItem="nW2-at-b8g" secondAttribute="trailing" constant="12" id="ZNj-EX-Ba9"/>
                     <constraint firstItem="nW2-at-b8g" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="11" id="Zu8-S1-2ka"/>
                     <constraint firstItem="7hS-EJ-4Eh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="aIy-DT-ao4"/>
+                    <constraint firstAttribute="bottom" secondItem="adg-vt-eg0" secondAttribute="bottom" constant="0.5" id="aNc-eA-ZJm"/>
                     <constraint firstItem="wut-aC-5PG" firstAttribute="top" secondItem="bh2-8O-mmH" secondAttribute="bottom" constant="6" id="bk9-I2-HGZ"/>
                     <constraint firstItem="bh2-8O-mmH" firstAttribute="leading" secondItem="7hS-EJ-4Eh" secondAttribute="trailing" constant="9" id="eZ4-nC-SW5"/>
                     <constraint firstAttribute="trailing" secondItem="opU-Gg-NW6" secondAttribute="trailing" constant="15" id="i5O-Ft-OIf"/>
@@ -141,6 +144,7 @@
                     <constraint firstItem="G8t-7O-yCV" firstAttribute="leading" secondItem="QhT-vd-t5i" secondAttribute="trailing" constant="12" id="wrl-CU-AdI"/>
                     <constraint firstItem="G8t-7O-yCV" firstAttribute="top" secondItem="opU-Gg-NW6" secondAttribute="bottom" constant="8" id="xEM-2F-ftA"/>
                     <constraint firstItem="rda-NX-Hlj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="11" id="xiq-zR-9Od"/>
+                    <constraint firstItem="adg-vt-eg0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="yiX-gG-iVb"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
