@@ -181,13 +181,10 @@ class SettingTableViewController: UITableViewController, UIActionSheetDelegate, 
         
         switch buttonIndex {
         case 1:
-            println("Report")
             self.displayMailComposerSheet("Report", toRecipients: ["Report Manager", "test"])
         case 2:
-            println("Suggestion")
             self.displayMailComposerSheet("Suggestion", toRecipients: ["Suggestion Manager"])
         case 3:
-            println("Partner with us")
             self.displayMailComposerSheet("Partner", toRecipients: ["Partner Manager"])
         default:
             break
