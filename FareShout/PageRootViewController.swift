@@ -11,6 +11,7 @@ protocol FareShoutNavigationDelegate {
 @objc protocol PageRootDelegate {
 	func pageRootTitle() -> NSString?
 	func presentHike()
+    func presentSetting()
 	
 	func openMessageNotification(listId: NSString)
 	func openJourneyNotification(reload: Bool, info: [NSString: AnyObject])
@@ -45,10 +46,6 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		var attributes: [NSObject: AnyObject] = [
 			NSFontAttributeName: UIFont(name: "FontAwesome", size: 20)!
 		]
-//		self.rightButton.setTitleTextAttributes(attributes, forState: UIControlState.Normal)
-//		self.leftButton.setTitleTextAttributes(attributes, forState: UIControlState.Normal)
-//		self.rightButton.title = NSString(format: "%@", NSString.fontAwesomeIconStringForEnum(FAIcon.FAThumbsOUp))
-//		self.leftButton.title = NSString.fontAwesomeIconStringForEnum(FAIcon.FACog)
 
         // Right Custom Button
         var rightImage : UIImage! = UIImage(named: "HikingButton")
@@ -65,8 +62,7 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
         var customLeftButton : UIButton! = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
         customLeftButton.frame = CGRectMake(0, 0, leftImage.size.width, leftImage.size.height)
         customLeftButton.setImage(leftImage, forState: UIControlState.Normal)
-        // # This Method(Function) is not yet When Setting Button Clicked. (need setting later)
-//        customLeftButton.addTarget(self, action: <#Selector#>, forControlEvents: <#UIControlEvents#>)
+        customLeftButton.addTarget(self, action: "didPressSetting:", forControlEvents: UIControlEvents.TouchUpInside)
         self.leftButton.customView = customLeftButton
 		
 		//self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
@@ -341,4 +337,8 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		vc.presentHike()
 	}
 	
+    @IBAction func didPressSetting(sender: AnyObject) {
+        var vc: PageRootDelegate = vcs[currentViewIndex].viewControllers![0] as PageRootDelegate
+        vc.presentSetting()
+    }
 }

@@ -22,13 +22,21 @@ class JourneyTableViewCell: MGSwipeTableCell {
 	
 	func populate(journey: Journey) {
 		self.journeyNameLabel.text = journey.ownerObj!.first_name! + " " + journey.ownerObj!.last_name!.substringToIndex(1)
-		if journey.owner! == currentUser!._id! {
-			self.journeyNameLabel.textColor = driverColor
-			self.driverImageView.image = UIImage(named: "DriverTag")
-		} else {
-			self.journeyNameLabel.textColor = UIColor(red: 96/255.0, green: 99/255.0, blue: 102/255.0, alpha: 1)
-			self.driverImageView.image = UIImage(named: "PassengerTag")
-		}
+//		if journey.owner! == currentUser!._id! {
+//			self.journeyNameLabel.textColor = driverColor
+//			self.driverImageView.image = UIImage(named: "DriverTag")
+//		} else {
+//			self.journeyNameLabel.textColor = UIColor(red: 96/255.0, green: 99/255.0, blue: 102/255.0, alpha: 1)
+//			self.driverImageView.image = UIImage(named: "PassengerTag")
+//		}
+        
+        if journey.isDriver {
+            self.journeyNameLabel.textColor = driverColor
+            self.driverImageView.image = UIImage(named: "DriverTag")
+        } else {
+            self.journeyNameLabel.textColor = UIColor(red: 96/255.0, green: 99/255.0, blue: 102/255.0, alpha: 1)
+            self.driverImageView.image = UIImage(named: "PassengerTag")
+        }
 		
 		self.bgView.backgroundColor = driverColor.colorWithAlphaComponent(0.1)
 		
@@ -58,7 +66,7 @@ class JourneyTableViewCell: MGSwipeTableCell {
 		} else {
 			self.dateLabel.text = "Date: N/A"
 		}
-		self.priceLabel.text = NSString(format: "£%.2f", journey.price)
+		self.priceLabel.text = NSString(format: "£%.2f", floor(journey.price))
 		self.availabilityLabel.text = NSString(format: "%d", journey.availableSeats!)
 	}
 	

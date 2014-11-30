@@ -178,7 +178,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 			cell!.delegate = self
 			
 			cell!.label.text = "Price"
-			cell!.slider.value = Float(journey.price)
+			cell!.slider.value = Float(floor(journey.price))
 			cell!.updatePrice()
 			
 			return cell! as UITableViewCell

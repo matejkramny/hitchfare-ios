@@ -73,6 +73,10 @@ class HikesTableViewCell: UITableViewController, PageRootDelegate, MGSwipeTableC
 	func presentHike () {
 		self.performSegueWithIdentifier("addJourney", sender: nil)
 	}
+    
+    func presentSetting() {
+		self.performSegueWithIdentifier("goSetting", sender: nil)
+    }
 	
 	func refreshData (sender: AnyObject?) {
 		MessageList.getLists({ (err: NSError?, data: [MessageList]) -> Void in

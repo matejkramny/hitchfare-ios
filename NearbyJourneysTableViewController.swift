@@ -99,6 +99,10 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
 	func presentHike () {
 		self.performSegueWithIdentifier("addJourney", sender: nil)
 	}
+    
+    func presentSetting() {
+        self.performSegueWithIdentifier("goSetting", sender: nil)
+    }
 	
 	func refreshData (sender: AnyObject?) {
 		var callback: (err: NSError?, data: [Journey]) -> Void = { (err: NSError?, data: [Journey]) -> Void in
