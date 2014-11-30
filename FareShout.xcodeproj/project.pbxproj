@@ -99,6 +99,8 @@
 		4FEA2EA91A29FB00008C1CE7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FEA2EA81A29FB00008C1CE7 /* MapKit.framework */; };
 		4FEA2EAC1A2A01AC008C1CE7 /* FSFullTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEA2EAA1A2A01AC008C1CE7 /* FSFullTextFieldTableViewCell.swift */; };
 		4FEA2EAD1A2A01AC008C1CE7 /* FSFullTextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FEA2EAB1A2A01AC008C1CE7 /* FSFullTextFieldTableViewCell.xib */; };
+		4FEA2EB01A2AD525008C1CE7 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEA2EAE1A2AD525008C1CE7 /* ReviewViewController.swift */; };
+		4FEA2EB11A2AD525008C1CE7 /* ReviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FEA2EAF1A2AD525008C1CE7 /* ReviewViewController.xib */; };
 		4FF31FF61A1F4EC9005805D7 /* RightChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF31FF41A1F4EC9005805D7 /* RightChatTableViewCell.swift */; };
 		4FF31FF71A1F4EC9005805D7 /* RightChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FF31FF51A1F4EC9005805D7 /* RightChatTableViewCell.xib */; };
 		4FF31FFA1A1F57AD005805D7 /* LeftChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF31FF81A1F57AD005805D7 /* LeftChatTableViewCell.swift */; };
@@ -242,6 +244,8 @@
 		4FEA2EA81A29FB00008C1CE7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		4FEA2EAA1A2A01AC008C1CE7 /* FSFullTextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSFullTextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		4FEA2EAB1A2A01AC008C1CE7 /* FSFullTextFieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FSFullTextFieldTableViewCell.xib; sourceTree = "<group>"; };
+		4FEA2EAE1A2AD525008C1CE7 /* ReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
+		4FEA2EAF1A2AD525008C1CE7 /* ReviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReviewViewController.xib; sourceTree = "<group>"; };
 		4FF31FF41A1F4EC9005805D7 /* RightChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightChatTableViewCell.swift; sourceTree = "<group>"; };
 		4FF31FF51A1F4EC9005805D7 /* RightChatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RightChatTableViewCell.xib; sourceTree = "<group>"; };
 		4FF31FF81A1F57AD005805D7 /* LeftChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftChatTableViewCell.swift; sourceTree = "<group>"; };
@@ -535,6 +539,8 @@
 				4F1A62531A1A90B300826ECE /* MessagesTableViewController.swift */,
 				4F8B23ED1A288DCD0095EC1B /* PassengersTableViewController.swift */,
 				4FEA2EA61A29F504008C1CE7 /* LocationFinderTableViewController.swift */,
+				4FEA2EAE1A2AD525008C1CE7 /* ReviewViewController.swift */,
+				4FEA2EAF1A2AD525008C1CE7 /* ReviewViewController.xib */,
 				4F1AD1A61A15625F0047BEE8 /* Cars */,
 			);
 			name = Scenes;
@@ -624,6 +630,7 @@
 			files = (
 				4FEA2EAD1A2A01AC008C1CE7 /* FSFullTextFieldTableViewCell.xib in Resources */,
 				4FC1E5EB19FEB518002F743B /* Main.storyboard in Resources */,
+				4FEA2EB11A2AD525008C1CE7 /* ReviewViewController.xib in Resources */,
 				4F412DA51A25266200019241 /* CarViewController.xib in Resources */,
 				4F1AD19E1A155C460047BEE8 /* FontAwesome.ttf in Resources */,
 				4FD346E11A127A76006026DD /* StepperTableViewCell.xib in Resources */,
@@ -697,6 +704,7 @@
 				4FD346E81A12831B006026DD /* StartEndTableViewCell.swift in Sources */,
 				4F4FFD691A1F5F80004EE524 /* ChatLabel.swift in Sources */,
 				4F4E363D1A13622100934D6B /* SharedStorage.swift in Sources */,
+				4FEA2EB01A2AD525008C1CE7 /* ReviewViewController.swift in Sources */,
 				4F20D36B1A23354E00A1CAC5 /* SDWebImageDownloaderOperation.m in Sources */,
 				4FD6D2961A05560B00199082 /* Network.swift in Sources */,
 				4F412D621A24B89700019241 /* JCNotificationBannerPresenter.m in Sources */,

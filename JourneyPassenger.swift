@@ -76,12 +76,6 @@ class JourneyPassenger {
 		return json
 	}
 	
-	class func getJourneyRequests (forJourney journey: Journey, withCallback callback: (err: NSError?, data: [JourneyPassenger]) -> Void) {
-		doRequest(makeRequest("/journey/" + journey._id! + "/requests", "GET"), { (err: NSError?, data: AnyObject?) -> Void in
-			
-			}, nil)
-	}
-	
 	class func getAllJourneyRequests (callback: (err: NSError?, data: [JourneyPassenger]) -> Void) {
 		doRequest(makeRequest("/journeys/requests", "GET"), { (err: NSError?, data: AnyObject?) -> Void in
 			var reqs: [JourneyPassenger] = []
@@ -94,7 +88,7 @@ class JourneyPassenger {
 			}
 			
 			callback(err: err, data: reqs)
-			}, nil)
+		}, nil)
 	}
 	
 	class func getMyJourneyRequests (callback: (err: NSError?, data: [JourneyPassenger]) -> Void) {
@@ -109,19 +103,40 @@ class JourneyPassenger {
 			}
 			
 			callback(err: err, data: reqs)
-			}, nil)
+		}, nil)
+	}
+	
+	class func getJourneyReviewRequests (callback: (err: NSError?, data: [JourneyPassenger]) -> Void) {
+		doRequest(makeRequest("/journeys/reviewable", "GET"), { (err: NSError?, data: AnyObject?) -> Void in
+			var reqs: [JourneyPassenger] = []
+			
+			var json: [[NSString: AnyObject]]? = data as? [[NSString: AnyObject]]
+			if json != nil {
+				for obj in json! {
+					reqs.append(JourneyPassenger(_response: obj))
+				}
+			}
+			
+			callback(err: err, data: reqs)
+		}, nil)
+	}
+	
+	func reviewJourney (review: Int, callback: (err: NSError?) -> Void) {
+		doRequest(makeRequest("/journey/" + self.journey._id! + "/request/" + self._id! + "/review/" + String(review), "PUT"), { (err: NSError?, data: AnyObject?) -> Void in
+			callback(err: err)
+		}, nil)
 	}
 	
 	func approveRequest (callback: (err: NSError?) -> Void) {
 		doRequest(makeRequest("/journey/" + self.journey._id! + "/request/" + self._id!, "PUT"), { (err: NSError?, data: AnyObject?) -> Void in
 			callback(err: err)
-			}, nil)
+		}, nil)
 	}
 	
 	func rejectRequest (callback: (err: NSError?) -> Void) {
 		doRequest(makeRequest("/journey/" + self.journey._id! + "/request/" + self._id!, "DELETE"), { (err: NSError?, data: AnyObject?) -> Void in
 			callback(err: err)
-			}, nil)
+		}, nil)
 	}
 	
 }

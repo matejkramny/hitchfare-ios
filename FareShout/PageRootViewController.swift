@@ -16,7 +16,7 @@ protocol FareShoutNavigationDelegate {
 	func openJourneyNotification(reload: Bool, info: [NSString: AnyObject])
 }
 
-class PageRootViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, FareShoutNavigationDelegate, UIScrollViewDelegate {
+class PageRootViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, FareShoutNavigationDelegate, UIScrollViewDelegate, JourneyReviewDelegate {
 	var vcs: [AnyObject] = []
 	var pageCtrl: UIPageViewController?
 
@@ -31,6 +31,11 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 	
 	var maskLayer: CAGradientLayer!
 	var scrollView: UIScrollView!
+	
+	var toReviewJourneys: [JourneyPassenger] = []
+	var reviewingJourney: JourneyPassenger?
+	var reviewVC: ReviewViewController!
+	var reviewBackgroundView: UIView!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -135,7 +140,64 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 			setTitleBarText()
 		}
 		
+		self.fetchJourneyReviewRequests()
+		
 		self.view.bringSubviewToFront(navigationBar)
+	}
+	
+	func fetchJourneyReviewRequests () {
+		JourneyPassenger.getJourneyReviewRequests({ (err: NSError?, data: [JourneyPassenger]) -> Void in
+			self.toReviewJourneys = data
+			
+			if data.count == 0 {
+				return
+			}
+			
+			self.beginAskingToReview()
+		})
+	}
+	
+	func beginAskingToReview() {
+		if self.toReviewJourneys.count == 0 {
+			return
+		}
+		
+		if self.reviewVC == nil {
+			self.reviewVC = UINib(nibName: "ReviewViewController", bundle: NSBundle.mainBundle()).instantiateWithOwner(nil, options: nil)[0] as ReviewViewController
+			
+			let sFrame = self.view.frame
+			let fourth = sFrame.width / 4
+			self.reviewVC.view.frame = CGRectMake(fourth / 2, sFrame.height / 2 - 214 / 2, fourth * 3, 214)
+			
+			self.reviewBackgroundView = UIView(frame: CGRectMake(sFrame.origin.x, sFrame.origin.y, sFrame.width, sFrame.height))
+			self.reviewBackgroundView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.5)
+			self.reviewBackgroundView.addGestureRecognizer(UIGestureRecognizer())
+		}
+		
+		self.reviewingJourney = self.toReviewJourneys[0]
+		
+		self.reviewVC.setup(self, journey: self.reviewingJourney!)
+		
+		self.view.addSubview(self.reviewBackgroundView)
+		self.view.addSubview(self.reviewVC.view)
+	}
+	
+	func JourneyReviewDidReview(journey: JourneyPassenger, rating: Int) {
+		self.toReviewJourneys.removeAtIndex(0)
+		self.reviewingJourney = nil
+		
+		self.reviewBackgroundView.removeFromSuperview()
+		self.reviewVC.view.removeFromSuperview()
+		
+		SVProgressHUD.showProgress(1.0, status: "Submitting..", maskType: SVProgressHUDMaskType.Black)
+		journey.reviewJourney(rating, callback: { (err: NSError?) -> Void in
+			if err != nil {
+				SVProgressHUD.showErrorWithStatus("Failure Submitting.")
+			} else {
+				SVProgressHUD.showSuccessWithStatus("Submitted. Thank you")
+				self.beginAskingToReview()
+			}
+		})
 	}
 	
 	func getCurrentViewController() -> UINavigationController {
