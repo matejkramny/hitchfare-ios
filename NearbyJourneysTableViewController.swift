@@ -116,7 +116,7 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
 		if self.lastLocation != nil || self.searchAttributes != nil {
 			var attrs: NSString!
 			if self.lastLocation != nil {
-				attrs = NSString(format: "lat=%f&lng=%f%%@%@", self.lastLocation!.latitude, self.lastLocation!.longitude, self.searchAttributes != nil ? "&" : "", self.searchAttributes != nil ? self.searchAttributes! : "")
+				attrs = NSString(format: "lat=%f&lng=%f%@%@", self.lastLocation!.latitude, self.lastLocation!.longitude, self.searchAttributes != nil ? "&" : "", self.searchAttributes != nil ? self.searchAttributes! : "")
 			} else {
 				attrs = self.searchAttributes!
 			}
