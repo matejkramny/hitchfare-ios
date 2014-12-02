@@ -13,12 +13,14 @@ class LoginViewController: UIViewController, FacebookCtrlDelegate, UIScrollViewD
 		
 		self.scrollView.delegate = self
 		
-		self.pageCtrl.currentPage = 0;
-		self.pageCtrl.numberOfPages = 3;
-	 
 		images.append(UIImageView(image: UIImage(named: "login_1")))
 		images.append(UIImageView(image: UIImage(named: "login_2")))
 		images.append(UIImageView(image: UIImage(named: "login_3")))
+		images.append(UIImageView(image: UIImage(named: "login_4")))
+		images.append(UIImageView(image: UIImage(named: "login_5")))
+		
+		self.pageCtrl.currentPage = 0;
+		self.pageCtrl.numberOfPages = images.count;
 		
 		self.pageCtrl.addTarget(self, action: "pageChanged:", forControlEvents: UIControlEvents.ValueChanged)
 		
@@ -39,7 +41,7 @@ class LoginViewController: UIViewController, FacebookCtrlDelegate, UIScrollViewD
 			self.scrollView.addSubview(img)
 		}
 		
-		self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * 3, self.scrollView.contentSize.height)
+		self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * CGFloat(self.images.count), self.scrollView.contentSize.height)
 	}
 	
 	@IBAction func doLogin(sender: UIButton) {

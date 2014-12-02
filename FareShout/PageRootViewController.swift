@@ -49,7 +49,7 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		mainNavigationDelegate = self
 		
 		var attributes: [NSObject: AnyObject] = [
-			NSFontAttributeName: UIFont(name: "FontAwesome", size: 24)!
+			NSFontAttributeName: UIFont(name: "FontAwesome", size: 22)!
 		]
 		
 		self.searchBarButtonItem = UIBarButtonItem(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FASearch), style: UIBarButtonItemStyle.Plain, target: self, action: "didPressSearch:")
@@ -350,7 +350,6 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		}
 		
 		self.pageIndicator.currentPage = vcIndex
-		self.setHasSearchButton(vcIndex == 1, animated: true)
 		
 		// Update text frame
 		self.titleBarText.frame = frame
@@ -371,10 +370,16 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 	}
 	
 	func didPressSearch (sender: AnyObject?) {
-		if currentViewIndex == 1 {
-			var d = (self.vcs[1] as UINavigationController) .viewControllers[0] as PageRootDelegate
-			d.didPressSearch!()
+		if currentViewIndex != 1 {
+			self.pageCtrl!.setViewControllers([vcs[1]], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
+			currentViewIndex = 1
+			var vc: PageRootDelegate = vcs[1].viewControllers![0] as PageRootDelegate
+			self.pageIndicator.currentPage = 1
+			self.titleBarText.text = vc.pageRootTitle()
 		}
+		
+		var d = (self.vcs[1] as UINavigationController) .viewControllers[0] as PageRootDelegate
+		d.didPressSearch!()
 	}
 	
 }

@@ -151,6 +151,7 @@
             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="availabilityLabel" destination="wut-aC-5PG" id="f8S-Np-hyR"/>
+                <outlet property="availabilityTextLabel" destination="Ilo-gm-1YN" id="fyx-9y-WpQ"/>
                 <outlet property="bgView" destination="adg-vt-eg0" id="M9M-Z1-bEW"/>
                 <outlet property="dateLabel" destination="G8t-7O-yCV" id="QUv-nf-Szf"/>
                 <outlet property="departureLabel" destination="opU-Gg-NW6" id="ojJ-3d-Jw4"/>

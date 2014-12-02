@@ -206,11 +206,11 @@ class Journey {
 	func searchAttributes () -> NSString {
 		var attrs: [NSString] = []
 		
-		if self.startLng != nil && self.startLng > 0.0 {
-			attrs.append(NSString(format: "startLat=%f&startLng=%f", startLat!, startLng!))
+		if self.startLocation != nil && self.startLocation!.length > 0 {
+			attrs.append(NSString(format: "startLocation=%@", startLocation!))
 		}
-		if self.endLng != nil && self.endLng > 0.0 {
-			attrs.append(NSString(format: "endLat=%f&endLng=%f", endLat!, endLng!))
+		if self.endLocation != nil && self.endLocation!.length > 0 {
+			attrs.append(NSString(format: "endLocation=%@", endLocation!))
 		}
 		if self.startDate != nil {
 			attrs.append("startDate=" + String(Int(startDate!.timeIntervalSince1970) * 1000))

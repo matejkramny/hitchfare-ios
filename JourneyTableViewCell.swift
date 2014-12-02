@@ -12,8 +12,9 @@ class JourneyTableViewCell: MGSwipeTableCell {
 	@IBOutlet weak var dateLabel: UILabel!
 	@IBOutlet weak var priceLabel: UILabel!
 	@IBOutlet weak var availabilityLabel: UILabel!
-    @IBOutlet weak var driverImageView: UIImageView!
-    @IBOutlet weak var bgView: UIView!
+	@IBOutlet weak var driverImageView: UIImageView!
+	@IBOutlet weak var bgView: UIView!
+	@IBOutlet weak var availabilityTextLabel: UILabel!
     
 	func style () {
 		self.availabilityLabel.layer.cornerRadius = 13.5
@@ -31,13 +32,13 @@ class JourneyTableViewCell: MGSwipeTableCell {
 //		}
 		
 		// Not 'journey.isDriver' -- which is correct. The below is expected behaviour by user.. and makes sense :/.
-        if journey.owner! == currentUser!._id! {
-            self.journeyNameLabel.textColor = driverColor
-            self.driverImageView.image = UIImage(named: "DriverTag")
-        } else {
-            self.journeyNameLabel.textColor = UIColor(red: 96/255.0, green: 99/255.0, blue: 102/255.0, alpha: 1)
-            self.driverImageView.image = UIImage(named: "PassengerTag")
-        }
+		if journey.owner! != currentUser!._id! || journey.isDriver == false {
+			self.journeyNameLabel.textColor = UIColor(red: 96/255.0, green: 99/255.0, blue: 102/255.0, alpha: 1)
+			self.driverImageView.image = UIImage(named: "PassengerTag")
+		} else {
+			self.journeyNameLabel.textColor = driverColor
+			self.driverImageView.image = UIImage(named: "DriverTag")
+		}
 		
 		self.bgView.backgroundColor = driverColor.colorWithAlphaComponent(0.1)
 		
@@ -72,7 +73,8 @@ class JourneyTableViewCell: MGSwipeTableCell {
 		
 		if journey.isDriver == false {
 			self.availabilityLabel.hidden = true
-			self.priceLabel.textColor = UIColor.grayColor()
+			self.availabilityTextLabel.hidden = true
+			self.priceLabel.hidden = true
 		}
 	}
 	

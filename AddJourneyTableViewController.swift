@@ -369,14 +369,21 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 		journey.isDriver = cell.toggle.selectedSegmentIndex == 0
 		
 		var stepperCell: StepperTableViewCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 3)) as StepperTableViewCell
+		var priceCell: PriceTableViewCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 3)) as PriceTableViewCell
 		
 		if journey.isDriver {
 			stepperCell.stepper.enabled = true
+			priceCell.slider.enabled = true
+			priceCell.field.text = NSString(format: "£%.2f", floor(priceCell.slider.value))
+			
 			if self.originalStepperColor != nil {
 				stepperCell.stepper.tintColor = self.originalStepperColor!
 			}
 		} else {
 			stepperCell.stepper.enabled = false
+			priceCell.slider.enabled = false
+			priceCell.field.text = "N/A"
+			
 			self.originalStepperColor = stepperCell.stepper.tintColor
 			stepperCell.stepper.tintColor = UIColor.grayColor()
 		}

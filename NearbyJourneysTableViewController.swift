@@ -159,7 +159,7 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		var journey = journeys[indexPath.row]
 		
-		SVProgressHUD.showProgress(0, status: "Loading Message..", maskType: SVProgressHUDMaskType.Black)
+		SVProgressHUD.showProgress(1.0, status: "Loading Message..", maskType: SVProgressHUDMaskType.Black)
 		
 		findMessageList(journey.owner!, { (list: MessageList?) -> Void in
 			self.performSegueWithIdentifier("openMessages", sender: list)

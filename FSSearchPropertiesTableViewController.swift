@@ -14,10 +14,10 @@ class FSSearchPropertiesTableViewController: UITableViewController, FSTextFieldC
 	var delegate: FSSearchPropertiesDelegate?
 	
 	override func viewDidLoad() {
-		self.navigationItem.title = "Search Properties"
+		self.navigationItem.title = "Search"
 		self.navigationItem.setHidesBackButton(true, animated: false)
 		self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "applySearchProperties:")
-		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Default", style: UIBarButtonItemStyle.Plain, target: self, action: "applyDefaultProperties")
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "applyDefaultProperties")
 		
 		self.tableView.registerNib(UINib(nibName: "FSTextFieldTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "TextField")
 		self.tableView.registerNib(UINib(nibName: "StartEndTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "StartEnd")
@@ -186,6 +186,7 @@ class FSSearchPropertiesTableViewController: UITableViewController, FSTextFieldC
 	}
 	
 	func StartEndTableViewCellDateChanged(cell: StartEndTableViewCell, toDate: NSDate) {
+		properties.startDate = toDate
 	}
 	
 	func didSelectLocation(location: LocationResult) {

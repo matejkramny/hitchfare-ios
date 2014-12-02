@@ -227,9 +227,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 				cell = AcceptJourneyRequestTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "acceptJourneyRequest")
 			}
 			
-			if req.journey.ownerObj != nil {
-				cell!.journeyName.text = req.journey.ownerObj!.first_name! + " " + req.journey.ownerObj!.last_name!.substringToIndex(1)
-			}
+			cell!.journeyName.text = req.user.name
 			
 			if req.requested != nil {
 				cell!.requestedLabel.text = "Requested on " + requestedJourneyDateFormatter.stringFromDate(req.requested!)
@@ -256,9 +254,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 				cell = JourneyRequestTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "journeyRequest")
 			}
 			
-			if req.journey.ownerObj != nil {
-				cell!.journeyName.text = req.journey.ownerObj!.first_name! + " " + req.journey.ownerObj!.last_name!.substringToIndex(1)
-			}
+			cell!.journeyName.text = req.user.name
 			
 			if req.requested != nil {
 				cell!.requestedLabel.text = "Requested on " + requestedJourneyDateFormatter.stringFromDate(req.requested!)
@@ -413,6 +409,18 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	}
 	
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+		if indexPath.section == 1 {
+			var req = pendingRequests[indexPath.row]
+			SVProgressHUD.showProgress(0, status: "Loading Message..", maskType: SVProgressHUDMaskType.Black)
+			
+			findMessageList(req.user._id!, { (list: MessageList?) -> Void in
+				SVProgressHUD.dismiss()
+				self.performSegueWithIdentifier("openMessages", sender: list)
+			})
+			
+			return
+		}
+		
 		if presentedFromElsewhere && indexPath.section == 3 {
 			var journey = journeys[indexPath.row]
 			
@@ -446,7 +454,10 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		self.isInSegue = true
 		mainNavigationDelegate.hideNavigationBar()
 		
-		if segue.identifier == "openPassengers" {
+		if segue.identifier == "openMessages" {
+			var vc: MessagesViewController = segue.destinationViewController as MessagesViewController
+			vc.list = sender as MessageList
+		} else if segue.identifier == "openPassengers" {
 			var vc: PassengersTableViewController = segue.destinationViewController as PassengersTableViewController
 			vc.journey = sender as Journey
 		} else if segue.identifier == "addJourney" && sender != nil {
