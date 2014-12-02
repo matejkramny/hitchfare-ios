@@ -4,6 +4,8 @@ import MapKit
 
 protocol LocationFinderDelegate {
 	func didSelectLocation(location: LocationResult)
+	
+	func didClearLocation()
 }
 
 class LocationResult {
@@ -90,6 +92,7 @@ class LocationFinderTableViewController: UITableViewController, FSTextFieldCellP
 		
 		self.navigationItem.hidesBackButton = true
 		self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "dismissView:")
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: UIBarButtonItemStyle.Plain, target: self, action: "clearLocation:")
 		
 		self.locationManager = CLLocationManager()
 		self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -120,6 +123,11 @@ class LocationFinderTableViewController: UITableViewController, FSTextFieldCellP
 	}
 	
 	func dismissView (sender: AnyObject?) {
+		self.navigationController!.popViewControllerAnimated(true)
+	}
+	
+	func clearLocation (sender: AnyObject?) {
+		self.delegate!.didClearLocation()
 		self.navigationController!.popViewControllerAnimated(true)
 	}
 	

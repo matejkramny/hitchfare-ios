@@ -14,6 +14,8 @@ class StartEndTableViewCell: UITableViewCell, UITextFieldDelegate {
 	
 	var datePicker: UIDatePicker?
 	var showsDatePicker: Bool = false
+	var datePickerMode: UIDatePickerMode = UIDatePickerMode.DateAndTime
+	var datePickerDateFormat: NSString = "dd/MM/yy hh:mm a"
 	
 	var delegate: StartEndTableViewCellProtocol?
 	
@@ -24,7 +26,7 @@ class StartEndTableViewCell: UITableViewCell, UITextFieldDelegate {
 	
 	func getDateFormatter() -> NSDateFormatter {
 		let dateFormatter = NSDateFormatter()
-		dateFormatter.dateFormat = "dd/MM/yy hh:mm a"
+		dateFormatter.dateFormat = self.datePickerDateFormat
 		
 		return dateFormatter
 	}
@@ -35,9 +37,10 @@ class StartEndTableViewCell: UITableViewCell, UITextFieldDelegate {
 		
 		if datePicker == nil {
 			datePicker = UIDatePicker(frame: CGRectMake(0, startDateField.frame.origin.y + startDateField.frame.size.height, self.frame.width, 216.0))
-			datePicker!.datePickerMode = UIDatePickerMode.DateAndTime
+			datePicker!.datePickerMode = self.datePickerMode
 			datePicker!.minimumDate = NSDate()
 			datePicker!.addTarget(self, action: "datePickerValueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+			datePicker!.tintColor = UIColor.whiteColor()
 		}
 		
 		var dateString: NSString = startDateField.text

@@ -69,6 +69,11 @@ class JourneyTableViewCell: MGSwipeTableCell {
 		}
 		self.priceLabel.text = NSString(format: "£%.2f", floor(journey.price))
 		self.availabilityLabel.text = NSString(format: "%d", journey.availableSeats!)
+		
+		if journey.isDriver == false {
+			self.availabilityLabel.hidden = true
+			self.priceLabel.textColor = UIColor.grayColor()
+		}
 	}
 	
 	override init(style: UITableViewCellStyle, reuseIdentifier: String?) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6221" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="azI-hm-qWg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6221" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="azI-hm-qWg">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6213"/>
@@ -257,7 +257,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w35-fP-mZg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3313.5" y="148.5"/>
+            <point key="canvasLocation" x="3325" y="148"/>
         </scene>
         <!--Passengers Table View Controller-->
         <scene sceneID="caP-e4-5Hz">
@@ -464,7 +464,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M6F-hw-Hnt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5987" y="843"/>
+            <point key="canvasLocation" x="6123" y="843"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="DUk-gt-Cj6">
@@ -569,6 +569,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oXy-7B-DdK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4388" y="1737"/>
+        </scene>
+        <!--Search Properties Table View Controller-->
+        <scene sceneID="R1s-qR-vnY">
+            <objects>
+                <tableViewController id="gGJ-9e-Gdn" customClass="FSSearchPropertiesTableViewController" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="kVr-1B-fv3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="38Q-zy-NVU">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="38Q-zy-NVU" id="Sjb-n3-Lih">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="gGJ-9e-Gdn" id="3ON-GK-SaD"/>
+                            <outlet property="delegate" destination="gGJ-9e-Gdn" id="4uu-yi-Quk"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="iM2-J8-tg8" kind="show" identifier="openLocationFinder" id="WN6-5C-jaF"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QXh-on-cXU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5247" y="1737"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="1Rc-SM-E19">
@@ -684,21 +713,11 @@
                                 <items>
                                     <navigationItem id="cBx-UA-IZE">
                                         <nil key="title"/>
-                                        <barButtonItem key="leftBarButtonItem" title="Item" id="oBx-3s-USr">
-                                            <connections>
-                                                <action selector="didPressSetting:" destination="azI-hm-qWg" id="EbW-ES-dVm"/>
-                                            </connections>
-                                        </barButtonItem>
                                         <view key="titleView" contentMode="scaleToFill" id="9DA-o2-ksv">
-                                            <rect key="frame" x="180" y="6" width="240" height="33"/>
+                                            <rect key="frame" x="180" y="5.5" width="240" height="33"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <barButtonItem key="rightBarButtonItem" title="Item" id="GHO-vx-Xzy">
-                                            <connections>
-                                                <action selector="didPressHike:" destination="azI-hm-qWg" id="NVb-2k-Eiz"/>
-                                            </connections>
-                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -712,9 +731,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="9eA-3Z-gBj"/>
                     <connections>
-                        <outlet property="leftButton" destination="oBx-3s-USr" id="Kip-s0-lC2"/>
+                        <outlet property="navItem" destination="cBx-UA-IZE" id="n97-bH-OlS"/>
                         <outlet property="navigationBar" destination="Ngl-A9-mYB" id="FBu-iC-Qu5"/>
-                        <outlet property="rightButton" destination="GHO-vx-Xzy" id="xGu-Y9-og6"/>
                         <outlet property="titleView" destination="9DA-o2-ksv" id="j8R-JI-nYQ"/>
                         <segue destination="qTe-nh-JjO" kind="presentation" identifier="showLogin" id="MXu-Lx-Juc"/>
                     </connections>
@@ -826,12 +844,22 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="zJn-JP-1g7"/>
                     <connections>
+                        <outlet property="searchDisplayController" destination="SC3-Mr-GgE" id="ccs-PI-axb"/>
                         <segue destination="7wh-7X-zfG" kind="presentation" identifier="addJourney" id="cK3-Rz-WSY"/>
                         <segue destination="w99-yo-k3r" kind="show" identifier="openMessages" id="VJA-kc-wSl"/>
                         <segue destination="7y5-LJ-U9N" kind="presentation" identifier="goSetting" id="mC9-SA-ObK"/>
+                        <segue destination="gGJ-9e-Gdn" kind="show" identifier="searchProperties" id="Pip-7x-pgG"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tmi-Km-oUY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="SC3-Mr-GgE">
+                    <connections>
+                        <outlet property="delegate" destination="Vvx-gm-nLf" id="Ch1-h0-I7i"/>
+                        <outlet property="searchContentsController" destination="Vvx-gm-nLf" id="jbA-X0-OR7"/>
+                        <outlet property="searchResultsDataSource" destination="Vvx-gm-nLf" id="dy7-f1-73G"/>
+                        <outlet property="searchResultsDelegate" destination="Vvx-gm-nLf" id="Emy-bx-Lrc"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="3325.5" y="843.75"/>
         </scene>
@@ -893,11 +921,12 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="wWa-xd-VQh"/>
-        <segue reference="idd-OF-6bD"/>
+        <segue reference="iyo-aa-cqh"/>
         <segue reference="SOi-a8-qTY"/>
-        <segue reference="8Iw-xR-reM"/>
-        <segue reference="7sG-pP-VEH"/>
+        <segue reference="VJA-kc-wSl"/>
+        <segue reference="mC9-SA-ObK"/>
+        <segue reference="cK3-Rz-WSY"/>
         <segue reference="ady-Dk-Mbv"/>
+        <segue reference="WN6-5C-jaF"/>
     </inferredMetricsTieBreakers>
 </document>

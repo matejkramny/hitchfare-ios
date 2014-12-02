@@ -129,8 +129,8 @@ class Journey {
 		getJourneys("/journeys", method: "GET", callback: callback)
 	}
 	
-	class func getAllByLocation (location: CLLocationCoordinate2D, callback: (err: NSError?, data: [Journey]) -> Void) {
-		getJourneys(NSString(format: "/journeys?lat=%f&lng=%f", location.latitude, location.longitude), method: "GET", callback: callback)
+	class func getAllByAttributes (attributes: NSString, callback: (err: NSError?, data: [Journey]) -> Void) {
+		getJourneys(NSString(format: "/journeys?%@", attributes), method: "GET", callback: callback)
 	}
 	
 	class func getMyJourneys (callback: (err: NSError?, data: [Journey]) -> Void) {
@@ -201,6 +201,27 @@ class Journey {
 			
 			callback(err: nil, data: passengers)
 		}, nil)
+	}
+	
+	func searchAttributes () -> NSString {
+		var attrs: [NSString] = []
+		
+		if self.startLng != nil && self.startLng > 0.0 {
+			attrs.append(NSString(format: "startLat=%f&startLng=%f", startLat!, startLng!))
+		}
+		if self.endLng != nil && self.endLng > 0.0 {
+			attrs.append(NSString(format: "endLat=%f&endLng=%f", endLat!, endLng!))
+		}
+		if self.startDate != nil {
+			attrs.append("startDate=" + String(Int(startDate!.timeIntervalSince1970) * 1000))
+		}
+		
+		var attrString = ""
+		for attr in attrs {
+			attrString = attrString + "&" + attr
+		}
+		
+		return attrString
 	}
 	
 }

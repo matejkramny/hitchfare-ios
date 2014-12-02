@@ -19,7 +19,7 @@ class FSWebViewController: UIViewController, UIWebViewDelegate {
         
         // Endpoint Setting
         var endpoint : String! = ""
-        if _flag == "Privacy" { endpoint = "/terms" }
+        if _flag == "Privacy" { endpoint = "/privacy" }
         else if _flag == "Terms of Service" { endpoint = "/terms" }
         
         var request = NSMutableURLRequest(URL: NSURL(string: kAPIEndpoint + endpoint)!)

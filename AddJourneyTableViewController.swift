@@ -415,4 +415,6 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 		}
 	}
 	
+	func didClearLocation() {
+	}
 }

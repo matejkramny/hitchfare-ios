@@ -15,15 +15,17 @@ protocol FareShoutNavigationDelegate {
 	
 	func openMessageNotification(listId: NSString)
 	func openJourneyNotification(reload: Bool, info: [NSString: AnyObject])
+	
+	optional
+	func didPressSearch()
 }
 
 class PageRootViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, FareShoutNavigationDelegate, UIScrollViewDelegate, JourneyReviewDelegate {
 	var vcs: [AnyObject] = []
 	var pageCtrl: UIPageViewController?
 
+	@IBOutlet weak var navItem: UINavigationItem!
 	@IBOutlet weak var navigationBar: UINavigationBar!
-	@IBOutlet weak var rightButton: UIBarButtonItem!
-	@IBOutlet weak var leftButton: UIBarButtonItem!
 	@IBOutlet weak var titleView: UIView!
 	
 	var titleBarText: UILabel!
@@ -38,32 +40,39 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 	var reviewVC: ReviewViewController!
 	var reviewBackgroundView: UIView!
 	
+	var searchBarButtonItem: UIBarButtonItem!
+	var rightBarButtonItem: UIBarButtonItem!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		mainNavigationDelegate = self
 		
 		var attributes: [NSObject: AnyObject] = [
-			NSFontAttributeName: UIFont(name: "FontAwesome", size: 20)!
+			NSFontAttributeName: UIFont(name: "FontAwesome", size: 24)!
 		]
+		
+		self.searchBarButtonItem = UIBarButtonItem(title: NSString.fontAwesomeIconStringForEnum(FAIcon.FASearch), style: UIBarButtonItemStyle.Plain, target: self, action: "didPressSearch:")
+		self.searchBarButtonItem.setTitleTextAttributes(attributes, forState: UIControlState.Normal)
 
-        // Right Custom Button
-        var rightImage : UIImage! = UIImage(named: "HikingButton")
-        var rightImageView : UIImageView! = UIImageView(image: rightImage)
-        var customRightButton : UIButton! = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
-        customRightButton.frame = CGRectMake(0, 0, rightImage.size.width, rightImage.size.height)
-        customRightButton.setImage(rightImage, forState: UIControlState.Normal)
-        customRightButton.addTarget(self, action: "didPressHike:", forControlEvents: UIControlEvents.TouchUpInside)
-        self.rightButton.customView = customRightButton
-        
-        // Left Custom Button
-        var leftImage : UIImage! = UIImage(named: "SettingButton")
-        var leftImageView : UIImageView! = UIImageView(image: leftImage)
-        var customLeftButton : UIButton! = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
-        customLeftButton.frame = CGRectMake(0, 0, leftImage.size.width, leftImage.size.height)
-        customLeftButton.setImage(leftImage, forState: UIControlState.Normal)
-        customLeftButton.addTarget(self, action: "didPressSetting:", forControlEvents: UIControlEvents.TouchUpInside)
-        self.leftButton.customView = customLeftButton
+		// Right Custom Button
+		var rightImage : UIImage! = UIImage(named: "HikingButton")
+		var rightImageView : UIImageView! = UIImageView(image: rightImage)
+		var customRightButton : UIButton! = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+		customRightButton.frame = CGRectMake(0, 0, rightImage.size.width, rightImage.size.height)
+		customRightButton.setImage(rightImage, forState: UIControlState.Normal)
+		customRightButton.addTarget(self, action: "didPressHike:", forControlEvents: UIControlEvents.TouchUpInside)
+		self.rightBarButtonItem = UIBarButtonItem(customView: customRightButton)
+		self.navItem.rightBarButtonItems = [self.rightBarButtonItem]
+		
+		// Left Custom Button
+		var leftImage : UIImage! = UIImage(named: "SettingButton")
+		var leftImageView : UIImageView! = UIImageView(image: leftImage)
+		var customLeftButton : UIButton! = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+		customLeftButton.frame = CGRectMake(0, 0, leftImage.size.width, leftImage.size.height)
+		customLeftButton.setImage(leftImage, forState: UIControlState.Normal)
+		customLeftButton.addTarget(self, action: "didPressSetting:", forControlEvents: UIControlEvents.TouchUpInside)
+		self.navItem.leftBarButtonItem = UIBarButtonItem(customView: customLeftButton)
 		
 		//self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
 		//self.navigationBar.shadowImage = UIImage()
@@ -100,6 +109,13 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		
 		self.titleView.layer.addSublayer(self.maskLayer)
 		self.titleView.addSubview(self.pageIndicator)
+		
+		UIGraphicsBeginImageContext(self.view.frame.size)
+		UIImage(named: "BackGround")!.drawInRect(self.view.bounds)
+		var img = UIGraphicsGetImageFromCurrentImageContext()
+		UIGraphicsEndImageContext()
+		
+		self.view.backgroundColor = UIColor(patternImage: img)
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -122,6 +138,7 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 			vcs.append(storyboard.instantiateViewControllerWithIdentifier("recent"))
 			vcs.append(storyboard.instantiateViewControllerWithIdentifier("friends"))
 			
+			self.setHasSearchButton(true, animated: false)
 			self.pageCtrl!.setViewControllers([vcs[1]], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
 			
 			for view in self.pageCtrl!.view.subviews {
@@ -139,6 +156,16 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		self.fetchJourneyReviewRequests()
 		
 		self.view.bringSubviewToFront(navigationBar)
+	}
+	
+	func setHasSearchButton (hasSearch: Bool, animated: Bool) {
+		var btns: [UIBarButtonItem] = [self.rightBarButtonItem]
+		
+		if hasSearch == true {
+			btns.append(self.searchBarButtonItem)
+		}
+		
+		self.navItem.setRightBarButtonItems(btns, animated: false)
 	}
 	
 	func fetchJourneyReviewRequests () {
@@ -323,6 +350,7 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		}
 		
 		self.pageIndicator.currentPage = vcIndex
+		self.setHasSearchButton(vcIndex == 1, animated: true)
 		
 		// Update text frame
 		self.titleBarText.frame = frame
@@ -337,8 +365,16 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		vc.presentHike()
 	}
 	
-    @IBAction func didPressSetting(sender: AnyObject) {
-        var vc: PageRootDelegate = vcs[currentViewIndex].viewControllers![0] as PageRootDelegate
-        vc.presentSetting()
-    }
+	@IBAction func didPressSetting(sender: AnyObject) {
+		var vc: PageRootDelegate = vcs[currentViewIndex].viewControllers![0] as PageRootDelegate
+		vc.presentSetting()
+	}
+	
+	func didPressSearch (sender: AnyObject?) {
+		if currentViewIndex == 1 {
+			var d = (self.vcs[1] as UINavigationController) .viewControllers[0] as PageRootDelegate
+			d.didPressSearch!()
+		}
+	}
+	
 }

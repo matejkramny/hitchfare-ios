@@ -2,7 +2,7 @@
 import UIKit
 import MapKit
 
-class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate, CLLocationManagerDelegate {
+class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate, CLLocationManagerDelegate, FSSearchPropertiesDelegate {
 	
 	var journeys: [Journey] = []
 	var didAppear: Bool = false
@@ -11,6 +11,8 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
 	var didUpdateDataAfterLocation: Bool = false
 	
 	var locationManager: CLLocationManager!
+	var searchAttributes: NSString?
+	var searchProperties: Journey?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -111,8 +113,20 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
 			self.tableView.reloadData()
 		}
 		
-		if self.lastLocation != nil {
-			Journey.getAllByLocation(self.lastLocation!, callback: callback)
+		if self.lastLocation != nil || self.searchAttributes != nil {
+			var attrs: NSString!
+			if self.lastLocation != nil {
+				attrs = NSString(format: "lat=%f&lng=%f%%@%@", self.lastLocation!.latitude, self.lastLocation!.longitude, self.searchAttributes != nil ? "&" : "", self.searchAttributes != nil ? self.searchAttributes! : "")
+			} else {
+				attrs = self.searchAttributes!
+			}
+			
+			// override if start|end location exists
+			if self.searchProperties != nil && (self.searchProperties!.startLocation != nil || self.searchProperties!.endLocation != nil) {
+				attrs = self.searchAttributes!
+			}
+			
+			Journey.getAllByAttributes(attrs, callback: callback)
 		} else {
 			Journey.getAll(callback)
 		}
@@ -169,6 +183,13 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
 		if segue.identifier == "openMessages" {
 			var vc: MessagesViewController = segue.destinationViewController as MessagesViewController
 			vc.list = sender as MessageList
+		} else if segue.identifier == "searchProperties" {
+			var vc: FSSearchPropertiesTableViewController = segue.destinationViewController as FSSearchPropertiesTableViewController
+			vc.delegate = self
+			
+			if self.searchProperties != nil {
+				vc.properties = self.searchProperties!
+			}
 		}
 	}
 	
@@ -190,6 +211,19 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
 	
 	func openJourneyNotification(reload: Bool, info: [NSString : AnyObject]) {
 		
+	}
+	
+	func didPressSearch() {
+		self.performSegueWithIdentifier("searchProperties", sender: nil)
+	}
+	
+	//MARK: FSSearchPropertiesDelegate
+	
+	func FSSearchPropertiesSetAssembledAttributes(properties: Journey?, attributes: NSString?) {
+		self.searchProperties = properties
+		self.searchAttributes = attributes
+		
+		// data is refreshed on ViewWillAppear..
 	}
 	
 }
