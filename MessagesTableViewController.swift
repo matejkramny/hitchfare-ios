@@ -268,8 +268,8 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 			cell!.backgroundView = nil
 			cell!.backgroundColor = UIColor.clearColor()
 			cell!.label.text = message.message
-			cell!.label.textColor = textColor
-			cell!.bgView.layer.backgroundColor = bgColor.CGColor
+			cell!.label.textColor = UIColor.whiteColor()
+			cell!.bgView.layer.backgroundColor = UIColor.blackColor().CGColor
 			cell!.bgView.layer.cornerRadius = cornerRadius
 			
 			cell!.selectionStyle = UITableViewCellSelectionStyle.None

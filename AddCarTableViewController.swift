@@ -1,7 +1,7 @@
 
 import UIKit
 
-class AddCarTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class AddCarTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, StepperCellDelegate, UITextFieldDelegate {
 	
 	var car: Car! = Car()
 	var chosenImage: UIImage? = nil
@@ -12,6 +12,7 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 		self.tableView.registerNib(UINib(nibName: "FSTextFieldTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "TextField")
 		self.tableView.registerNib(UINib(nibName: "ImageTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "ImageView")
 		self.tableView.registerNib(UINib(nibName: "FSTextViewTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "TextView")
+		self.tableView.registerNib(UINib(nibName: "StepperTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Stepper")
 		
 		self.navigationItem.title = "Add Car"
 		if self.car._id != nil {
@@ -47,7 +48,7 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 	}
 	
 	func add (sender: AnyObject) {
-		car.name = getCellContents(NSIndexPath(forRow: 0, inSection: 0))
+        //		car.name = getCellContents(NSIndexPath(forRow: 0, inSection: 0))          // NonVisible -> fatal error : unexpectedly found nil while unwrapping an Optional value
 		
 		var s = getCellContents(NSIndexPath(forRow: 0, inSection: 1))
 		var seats: Int? = s.integerValue
@@ -68,6 +69,10 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 	}
 	
 	func getCellContents(indexPath: NSIndexPath) -> NSString {
+        if indexPath.section == 1 {
+            return String(format: "%.0f", (self.tableView.cellForRowAtIndexPath(indexPath) as StepperTableViewCell).stepper.value)
+        }
+        
 		return (self.tableView.cellForRowAtIndexPath(indexPath) as FSTextFieldTableViewCell).field.text
 	}
 	
@@ -118,7 +123,7 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 			return cell
 		}
 		
-		if (indexPath.section == 0 && indexPath.row == 0) || indexPath.section == 1 {
+		if (indexPath.section == 0 && indexPath.row == 0) {
 			var identifier = "TextField"
 			
 			var cell: FSTextFieldTableViewCell? = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as? FSTextFieldTableViewCell
@@ -129,31 +134,40 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 			
 			cell!.selectionStyle = UITableViewCellSelectionStyle.None
 			
-			switch indexPath.section {
-			case 0:
-				cell!.label.text = "Name"
-				cell!.field.text = self.car.name
-				cell!.field.placeholder = "Car Name"
-				cell!.field.keyboardType = UIKeyboardType.Default
-				cell!.field.autocapitalizationType = UITextAutocapitalizationType.Words
-				
-				break
-			case 1:
-				if self.car.seats > 0 {
-					cell!.field.text = String(self.car.seats)
-				}
-				
-				cell!.label.text = "Number of Seats"
-				cell!.field.placeholder = "4"
-				cell!.field.keyboardType = UIKeyboardType.NumberPad
-				
-				break
-			default:
-				break
-			}
+            cell!.label.text = "Name"
+            cell!.field.delegate = self
+            cell!.field.text = self.car.name
+//            cell!.field.placeholder = "Car Name"
+            cell!.field.attributedPlaceholder = NSAttributedString(string: "Car Name", attributes: [NSForegroundColorAttributeName: UIColor.grayColor()])
+            cell!.field.keyboardType = UIKeyboardType.Default
+            cell!.field.autocapitalizationType = UITextAutocapitalizationType.Words
 			
 			return cell!
 		}
+        
+        if indexPath.section == 1 {
+            // Number of Seats
+            var cell = tableView.dequeueReusableCellWithIdentifier("Stepper", forIndexPath: indexPath) as? StepperTableViewCell
+            if cell == nil {
+                cell = StepperTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Stepper")
+            }
+            
+            cell!.stepper.maximumValue = 6
+            cell!.stepper.minimumValue = 0
+            
+            if self.car.seats > 0 {
+                cell!.stepper.value = Double(self.car.seats)
+            } else {
+                cell!.stepper.value = 4                 // Default Passengers Number Set
+            }
+            
+            cell!.label.text = "Number of Seats : " + String(format: "%.0f", cell!.stepper.value)
+            
+            cell!.initialize()
+            cell!.delegate = self
+            
+            return cell! as UITableViewCell
+        }
 		
 		if indexPath.section == 0 && indexPath.row == 1 {
 			var cell: FSTextViewTableViewCell? = tableView.dequeueReusableCellWithIdentifier("TextView", forIndexPath: indexPath) as? FSTextViewTableViewCell
@@ -161,6 +175,8 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 			if cell == nil {
 				cell = FSTextViewTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "TextView")
 			}
+            
+			cell!.selectionStyle = UITableViewCellSelectionStyle.None
 			
 			cell!.backgroundColor = UIColor.clearColor()
 			cell!.fieldTitle.text = "Description"
@@ -251,4 +267,15 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 		self.dismissViewControllerAnimated(true, completion: nil)
 	}
 	
+    // MARK: - StepperCellDelegate
+    func StepperValueChanged(cell: StepperTableViewCell, value: Double) {
+        cell.label.text = "Number of Seats"
+        cell.label.text = cell.label.text! + " : " + String(format: "%.0f", value)
+    }
+    
+    // MARK: - UITextField Delegate
+    func textFieldShouldEndEditing(textField: UITextField) -> Bool {
+        self.car.name = textField.text
+        return true
+    }
 }
