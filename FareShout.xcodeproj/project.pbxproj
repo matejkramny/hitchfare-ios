@@ -220,7 +220,7 @@
 		4F95342619FFEFDF0058210D /* UserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserTableViewController.swift; path = FareShout/UserTableViewController.swift; sourceTree = "<group>"; };
 		4FA9F15919FED9B7009D0F33 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4FA9F16019FFD3CA009D0F33 /* PageRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PageRootViewController.swift; path = FareShout/PageRootViewController.swift; sourceTree = "<group>"; };
-		4FC1E5E019FEB518002F743B /* FareShout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FareShout.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4FC1E5E019FEB518002F743B /* fareshout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fareshout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FC1E5E419FEB518002F743B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FC1E5E519FEB518002F743B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FC1E5EA19FEB518002F743B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -490,7 +490,7 @@
 		4FC1E5E119FEB518002F743B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4FC1E5E019FEB518002F743B /* FareShout.app */,
+				4FC1E5E019FEB518002F743B /* fareshout.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -586,9 +586,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4FC1E5DF19FEB518002F743B /* FareShout */ = {
+		4FC1E5DF19FEB518002F743B /* fareshout */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4FC1E5FF19FEB518002F743B /* Build configuration list for PBXNativeTarget "FareShout" */;
+			buildConfigurationList = 4FC1E5FF19FEB518002F743B /* Build configuration list for PBXNativeTarget "fareshout" */;
 			buildPhases = (
 				4FC1E5DC19FEB518002F743B /* Sources */,
 				4FC1E5DD19FEB518002F743B /* Frameworks */,
@@ -598,9 +598,9 @@
 			);
 			dependencies = (
 			);
-			name = FareShout;
+			name = fareshout;
 			productName = FareShout;
-			productReference = 4FC1E5E019FEB518002F743B /* FareShout.app */;
+			productReference = 4FC1E5E019FEB518002F743B /* fareshout.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -614,7 +614,7 @@
 				TargetAttributes = {
 					4FC1E5DF19FEB518002F743B = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = P6DBKK68A7;
+						DevelopmentTeam = 98JR85M9BW;
 					};
 				};
 			};
@@ -631,7 +631,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4FC1E5DF19FEB518002F743B /* FareShout */,
+				4FC1E5DF19FEB518002F743B /* fareshout */,
 			);
 		};
 /* End PBXProject section */
@@ -897,7 +897,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4FC1E5FF19FEB518002F743B /* Build configuration list for PBXNativeTarget "FareShout" */ = {
+		4FC1E5FF19FEB518002F743B /* Build configuration list for PBXNativeTarget "fareshout" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4FC1E60019FEB518002F743B /* Debug */,
