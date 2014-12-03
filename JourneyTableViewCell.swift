@@ -32,12 +32,12 @@ class JourneyTableViewCell: MGSwipeTableCell {
 //		}
 		
 		// Not 'journey.isDriver' -- which is correct. The below is expected behaviour by user.. and makes sense :/.
-		if journey.owner! != currentUser!._id! || journey.isDriver == false {
-			self.journeyNameLabel.textColor = UIColor(red: 96/255.0, green: 99/255.0, blue: 102/255.0, alpha: 1)
-			self.driverImageView.image = UIImage(named: "PassengerTag")
-		} else {
+		if journey.isDriver == true {
 			self.journeyNameLabel.textColor = driverColor
 			self.driverImageView.image = UIImage(named: "DriverTag")
+		} else {
+			self.journeyNameLabel.textColor = UIColor(red: 96/255.0, green: 99/255.0, blue: 102/255.0, alpha: 1)
+			self.driverImageView.image = UIImage(named: "PassengerTag")
 		}
 		
 		self.bgView.backgroundColor = driverColor.colorWithAlphaComponent(0.1)
@@ -75,6 +75,10 @@ class JourneyTableViewCell: MGSwipeTableCell {
 			self.availabilityLabel.hidden = true
 			self.availabilityTextLabel.hidden = true
 			self.priceLabel.hidden = true
+		} else {
+			self.availabilityLabel.hidden = false
+			self.availabilityTextLabel.hidden = false
+			self.priceLabel.hidden = false
 		}
 	}
 	
