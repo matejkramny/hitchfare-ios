@@ -236,7 +236,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			}
 			
 			if req.journey.ownerObj != nil {
-				var url = NSURL(string: req.journey.ownerObj!.picture!.url)
+				var url = NSURL(string: req.user.picture!.url)
 				cell!.profileImageView.sd_setImageWithURL(url!)
 				cell!.profileImageView.layer.cornerRadius = 25
 				cell!.profileImageView.layer.masksToBounds = true
@@ -254,7 +254,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 				cell = JourneyRequestTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "journeyRequest")
 			}
 			
-			cell!.journeyName.text = req.user.name
+			cell!.journeyName.text = req.journey.ownerObj!.name
 			
 			if req.requested != nil {
 				cell!.requestedLabel.text = "Requested on " + requestedJourneyDateFormatter.stringFromDate(req.requested!)
