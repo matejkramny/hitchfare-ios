@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6221" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="azI-hm-qWg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="azI-hm-qWg">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6213"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
         <scene sceneID="xZk-rn-kcM">
             <objects>
-                <viewController id="qTe-nh-JjO" customClass="LoginViewController" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="qTe-nh-JjO" customClass="LoginViewController" customModule="fareshout" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="igv-9S-dS0"/>
                         <viewControllerLayoutGuide type="bottom" id="vBC-SH-yI8"/>
@@ -142,7 +142,7 @@
         <!--User Table View Controller-->
         <scene sceneID="JPW-X8-1NN">
             <objects>
-                <tableViewController id="332-jX-tJv" customClass="UserTableViewController" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="332-jX-tJv" customClass="UserTableViewController" customModule="fareshout" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fkb-yL-N2t">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -240,7 +240,7 @@
         <!--Passengers Table View Controller-->
         <scene sceneID="caP-e4-5Hz">
             <objects>
-                <tableViewController id="iEh-lV-fiU" customClass="PassengersTableViewController" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="iEh-lV-fiU" customClass="PassengersTableViewController" customModule="fareshout" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="0sg-91-PML">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -269,7 +269,7 @@
         <!--Cars Table View Controller-->
         <scene sceneID="HT5-bm-w2q">
             <objects>
-                <viewController id="8bB-pc-DAg" customClass="CarsTableViewController" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8bB-pc-DAg" customClass="CarsTableViewController" customModule="fareshout" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZGW-QJ-2ir"/>
                         <viewControllerLayoutGuide type="bottom" id="T4L-cI-QNy"/>
@@ -302,7 +302,7 @@
         <!--Add Car Table View Controller-->
         <scene sceneID="XmL-6V-9Wb">
             <objects>
-                <tableViewController id="zA3-vq-tZF" customClass="AddCarTableViewController" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="zA3-vq-tZF" customClass="AddCarTableViewController" customModule="fareshout" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="ykv-QW-dBD">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -336,7 +336,7 @@
         <!--Add Hikes-->
         <scene sceneID="7q8-Zn-MPe">
             <objects>
-                <tableViewController id="eH1-yq-0dA" customClass="AddJourneyTableViewController" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="eH1-yq-0dA" customClass="AddJourneyTableViewController" customModule="fareshout" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="vLv-p5-2u3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -413,7 +413,7 @@
         <!--Location Finder Table View Controller-->
         <scene sceneID="LaS-mB-T1d">
             <objects>
-                <tableViewController id="iM2-J8-tg8" customClass="LocationFinderTableViewController" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="iM2-J8-tg8" customClass="LocationFinderTableViewController" customModule="fareshout" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="5Ou-PO-8gQ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -463,7 +463,7 @@
         <!--Messages View Controller-->
         <scene sceneID="Fj6-6n-mwu">
             <objects>
-                <viewController id="w99-yo-k3r" customClass="MessagesViewController" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="w99-yo-k3r" customClass="MessagesViewController" customModule="fareshout" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UAx-rU-j6o"/>
                         <viewControllerLayoutGuide type="bottom" id="K0x-pR-5yH"/>
@@ -551,7 +551,7 @@
         <!--Search Properties Table View Controller-->
         <scene sceneID="R1s-qR-vnY">
             <objects>
-                <tableViewController id="gGJ-9e-Gdn" customClass="FSSearchPropertiesTableViewController" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="gGJ-9e-Gdn" customClass="FSSearchPropertiesTableViewController" customModule="fareshout" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="kVr-1B-fv3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -580,7 +580,7 @@
         <!--Root View Controller-->
         <scene sceneID="1Rc-SM-E19">
             <objects>
-                <tableViewController id="sP9-q5-qOU" customClass="SettingTableViewController" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="sP9-q5-qOU" customClass="SettingTableViewController" customModule="fareshout" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="5IG-9S-GNg">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -625,7 +625,7 @@
         <!--Web View Controller-->
         <scene sceneID="J3U-cx-uEs">
             <objects>
-                <viewController id="Szf-xQ-AHC" customClass="FSWebViewController" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Szf-xQ-AHC" customClass="FSWebViewController" customModule="fareshout" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Z73-vW-436"/>
                         <viewControllerLayoutGuide type="bottom" id="h8i-MN-eGb"/>
@@ -674,7 +674,7 @@
         <!--Page Root View Controller-->
         <scene sceneID="OUz-th-0A1">
             <objects>
-                <viewController id="azI-hm-qWg" customClass="PageRootViewController" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="azI-hm-qWg" customClass="PageRootViewController" customModule="fareshout" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="icI-Me-bYF"/>
                         <viewControllerLayoutGuide type="bottom" id="zQg-zC-qY7"/>
@@ -692,7 +692,7 @@
                                     <navigationItem id="cBx-UA-IZE">
                                         <nil key="title"/>
                                         <view key="titleView" contentMode="scaleToFill" id="9DA-o2-ksv">
-                                            <rect key="frame" x="180" y="6" width="240" height="33"/>
+                                            <rect key="frame" x="180" y="5.5" width="240" height="33"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
@@ -738,7 +738,7 @@
         <!--Nearby Journeys Table View Controller-->
         <scene sceneID="nI3-su-lpA">
             <objects>
-                <tableViewController id="Vvx-gm-nLf" customClass="NearbyJourneysTableViewController" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Vvx-gm-nLf" customClass="NearbyJourneysTableViewController" customModule="fareshout" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9xV-0m-EnX">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -844,7 +844,7 @@
         <!--Hikes Table View Cell-->
         <scene sceneID="5Hk-42-cXv">
             <objects>
-                <tableViewController id="cU5-fp-Ekr" customClass="HikesTableViewCell" customModule="FareShout" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="cU5-fp-Ekr" customClass="HikesTableViewCell" customModule="fareshout" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="eEW-fn-jCj">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
