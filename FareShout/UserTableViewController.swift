@@ -18,6 +18,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	// set to true before loading to indicate the view isn't loaded from UIPage thing
 	var presentedFromElsewhere = false
 	var shownUser: User!
+	var driverRating: Double? = nil
 	
 	let requestedJourneyDateFormatter: NSDateFormatter = NSDateFormatter()
 	
@@ -135,8 +136,10 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			self.tableView.reloadData()
 		}
 		
+		var u = currentUser!
 		if presentedFromElsewhere {
 			Journey.getUserJourneys(shownUser, callback: callback)
+			u = shownUser
 		} else {
 			JourneyPassenger.getMyJourneyRequests({ (err: NSError?, data: [JourneyPassenger]) -> Void in
 				self.myPendingRequests = data
@@ -170,6 +173,11 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			
 			Journey.getMyJourneys(callback)
 		}
+		
+		u.averageRating({ (err: NSError?, rating: Double?) -> Void in
+			self.driverRating = rating
+			self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
+		})
 	}
 	
     //MARK: - TableView Delegate Method
@@ -207,6 +215,10 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			
 			if presentedFromElsewhere {
 				c.carButton.hidden = true
+			}
+			
+			if self.driverRating != nil {
+				c.ratingLabel.text = NSString(format: "Rating: %.2f", self.driverRating!)
 			}
 			
 			var url = NSURL(string: shownUser.picture!.url)

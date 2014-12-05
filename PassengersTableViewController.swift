@@ -1,7 +1,7 @@
 
 import UIKit
 
-class PassengersTableViewController: UITableViewController {
+class PassengersTableViewController: UITableViewController, MGSwipeTableCellDelegate {
 	var journey: Journey!
 	var passengers: [JourneyPassenger] = []
 	
@@ -99,6 +99,7 @@ class PassengersTableViewController: UITableViewController {
 		deleteBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
 		
 		cell!.rightButtons = [deleteBtn]
+		cell!.delegate = self
 		cell!.rightSwipeSettings.transition = MGSwipeTransition.TransitionDrag
 		
 		cell!.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
@@ -137,6 +138,27 @@ class PassengersTableViewController: UITableViewController {
 			var vc: MessagesViewController = segue.destinationViewController as MessagesViewController
 			vc.list = sender as MessageList
 		}
+	}
+	
+	func swipeTableCell(cell: MGSwipeTableCell!, canSwipe direction: MGSwipeDirection) -> Bool {
+		return direction == MGSwipeDirection.RightToLeft
+	}
+	
+	func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
+		var indexPath: NSIndexPath = self.tableView.indexPathForCell(cell as UITableViewCell)!
+		
+		var passenger = passengers[indexPath.row-1]
+		SVProgressHUD.showProgress(1.0, status: "Deleting Passenger", maskType: SVProgressHUDMaskType.Black)
+		passenger.rejectRequest({ (err: NSError?) -> Void in
+			if err != nil {
+				return SVProgressHUD.showErrorWithStatus("Network Error.")
+			}
+			
+			SVProgressHUD.dismiss()
+			self.refreshData(nil)
+		})
+		
+		return true
 	}
 	
 }

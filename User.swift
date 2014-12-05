@@ -110,4 +110,18 @@ class User {
 		
 		return json
 	}
+	
+	func averageRating(callback: (err: NSError?, rating: Double?) -> Void) {
+		doRequest(makeRequest("/rating", "GET"), { (err: NSError?, data: AnyObject?) -> Void in
+			var json: [NSString: AnyObject]? = data as? [NSString: AnyObject]
+			if json != nil {
+				let average: NSString? = json!["average"] as? NSString
+				if average != nil {
+					callback(err: err, rating: average!.doubleValue)
+				}
+			}
+			
+			callback(err: err, rating: nil)
+		}, nil)
+	}
 }
