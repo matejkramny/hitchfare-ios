@@ -224,4 +224,16 @@ class Journey {
 		return attrString
 	}
 	
+	func averageRating(callback: (err: NSError?, rating: Double?) -> Void) {
+		doRequest(makeRequest("/rating/journey/" + self._id!, "GET"), { (err: NSError?, data: AnyObject?) -> Void in
+			var json: [NSString: AnyObject]? = data as? [NSString: AnyObject]
+			if json != nil {
+				let average: Double? = json!["average"] as? Double
+				return callback(err: err, rating: average)
+			}
+			
+			callback(err: err, rating: nil)
+		}, nil)
+	}
+	
 }

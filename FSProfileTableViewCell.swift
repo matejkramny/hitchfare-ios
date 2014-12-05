@@ -10,7 +10,6 @@ class FSProfileTableViewCell: UITableViewCell {
 	
 	@IBOutlet weak var nameLabel: UILabel!
 	@IBOutlet weak var descriptionLabel: UILabel!
-	@IBOutlet weak var ratingImageView: UIImageView!
 	@IBOutlet weak var profileImageView: UIImageView!
 	@IBOutlet weak var carButton: UIButton!
 	@IBOutlet weak var ratingLabel: UILabel!

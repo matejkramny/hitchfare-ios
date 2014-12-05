@@ -5,6 +5,8 @@ class PassengersTableViewController: UITableViewController, MGSwipeTableCellDele
 	var journey: Journey!
 	var passengers: [JourneyPassenger] = []
 	
+	var avgRating: Double?
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -47,17 +49,49 @@ class PassengersTableViewController: UITableViewController, MGSwipeTableCellDele
 			self.refreshControl!.endRefreshing()
 			self.tableView.reloadData()
 		})
+		
+		self.journey.averageRating({ (err: NSError?, rating: Double?) -> Void in
+			self.avgRating = rating
+			self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
+		})
 	}
 	
 	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-		return 1
+		return 2
 	}
 	
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		if section == 0 {
+			return self.avgRating != nil ? 1 : 0
+		}
+		
 		return self.passengers.count + 1
 	}
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+		if indexPath.section == 0 {
+			var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("rating", forIndexPath: indexPath) as UITableViewCell
+			
+			cell.textLabel!.font = UIFont(awesomeFontOfSize: 18.0)
+			var stars = ""
+			
+			for var i = 0; i < Int(ceil(self.avgRating!)); i++ {
+				var starEnum = FAIcon.FAStar
+				
+				if i == Int(round(self.avgRating!)) {
+					starEnum = FAIcon.FAStarHalf
+				}
+				
+				stars = stars + NSString.fontAwesomeIconStringForEnum(starEnum)
+			}
+			
+			cell.textLabel!.text = NSString(format: "Average Rating: %@", stars)
+			cell.textLabel!.textColor = UIColor.whiteColor()
+			cell.backgroundColor = UIColor.clearColor()
+			
+			return cell
+		}
+		
 		var cell = tableView.dequeueReusableCellWithIdentifier("Hike", forIndexPath: indexPath) as? HikeTableViewCell
 		
 		if cell == nil {
@@ -89,7 +123,14 @@ class PassengersTableViewController: UITableViewController, MGSwipeTableCellDele
 		
 		cell!.messageLabel.text = "Not Rated."
 		if passenger.rated == true {
-			cell!.messageLabel.text = "Rating: " + String(passenger.rating) + "/5"
+			cell!.messageLabel!.font = UIFont(awesomeFontOfSize: 14.0)
+			var stars = ""
+			
+			for var i = 0; i < passenger.rating; i++ {
+				stars = stars + NSString.fontAwesomeIconStringForEnum(FAIcon.FAStar)
+			}
+			
+			cell!.messageLabel!.text = NSString(format: "Rating: %@", stars)
 		}
 		
 		var deleteBtn = MGSwipeButton(title: " " + NSString.fontAwesomeIconStringForEnum(FAIcon.FATrashO) + " ", backgroundColor: UIColor.blackColor())
@@ -108,6 +149,10 @@ class PassengersTableViewController: UITableViewController, MGSwipeTableCellDele
 	}
 	
 	override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		if indexPath.section == 0 {
+			return 33
+		}
+		
 		return 88
 	}
 	

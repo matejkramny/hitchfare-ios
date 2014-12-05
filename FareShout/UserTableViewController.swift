@@ -218,7 +218,20 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			}
 			
 			if self.driverRating != nil {
-				c.ratingLabel.text = NSString(format: "Rating: %.2f", self.driverRating!)
+				c.ratingLabel.font = UIFont(awesomeFontOfSize: 17.0)
+				var stars: String = ""
+				
+				for var i = 0; i < Int(ceil(self.driverRating!)); i++ {
+					var starEnum = FAIcon.FAStar
+					
+					if i == Int(round(self.driverRating!)) {
+						starEnum = FAIcon.FAStarHalf
+					}
+					
+					stars = stars + NSString.fontAwesomeIconStringForEnum(starEnum)
+				}
+				
+				c.ratingLabel.text = NSString(format: "Rating: %@", stars)
 			}
 			
 			var url = NSURL(string: shownUser.picture!.url)

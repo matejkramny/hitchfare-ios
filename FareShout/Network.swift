@@ -142,6 +142,12 @@ func doPostRequest (request: NSMutableURLRequest, callback: (err: NSError?, data
 	doRequest(request, callback, data)
 }
 
+func callInMainThread (err: NSError?, data: AnyObject?, callback: (err: NSError?, data: AnyObject?) -> Void) {
+	dispatch_async(dispatch_get_main_queue(), { () -> Void in
+		callback(err:err, data: data)
+	})
+}
+
 func doRequest (request: NSMutableURLRequest, callback: (err: NSError?, data: AnyObject?) -> Void, body: NSData?) -> NSURLSessionDataTask? {
 	if queueRequests {
 		var req: Request! = Request(request: request, callback: callback, body: body)
@@ -156,9 +162,7 @@ func doRequest (request: NSMutableURLRequest, callback: (err: NSError?, data: An
 	
 	let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { (data: NSData!, res: NSURLResponse!, err) -> Void in
 		if err != nil {
-			dispatch_async(dispatch_get_main_queue(), { () -> Void in
-				callback(err: err, data: nil)
-			})
+			callInMainThread(err, nil, callback)
 			return
 		}
 		
@@ -170,9 +174,7 @@ func doRequest (request: NSMutableURLRequest, callback: (err: NSError?, data: An
 		
 		var statusCode = httpRes.statusCode
 		if statusCode >= 400 {
-			dispatch_async(dispatch_get_main_queue(), { () -> Void in
-				callback(err: NSError(domain: kNetworkDomainError, code: 0, userInfo: nil), data: nil)
-			})
+			callInMainThread(NSError(domain: kNetworkDomainError, code: 0, userInfo: nil), nil, callback)
 			
 			return
 		}
@@ -183,15 +185,12 @@ func doRequest (request: NSMutableURLRequest, callback: (err: NSError?, data: An
 		
 		var json: AnyObject? = NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions(0), error: &e)
 		if e != nil {
-			dispatch_async(dispatch_get_main_queue(), { () -> Void in
-				callback(err: err, data: nil)
-			})
+			callInMainThread(err, nil, callback)
+			
 			return
 		}
 		
-		dispatch_async(dispatch_get_main_queue(), { () -> Void in
-			callback(err: nil, data: json)
-		})
+		callInMainThread(nil, json, callback)
 	}
 	
 	task.resume()

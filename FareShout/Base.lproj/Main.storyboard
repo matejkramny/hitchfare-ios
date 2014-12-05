@@ -246,10 +246,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="gV4-qw-dUW">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="rating" textLabel="fxH-iN-xov" style="IBUITableViewCellStyleDefault" id="gV4-qw-dUW">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gV4-qw-dUW" id="utL-Va-48B">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fxH-iN-xov">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -902,11 +910,11 @@
         <image name="loginBtn" width="410" height="90"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="idd-OF-6bD"/>
-        <segue reference="SOi-a8-qTY"/>
-        <segue reference="cTb-Nu-5Su"/>
-        <segue reference="7sG-pP-VEH"/>
         <segue reference="iyo-aa-cqh"/>
+        <segue reference="SOi-a8-qTY"/>
+        <segue reference="8Iw-xR-reM"/>
+        <segue reference="idd-OF-6bD"/>
+        <segue reference="7sG-pP-VEH"/>
         <segue reference="ady-Dk-Mbv"/>
         <segue reference="WN6-5C-jaF"/>
     </inferredMetricsTieBreakers>
