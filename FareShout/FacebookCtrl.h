@@ -10,7 +10,7 @@
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
 
-#define FACEBOOK_APP_KEY @"1380316908928677"
+#define FACEBOOK_APP_KEY @"336240179884192"
 #define FACEBOOK_HOST @"https://graph.facebook.com/"
 
 @protocol FacebookCtrlDelegate <NSObject>

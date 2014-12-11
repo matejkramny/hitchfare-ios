@@ -67,9 +67,9 @@ static FacebookCtrl *appConfigInstance = nil;
 - (void)requestAccessToFacebook {
 	 self.accountStore = [[ACAccountStore alloc] init];
 	 ACAccountType *FBaccountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-	 NSLog(@"설정 : %@", FBaccountType.accessGranted?@"Yes":@"No");
+	 NSLog(@"FB Grant: %@", FBaccountType.accessGranted ? @"Yes" : @"No");
 	 
-	 NSDictionary *FBdict = [NSDictionary dictionaryWithObjectsAndKeys:FACEBOOK_APP_KEY, ACFacebookAppIdKey, @[@"email", @"user_photos"], ACFacebookPermissionsKey, nil];
+	 NSDictionary *FBdict = [NSDictionary dictionaryWithObjectsAndKeys:FACEBOOK_APP_KEY, ACFacebookAppIdKey, @[@"email", @"user_photos", @"user_friends"], ACFacebookPermissionsKey, nil];
 	 
 	 [self.accountStore requestAccessToAccountsWithType:FBaccountType options:FBdict completion:^(BOOL granted, NSError *e) {
 		  if (granted)
@@ -90,13 +90,13 @@ static FacebookCtrl *appConfigInstance = nil;
 }
 
 - (void)getInformationSelf {
-	 // https://graph.facebook.coim/me?fields=email,first_name,last_name,name,picture.type(large)
+	 // https://graph.facebook.com/me?fields=email,first_name,last_name,name,picture.type(large),friends
 	 
 	 if (![self checkUseEnableFacebook]) return;
 	 
 	 NSURL *requestURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", FACEBOOK_HOST, @"me"]];
 	 NSDictionary *parameters = @{
-											@"fields": @"id,email,first_name,last_name,name,picture.type(large).width(1280)"
+											@"fields": @"id,email,first_name,last_name,name,picture.type(large).width(1280),friends"
 											};
 	 
 	 SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeFacebook requestMethod:SLRequestMethodGET URL:requestURL parameters:parameters];

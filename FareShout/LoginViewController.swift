@@ -61,7 +61,7 @@ class LoginViewController: UIViewController, FacebookCtrlDelegate, UIScrollViewD
 	
 	func onFinishedGetInformationSelf(_response: [NSString : AnyObject]!) {
 		currentUser = User(_response: _response)
-		currentUser?.register({ (error, data) -> Void in
+		currentUser!.register({ (error, data) -> Void in
 			self.dismissViewControllerAnimated(true, completion: nil)
 		})
 	}

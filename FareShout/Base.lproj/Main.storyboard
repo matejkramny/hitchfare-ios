@@ -585,7 +585,7 @@
             </objects>
             <point key="canvasLocation" x="5247" y="1737"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Settings-->
         <scene sceneID="1Rc-SM-E19">
             <objects>
                 <tableViewController id="sP9-q5-qOU" customClass="SettingTableViewController" customModule="fareshout" customModuleProvider="target" sceneMemberID="viewController">
@@ -618,13 +618,27 @@
                                     <segue destination="Szf-xQ-AHC" kind="show" identifier="Terms of Service" id="xAK-Gd-thH"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="button" textLabel="4iV-za-GEy" style="IBUITableViewCellStyleDefault" id="mnS-O5-yBN">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mnS-O5-yBN" id="BUd-2r-J5C">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4iV-za-GEy">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="sP9-q5-qOU" id="gHm-Ke-ePF"/>
                             <outlet property="delegate" destination="sP9-q5-qOU" id="tE4-yD-C7l"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="lZQ-cV-6yb"/>
+                    <navigationItem key="navigationItem" title="Settings" id="lZQ-cV-6yb"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lYO-a5-XJf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -912,7 +926,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="iyo-aa-cqh"/>
         <segue reference="SOi-a8-qTY"/>
-        <segue reference="8Iw-xR-reM"/>
+        <segue reference="cTb-Nu-5Su"/>
         <segue reference="idd-OF-6bD"/>
         <segue reference="7sG-pP-VEH"/>
         <segue reference="ady-Dk-Mbv"/>

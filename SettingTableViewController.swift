@@ -68,13 +68,15 @@ class SettingTableViewController: UITableViewController, UIActionSheetDelegate, 
     
     // MARK: - TableView Delegate Methods
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0, 1 :
             return 2
+		case 2:
+			return 1
         default:
             return 0
         }
@@ -100,8 +102,11 @@ class SettingTableViewController: UITableViewController, UIActionSheetDelegate, 
                 cell!.textLabel!.text = "Terms of Service"
                 cell!.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             }
-        }
-        
+		} else if indexPath.section == 2 {
+			cell = tableView.dequeueReusableCellWithIdentifier("button", forIndexPath: indexPath) as? UITableViewCell
+			cell!.textLabel!.text = "Log Out"
+		}
+			
         return cell!
     }
     
@@ -131,6 +136,11 @@ class SettingTableViewController: UITableViewController, UIActionSheetDelegate, 
             } else {
                 // Terms of Service
             }
+		case 2:
+			currentUser = nil
+			sessionCookie = nil
+			saveSettings()
+			self.navigationController!.dismissViewControllerAnimated(true, completion: nil)
         default:
             break
         }

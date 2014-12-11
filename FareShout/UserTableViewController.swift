@@ -11,6 +11,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	var pastJourneys: [Journey] = []
 	var myPendingRequests: [JourneyPassenger] = []
 	var pendingRequests: [JourneyPassenger] = []
+	var mutualFriends: [User] = []
 	
 	var didAppear: Bool = false
 	var isInSegue: Bool = false
@@ -37,6 +38,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		self.tableView.registerNib(UINib(nibName: "FSProfileTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "profileCell")
 		self.tableView.registerNib(UINib(nibName: "JourneyRequestTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "journeyRequest")
 		self.tableView.registerNib(UINib(nibName: "AcceptJourneyRequestTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "acceptJourneyRequest")
+		self.tableView.registerNib(UINib(nibName: "HikeTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Hike")
 		
 		var image : UIImage! = UIImage(named: "BackGround")
 		var imageView : UIImageView! = UIImageView(image: image)
@@ -140,6 +142,11 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		if presentedFromElsewhere {
 			Journey.getUserJourneys(shownUser, callback: callback)
 			u = shownUser
+			
+			currentUser!.getMutualFriends(shownUser, callback: { (err: NSError?, friends: [User]) -> Void in
+				self.mutualFriends = friends
+				self.tableView.reloadSections(NSIndexSet(index: 4), withRowAnimation: UITableViewRowAnimation.Automatic)
+			})
 		} else {
 			JourneyPassenger.getMyJourneyRequests({ (err: NSError?, data: [JourneyPassenger]) -> Void in
 				self.myPendingRequests = data
@@ -183,7 +190,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
     //MARK: - TableView Delegate Method
     
 	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-		return 5
+		return 6
 	}
 	
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -193,6 +200,8 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		case 3:
 			return journeys.count
 		case 4:
+			return mutualFriends.count
+		case 5:
 			return pastJourneys.count
 		case 2:
 			return myPendingRequests.count
@@ -298,9 +307,9 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			cell!.delegate = self
 			
 			return cell!
-		} else if indexPath.section == 3 || indexPath.section == 4 {
+		} else if indexPath.section == 3 || indexPath.section == 5 {
 			var list: [Journey] = journeys
-			if indexPath.section == 4 {
+			if indexPath.section == 5 {
 				list = pastJourneys
 			}
 			
@@ -331,6 +340,27 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			cell!.style()
 			cell!.populate(journey)
 			cell!.journeyNameLabel.text = journey.ownerObj!.name
+			
+			return cell!
+		} else if indexPath.section == 4 {
+			// mutual friends
+			var cell = tableView.dequeueReusableCellWithIdentifier("Hike", forIndexPath: indexPath) as? HikeTableViewCell
+			
+			if cell == nil {
+				cell = HikeTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Hike")
+			}
+			
+			var friend = mutualFriends[indexPath.row]
+			
+			cell!.nameLabel.text = friend.name
+			if friend.picture != nil {
+				cell!.pictureImageView.sd_setImageWithURL(NSURL(string: friend.picture!.url))
+				cell!.pictureImageView.clipsToBounds = true
+				cell!.pictureImageView.layer.cornerRadius = 72/2
+			}
+			
+			cell!.messageLabel.text = ""
+			cell!.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
 			
 			return cell!
 		}
@@ -373,7 +403,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		if section == 3 {
 			return "Current Journeys"
 		}
-		if section == 4 {
+		if section == 5 {
 			return self.pastJourneys.count > 0 ? "Past Journeys" : nil
 		}
 		if section == 2 {
@@ -382,6 +412,9 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		if section == 1 {
 			return self.pendingRequests.count > 0 ? "Journey Requests" : nil
 		}
+		if section == 4 {
+			return self.mutualFriends.count > 0 ? "Mutual Friends" : nil
+		}
 		
 		return nil
 	}
@@ -389,7 +422,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 		var headerHeight : CGFloat = tableView.sectionHeaderHeight
 		
-		if section == 4 {
+		if section == 5 {
 			return self.pastJourneys.count > 0 ? headerHeight : 0
 		}
 		if section == 3 {
@@ -401,6 +434,9 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		if section == 1 {
 			return self.pendingRequests.count > 0 ? headerHeight : 0
 		}
+		if section == 4 {
+			return self.mutualFriends.count > 0 ? headerHeight : 0
+		}
 		
 		return 0
 	}
@@ -410,6 +446,8 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			return 120.0
 		} else if indexPath.section == 1 || indexPath.section == 2 {
 			return 66.0
+		} else if indexPath.section == 4 {
+			return 88.0
 		} else {
 			return 126.0
 		}
@@ -458,10 +496,12 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 					SVProgressHUD.showSuccessWithStatus("Sent request to join Journey")
 				}
 			})
-		} else if indexPath.section >= 3 {
+		} else if indexPath.section == 3 || indexPath.section == 5 {
 			// Open passengers list
 			self.performSegueWithIdentifier("openPassengers", sender: indexPath.section == 3 ? journeys[indexPath.row] : pastJourneys[indexPath.row])
 			return
+		} else if indexPath.section == 4 {
+			//WARN: find message list
 		}
 		
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)

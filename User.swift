@@ -1,36 +1,14 @@
 
 import Foundation
 
-class UserPicture: NSObject {
+class UserPicture {
 	var isSilhouette: Bool = false
 	var url: NSString!
 	var width: NSString? = nil
 	var height: NSString? = nil
 	
-	var UUID: String
-	var sourceImageUUID: String
-	
 	init(url: NSString) {
 		self.url = url
-		
-		let str = self.url.cStringUsingEncoding(NSUTF8StringEncoding)
-		let strLen = CC_LONG(self.url.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
-		let digestLen = Int(CC_MD5_DIGEST_LENGTH)
-		let result = UnsafeMutablePointer<CUnsignedChar>.alloc(digestLen)
-		
-		CC_MD5(str, strLen, result)
-		
-		var hash = NSMutableString()
-		for i in 0..<digestLen {
-			hash.appendFormat("%02x", result[i])
-		}
-		
-		result.destroy()
-		
-		self.UUID = String(hash)
-		self.sourceImageUUID = self.UUID
-		
-		super.init()
 	}
 }
 
@@ -42,6 +20,7 @@ class User {
 	var last_name: NSString? = nil
 	var name: NSString? = nil
 	var picture: UserPicture? = nil
+	var userFriends: [NSString] = [] // [fbId]
 	
 	init(){}
 	
@@ -68,6 +47,24 @@ class User {
 		self.id = _response["id"] as String?
 		self.last_name = _response["last_name"] as String?
 		self.name = _response["name"] as String?
+		
+		var friends: [NSString: AnyObject]? = _response["friends"] as? [NSString: AnyObject]
+		if friends != nil {
+			var friendsData: [[NSString: AnyObject]]? = friends!["data"] as? [[NSString: AnyObject]]
+			if friendsData != nil {
+				for fData: [NSString: AnyObject] in friendsData! {
+					var id: NSString? = fData["id"] as? NSString
+					self.userFriends.append(id!)
+				}
+			}
+		}
+		
+		var userFriends: [NSString]? = _response["userFriends"] as? [NSString]
+		if userFriends != nil {
+			for uf in userFriends! {
+				self.userFriends.append(uf)
+			}
+		}
 	}
 	
 	func register (completion: (error: NSError?, data: AnyObject?) -> Void) {
@@ -75,6 +72,11 @@ class User {
 		doPostRequest(request, { (err: NSError?, data: AnyObject?) -> Void in
 			var error = err;
 			queueRequests = false
+			
+			var _idJson: [NSString: AnyObject]? = data as? [NSString: AnyObject]
+			if _idJson != nil {
+				self._id = _idJson!["_id"] as? NSString
+			}
 			
 			doRequest(makeRequest("/me", "GET"), { (err: NSError?, data: AnyObject?) -> Void in
 				if data != nil {
@@ -107,6 +109,7 @@ class User {
 		if self.last_name != nil { json["last_name"] = last_name! }
 		if self.name != nil { json["name"] = name! }
 		if self.picture != nil { json["picture"] = ["url": self.picture!.url!, "is_silhouette": self.picture!.isSilhouette] as AnyObject }
+		json["userFriends"] = self.userFriends;
 		
 		return json
 	}
@@ -120,6 +123,24 @@ class User {
 			}
 			
 			callback(err: err, rating: nil)
+		}, nil)
+	}
+	
+	func getMutualFriends (user: User, callback: (err: NSError?, friends: [User]) -> Void) {
+		doRequest(makeRequest("/user/" + user._id! + "/mutualFriends", "GET"), { (err: NSError?, data: AnyObject?) -> Void in
+			if err != nil {
+				return callback(err: err, friends: [])
+			}
+			
+			var json: [[NSString: AnyObject]]? = data as? [[NSString: AnyObject]]
+			var friends: [User] = []
+			if json != nil {
+				for u in json! {
+					friends.append(User(_response: u))
+				}
+			}
+			
+			callback(err: nil, friends: friends)
 		}, nil)
 	}
 }
