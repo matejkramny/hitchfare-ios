@@ -79,6 +79,10 @@ class HikesTableViewCell: UITableViewController, PageRootDelegate, MGSwipeTableC
     }
 	
 	func refreshData (sender: AnyObject?) {
+		if currentUser == nil {
+			return
+		}
+		
 		MessageList.getLists({ (err: NSError?, data: [MessageList]) -> Void in
 			self.refreshControl!.endRefreshing()
 			self.messages = data

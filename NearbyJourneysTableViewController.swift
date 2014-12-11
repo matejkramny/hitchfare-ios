@@ -107,6 +107,10 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
     }
 	
 	func refreshData (sender: AnyObject?) {
+		if currentUser == nil {
+			return
+		}
+		
 		var callback: (err: NSError?, data: [Journey]) -> Void = { (err: NSError?, data: [Journey]) -> Void in
 			self.journeys = data
 			self.refreshControl!.endRefreshing()

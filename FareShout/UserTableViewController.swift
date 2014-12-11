@@ -111,6 +111,10 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
     }
 	
 	func refreshData (sender: AnyObject?) {
+		if currentUser == nil {
+			return
+		}
+		
 		var callback: (err: NSError?, data: [Journey]) -> Void = { (err: NSError?, data: [Journey]) -> Void in
 			let calendar: NSCalendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
 			let components: NSDateComponents = calendar.components(NSCalendarUnit.YearCalendarUnit|NSCalendarUnit.MonthCalendarUnit|NSCalendarUnit.DayCalendarUnit, fromDate: NSDate())
@@ -502,6 +506,13 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			return
 		} else if indexPath.section == 4 {
 			//WARN: find message list
+			SVProgressHUD.showProgress(1.0, status: "Loading Message..", maskType: SVProgressHUDMaskType.Black)
+			
+			findMessageList(self.mutualFriends[indexPath.row]._id!, { (list: MessageList?) -> Void in
+				self.performSegueWithIdentifier("openMessages", sender: list)
+			})
+			
+			return
 		}
 		
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -518,6 +529,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		self.isInSegue = true
 		mainNavigationDelegate.hideNavigationBar()
+		SVProgressHUD.dismiss()
 		
 		if segue.identifier == "openMessages" {
 			var vc: MessagesViewController = segue.destinationViewController as MessagesViewController
