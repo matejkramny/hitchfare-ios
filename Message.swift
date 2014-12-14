@@ -37,7 +37,7 @@ class Message {
 		
 		if self.list != nil { json["list"] = list._id }
 		if self.message != nil { json["message"] = message }
-		if self.sent != nil { json["sent"] = sent.timeIntervalSince1970 }
+		if self.sent != nil { json["sent"] = sent.timeIntervalSince1970 * 1000 }
 		if self.sender != nil { json["sender"] = sender }
 		
 		return json

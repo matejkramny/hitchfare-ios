@@ -65,11 +65,20 @@ static FacebookCtrl *appConfigInstance = nil;
 
 // 접근 토큰 얻어오기
 - (void)requestAccessToFacebook {
+	 [self requestAccessToFacebookWithPerms:true];
+}
+
+- (void)requestAccessToFacebookWithPerms:(BOOL)fullPerms {
 	 self.accountStore = [[ACAccountStore alloc] init];
 	 ACAccountType *FBaccountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
 	 NSLog(@"FB Grant: %@", FBaccountType.accessGranted ? @"Yes" : @"No");
 	 
-	 NSDictionary *FBdict = [NSDictionary dictionaryWithObjectsAndKeys:FACEBOOK_APP_KEY, ACFacebookAppIdKey, @[@"email", @"user_photos", @"user_friends"], ACFacebookPermissionsKey, nil];
+	 NSArray *perms = @[@"email", @"user_photos", @"user_friends"];
+	 if (fullPerms == false) {
+		  perms = @[@"email", @"user_friends"];
+	 }
+	 
+	 NSDictionary *FBdict = [NSDictionary dictionaryWithObjectsAndKeys:FACEBOOK_APP_KEY, ACFacebookAppIdKey, perms, ACFacebookPermissionsKey, nil];
 	 
 	 [self.accountStore requestAccessToAccountsWithType:FBaccountType options:FBdict completion:^(BOOL granted, NSError *e) {
 		  if (granted)
@@ -90,6 +99,10 @@ static FacebookCtrl *appConfigInstance = nil;
 }
 
 - (void)getInformationSelf {
+	 [self getInformationSelfWithAccessToken:nil];
+}
+
+- (void)getInformationSelfWithAccessToken:(NSString *)token {
 	 // https://graph.facebook.com/me?fields=email,first_name,last_name,name,picture.type(large),friends
 	 
 	 if (![self checkUseEnableFacebook]) return;
@@ -98,6 +111,13 @@ static FacebookCtrl *appConfigInstance = nil;
 	 NSDictionary *parameters = @{
 											@"fields": @"id,email,first_name,last_name,name,picture.type(large).width(1280),friends"
 											};
+	 
+	 if (token != nil) {
+		  parameters = @{
+							  @"fields": parameters[@"fields"],
+							  @"accessToken": token
+							  };
+	 }
 	 
 	 SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeFacebook requestMethod:SLRequestMethodGET URL:requestURL parameters:parameters];
 	 request.account = self.facebookAccount;

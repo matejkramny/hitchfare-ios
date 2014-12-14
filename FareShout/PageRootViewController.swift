@@ -20,7 +20,7 @@ protocol FareShoutNavigationDelegate {
 	func didPressSearch()
 }
 
-class PageRootViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, FareShoutNavigationDelegate, UIScrollViewDelegate, JourneyReviewDelegate {
+class PageRootViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate, FareShoutNavigationDelegate, UIScrollViewDelegate, JourneyReviewDelegate, FacebookCtrlDelegate {
 	var vcs: [AnyObject] = []
 	var pageCtrl: UIPageViewController?
 
@@ -156,6 +156,17 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		self.fetchJourneyReviewRequests()
 		
 		self.view.bringSubviewToFront(navigationBar)
+		
+		if currentUser != nil {
+			FacebookCtrl.sharedInstance().delegate = self
+			
+			FacebookCtrl.sharedInstance().requestAccessToFacebookWithPerms(false)
+			if storage.accessToken != nil {
+				FacebookCtrl.sharedInstance().getInformationSelfWithAccessToken(storage.accessToken!)
+			} else {
+				FacebookCtrl.sharedInstance().getInformationSelf()
+			}
+		}
 	}
 	
 	func setHasSearchButton (hasSearch: Bool, animated: Bool) {
@@ -380,6 +391,15 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		
 		var d = (self.vcs[1] as UINavigationController) .viewControllers[0] as PageRootDelegate
 		d.didPressSearch!()
+	}
+	
+	//MARK: FacebookCtrlDelegate
+	
+	func onFinishedGetInformationSelf(_response: [NSString : AnyObject]!) {
+		currentUser!.parse(_response)
+		currentUser!.register({ (error, data) -> Void in
+			self.dismissViewControllerAnimated(true, completion: nil)
+		})
 	}
 	
 }

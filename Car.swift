@@ -40,8 +40,13 @@ class Car: NSObject {
 		return json
 	}
 	
-	class func getAll (callback: (err: NSError?, data: [Car]) -> Void) {
-		doRequest(makeRequest("/cars", "GET"), { (err: NSError?, data: AnyObject?) -> Void in
+	class func getAll (user: User, callback: (err: NSError?, data: [Car]) -> Void) {
+		var url = "/user/" + user._id! + "/cars"
+		if user === currentUser! {
+			url = "/cars"
+		}
+		
+		doRequest(makeRequest(url, "GET"), { (err: NSError?, data: AnyObject?) -> Void in
 			var cars: [Car] = []
 			
 			if data != nil {

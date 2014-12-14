@@ -3,13 +3,14 @@ import Foundation
 
 class SharedStorage: NSObject {
 	var cars: [Car] = []
+	var accessToken: NSString?
 	
 	override init() {
 		super.init()
 	}
 	
-	func getCars (callback: (err: NSError?) -> Void) {
-		Car.getAll({ (err: NSError?, data: [Car]) -> Void in
+	func getCars (user: User, callback: (err: NSError?) -> Void) {
+		Car.getAll(user, { (err: NSError?, data: [Car]) -> Void in
 			self.cars = data
 			
 			callback(err: err)

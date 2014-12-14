@@ -21,11 +21,16 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	var shownUser: User!
 	var driverRating: Double? = nil
 	
+	var profileTapGestureRecognizer: UITapGestureRecognizer!
 	let requestedJourneyDateFormatter: NSDateFormatter = NSDateFormatter()
+	
+	var blackBackdropView: UIView?
+	var profileImageView: UIImageView?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		self.profileTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "openProfileImage")
 		self.requestedJourneyDateFormatter.dateFormat = "dd/MM/yyyy"
 		
 		self.navigationController!.navigationBar.translucent = false
@@ -105,11 +110,75 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	func presentHike () {
 		self.performSegueWithIdentifier("addJourney", sender: nil)
 	}
-    
-    func presentSetting() {
-        self.performSegueWithIdentifier("goSetting", sender: nil)
-    }
 	
+	func presentSetting () {
+		self.performSegueWithIdentifier("goSetting", sender: nil)
+	}
+	
+	func openProfileImage () {
+		if self.blackBackdropView == nil {
+			mainNavigationDelegate.hideNavigationBar()
+			self.showProfileImage()
+		} else {
+			mainNavigationDelegate.showNavigationBar()
+			self.hideProfileImage()
+		}
+	}
+	
+	func showProfileImage () {
+		let v: UIView = navigationController!.view
+		
+		let profileCell: FSProfileTableViewCell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as FSProfileTableViewCell
+		
+		self.blackBackdropView = UIView(frame: CGRectMake(v.frame.origin.x, v.frame.origin.y, v.frame.size.width, v.frame.size.height))
+		self.profileImageView = UIImageView(image: profileCell.profileImageView.image)
+		
+		self.blackBackdropView!.backgroundColor = UIColor.blackColor()
+		
+		let aspectRatio = self.profileImageView!.image!.size.height / self.profileImageView!.image!.size.width
+		let height = v.frame.size.width * aspectRatio
+		self.profileImageView!.frame = CGRectMake(0, v.frame.size.height / 2 - height / 2, v.frame.width, height)
+		
+		self.profileImageView!.userInteractionEnabled = true
+		self.blackBackdropView!.userInteractionEnabled = true
+		
+		self.blackBackdropView!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "openProfileImage"))
+		self.profileImageView!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "openProfileImage"))
+		
+		self.blackBackdropView!.alpha = 0
+		self.profileImageView!.alpha = 0
+		
+		v.addSubview(self.blackBackdropView!)
+		v.addSubview(self.profileImageView!)
+		
+		UIView.animateWithDuration(0.25, animations: {
+			self.blackBackdropView!.alpha = 1
+			self.profileImageView!.alpha = 1
+		})
+		
+		//UIView.transitionWithView(v, duration: 0.75, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+			
+		//}, completion: nil)
+	}
+	
+	func hideProfileImage () {
+		UIView.animateWithDuration(0.25, animations: {
+			self.blackBackdropView!.alpha = 0
+			self.profileImageView!.alpha = 0
+		})
+		
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.35 * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), { () -> Void in
+			self.blackBackdropView!.removeFromSuperview()
+			self.profileImageView!.removeFromSuperview()
+			
+			self.blackBackdropView!.removeGestureRecognizer(self.profileTapGestureRecognizer)
+			self.profileImageView!.removeGestureRecognizer(self.profileTapGestureRecognizer)
+			
+			self.blackBackdropView = nil
+			self.profileImageView = nil
+		})
+	}
+
 	func refreshData (sender: AnyObject?) {
 		if currentUser == nil {
 			return
@@ -226,10 +295,6 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			
 			var c = cell as FSProfileTableViewCell
 			
-			if presentedFromElsewhere {
-				c.carButton.hidden = true
-			}
-			
 			if self.driverRating != nil {
 				c.ratingLabel.font = UIFont(awesomeFontOfSize: 17.0)
 				var stars: String = ""
@@ -252,6 +317,8 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			c.profileImageView.layer.cornerRadius = 45
 			c.profileImageView.layer.masksToBounds = true
 			c.profileImageView.layer.shouldRasterize = true
+			c.profileImageView.addGestureRecognizer(self.profileTapGestureRecognizer)
+			c.profileImageView.userInteractionEnabled = true
 			c.delegate = self
 			c.nameLabel.text = shownUser.name
 			c.selectionStyle = UITableViewCellSelectionStyle.None
@@ -540,6 +607,11 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		} else if segue.identifier == "addJourney" && sender != nil {
 			var vc: AddJourneyTableViewController = (segue.destinationViewController as UINavigationController).viewControllers[0] as AddJourneyTableViewController
 			vc.journey = sender as Journey
+		} else if segue.identifier == "openCars" {
+			if presentedFromElsewhere == true {
+				var vc: CarsTableViewController = segue.destinationViewController as CarsTableViewController
+				vc.user = shownUser
+			}
 		}
 	}
 	

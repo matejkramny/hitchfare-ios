@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6221" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6213"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CarViewController" customModule="FareShout" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CarViewController" customModule="fareshout" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <viewController id="l32-Sf-MMu" customClass="CarViewController" customModule="FareShout" customModuleProvider="target">
+        <viewController id="l32-Sf-MMu" customClass="CarViewController" customModule="fareshout" customModuleProvider="target">
             <layoutGuides>
                 <viewControllerLayoutGuide type="top" id="V1g-wd-Tia"/>
                 <viewControllerLayoutGuide type="bottom" id="KUc-hw-amX"/>
@@ -19,19 +19,19 @@
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cWo-uS-kOO">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="450"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="cWo-uS-kOO" secondAttribute="height" multiplier="2:1" id="klV-6c-ghB"/>
+                            <constraint firstAttribute="width" secondItem="cWo-uS-kOO" secondAttribute="height" multiplier="4:3" id="klV-6c-ghB"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zYm-dp-Xo9">
-                        <rect key="frame" x="16" y="337" width="568" height="21"/>
+                        <rect key="frame" x="16" y="487" width="568" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IV7-3P-XVE">
-                        <rect key="frame" x="16" y="308" width="514" height="21"/>
+                        <rect key="frame" x="16" y="458" width="514" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="NAW-Mz-93X"/>
                         </constraints>
@@ -40,7 +40,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="naz-kb-uuL">
-                        <rect key="frame" x="538" y="308" width="46" height="21"/>
+                        <rect key="frame" x="538" y="458" width="46" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20.5" id="6br-ji-VTd"/>
                             <constraint firstAttribute="width" constant="46" id="vsf-gr-ijO"/>

@@ -65,4 +65,8 @@ class LoginViewController: UIViewController, FacebookCtrlDelegate, UIScrollViewD
 			self.dismissViewControllerAnimated(true, completion: nil)
 		})
 	}
+	
+	func onFinishedRequestAccessToken(token: NSString) {
+		storage.accessToken = token
+	}
 }

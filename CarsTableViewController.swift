@@ -12,6 +12,7 @@ class CarsTableViewController: UIViewController {
 	var selectCarMode: Bool = false
 	var selectedCar: Car? = nil
 	var delegate: CarSelectionProtocol? = nil
+	var user: User?
 	
 	var carViews: [CarViewController] = []
 	
@@ -24,7 +25,11 @@ class CarsTableViewController: UIViewController {
 			self.navigationItem.title = "Cars"
 		}
 		
-		self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addCar:")
+		if self.user != nil && self.user!._id != currentUser!._id {
+			self.navigationItem.title = "Cars"
+		} else {
+			self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addCar:")	
+		}
 		
 		UIGraphicsBeginImageContext(self.view.frame.size)
 		UIImage(named: "BackGround")!.drawInRect(self.view.bounds)
@@ -49,7 +54,7 @@ class CarsTableViewController: UIViewController {
 	}
 	
 	func refreshCars (sender: AnyObject?) {
-		storage.getCars({ (err: NSError?) -> Void in
+		storage.getCars(self.user == nil ? currentUser! : self.user!, { (err: NSError?) -> Void in
 			self.createCarVCs()
 		})
 	}
@@ -86,6 +91,10 @@ class CarsTableViewController: UIViewController {
 			if self.selectCarMode == true {
 				view.editBtn.setNeedsDisplay()
 				view.editBtn.setTitle("Select", forState: UIControlState.Normal)
+			}
+			
+			if self.user != nil && self.user!._id != currentUser!._id {
+				view.editBtn.hidden = true
 			}
 			
 			self.scrollView.addSubview(view.view)

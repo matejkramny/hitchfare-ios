@@ -257,7 +257,8 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 		var imag = UIImagePickerController()
 		imag.delegate = self
 		imag.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-		imag.allowsEditing = false
+		imag.allowsEditing = true
+		
 		self.presentViewController(imag, animated: true, completion: nil)
 	}
 	

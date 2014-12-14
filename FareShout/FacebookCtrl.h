@@ -33,10 +33,12 @@
 
 // Facebook Graph API
 - (void)getInformationSelf;                             // 본인 정보 불러오기
+- (void)getInformationSelfWithAccessToken:(NSString *)token;
 - (void)deletePermissions;                              // 계정 접근 권한 삭제
 
 // Social, Accounts Framework
 - (void)requestAccessToFacebook;                        // 페이스북 접근 요청
+- (void)requestAccessToFacebookWithPerms:(BOOL)fullPerms;
 - (void)attemptRenewCredentials;                        // 계정 갱신
 
 - (BOOL)checkUseEnableFacebook;

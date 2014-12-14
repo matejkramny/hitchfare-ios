@@ -19,8 +19,13 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 	var tapGestureRecognizer: UITapGestureRecognizer!
 	var titleView: UIView!
 	
+	var timeFormatter: NSDateFormatter!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		timeFormatter = NSDateFormatter()
+		timeFormatter.dateFormat = "hh:mm"
 		
 		if list.receiver._id == currentUser!._id! {
 			self.navigationItem.title = list.sender.name
@@ -243,6 +248,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 			cell!.label.textColor = textColor
 			cell!.bgView.layer.backgroundColor = bgColor.CGColor
 			cell!.bgView.layer.cornerRadius = cornerRadius
+			cell!.timeLabel.text = timeFormatter.stringFromDate(message.sent)
 			
 			cell!.selectionStyle = UITableViewCellSelectionStyle.None
 			
@@ -264,6 +270,8 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 			cell!.profileImageView.layer.masksToBounds = true
 			cell!.profileImageView.layer.cornerRadius = 35/2
 			cell!.profileImageView.layer.shouldRasterize = true
+			
+			cell!.timeLabel.text = timeFormatter.stringFromDate(message.sent)
 			
 			cell!.backgroundView = nil
 			cell!.backgroundColor = UIColor.clearColor()
