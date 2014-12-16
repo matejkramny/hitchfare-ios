@@ -72,6 +72,7 @@ class CarsTableViewController: UIViewController {
 			
 			if car.picture != nil {
 				view.carImageView.sd_setImageWithURL(NSURL(string: car.picture!))
+                view.carImageView.contentMode = UIViewContentMode.ScaleAspectFit
 			}
 			
 			view.carNameLabel.text = car.name
@@ -79,12 +80,13 @@ class CarsTableViewController: UIViewController {
 			
 			view.view.frame = CGRectMake(view.view.frame.size.width * CGFloat(i), view.view.frame.origin.y, view.view.frame.size.width, view.view.frame.size.height)
 			
-			UIGraphicsBeginImageContext(view.view.frame.size)
-			UIImage(named: "BackGround")!.drawInRect(self.view.bounds)
-			var image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
-			UIGraphicsEndImageContext()
+//			UIGraphicsBeginImageContext(view.view.frame.size)
+//			UIImage(named: "BackGround")!.drawInRect(self.view.bounds)
+//			var image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+//			UIGraphicsEndImageContext()
 			
-			view.view.backgroundColor = UIColor(patternImage: image)
+//			view.view.backgroundColor = UIColor(patternImage: image)
+            view.view.backgroundColor = UIColor.clearColor()
 			
 			view.editBtn.addTarget(self, action: "editBtnPressed:", forControlEvents: UIControlEvents.TouchUpInside)
 			
