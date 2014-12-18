@@ -3,24 +3,24 @@ import Foundation
 import MapKit
 
 class Journey {
-	var _id: NSString? = nil
+	var _id: NSString?
 	
-	var owner: String? = "" //_id
-	var ownerObj: User? = nil
+	var owner: String? //_id
+	var ownerObj: User?
 	
-	var car: String? = "" //_id
+	var car: String? //_id
 	var isDriver: Bool = true
-	var availableSeats: Int? = 0
+	var availableSeats: Int?
 	
 	var startDate: NSDate? = NSDate()
-	var startDateHuman: NSString? = ""
-	var startLocation: NSString? = ""
-	var startLat: Double? = 0
-	var startLng: Double? = 0
+	var startDateHuman: NSString?
+	var startLocation: NSString?
+	var startLat: Double?
+	var startLng: Double?
 	
-	var endLocation: NSString? = ""
-	var endLat: Double? = 0
-	var endLng: Double? = 0
+	var endLocation: NSString?
+	var endLat: Double?
+	var endLng: Double?
 	
 	var price: Float = 10.00
 	

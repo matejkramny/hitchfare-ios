@@ -12,6 +12,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	var myPendingRequests: [JourneyPassenger] = []
 	var pendingRequests: [JourneyPassenger] = []
 	var mutualFriends: [User] = []
+	var mutualFriendGestureRecognizers: [UITapGestureRecognizer] = []
 	
 	var didAppear: Bool = false
 	var isInSegue: Bool = false
@@ -44,6 +45,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		self.tableView.registerNib(UINib(nibName: "JourneyRequestTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "journeyRequest")
 		self.tableView.registerNib(UINib(nibName: "AcceptJourneyRequestTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "acceptJourneyRequest")
 		self.tableView.registerNib(UINib(nibName: "HikeTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Hike")
+		self.tableView.registerNib(UINib(nibName: "MutualFriendsTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "MutualFriendCell")
 		
 		var image : UIImage! = UIImage(named: "BackGround")
 		var imageView : UIImageView! = UIImageView(image: image)
@@ -273,7 +275,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		case 3:
 			return journeys.count
 		case 4:
-			return mutualFriends.count
+			return mutualFriends.count > 0 ? 1 : 0
 		case 5:
 			return pastJourneys.count
 		case 2:
@@ -415,23 +417,49 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			return cell!
 		} else if indexPath.section == 4 {
 			// mutual friends
-			var cell = tableView.dequeueReusableCellWithIdentifier("Hike", forIndexPath: indexPath) as? HikeTableViewCell
+			var cell = tableView.dequeueReusableCellWithIdentifier("MutualFriendCell", forIndexPath: indexPath) as? MutualFriendsTableViewCell
 			
 			if cell == nil {
-				cell = HikeTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Hike")
+				cell = MutualFriendsTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "MutualFriendCell")
 			}
 			
-			var friend = mutualFriends[indexPath.row]
-			
-			cell!.nameLabel.text = friend.name
-			if friend.picture != nil {
-				cell!.pictureImageView.sd_setImageWithURL(NSURL(string: friend.picture!.url))
-				cell!.pictureImageView.clipsToBounds = true
-				cell!.pictureImageView.layer.cornerRadius = 72/2
+			for (i, friend) in enumerate(mutualFriends) {
+				for subview in cell!.friendsScrollView.subviews {
+					subview.removeFromSuperview()
+				}
+				
+				mutualFriendGestureRecognizers = []
+				
+				var offset: Int = i * 8
+				if i == 0 {
+					offset = 8
+				}
+				
+				if friend.picture != nil {
+					var imgView = UIImageView(frame: CGRectMake(CGFloat(i * 70 + offset), 8, 70, 70))
+					imgView.sd_setImageWithURL(NSURL(string: friend.picture!.url))
+					imgView.clipsToBounds = true
+					imgView.layer.cornerRadius = 70/2
+					
+					imgView.userInteractionEnabled = true
+					
+					var gestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "didReceiveTapOnMutualFriendCell:")
+					imgView.addGestureRecognizer(gestureRecognizer)
+					mutualFriendGestureRecognizers.append(gestureRecognizer)
+					
+					var nameLabel = UILabel(frame: CGRectMake(CGFloat(i * 70 + offset), 78 + 8, 70, 14))
+					nameLabel.text = friend.name
+					nameLabel.textColor = UIColor.whiteColor()
+					nameLabel.font = UIFont.systemFontOfSize(12)
+					nameLabel.textAlignment = NSTextAlignment.Center
+					
+					cell!.friendsScrollView.addSubview(imgView)
+					cell!.friendsScrollView.addSubview(nameLabel)
+				}
+				
+				cell!.userInteractionEnabled = true
+				//cell!.friendsScrollView.contentSize = CGSizeMake(CGFloat(mutualFriends.count - 1) * 74 + 8, 70 + 16 + 14 + 20)
 			}
-			
-			cell!.messageLabel.text = ""
-			cell!.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
 			
 			return cell!
 		}
@@ -518,7 +546,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		} else if indexPath.section == 1 || indexPath.section == 2 {
 			return 66.0
 		} else if indexPath.section == 4 {
-			return 88.0
+			return 70 + 16 + 14 + 16
 		} else {
 			return 126.0
 		}
@@ -570,15 +598,6 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		} else if indexPath.section == 3 || indexPath.section == 5 {
 			// Open passengers list
 			self.performSegueWithIdentifier("openPassengers", sender: indexPath.section == 3 ? journeys[indexPath.row] : pastJourneys[indexPath.row])
-			return
-		} else if indexPath.section == 4 {
-			//WARN: find message list
-			SVProgressHUD.showProgress(1.0, status: "Loading Message..", maskType: SVProgressHUDMaskType.Black)
-			
-			findMessageList(self.mutualFriends[indexPath.row]._id!, { (list: MessageList?) -> Void in
-				self.performSegueWithIdentifier("openMessages", sender: list)
-			})
-			
 			return
 		}
 		
@@ -753,6 +772,27 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		}
 		
 		return collection[indexPath!.row]
+	}
+	
+	func didReceiveTapOnMutualFriendCell(recognizer: UITapGestureRecognizer) {
+		var friend: User? = nil
+		
+		for (i, rec) in enumerate(mutualFriendGestureRecognizers) {
+			if rec === recognizer {
+				friend = mutualFriends[i]
+				break
+			}
+		}
+		
+		if friend == nil {
+			return
+		}
+		
+		SVProgressHUD.showProgress(1.0, status: "Loading Message..", maskType: SVProgressHUDMaskType.Black)
+		
+		findMessageList(friend!._id!, { (list: MessageList?) -> Void in
+			self.performSegueWithIdentifier("openMessages", sender: list)
+		})
 	}
 	
 }

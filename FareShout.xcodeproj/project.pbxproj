@@ -77,6 +77,8 @@
 		4F8B23EE1A288DCD0095EC1B /* PassengersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8B23ED1A288DCD0095EC1B /* PassengersTableViewController.swift */; };
 		4F8B23F01A288EBC0095EC1B /* JourneyPassenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8B23EF1A288EBC0095EC1B /* JourneyPassenger.swift */; };
 		4F95342719FFEFDF0058210D /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F95342619FFEFDF0058210D /* UserTableViewController.swift */; };
+		4FA366721A424CD6005EDD7A /* MutualFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA366701A424CD6005EDD7A /* MutualFriendsTableViewCell.swift */; };
+		4FA366731A424CD6005EDD7A /* MutualFriendsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FA366711A424CD6005EDD7A /* MutualFriendsTableViewCell.xib */; };
 		4FA9F15A19FED9B7009D0F33 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA9F15919FED9B7009D0F33 /* User.swift */; };
 		4FA9F16119FFD3CA009D0F33 /* PageRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA9F16019FFD3CA009D0F33 /* PageRootViewController.swift */; };
 		4FC1E5E619FEB518002F743B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC1E5E519FEB518002F743B /* AppDelegate.swift */; };
@@ -218,6 +220,8 @@
 		4F8B23ED1A288DCD0095EC1B /* PassengersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassengersTableViewController.swift; sourceTree = "<group>"; };
 		4F8B23EF1A288EBC0095EC1B /* JourneyPassenger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JourneyPassenger.swift; sourceTree = "<group>"; };
 		4F95342619FFEFDF0058210D /* UserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserTableViewController.swift; path = FareShout/UserTableViewController.swift; sourceTree = "<group>"; };
+		4FA366701A424CD6005EDD7A /* MutualFriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutualFriendsTableViewCell.swift; sourceTree = "<group>"; };
+		4FA366711A424CD6005EDD7A /* MutualFriendsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MutualFriendsTableViewCell.xib; sourceTree = "<group>"; };
 		4FA9F15919FED9B7009D0F33 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4FA9F16019FFD3CA009D0F33 /* PageRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PageRootViewController.swift; path = FareShout/PageRootViewController.swift; sourceTree = "<group>"; };
 		4FC1E5E019FEB518002F743B /* fareshout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fareshout.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -456,6 +460,8 @@
 				4F412D6D1A24C72C00019241 /* AcceptJourneyRequestTableViewCell.xib */,
 				4F412DA61A254E2800019241 /* ImageTableViewCell.swift */,
 				4F412DA71A254E2800019241 /* ImageTableViewCell.xib */,
+				4FA366701A424CD6005EDD7A /* MutualFriendsTableViewCell.swift */,
+				4FA366711A424CD6005EDD7A /* MutualFriendsTableViewCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -646,6 +652,7 @@
 				4FEA2EB11A2AD525008C1CE7 /* ReviewViewController.xib in Resources */,
 				4F412DA51A25266200019241 /* CarViewController.xib in Resources */,
 				4F1AD19E1A155C460047BEE8 /* FontAwesome.ttf in Resources */,
+				4FA366731A424CD6005EDD7A /* MutualFriendsTableViewCell.xib in Resources */,
 				4FD346E11A127A76006026DD /* StepperTableViewCell.xib in Resources */,
 				DB57FE551A26F2C100D99648 /* Common.xcassets in Resources */,
 				4F412DA91A254E2800019241 /* ImageTableViewCell.xib in Resources */,
@@ -701,6 +708,7 @@
 				4FA9F16119FFD3CA009D0F33 /* PageRootViewController.swift in Sources */,
 				4F20D3661A23354E00A1CAC5 /* NSData+ImageContentType.m in Sources */,
 				4F20D36F1A23354E00A1CAC5 /* UIImage+GIF.m in Sources */,
+				4FA366721A424CD6005EDD7A /* MutualFriendsTableViewCell.swift in Sources */,
 				4F525F371A05958B00EDD696 /* Journey.swift in Sources */,
 				4F412D611A24B89700019241 /* JCNotificationBanner.m in Sources */,
 				4F412D651A24B89700019241 /* JCNotificationBannerPresenterSmokeStyle.m in Sources */,
