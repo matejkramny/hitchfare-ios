@@ -21,11 +21,15 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 	
 	var timeFormatter: NSDateFormatter!
 	
+	var sections: [[String: AnyObject]] = []
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		timeFormatter = NSDateFormatter()
-		timeFormatter.dateFormat = "hh:mm"
+		timeFormatter.dateFormat = "HH:mm"
+		timeFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+		timeFormatter.timeZone = NSTimeZone.localTimeZone()
 		
 		if list.receiver._id == currentUser!._id! {
 			self.navigationItem.title = list.sender.name
@@ -194,8 +198,11 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 			
 			self.tableView.contentSize = CGSizeMake(self.tableView.contentSize.width, height)
 			self.tableView.reloadData()
-			if self.list.messages.count > 0 {
-				self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: self.list.messages.count-1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+			if self.sections.count > 0 {
+				var last: [Message]? = (self.sections.last as [String: AnyObject]!)["messages"] as? [Message]
+				if last != nil && last!.count > 0 {
+					self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: last!.count - 1, inSection: self.sections.count - 1), atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+				}
 			}
 		}, completion: { (something: Bool) -> Void in
 		})
@@ -213,24 +220,66 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 		}
 		
 		self.list.getMessages({ (err: NSError?, data: [Message]) -> Void in
+			self.buildData(data)
+			
 			self.refreshControl.endRefreshing()
 			self.tableView.reloadData()
-			if self.list.messages.count > 0 {
-				self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: self.list.messages.count-1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: animated)
+			if self.sections.count > 0 {
+				var last: [Message]? = (self.sections.last as [String: AnyObject]!)["messages"] as? [Message]
+				if last != nil && last!.count > 0 {
+					self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: last!.count - 1, inSection: self.sections.count - 1), atScrollPosition: UITableViewScrollPosition.Bottom, animated: animated)
+				}
 			}
 		})
 	}
 	
+	func buildData(data: [Message]) {
+		self.sections = []
+		
+		var section: [String: AnyObject] = [:]
+		var dateFormatter: NSDateFormatter = NSDateFormatter()
+		dateFormatter.dateFormat = "d MMM yyyy"
+		
+		for d in data {
+			var date: String = dateFormatter.stringFromDate(d.sent)
+			
+			var name = section["name"] as? String
+			if name == nil {
+				section["name"] = date
+				name = date
+			}
+			
+			if name! != date {
+				self.sections.append(section)
+				section = ["name": date]
+			}
+			
+			var messages: [Message]? = section["messages"] as? [Message]
+			if messages == nil {
+				messages = []
+			}
+			
+			messages!.append(d)
+			section["messages"] = messages!
+			
+			println(messages!)
+			println(section["messages"] as [Message])
+		}
+		
+		self.sections.append(section)
+	}
+	
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-		return 1
+		return sections.count
 	}
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return list.messages.count
+		var messages: [Message]? = sections[section]["messages"] as? [Message]
+		return messages!.count
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let message: Message = list.messages[indexPath.row]
+		let message: Message = (sections[indexPath.section]["messages"] as? [Message])![indexPath.row]
 		let bgColor: UIColor = UIColor(red: 241/255, green: 245/255, blue: 253/255, alpha: 1.0)
 		let textColor: UIColor = UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 1.0)
 		let cornerRadius: CGFloat = 26/2
@@ -287,7 +336,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 	}
 	
 	func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-		let message: Message = list.messages[indexPath.row]
+		let message: Message = (sections[indexPath.section]["messages"] as? [Message])![indexPath.row]
 		
 		var attributes: [NSObject: AnyObject] = [
 			NSFontAttributeName: UIFont.systemFontOfSize(18)
@@ -314,7 +363,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 	}
 	
 	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-		var message: Message = list.messages[indexPath.row]
+		let message: Message = (sections[indexPath.section]["messages"] as? [Message])![indexPath.row]
 		
 		var attributes: [NSObject: AnyObject] = [
 			NSFontAttributeName: UIFont.systemFontOfSize(18)
@@ -323,6 +372,42 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 		var expectedRect: CGRect = message.message.boundingRectWithSize(CGSizeMake(tableView.frame.width - 99, 99999999), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attributes, context: nil)
 		
 		return expectedRect.height + 16 + 16
+	}
+	
+	func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+		let title = self.tableView(tableView, titleForHeaderInSection: section)
+		if title == nil {
+			return nil
+		}
+		
+		let view: UIView = UIView(frame: CGRectMake(0, 0, tableView.frame.width, 26))
+		let label: UILabel = UILabel(frame: CGRectMake(0, 4, view.frame.width, 26))
+		label.text = title
+		label.textAlignment = NSTextAlignment.Center
+		label.font = UIFont(name: "HelveticaNeue-Italic", size: 14.0)
+		label.textColor = UIColor.blackColor().colorWithAlphaComponent(0.9)
+		label.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.8)
+		
+		let width = label.intrinsicContentSize().width
+		label.frame = CGRectMake(view.frame.width / 2 - width / 2 - 20, 4, width + 20, 26)
+		label.layer.cornerRadius = 5
+		label.clipsToBounds = true
+		
+		view.addSubview(label)
+		
+		return view
+	}
+	
+	func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		if sections.count == 0 {
+			return nil
+		}
+		
+		return sections[section]["name"] as? String
+	}
+	
+	func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		return 26
 	}
 	
 	func didReceiveMessage(notification: NSNotification) {
