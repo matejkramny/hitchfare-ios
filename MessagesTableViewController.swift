@@ -261,9 +261,6 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 			
 			messages!.append(d)
 			section["messages"] = messages!
-			
-			println(messages!)
-			println(section["messages"] as [Message])
 		}
 		
 		self.sections.append(section)
