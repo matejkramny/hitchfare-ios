@@ -13,7 +13,7 @@ let kISODateFormat = "YYYY-MM-dd\'T\'HH:mm:ss.SSS\'Z\'"
 
 // Production
 let kAPIProtocol = "https://"
-let kAPIEndpoint = kAPIProtocol + "fareshout-matejkramny.ngapp.io"
+let kAPIEndpoint = kAPIProtocol + "fareshout.c.nodegear.com"
 
 let kGeocodeApiEndpoint = "https://maps.googleapis.com/maps/api/geocode/json"
 
