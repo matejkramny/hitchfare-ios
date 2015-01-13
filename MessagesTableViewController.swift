@@ -272,6 +272,10 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		var messages: [Message]? = sections[section]["messages"] as? [Message]
+		if messages == nil {
+			return 0
+		}
+		
 		return messages!.count
 	}
 	
@@ -404,6 +408,11 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 	}
 	
 	func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		let title = self.tableView(tableView, titleForHeaderInSection: section)
+		if title == nil {
+			return 0
+		}
+		
 		return 26
 	}
 	
