@@ -94,7 +94,7 @@ func readSettings () -> Bool {
 func saveSettings () -> Bool {
 	var settings: [String: AnyObject] = [:]
 	settings["sessionCookie"] = sessionCookie
-	settings["user"] = currentUser?.json()
+	settings["user"] = currentUser!.json()
 	settings["didRequestForNotifications"] = didRequestForNotifications
 	settings["accessToken"] = storage.accessToken
 	

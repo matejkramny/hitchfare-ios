@@ -76,12 +76,14 @@ class User {
 			var _idJson: [NSString: AnyObject]? = data as? [NSString: AnyObject]
 			if _idJson != nil {
 				self._id = _idJson!["_id"] as? NSString
+				saveSettings()
 			}
 			
 			doRequest(makeRequest("/me", "GET"), { (err: NSError?, data: AnyObject?) -> Void in
 				if data != nil {
 					var json: [NSString: AnyObject] = data as [NSString: AnyObject]
 					self.parse(json)
+					saveSettings()
 				}
 				
 				queueRequests = false
@@ -103,11 +105,12 @@ class User {
 	func json() -> [NSObject: AnyObject] {
 		var json: [NSObject: AnyObject] = [:]
 		
-		if self.email != nil { json["email"] = email! }
-		if self.first_name != nil { json["first_name"] = first_name! }
-		if self.id != nil { json["id"] = id! }
-		if self.last_name != nil { json["last_name"] = last_name! }
-		if self.name != nil { json["name"] = name! }
+		if self._id != nil { json["_id"] = self._id! }
+		if self.email != nil { json["email"] = self.email! }
+		if self.first_name != nil { json["first_name"] = self.first_name! }
+		if self.id != nil { json["id"] = self.id! }
+		if self.last_name != nil { json["last_name"] = self.last_name! }
+		if self.name != nil { json["name"] = self.name! }
 		if self.picture != nil { json["picture"] = ["url": self.picture!.url!, "is_silhouette": self.picture!.isSilhouette] as AnyObject }
 		json["userFriends"] = self.userFriends;
 		

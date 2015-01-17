@@ -26,6 +26,8 @@ class Message {
 	}
 	
 	func sendMessage (callback: (err: NSError?, data: AnyObject?) -> Void) {
+		self.sent = NSDate()
+		
 		doPostRequest(makeRequest("/message/" + self.list._id, "POST"), { (err: NSError?, data: AnyObject?) -> Void in
 			callback(err: err, data: data)
 			return

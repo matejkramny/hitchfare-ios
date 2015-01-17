@@ -241,6 +241,10 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 		dateFormatter.dateFormat = "d MMM yyyy"
 		
 		for d in data {
+			if (d.sent == nil) {
+				d.sent = NSDate()
+			}
+			
 			var date: String = dateFormatter.stringFromDate(d.sent)
 			
 			var name = section["name"] as? String

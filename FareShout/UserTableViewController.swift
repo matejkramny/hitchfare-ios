@@ -157,10 +157,6 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			self.blackBackdropView!.alpha = 1
 			self.profileImageView!.alpha = 1
 		})
-		
-		//UIView.transitionWithView(v, duration: 0.75, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
-			
-		//}, completion: nil)
 	}
 	
 	func hideProfileImage () {
@@ -187,6 +183,12 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		}
 		
 		var callback: (err: NSError?, data: [Journey]) -> Void = { (err: NSError?, data: [Journey]) -> Void in
+			if err != nil {
+				self.refreshControl!.endRefreshing()
+				SVProgressHUD.showErrorWithStatus("Failed to load user data: " + err!.description)
+				return
+			}
+			
 			let calendar: NSCalendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
 			let components: NSDateComponents = calendar.components(NSCalendarUnit.YearCalendarUnit|NSCalendarUnit.MonthCalendarUnit|NSCalendarUnit.DayCalendarUnit, fromDate: NSDate())
 			components.hour = 0
@@ -213,17 +215,25 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			self.tableView.reloadData()
 		}
 		
-		var u = currentUser!
+		var u = self.shownUser
 		if presentedFromElsewhere {
 			Journey.getUserJourneys(shownUser, callback: callback)
 			u = shownUser
 			
-			currentUser!.getMutualFriends(shownUser, callback: { (err: NSError?, friends: [User]) -> Void in
+			u.getMutualFriends(shownUser, callback: { (err: NSError?, friends: [User]) -> Void in
+				if err != nil {
+					return
+				}
+				
 				self.mutualFriends = friends
 				self.tableView.reloadSections(NSIndexSet(index: 4), withRowAnimation: UITableViewRowAnimation.Automatic)
 			})
 		} else {
 			JourneyPassenger.getMyJourneyRequests({ (err: NSError?, data: [JourneyPassenger]) -> Void in
+				if err != nil {
+					return
+				}
+				
 				self.myPendingRequests = data
 				
 				var iDone = 0
@@ -239,6 +249,10 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			})
 			
 			JourneyPassenger.getAllJourneyRequests({ (err: NSError?, data: [JourneyPassenger]) -> Void in
+				if err != nil {
+					return
+				}
+				
 				self.pendingRequests = data
 				
 				var iDone = 0
@@ -257,6 +271,10 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		}
 		
 		u.averageRating({ (err: NSError?, rating: Double?) -> Void in
+			if err != nil {
+				return
+			}
+			
 			self.driverRating = rating
 			self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
 		})
@@ -400,7 +418,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 				deleteBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
 				editBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
 				
-				if currentUser!._id! == journey.owner! {
+				if self.shownUser._id! == journey.owner! {
 					cell!.leftButtons = indexPath.section == 3 ? [deleteBtn, editBtn] : []
 				} else {
 					cell!.leftButtons = indexPath.section == 3 ? [deleteBtn] : []
@@ -662,7 +680,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		
 		if index == 0 {
 			// Delete
-			if currentUser!._id! != journey.owner! {
+			if self.shownUser._id! != journey.owner! {
 				// Delete the passenger request.
 				SVProgressHUD.showProgress(1.0, status: "Removing..", maskType: SVProgressHUDMaskType.Black)
 				
@@ -670,7 +688,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 					var found: JourneyPassenger?
 					
 					for d in data {
-						if d.user._id! == currentUser!._id! {
+						if d.user._id! == self.shownUser._id! {
 							found = d
 							break
 						}
