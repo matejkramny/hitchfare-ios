@@ -119,10 +119,16 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	
 	func openProfileImage () {
 		if self.blackBackdropView == nil {
-			mainNavigationDelegate.hideNavigationBar()
+			if self.shownUser === currentUser! {
+				mainNavigationDelegate.hideNavigationBar()
+			}
+			
 			self.showProfileImage()
 		} else {
-			mainNavigationDelegate.showNavigationBar()
+			if self.shownUser === currentUser! {
+				mainNavigationDelegate.showNavigationBar()
+			}
+			
 			self.hideProfileImage()
 		}
 	}
@@ -178,7 +184,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	}
 
 	func refreshData (sender: AnyObject?) {
-		if currentUser == nil {
+		if currentUser == nil || currentUser!._id == nil {
 			return
 		}
 		
@@ -418,7 +424,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 				deleteBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
 				editBtn.titleLabel!.font = UIFont(name: "FontAwesome", size: 24)!
 				
-				if self.shownUser._id! == journey.owner! {
+				if self.shownUser._id != nil && self.shownUser._id! == journey.owner! {
 					cell!.leftButtons = indexPath.section == 3 ? [deleteBtn, editBtn] : []
 				} else {
 					cell!.leftButtons = indexPath.section == 3 ? [deleteBtn] : []

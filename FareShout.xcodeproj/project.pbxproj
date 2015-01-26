@@ -71,6 +71,9 @@
 		4F525F391A05A10800EDD696 /* NearbyJourneysTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F381A05A10800EDD696 /* NearbyJourneysTableViewController.swift */; };
 		4F525F3B1A05A26C00EDD696 /* AddJourneyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F3A1A05A26C00EDD696 /* AddJourneyTableViewController.swift */; };
 		4F525F3D1A06A46500EDD696 /* CarsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F3C1A06A46500EDD696 /* CarsTableViewController.swift */; };
+		4F70EDAF1A765DE900E2D6CA /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F70EDAE1A765DE900E2D6CA /* libc++.dylib */; };
+		4F70EDB11A765DF400E2D6CA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F70EDB01A765DF400E2D6CA /* SystemConfiguration.framework */; };
+		4F70EDB61A765EA000E2D6CA /* Bugsnag.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F70EDAC1A765DBA00E2D6CA /* Bugsnag.framework */; };
 		4F8609351A2DF70E00E4BA89 /* FSSearchPropertiesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8609341A2DF70E00E4BA89 /* FSSearchPropertiesTableViewController.swift */; };
 		4F8856AD1A1118240039EA6E /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8856AB1A1118240039EA6E /* SwitchTableViewCell.swift */; };
 		4F8856AE1A1118240039EA6E /* SwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F8856AC1A1118240039EA6E /* SwitchTableViewCell.xib */; };
@@ -214,6 +217,9 @@
 		4F525F381A05A10800EDD696 /* NearbyJourneysTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyJourneysTableViewController.swift; sourceTree = "<group>"; };
 		4F525F3A1A05A26C00EDD696 /* AddJourneyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddJourneyTableViewController.swift; sourceTree = "<group>"; };
 		4F525F3C1A06A46500EDD696 /* CarsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarsTableViewController.swift; sourceTree = "<group>"; };
+		4F70EDAC1A765DBA00E2D6CA /* Bugsnag.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugsnag.framework; sourceTree = "<group>"; };
+		4F70EDAE1A765DE900E2D6CA /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		4F70EDB01A765DF400E2D6CA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4F8609341A2DF70E00E4BA89 /* FSSearchPropertiesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSSearchPropertiesTableViewController.swift; sourceTree = "<group>"; };
 		4F8856AB1A1118240039EA6E /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		4F8856AC1A1118240039EA6E /* SwitchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchTableViewCell.xib; sourceTree = "<group>"; };
@@ -270,6 +276,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F70EDB61A765EA000E2D6CA /* Bugsnag.framework in Frameworks */,
+				4F70EDB11A765DF400E2D6CA /* SystemConfiguration.framework in Frameworks */,
+				4F70EDAF1A765DE900E2D6CA /* libc++.dylib in Frameworks */,
 				DB22377F1A2B4F5500BCE0F2 /* MessageUI.framework in Frameworks */,
 				4FEA2EA91A29FB00008C1CE7 /* MapKit.framework in Frameworks */,
 				4F4FFDB31A1FBC31004EE524 /* ImageIO.framework in Frameworks */,
@@ -285,6 +294,9 @@
 		4F1AD1731A14F62D0047BEE8 /* Deps */ = {
 			isa = PBXGroup;
 			children = (
+				4F70EDAE1A765DE900E2D6CA /* libc++.dylib */,
+				4F70EDB01A765DF400E2D6CA /* SystemConfiguration.framework */,
+				4F70EDAC1A765DBA00E2D6CA /* Bugsnag.framework */,
 				4FEA2EA81A29FB00008C1CE7 /* MapKit.framework */,
 				4F412D491A24B88700019241 /* JCNotificationBanner */,
 				4F20D3801A235B9500A1CAC5 /* OCRAStd.otf */,
@@ -599,6 +611,7 @@
 				4FC1E5DC19FEB518002F743B /* Sources */,
 				4FC1E5DD19FEB518002F743B /* Frameworks */,
 				4FC1E5DE19FEB518002F743B /* Resources */,
+				4F70EDB21A765E1F00E2D6CA /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -675,6 +688,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4F70EDB21A765E1F00E2D6CA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /usr/bin/ruby;
+			shellScript = "fork do\nProcess.setsid\nSTDIN.reopen(\"/dev/null\")\nSTDOUT.reopen(\"/dev/null\", \"a\")\nSTDERR.reopen(\"/dev/null\", \"a\")\n\nrequire 'shellwords'\n\nDir[\"#{ENV[\"DWARF_DSYM_FOLDER_PATH\"]}/*/Contents/Resources/DWARF/*\"].each do |dsym|\nsystem(\"curl -F dsym=@#{Shellwords.escape(dsym)} -F projectRoot=#{Shellwords.escape(ENV[\"PROJECT_DIR\"])} https://upload.bugsnag.com/\")\nend\nend";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4FC1E5DC19FEB518002F743B /* Sources */ = {
@@ -866,9 +895,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = FareShout/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FareShout/FareShout-Bridging-Header.h";
@@ -884,9 +918,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = FareShout/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FareShout/FareShout-Bridging-Header.h";

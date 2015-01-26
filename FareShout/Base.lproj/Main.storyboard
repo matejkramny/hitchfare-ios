@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="azI-hm-qWg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C81f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="azI-hm-qWg">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -663,10 +663,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="RiG-GB-3eq" firstAttribute="leading" secondItem="R3q-wS-m1m" secondAttribute="leading" id="AgX-J4-GNB"/>
-                            <constraint firstItem="RiG-GB-3eq" firstAttribute="top" secondItem="R3q-wS-m1m" secondAttribute="top" id="ESP-xB-0r5"/>
-                            <constraint firstAttribute="trailing" secondItem="RiG-GB-3eq" secondAttribute="trailing" id="Mbe-69-fhO"/>
-                            <constraint firstItem="h8i-MN-eGb" firstAttribute="top" secondItem="RiG-GB-3eq" secondAttribute="bottom" id="buz-Pm-J2d"/>
+                            <constraint firstItem="h8i-MN-eGb" firstAttribute="top" secondItem="RiG-GB-3eq" secondAttribute="bottom" id="Qb4-pw-uTP"/>
+                            <constraint firstAttribute="trailing" secondItem="RiG-GB-3eq" secondAttribute="trailing" id="Qe5-HM-JUg"/>
+                            <constraint firstItem="RiG-GB-3eq" firstAttribute="leading" secondItem="R3q-wS-m1m" secondAttribute="leading" id="hIU-O3-cVU"/>
+                            <constraint firstItem="RiG-GB-3eq" firstAttribute="top" secondItem="R3q-wS-m1m" secondAttribute="top" id="yuY-oL-Ym0"/>
                         </constraints>
                     </view>
                     <connections>

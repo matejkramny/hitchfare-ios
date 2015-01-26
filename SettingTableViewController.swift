@@ -34,14 +34,7 @@ class SettingTableViewController: UITableViewController, UIActionSheetDelegate, 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         var vc: FSWebViewController = segue.destinationViewController as FSWebViewController
         vc.title = segue.identifier
-        
-        if segue.identifier == "Privacy" {
-            var vc: FSWebViewController = segue.destinationViewController as FSWebViewController
-            vc._flag = segue.identifier
-        } else if segue.identifier == "Terms of Service" {
-            var vc: FSWebViewController = segue.destinationViewController as FSWebViewController
-            vc._flag = segue.identifier
-        }
+		vc._flag = segue.identifier
     }
     
     // MARK: Action
