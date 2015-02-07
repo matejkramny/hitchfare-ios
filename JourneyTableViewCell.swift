@@ -69,7 +69,11 @@ class JourneyTableViewCell: MGSwipeTableCell {
 			self.dateLabel.text = "Date: N/A"
 		}
 		self.priceLabel.text = NSString(format: "£%.2f", floor(journey.price))
-		self.availabilityLabel.text = NSString(format: "%d", journey.availableSeats!)
+		if (journey.availableSeats != nil) {
+			self.availabilityLabel.text = NSString(format: "%d", journey.availableSeats!)
+		} else {
+			self.availabilityLabel.text = ""
+		}
 		
 		if journey.isDriver == false {
 			self.availabilityLabel.hidden = true

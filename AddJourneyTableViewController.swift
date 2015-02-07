@@ -317,8 +317,10 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 		journey.availableSeats = car.seats - 1
 		
 		var cell: StepperTableViewCell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 3)) as StepperTableViewCell
-		cell.stepper.value = Double(journey.availableSeats!)
-		cell.label.text = "Availability: " + String(journey.availableSeats!)
+		if journey.availableSeats != nil {
+			cell.stepper.value = Double(journey.availableSeats!)
+			cell.label.text = "Availability: " + String(journey.availableSeats!)
+		}
 		
 		var carCell: UITableViewCell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2))!
 		carCell.detailTextLabel!.text = car.name
