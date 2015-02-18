@@ -62,7 +62,10 @@ class PassengersTableViewController: UITableViewController, MGSwipeTableCellDele
 	
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if section == 0 {
-			return self.avgRating != nil ? 1 : 0
+			if self.avgRating != nil && self.journey.carObj != nil {
+				return 2
+			}
+			return self.avgRating != nil ? 2 : 1
 		}
 		
 		return self.passengers.count + 1
@@ -70,22 +73,33 @@ class PassengersTableViewController: UITableViewController, MGSwipeTableCellDele
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		if indexPath.section == 0 {
-			var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("rating", forIndexPath: indexPath) as UITableViewCell
-			
-			cell.textLabel!.font = UIFont(awesomeFontOfSize: 18.0)
-			var stars = ""
-			
-			for var i = 0; i < Int(ceil(self.avgRating!)); i++ {
-				var starEnum = FAIcon.FAStar
+			if indexPath.row == 1 || indexPath.row == 0 && self.journey.carObj == nil {
+				var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("rating", forIndexPath: indexPath) as UITableViewCell
 				
-				if i == Int(round(self.avgRating!)) {
-					starEnum = FAIcon.FAStarHalf
+				cell.textLabel!.font = UIFont(awesomeFontOfSize: 18.0)
+				var stars = ""
+				
+				for var i = 0; i < Int(ceil(self.avgRating!)); i++ {
+					var starEnum = FAIcon.FAStar
+					
+					if i == Int(round(self.avgRating!)) {
+						starEnum = FAIcon.FAStarHalf
+					}
+					
+					stars = stars + NSString.fontAwesomeIconStringForEnum(starEnum)
 				}
 				
-				stars = stars + NSString.fontAwesomeIconStringForEnum(starEnum)
+				cell.textLabel!.text = NSString(format: "Average Rating: %@", stars)
+				cell.textLabel!.textColor = UIColor.whiteColor()
+				cell.backgroundColor = UIColor.clearColor()
+				
+				return cell
 			}
 			
-			cell.textLabel!.text = NSString(format: "Average Rating: %@", stars)
+			var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("car", forIndexPath: indexPath) as UITableViewCell
+			
+			cell.textLabel!.text = "Driver's Car"
+			cell.detailTextLabel!.text = self.journey.carObj!.name
 			cell.textLabel!.textColor = UIColor.whiteColor()
 			cell.backgroundColor = UIColor.clearColor()
 			
@@ -157,6 +171,29 @@ class PassengersTableViewController: UITableViewController, MGSwipeTableCellDele
 	}
 	
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+		if indexPath.section == 0 {
+			if indexPath.row == 1 || indexPath.row == 0 && self.journey.carObj == nil {
+				return
+			}
+			
+			// Show off the car..
+			let vc: CarViewController = UINib(nibName: "CarViewController", bundle: NSBundle.mainBundle()).instantiateWithOwner(nil, options: nil)[0] as CarViewController
+			vc.car = self.journey.carObj!
+			vc.navigationItem.title = vc.car.name
+			vc.setup(false)
+			
+			UIGraphicsBeginImageContext(vc.view.frame.size)
+			UIImage(named: "BackGround")!.drawInRect(self.view.bounds)
+			var image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+			UIGraphicsEndImageContext()
+			
+			vc.view.backgroundColor = UIColor(patternImage: image)
+			vc.editBtn.enabled = false
+			vc.editBtn.layer.opacity = 0
+			
+			self.navigationController!.pushViewController(vc, animated: true)
+			return
+		}
 		var userId: String!
 		
 		if indexPath.row == 0 {

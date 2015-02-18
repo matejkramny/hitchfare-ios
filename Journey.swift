@@ -9,6 +9,8 @@ class Journey {
 	var ownerObj: User?
 	
 	var car: String? //_id
+	var carObj: Car?
+	
 	var isDriver: Bool = true
 	var availableSeats: Int?
 	
@@ -39,6 +41,15 @@ class Journey {
 		}
 		
 		self.car = _response["car"] as? String
+		if self.car == nil {
+			// maybe its an obj.
+			var json = _response["car"] as? [NSString: AnyObject]
+			if json != nil {
+				self.carObj = Car(_response: json!)
+				self.car = self.carObj!._id
+			}
+		}
+		
 		var isDriver = _response["isDriver"] as? Bool
 		if isDriver != nil {
 			self.isDriver = isDriver!
@@ -58,7 +69,6 @@ class Journey {
 			
 			self.startDate = dateFormatter.dateFromString(startStr!)
 		}
-		////////////////////////////////////////////////////////////////////////////////////
 		
 		self.startDateHuman = start["human"] as? String
 		self.startLocation = start["location"] as? String
@@ -137,6 +147,10 @@ class Journey {
 		getJourneys("/journeys/my", method: "GET", callback: callback)
 	}
 	
+	class func getOnlyMyJourneys (callback: (err: NSError?, data: [Journey]) -> Void) {
+		getJourneys("/journeys/onlyMy", method: "GET", callback: callback)
+	}
+	
 	class func getUserJourneys (user: User, callback: (err: NSError?, data: [Journey]) -> Void) {
 		getJourneys("/journeys/user/" + user._id!, method: "GET", callback: callback)
 	}
@@ -157,10 +171,16 @@ class Journey {
 		}, nil)
 	}
 	
-	func requestJoin (callback: (err: NSError?) -> Void) {
+	func requestJoin(callback: (err: NSError?) -> Void) {
 		doRequest(makeRequest("/journey/" + self._id!, "PUT"), { (err: NSError?, data: AnyObject?) -> Void in
 			callback(err: err)
 		}, nil)
+	}
+	
+	func requestJoinPassenger(selfJourney: Journey, callback: (err: NSError?) -> Void) {
+		doPostRequest(makeRequest("/journey/" + self._id!, "PUT"), { (err: NSError?, data: AnyObject?) -> Void in
+			callback(err: err)
+		}, ["journey_id": selfJourney._id!] as [NSString: AnyObject])
 	}
 	
 	func update (callback: (err: NSError?, data: AnyObject?) -> Void) {

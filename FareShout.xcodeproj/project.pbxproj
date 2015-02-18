@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0CA6DFDE1A9421F400C69B7A /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA6DFDC1A9421F400C69B7A /* Crashlytics.framework */; };
+		0CA6DFDF1A9421F400C69B7A /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA6DFDD1A9421F400C69B7A /* Fabric.framework */; };
+		0CA6DFE11A9440E900C69B7A /* PickJourneyViewCtrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA6DFE01A9440E900C69B7A /* PickJourneyViewCtrl.swift */; };
 		4F1A62541A1A90B300826ECE /* MessagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1A62531A1A90B300826ECE /* MessagesTableViewController.swift */; };
 		4F1A62561A1A90EE00826ECE /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1A62551A1A90EE00826ECE /* Message.swift */; };
 		4F1AD1711A139B490047BEE8 /* FSTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1AD16F1A139B490047BEE8 /* FSTextFieldTableViewCell.swift */; };
@@ -73,7 +76,6 @@
 		4F525F3D1A06A46500EDD696 /* CarsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F525F3C1A06A46500EDD696 /* CarsTableViewController.swift */; };
 		4F70EDAF1A765DE900E2D6CA /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F70EDAE1A765DE900E2D6CA /* libc++.dylib */; };
 		4F70EDB11A765DF400E2D6CA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F70EDB01A765DF400E2D6CA /* SystemConfiguration.framework */; };
-		4F70EDB61A765EA000E2D6CA /* Bugsnag.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F70EDAC1A765DBA00E2D6CA /* Bugsnag.framework */; };
 		4F8609351A2DF70E00E4BA89 /* FSSearchPropertiesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8609341A2DF70E00E4BA89 /* FSSearchPropertiesTableViewController.swift */; };
 		4F8856AD1A1118240039EA6E /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8856AB1A1118240039EA6E /* SwitchTableViewCell.swift */; };
 		4F8856AE1A1118240039EA6E /* SwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F8856AC1A1118240039EA6E /* SwitchTableViewCell.xib */; };
@@ -118,6 +120,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0CA6DFDC1A9421F400C69B7A /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		0CA6DFDD1A9421F400C69B7A /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		0CA6DFE01A9440E900C69B7A /* PickJourneyViewCtrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickJourneyViewCtrl.swift; sourceTree = "<group>"; };
 		4F1A62531A1A90B300826ECE /* MessagesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesTableViewController.swift; sourceTree = "<group>"; };
 		4F1A62551A1A90EE00826ECE /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		4F1AD16F1A139B490047BEE8 /* FSTextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSTextFieldTableViewCell.swift; sourceTree = "<group>"; };
@@ -217,7 +222,6 @@
 		4F525F381A05A10800EDD696 /* NearbyJourneysTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyJourneysTableViewController.swift; sourceTree = "<group>"; };
 		4F525F3A1A05A26C00EDD696 /* AddJourneyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddJourneyTableViewController.swift; sourceTree = "<group>"; };
 		4F525F3C1A06A46500EDD696 /* CarsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarsTableViewController.swift; sourceTree = "<group>"; };
-		4F70EDAC1A765DBA00E2D6CA /* Bugsnag.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugsnag.framework; sourceTree = "<group>"; };
 		4F70EDAE1A765DE900E2D6CA /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		4F70EDB01A765DF400E2D6CA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4F8609341A2DF70E00E4BA89 /* FSSearchPropertiesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSSearchPropertiesTableViewController.swift; sourceTree = "<group>"; };
@@ -276,15 +280,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F70EDB61A765EA000E2D6CA /* Bugsnag.framework in Frameworks */,
 				4F70EDB11A765DF400E2D6CA /* SystemConfiguration.framework in Frameworks */,
 				4F70EDAF1A765DE900E2D6CA /* libc++.dylib in Frameworks */,
 				DB22377F1A2B4F5500BCE0F2 /* MessageUI.framework in Frameworks */,
 				4FEA2EA91A29FB00008C1CE7 /* MapKit.framework in Frameworks */,
 				4F4FFDB31A1FBC31004EE524 /* ImageIO.framework in Frameworks */,
+				0CA6DFDE1A9421F400C69B7A /* Crashlytics.framework in Frameworks */,
 				4F1AD1791A14F6A70047BEE8 /* QuartzCore.framework in Frameworks */,
 				4FC1E60C19FEB866002F743B /* Accounts.framework in Frameworks */,
 				4FC1E60A19FEB839002F743B /* Social.framework in Frameworks */,
+				0CA6DFDF1A9421F400C69B7A /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,9 +299,10 @@
 		4F1AD1731A14F62D0047BEE8 /* Deps */ = {
 			isa = PBXGroup;
 			children = (
+				0CA6DFDC1A9421F400C69B7A /* Crashlytics.framework */,
+				0CA6DFDD1A9421F400C69B7A /* Fabric.framework */,
 				4F70EDAE1A765DE900E2D6CA /* libc++.dylib */,
 				4F70EDB01A765DF400E2D6CA /* SystemConfiguration.framework */,
-				4F70EDAC1A765DBA00E2D6CA /* Bugsnag.framework */,
 				4FEA2EA81A29FB00008C1CE7 /* MapKit.framework */,
 				4F412D491A24B88700019241 /* JCNotificationBanner */,
 				4F20D3801A235B9500A1CAC5 /* OCRAStd.otf */,
@@ -561,6 +567,7 @@
 				4FA9F16019FFD3CA009D0F33 /* PageRootViewController.swift */,
 				4FC1E60619FEB71D002F743B /* Login */,
 				4F95342619FFEFDF0058210D /* UserTableViewController.swift */,
+				0CA6DFE01A9440E900C69B7A /* PickJourneyViewCtrl.swift */,
 				4F525F381A05A10800EDD696 /* NearbyJourneysTableViewController.swift */,
 				4F1AD1A71A1562760047BEE8 /* HikesTableViewController.swift */,
 				4F525F3A1A05A26C00EDD696 /* AddJourneyTableViewController.swift */,
@@ -611,7 +618,7 @@
 				4FC1E5DC19FEB518002F743B /* Sources */,
 				4FC1E5DD19FEB518002F743B /* Frameworks */,
 				4FC1E5DE19FEB518002F743B /* Resources */,
-				4F70EDB21A765E1F00E2D6CA /* ShellScript */,
+				0CA6DFDB1A9421C600C69B7A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -690,7 +697,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4F70EDB21A765E1F00E2D6CA /* ShellScript */ = {
+		0CA6DFDB1A9421C600C69B7A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -700,8 +707,9 @@
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /usr/bin/ruby;
-			shellScript = "fork do\nProcess.setsid\nSTDIN.reopen(\"/dev/null\")\nSTDOUT.reopen(\"/dev/null\", \"a\")\nSTDERR.reopen(\"/dev/null\", \"a\")\n\nrequire 'shellwords'\n\nDir[\"#{ENV[\"DWARF_DSYM_FOLDER_PATH\"]}/*/Contents/Resources/DWARF/*\"].each do |dsym|\nsystem(\"curl -F dsym=@#{Shellwords.escape(dsym)} -F projectRoot=#{Shellwords.escape(ENV[\"PROJECT_DIR\"])} https://upload.bugsnag.com/\")\nend\nend";
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 74bc063f85cffe425688877adacd4e6ca2f2a115 0641043976e2496dca4bd8e257e0ee1ba29a3730c8d292d3ce55ef909b271b59";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -765,6 +773,7 @@
 				4F412D661A24B89700019241 /* JCNotificationBannerView.m in Sources */,
 				4F8856AD1A1118240039EA6E /* SwitchTableViewCell.swift in Sources */,
 				4F412DA81A254E2800019241 /* ImageTableViewCell.swift in Sources */,
+				0CA6DFE11A9440E900C69B7A /* PickJourneyViewCtrl.swift in Sources */,
 				4F8B23F01A288EBC0095EC1B /* JourneyPassenger.swift in Sources */,
 				4F8B23EE1A288DCD0095EC1B /* PassengersTableViewController.swift in Sources */,
 				4FD346E41A127CB3006026DD /* PriceTableViewCell.swift in Sources */,

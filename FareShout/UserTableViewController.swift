@@ -1,7 +1,7 @@
 
 import UIKit
 
-class UserTableViewController: UITableViewController, FSProfileTableViewCellDelegate, PageRootDelegate, MGSwipeTableCellDelegate, JourneyRequestDelegate, AcceptJourneyRequestDelegate {
+class UserTableViewController: UITableViewController, FSProfileTableViewCellDelegate, PageRootDelegate, MGSwipeTableCellDelegate, JourneyRequestDelegate, AcceptJourneyRequestDelegate, PickJourneyDelegate {
     
     // Section title color constant variables.
     let kDefaultSectionTitleColor : UIColor! = UIColor(red: 103/255.0, green: 0/255.0, blue: 10/255.0, alpha: 1)
@@ -27,6 +27,10 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	
 	var blackBackdropView: UIView?
 	var profileImageView: UIImageView?
+	
+	// set when the user wants to join a journey which is in passenger mode
+	var pickingSelfJourneyForJourney: Journey?
+	var pickedJourney: Journey?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -70,6 +74,21 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		
 		if presentedFromElsewhere == false {
 			mainNavigationDelegate.showNavigationBar()
+		}
+		
+		if (self.pickingSelfJourneyForJourney != nil) {
+			if self.pickedJourney != nil {
+				self.pickingSelfJourneyForJourney!.requestJoinPassenger(self.pickedJourney!, { (err: NSError?) -> Void in
+					if err != nil {
+						SVProgressHUD.showErrorWithStatus("Error Joining Journey. You might have already requested to join.")
+					} else {
+						SVProgressHUD.showSuccessWithStatus("Sent request to join Journey")
+					}
+				})
+			}
+			
+			self.pickingSelfJourneyForJourney = nil
+			self.pickedJourney = nil
 		}
 		
 		self.refreshData(nil)
@@ -410,7 +429,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 				list = pastJourneys
 			}
 			
-			var journey = list[indexPath.row]
+			let journey = list[indexPath.row]
 			
 			var cell = tableView.dequeueReusableCellWithIdentifier("Journey", forIndexPath: indexPath) as? JourneyTableViewCell
 			if cell == nil {
@@ -612,9 +631,17 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			
 			SVProgressHUD.showProgress(1.0, status: "Requesting to Join", maskType: SVProgressHUDMaskType.Black)
 			
+			if journey.isDriver == false {
+				// pick one of my own journeys
+				// weirdfuckingnamebutsowhat
+				self.pickingSelfJourneyForJourney = journey
+				self.performSegueWithIdentifier("pickJourney", sender: nil)
+				return
+			}
+			
 			journey.requestJoin({ (err: NSError?) -> Void in
 				if err != nil {
-					SVProgressHUD.showErrorWithStatus("Error Joining Journey. Perhaps already requested.")
+					SVProgressHUD.showErrorWithStatus("Error Joining Journey. You might have already requested to join.")
 				} else {
 					SVProgressHUD.showSuccessWithStatus("Sent request to join Journey")
 				}
@@ -655,6 +682,9 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 				var vc: CarsTableViewController = segue.destinationViewController as CarsTableViewController
 				vc.user = shownUser
 			}
+		} else if segue.identifier == "pickJourney" {
+			var vc: PickJourneyViewCtrl = (segue.destinationViewController as UINavigationController).viewControllers[0] as PickJourneyViewCtrl
+			vc.delegate = self
 		}
 	}
 	
@@ -817,6 +847,12 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		findMessageList(friend!._id!, { (list: MessageList?) -> Void in
 			self.performSegueWithIdentifier("openMessages", sender: list)
 		})
+	}
+	
+	//PRAGMA mark: PickJourneyDelegate thing
+	
+	func pickJourneyViewDidPickJourney(journey: Journey) {
+		self.pickedJourney = journey
 	}
 	
 }

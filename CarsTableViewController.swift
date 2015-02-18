@@ -13,6 +13,7 @@ class CarsTableViewController: UIViewController {
 	var selectedCar: Car? = nil
 	var delegate: CarSelectionProtocol? = nil
 	var user: User?
+	var cars: [Car] = []
 	
 	var carViews: [CarViewController] = []
 	
@@ -54,9 +55,17 @@ class CarsTableViewController: UIViewController {
 	}
 	
 	func refreshCars (sender: AnyObject?) {
-		storage.getCars(self.user == nil ? currentUser! : self.user!, { (err: NSError?) -> Void in
-			self.createCarVCs()
-		})
+		if self.user == nil {
+			storage.getCars(currentUser!, { (err: NSError?) -> Void in
+				self.cars = storage.cars
+				self.createCarVCs()
+			})
+		} else {
+			Car.getAll(self.user!, { (err: NSError?, data: [Car]) -> Void in
+				self.cars = data
+				self.createCarVCs()
+			})
+		}
 	}
 	
 	func createCarVCs () {
@@ -65,46 +74,24 @@ class CarsTableViewController: UIViewController {
 		}
 		self.carViews = []
 		
-		for (i, car) in enumerate(storage.cars) {
+		for (i, car) in enumerate(self.cars) {
 			
 			var view: CarViewController = UINib(nibName: "CarViewController", bundle: NSBundle.mainBundle()).instantiateWithOwner(nil, options: nil)[0] as CarViewController
 			view.car = car
-			
-			if car.picture != nil {
-				view.carImageView.sd_setImageWithURL(NSURL(string: car.picture!))
-                view.carImageView.contentMode = UIViewContentMode.ScaleAspectFit
-			}
-			
-			view.carNameLabel.text = car.name
-			view.carDescriptionLabel.text = car.carDescription
+			view.setup(self.selectCarMode)
 			
 			view.view.frame = CGRectMake(view.view.frame.size.width * CGFloat(i), view.view.frame.origin.y, view.view.frame.size.width, view.view.frame.size.height)
-			
-//			UIGraphicsBeginImageContext(view.view.frame.size)
-//			UIImage(named: "BackGround")!.drawInRect(self.view.bounds)
-//			var image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
-//			UIGraphicsEndImageContext()
-			
-//			view.view.backgroundColor = UIColor(patternImage: image)
-            view.view.backgroundColor = UIColor.clearColor()
-			
-			view.editBtn.addTarget(self, action: "editBtnPressed:", forControlEvents: UIControlEvents.TouchUpInside)
-			
-			if self.selectCarMode == true {
-				view.editBtn.setNeedsDisplay()
-				view.editBtn.setTitle("Select", forState: UIControlState.Normal)
-			}
 			
 			if self.user != nil && self.user!._id != currentUser!._id {
 				view.editBtn.hidden = true
 			}
+			view.editBtn.addTarget(self, action: "editBtnPressed:", forControlEvents: UIControlEvents.TouchUpInside)
 			
 			self.scrollView.addSubview(view.view)
 			self.carViews.append(view)
-			
 		}
 		
-		self.scrollView.contentSize = CGSizeMake(self.view.frame.width * CGFloat(storage.cars.count), self.scrollView.contentSize.height)
+		self.scrollView.contentSize = CGSizeMake(self.view.frame.width * CGFloat(self.cars.count), self.scrollView.contentSize.height)
 		
 	}
 	

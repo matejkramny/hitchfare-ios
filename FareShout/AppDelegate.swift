@@ -1,5 +1,7 @@
 
 import UIKit
+import Fabric
+import Crashlytics
 
 let iOS8 = floor(NSFoundationVersionNumber) > floor(NSFoundationVersionNumber_iOS_7_1)
 var enteredForeground: NSDate! = NSDate()
@@ -9,7 +11,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var window: UIWindow?
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-		Bugsnag.startBugsnagWithApiKey("e792a65247183f0fbd736cf544599709")
+		Fabric.with([Crashlytics()])
 		
 		styleApplication()
 		

@@ -20,6 +20,3 @@
 #import "JCNotificationBannerPresenter.h"
 #import "JCNotificationCenter.h"
 #import "JCNotificationBannerPresenterSmokeStyle.h"
-
-// Bugsnag
-#import <Bugsnag/Bugsnag.h>
