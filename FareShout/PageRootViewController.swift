@@ -43,6 +43,8 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 	var searchBarButtonItem: UIBarButtonItem!
 	var rightBarButtonItem: UIBarButtonItem!
 	
+	var didRenewFacebookDetails: Bool = false
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -159,6 +161,12 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		
 		if currentUser != nil {
 			FacebookCtrl.sharedInstance().delegate = self
+			
+			if self.didRenewFacebookDetails != false {
+				return
+			}
+			
+			self.didRenewFacebookDetails = true
 			
 			FacebookCtrl.sharedInstance().requestAccessToFacebookWithPerms(false)
 			if storage.accessToken != nil {
@@ -397,6 +405,7 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 	
 	func onFinishedGetInformationSelf(_response: [NSString : AnyObject]!) {
 		currentUser!.parse(_response)
+		
 		currentUser!.register({ (error, data) -> Void in
 			self.dismissViewControllerAnimated(true, completion: nil)
 		})

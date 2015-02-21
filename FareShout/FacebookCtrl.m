@@ -139,7 +139,10 @@ static FacebookCtrl *appConfigInstance = nil;
 				} else if ([list objectForKey:@"error"] != nil) {
 					 [self attemptRenewCredentials];
 				} else if ([self.delegate respondsToSelector:@selector(onFinishedGetInformationSelf:)]) {
-					 [self.delegate onFinishedGetInformationSelf:list];
+					// call in main thread
+					dispatch_async(dispatch_get_main_queue(), ^(void) {
+						[self.delegate onFinishedGetInformationSelf:list];
+					});
 				}
 		  }
 		  else {

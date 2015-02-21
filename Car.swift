@@ -41,6 +41,12 @@ class Car: NSObject {
 	}
 	
 	class func getAll (user: User, callback: (err: NSError?, data: [Car]) -> Void) {
+		if user._id == nil {
+			SVProgressHUD.showErrorWithStatus("Error! Restart app.")
+			callback(err: nil, data: [])
+			return
+		}
+		
 		var url = "/user/" + user._id! + "/cars"
 		if user === currentUser! {
 			url = "/cars"
@@ -50,10 +56,12 @@ class Car: NSObject {
 			var cars: [Car] = []
 			
 			if data != nil {
-				var dataObj = data as [[String: AnyObject]]
+				var dataObj = data as? [[String: AnyObject]]
 				
-				for d in dataObj {
-					cars.append(Car(_response: d))
+				if dataObj != nil {
+					for d in dataObj! {
+						cars.append(Car(_response: d))
+					}
 				}
 			}
 			

@@ -10,7 +10,7 @@ class SettingTableViewController: UITableViewController, UIActionSheetDelegate, 
         self.navigationController?.navigationBar.translucent = false
 		self.navigationController!.navigationBar.barStyle = UIBarStyle.Black
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "done:")
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "done:")
         
         var image : UIImage! = UIImage(named: "BackGround")
         var imageView : UIImageView! = UIImageView(image: image)

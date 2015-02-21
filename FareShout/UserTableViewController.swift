@@ -648,7 +648,13 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			})
 		} else if indexPath.section == 3 || indexPath.section == 5 {
 			// Open passengers list
-			self.performSegueWithIdentifier("openPassengers", sender: indexPath.section == 3 ? journeys[indexPath.row] : pastJourneys[indexPath.row])
+			var journey = indexPath.section == 3 ? journeys[indexPath.row] : pastJourneys[indexPath.row];
+			if journey.isDriver == false {
+				tableView.deselectRowAtIndexPath(indexPath, animated: true)
+				return
+			}
+			
+			self.performSegueWithIdentifier("openPassengers", sender: journey)
 			return
 		}
 		

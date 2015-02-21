@@ -48,6 +48,8 @@ class User {
 		self.last_name = _response["last_name"] as String?
 		self.name = _response["name"] as String?
 		
+		self.userFriends = []
+		
 		var friends: [NSString: AnyObject]? = _response["friends"] as? [NSString: AnyObject]
 		if friends != nil {
 			var friendsData: [[NSString: AnyObject]]? = friends!["data"] as? [[NSString: AnyObject]]
@@ -76,7 +78,6 @@ class User {
 			var _idJson: [NSString: AnyObject]? = data as? [NSString: AnyObject]
 			if _idJson != nil {
 				self._id = _idJson!["_id"] as? NSString
-				saveSettings()
 			}
 			
 			doRequest(makeRequest("/me", "GET"), { (err: NSError?, data: AnyObject?) -> Void in

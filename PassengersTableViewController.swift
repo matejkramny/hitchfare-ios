@@ -62,9 +62,14 @@ class PassengersTableViewController: UITableViewController, MGSwipeTableCellDele
 	
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if section == 0 {
+			if self.avgRating == nil && self.journey.carObj == nil {
+				return 0
+			}
+			
 			if self.avgRating != nil && self.journey.carObj != nil {
 				return 2
 			}
+			
 			return self.avgRating != nil ? 2 : 1
 		}
 		
@@ -73,20 +78,22 @@ class PassengersTableViewController: UITableViewController, MGSwipeTableCellDele
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		if indexPath.section == 0 {
-			if indexPath.row == 1 || indexPath.row == 0 && self.journey.carObj == nil {
+			if indexPath.row == 1 || (indexPath.row == 0 && self.journey.carObj == nil) {
 				var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("rating", forIndexPath: indexPath) as UITableViewCell
 				
 				cell.textLabel!.font = UIFont(awesomeFontOfSize: 18.0)
 				var stars = ""
 				
-				for var i = 0; i < Int(ceil(self.avgRating!)); i++ {
-					var starEnum = FAIcon.FAStar
-					
-					if i == Int(round(self.avgRating!)) {
-						starEnum = FAIcon.FAStarHalf
+				if self.avgRating != nil {
+					for var i = 0; i < Int(ceil(self.avgRating!)); i++ {
+						var starEnum = FAIcon.FAStar
+						
+						if i == Int(round(self.avgRating!)) {
+							starEnum = FAIcon.FAStarHalf
+						}
+						
+						stars = stars + NSString.fontAwesomeIconStringForEnum(starEnum)
 					}
-					
-					stars = stars + NSString.fontAwesomeIconStringForEnum(starEnum)
 				}
 				
 				cell.textLabel!.text = NSString(format: "Average Rating: %@", stars)

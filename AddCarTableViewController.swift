@@ -1,7 +1,7 @@
 
 import UIKit
 
-class AddCarTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, StepperCellDelegate, UITextFieldDelegate {
+class AddCarTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, StepperCellDelegate, FSTextFieldCellProtocol, UITextViewDelegate {
 	
 	var car: Car! = Car()
 	var chosenImage: UIImage? = nil
@@ -48,17 +48,6 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 	}
 	
 	func add (sender: AnyObject) {
-        //		car.name = getCellContents(NSIndexPath(forRow: 0, inSection: 0))          // NonVisible -> fatal error : unexpectedly found nil while unwrapping an Optional value
-		
-		var s = getCellContents(NSIndexPath(forRow: 0, inSection: 1))
-		var seats: Int? = s.integerValue
-		if seats == nil || seats! == 0 {
-			return
-		}
-		
-		car.carDescription = (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0)) as FSTextViewTableViewCell).textView.text
-		car.seats = seats!
-		
 		SVProgressHUD.showProgress(1.0, status: "Saving...", maskType: SVProgressHUDMaskType.Black)
 		car.update(chosenImage, callback: { (err: NSError?, data: AnyObject?) -> Void in
 			SVProgressHUD.dismiss()
@@ -135,7 +124,8 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 			cell!.selectionStyle = UITableViewCellSelectionStyle.None
 			
             cell!.label.text = "Name"
-            cell!.field.delegate = self
+			cell!.delegate = self
+			cell!.initialize()
             cell!.field.text = self.car.name
 //            cell!.field.placeholder = "Car Name"
             cell!.field.attributedPlaceholder = NSAttributedString(string: "Car Name", attributes: [NSForegroundColorAttributeName: UIColor.grayColor()])
@@ -158,7 +148,8 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
             if self.car.seats > 0 {
                 cell!.stepper.value = Double(self.car.seats)
             } else {
-                cell!.stepper.value = 4                 // Default Passengers Number Set
+				self.car.seats = 4
+                cell!.stepper.value = 4
             }
             
             cell!.label.text = "Number of Seats : " + String(format: "%.0f", cell!.stepper.value)
@@ -181,6 +172,7 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 			cell!.backgroundColor = UIColor.clearColor()
 			cell!.fieldTitle.text = "Description"
 			cell!.textView.text = car.carDescription
+			cell!.textView.delegate = self
 			
 			cell!.textView.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.2).CGColor
 			cell!.textView.layer.borderWidth = 1
@@ -272,11 +264,20 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
     func StepperValueChanged(cell: StepperTableViewCell, value: Double) {
         cell.label.text = "Number of Seats"
         cell.label.text = cell.label.text! + " : " + String(format: "%.0f", value)
+		
+		self.car.seats = Int(value)
     }
     
-    // MARK: - UITextField Delegate
-    func textFieldShouldEndEditing(textField: UITextField) -> Bool {
-        self.car.name = textField.text
-        return true
-    }
+    // MARK: - FSTextFieldDelegate
+	func FSTextFieldCellEditingBegan(cell: FSTextFieldTableViewCell?) {
+		return
+	}
+	
+	func FSTextFieldCellValueChanged(cell: FSTextFieldTableViewCell?, value: NSString?) {
+		self.car.name = cell!.field.text
+	}
+	
+	func textViewDidChange(textView: UITextView) {
+		self.car.carDescription = textView.text
+	}
 }
