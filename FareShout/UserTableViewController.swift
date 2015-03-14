@@ -466,17 +466,13 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 				cell = MutualFriendsTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "MutualFriendCell")
 			}
 			
+			mutualFriendGestureRecognizers = []
+			for subview in cell!.friendsScrollView.subviews {
+				subview.removeFromSuperview()
+			}
+			
 			for (i, friend) in enumerate(mutualFriends) {
-				for subview in cell!.friendsScrollView.subviews {
-					subview.removeFromSuperview()
-				}
-				
-				mutualFriendGestureRecognizers = []
-				
-				var offset: Int = i * 8
-				if i == 0 {
-					offset = 8
-				}
+				var offset: Int = i * 8 + 8 // 8n+8
 				
 				if friend.picture != nil {
 					var imgView = UIImageView(frame: CGRectMake(CGFloat(i * 70 + offset), 8, 70, 70))

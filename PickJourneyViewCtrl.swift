@@ -30,7 +30,16 @@ class PickJourneyViewCtrl: UITableViewController {
 		super.viewWillAppear(animated)
 		
 		Journey.getOnlyMyJourneys({ (err: NSError?, data: [Journey]) -> Void in
-			self.journeys = data
+			var js: [Journey] = []
+			var now: NSTimeInterval = NSDate().timeIntervalSince1970
+			
+			for journey in data {
+				if journey.startDate!.timeIntervalSince1970 > now {
+					js.append(journey)
+				}
+			}
+			
+			self.journeys = js
 			self.tableView.reloadData()
 		})
 	}
