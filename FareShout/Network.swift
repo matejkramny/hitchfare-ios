@@ -62,7 +62,7 @@ func makeRequest (endpoint: String, method: String?) -> NSMutableURLRequest {
 }
 
 func readSettings () -> Bool {
-	var docDir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
+	var docDir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as! String
 	
 	var err: NSError?
 	var contents = NSData(contentsOfFile: docDir + "/settings.json", options: NSDataReadingOptions.DataReadingMappedIfSafe, error: &err)
@@ -78,7 +78,7 @@ func readSettings () -> Bool {
 	
 	sessionCookie = settings!["sessionCookie"] as? String
 	if settings!["user"] != nil {
-		currentUser = User(_response: settings!["user"] as [String: AnyObject])
+		currentUser = User(_response: settings!["user"] as! [String: AnyObject])
 	}
 	
 	var reqForNotifs = settings!["didRequestForNotifications"] as? Bool
@@ -103,7 +103,7 @@ func saveSettings () -> Bool {
 	settings["didRequestForNotifications"] = didRequestForNotifications
 	settings["accessToken"] = storage.accessToken
 	
-	var docDir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
+	var docDir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as! String
 	
 	var err: NSError?
 	var jsonData = NSJSONSerialization.dataWithJSONObject(settings, options: NSJSONWritingOptions.allZeros, error: &err)
@@ -174,7 +174,7 @@ func doRequest (request: NSMutableURLRequest, callback: (err: NSError?, data: An
 			return
 		}
 		
-		var httpRes = res as NSHTTPURLResponse
+		var httpRes = res as! NSHTTPURLResponse
 		var cookie = httpRes.allHeaderFields["set-cookie"] as? String
 		if cookie != nil {
 			sessionCookie = cookie!.componentsSeparatedByString(";")[0] as String
@@ -250,12 +250,12 @@ func geocodeAddress(address: String, callback: (err: NSError?, data: [[NSString:
 			return callback(err: nil, data: [])
 		}
 		
-		let status = json!["status"] as NSString
+		let status = json!["status"] as! NSString
 		if status != "OK" {
 			return callback(err: nil, data: [])
 		}
 		
-		var results = json!["results"] as [[NSString: AnyObject]]
+		var results = json!["results"] as! [[NSString: AnyObject]]
 		callback(err: nil, data: results)
 	}, nil)
 }
@@ -267,7 +267,7 @@ func geocodeLocation(location: CLLocationCoordinate2D, callback: (err: NSError?,
 	}
 	
 	var urlAddress = NSString(format: "%@?latlng=%f,%f", kGeocodeApiEndpoint, location.latitude, location.longitude)
-	var request = NSMutableURLRequest(URL: NSURL(string: urlAddress)!)
+	var request = NSMutableURLRequest(URL: NSURL(string: urlAddress as String)!)
 	request.setValue("application/json", forHTTPHeaderField: "Accept")
 	request.HTTPMethod = "GET"
 	
@@ -281,12 +281,12 @@ func geocodeLocation(location: CLLocationCoordinate2D, callback: (err: NSError?,
 			return callback(err: nil, data: [])
 		}
 		
-		let status = json!["status"] as NSString
+		let status = json!["status"] as! NSString
 		if status != "OK" {
 			return callback(err: nil, data: [])
 		}
 		
-		var results = json!["results"] as [[NSString: AnyObject]]
+		var results = json!["results"] as! [[NSString: AnyObject]]
 		callback(err: nil, data: results)
 	}, nil)
 }

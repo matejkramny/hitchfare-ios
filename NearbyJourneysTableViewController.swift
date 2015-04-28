@@ -185,10 +185,10 @@ class NearbyJourneysTableViewController: UITableViewController, PageRootDelegate
 		mainNavigationDelegate.hideNavigationBar()
 		
 		if segue.identifier == "openMessages" {
-			var vc: MessagesViewController = segue.destinationViewController as MessagesViewController
-			vc.list = sender as MessageList
+			var vc: MessagesViewController = segue.destinationViewController as! MessagesViewController
+			vc.list = sender as! MessageList
 		} else if segue.identifier == "searchProperties" {
-			var vc: FSSearchPropertiesTableViewController = segue.destinationViewController as FSSearchPropertiesTableViewController
+			var vc: FSSearchPropertiesTableViewController = segue.destinationViewController as! FSSearchPropertiesTableViewController
 			vc.delegate = self
 			
 			if self.searchProperties != nil {

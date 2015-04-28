@@ -37,7 +37,7 @@ class Journey {
 		var _ownerObj: [NSString: AnyObject]? = _response["owner"] as? [NSString: AnyObject]
 		if _ownerObj != nil {
 			self.ownerObj = User(_response: _ownerObj!)
-			self.owner = self.ownerObj!._id
+			self.owner = self.ownerObj!._id as? String
 		}
 		
 		self.car = _response["car"] as? String
@@ -46,7 +46,7 @@ class Journey {
 			var json = _response["car"] as? [NSString: AnyObject]
 			if json != nil {
 				self.carObj = Car(_response: json!)
-				self.car = self.carObj!._id
+				self.car = self.carObj!._id as? String
 			}
 		}
 		
@@ -56,7 +56,7 @@ class Journey {
 		}
 		self.availableSeats = _response["availableSeats"] as? Int
 		
-		var start = _response["start"] as [String: AnyObject]
+		var start = _response["start"] as! [String: AnyObject]
 		
 		// StartDate is not Double Type.  ->  Server Time     exam) 2014-11-26T10:21:09.064Z
 		// Start Date Parsing Fixed. (Korea Develope Team Added.)
@@ -78,7 +78,7 @@ class Journey {
 			self.startLng = loc![1]
 		}
 		
-		var end = _response["end"] as [String: AnyObject]
+		var end = _response["end"] as! [String: AnyObject]
 		
 		self.endLocation = end["location"] as? String
 		loc = end["loc"] as? [Double]
@@ -152,15 +152,15 @@ class Journey {
 	}
 	
 	class func getUserJourneys (user: User, callback: (err: NSError?, data: [Journey]) -> Void) {
-		getJourneys("/journeys/user/" + user._id!, method: "GET", callback: callback)
+		getJourneys("/journeys/user/" + (user._id! as String), method: "GET", callback: callback)
 	}
 	
 	class func getJourneys(url: NSString, method: NSString, callback: (err: NSError?, data: [Journey]) -> Void) {
-		doRequest(makeRequest(url, method), { (err: NSError?, data: AnyObject?) -> Void in
+		doRequest(makeRequest(url as String, method as String), { (err: NSError?, data: AnyObject?) -> Void in
 			var cars: [Journey] = []
 			
 			if data != nil {
-				var dataObj = data as [[String: AnyObject]]
+				var dataObj = data as! [[String: AnyObject]]
 				
 				for d in dataObj {
 					cars.append(Journey(_response: d))
@@ -172,13 +172,13 @@ class Journey {
 	}
 	
 	func requestJoin(callback: (err: NSError?) -> Void) {
-		doRequest(makeRequest("/journey/" + self._id!, "PUT"), { (err: NSError?, data: AnyObject?) -> Void in
+		doRequest(makeRequest("/journey/" + (self._id! as String), "PUT"), { (err: NSError?, data: AnyObject?) -> Void in
 			callback(err: err)
 		}, nil)
 	}
 	
 	func requestJoinPassenger(selfJourney: Journey, callback: (err: NSError?) -> Void) {
-		doPostRequest(makeRequest("/journey/" + self._id!, "PUT"), { (err: NSError?, data: AnyObject?) -> Void in
+		doPostRequest(makeRequest("/journey/" + (self._id! as String), "PUT"), { (err: NSError?, data: AnyObject?) -> Void in
 			callback(err: err)
 		}, ["journey_id": selfJourney._id!] as [NSString: AnyObject])
 	}
@@ -189,7 +189,7 @@ class Journey {
 		if self._id == nil || self._id?.length == 0 {
 			request = makeRequest("/journeys", "POST")
 		} else {
-			request = makeRequest("/journey/" + self._id!, "POST")
+			request = makeRequest("/journey/" + (self._id! as String), "POST")
 		}
 		
 		doPostRequest(request, callback, self.json())
@@ -201,11 +201,11 @@ class Journey {
 			return
 		}
 		
-		doRequest(makeRequest("/journey/" + self._id!, "DELETE"), callback, nil)
+		doRequest(makeRequest("/journey/" + (self._id! as String), "DELETE"), callback, nil)
 	}
 	
 	func getPassengers (callback: (err: NSError?, data: [JourneyPassenger]) -> Void) {
-		doRequest(makeRequest("/journey/" + self._id! + "/passengers", "GET"), { (err: NSError?, data: AnyObject?) -> Void in
+		doRequest(makeRequest("/journey/" + (self._id! as String) + "/passengers", "GET"), { (err: NSError?, data: AnyObject?) -> Void in
 			if err != nil {
 				callback(err: err, data: [])
 				return
@@ -238,14 +238,14 @@ class Journey {
 		
 		var attrString = ""
 		for attr in attrs {
-			attrString = attrString + "&" + attr
+			attrString = attrString + "&" + (attr as String)
 		}
 		
 		return attrString
 	}
 	
 	func averageRating(callback: (err: NSError?, rating: Double?) -> Void) {
-		doRequest(makeRequest("/rating/journey/" + self._id!, "GET"), { (err: NSError?, data: AnyObject?) -> Void in
+		doRequest(makeRequest("/rating/journey/" + (self._id! as String), "GET"), { (err: NSError?, data: AnyObject?) -> Void in
 			var json: [NSString: AnyObject]? = data as? [NSString: AnyObject]
 			if json != nil {
 				let average: Double? = json!["average"] as? Double

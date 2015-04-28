@@ -60,7 +60,7 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		// Right Custom Button
 		var rightImage : UIImage! = UIImage(named: "HikingButton")
 		var rightImageView : UIImageView! = UIImageView(image: rightImage)
-		var customRightButton : UIButton! = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+		var customRightButton : UIButton! = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
 		customRightButton.frame = CGRectMake(0, 0, rightImage.size.width, rightImage.size.height)
 		customRightButton.setImage(rightImage, forState: UIControlState.Normal)
 		customRightButton.addTarget(self, action: "didPressHike:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -70,7 +70,7 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		// Left Custom Button
 		var leftImage : UIImage! = UIImage(named: "SettingButton")
 		var leftImageView : UIImageView! = UIImageView(image: leftImage)
-		var customLeftButton : UIButton! = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+		var customLeftButton : UIButton! = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
 		customLeftButton.frame = CGRectMake(0, 0, leftImage.size.width, leftImage.size.height)
 		customLeftButton.setImage(leftImage, forState: UIControlState.Normal)
 		customLeftButton.addTarget(self, action: "didPressSetting:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -145,7 +145,7 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 			
 			for view in self.pageCtrl!.view.subviews {
 				if let v = view as? UIScrollView {
-					var scrollView = view as UIScrollView
+					var scrollView = view as! UIScrollView
 					scrollView.delegate = self
 					
 					self.scrollView = scrollView
@@ -170,7 +170,7 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 			
 			FacebookCtrl.sharedInstance().requestAccessToFacebookWithPerms(false)
 			if storage.accessToken != nil {
-				FacebookCtrl.sharedInstance().getInformationSelfWithAccessToken(storage.accessToken!)
+				FacebookCtrl.sharedInstance().getInformationSelfWithAccessToken(storage.accessToken! as String)
 			} else {
 				FacebookCtrl.sharedInstance().getInformationSelf()
 			}
@@ -205,7 +205,7 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		}
 		
 		if self.reviewVC == nil {
-			self.reviewVC = UINib(nibName: "ReviewViewController", bundle: NSBundle.mainBundle()).instantiateWithOwner(nil, options: nil)[0] as ReviewViewController
+			self.reviewVC = UINib(nibName: "ReviewViewController", bundle: NSBundle.mainBundle()).instantiateWithOwner(nil, options: nil)[0] as! ReviewViewController
 			
 			let sFrame = self.view.frame
 			let fourth = sFrame.width / 4
@@ -243,7 +243,7 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 	}
 	
 	func getCurrentViewController() -> UINavigationController {
-		return self.vcs[currentViewIndex] as UINavigationController
+		return self.vcs[currentViewIndex] as! UINavigationController
 	}
 	
 	override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -261,7 +261,7 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 	
 	func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
 		for (i, v) in enumerate(vcs) {
-			if v as UIViewController == viewController {
+			if v as! UIViewController == viewController {
 				if i < vcs.count - 1 {
 					var view = vcs[i+1] as? UIViewController
 					
@@ -287,7 +287,7 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 	
 	func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
 		for (i, v) in enumerate(vcs) {
-			if v as UIViewController == viewController {
+			if v as! UIViewController == viewController {
 				if i > 0 {
 					var view = vcs[i-1] as? UIViewController
 					
@@ -333,8 +333,8 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 	}
 	
 	func setTitleBarText () {
-		var vc: PageRootDelegate = vcs[currentViewIndex].viewControllers![0] as PageRootDelegate
-		self.titleBarText.text = vc.pageRootTitle()
+		var vc: PageRootDelegate = vcs[currentViewIndex].viewControllers![0] as! PageRootDelegate
+		self.titleBarText.text = vc.pageRootTitle() as? String
 	}
 	
 	func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -374,17 +374,17 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		self.titleBarText.frame = frame
 		
 		// Update title
-		var vc: PageRootDelegate = vcs[vcIndex].viewControllers![0] as PageRootDelegate
-		self.titleBarText.text = vc.pageRootTitle()
+		var vc: PageRootDelegate = vcs[vcIndex].viewControllers![0] as! PageRootDelegate
+		self.titleBarText.text = vc.pageRootTitle() as? String
 	}
 	
 	@IBAction func didPressHike(sender: AnyObject) {
-		var vc: PageRootDelegate = vcs[currentViewIndex].viewControllers![0] as PageRootDelegate
+		var vc: PageRootDelegate = vcs[currentViewIndex].viewControllers![0] as! PageRootDelegate
 		vc.presentHike()
 	}
 	
 	@IBAction func didPressSetting(sender: AnyObject) {
-		var vc: PageRootDelegate = vcs[currentViewIndex].viewControllers![0] as PageRootDelegate
+		var vc: PageRootDelegate = vcs[currentViewIndex].viewControllers![0] as! PageRootDelegate
 		vc.presentSetting()
 	}
 	
@@ -392,19 +392,19 @@ class PageRootViewController: UIViewController, UIPageViewControllerDataSource, 
 		if currentViewIndex != 1 {
 			self.pageCtrl!.setViewControllers([vcs[1]], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
 			currentViewIndex = 1
-			var vc: PageRootDelegate = vcs[1].viewControllers![0] as PageRootDelegate
+			var vc: PageRootDelegate = vcs[1].viewControllers![0] as! PageRootDelegate
 			self.pageIndicator.currentPage = 1
-			self.titleBarText.text = vc.pageRootTitle()
+			self.titleBarText.text = vc.pageRootTitle() as? String
 		}
 		
-		var d = (self.vcs[1] as UINavigationController) .viewControllers[0] as PageRootDelegate
+		var d = (self.vcs[1] as! UINavigationController) .viewControllers[0] as! PageRootDelegate
 		d.didPressSearch!()
 	}
 	
 	//MARK: FacebookCtrlDelegate
 	
-	func onFinishedGetInformationSelf(_response: [NSString : AnyObject]!) {
-		currentUser!.parse(_response)
+	func onFinishedGetInformationSelf(_response: [NSObject : AnyObject]!) {
+		currentUser!.parse(_response as! [NSString: AnyObject])
 		
 		currentUser!.register({ (error, data) -> Void in
 			self.dismissViewControllerAnimated(true, completion: nil)

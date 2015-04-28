@@ -22,7 +22,7 @@ class JourneyTableViewCell: MGSwipeTableCell {
 	}
 	
 	func populate(journey: Journey) {
-		self.journeyNameLabel.text = journey.ownerObj!.name
+		self.journeyNameLabel.text = journey.ownerObj!.name as? String
 //		if journey.owner! == currentUser!._id! {
 //			self.journeyNameLabel.textColor = driverColor
 //			self.driverImageView.image = UIImage(named: "DriverTag")
@@ -44,14 +44,14 @@ class JourneyTableViewCell: MGSwipeTableCell {
 		
 		var startLocation = journey.startLocation
 		if startLocation != nil {
-			self.departureLabel.text = "Departure: " + startLocation!
+			self.departureLabel.text = "Departure: " + (startLocation! as String)
 		} else {
 			self.departureLabel.text = "Departure: N/A"
 		}
 		
 		var endLocation = journey.endLocation
 		if endLocation != nil {
-			self.destinationLabel.text = "Destination: " + endLocation!
+			self.destinationLabel.text = "Destination: " + (endLocation! as String)
 		} else {
 			self.destinationLabel.text = "Destination: N/A"
 		}
@@ -68,9 +68,9 @@ class JourneyTableViewCell: MGSwipeTableCell {
 		} else {
 			self.dateLabel.text = "Date: N/A"
 		}
-		self.priceLabel.text = NSString(format: "£%.2f", floor(journey.price))
+		self.priceLabel.text = NSString(format: "£%.2f", floor(journey.price)) as String
 		if (journey.availableSeats != nil) {
-			self.availabilityLabel.text = NSString(format: "%d", journey.availableSeats!)
+			self.availabilityLabel.text = NSString(format: "%d", journey.availableSeats!) as String
 		} else {
 			self.availabilityLabel.text = ""
 		}

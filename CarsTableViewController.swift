@@ -56,12 +56,12 @@ class CarsTableViewController: UIViewController {
 	
 	func refreshCars (sender: AnyObject?) {
 		if self.user == nil {
-			storage.getCars(currentUser!, { (err: NSError?) -> Void in
+			storage.getCars(currentUser!, callback: { (err: NSError?) -> Void in
 				self.cars = storage.cars
 				self.createCarVCs()
 			})
 		} else {
-			Car.getAll(self.user!, { (err: NSError?, data: [Car]) -> Void in
+			Car.getAll(self.user!, callback: { (err: NSError?, data: [Car]) -> Void in
 				self.cars = data
 				self.createCarVCs()
 			})
@@ -76,7 +76,7 @@ class CarsTableViewController: UIViewController {
 		
 		for (i, car) in enumerate(self.cars) {
 			
-			var view: CarViewController = UINib(nibName: "CarViewController", bundle: NSBundle.mainBundle()).instantiateWithOwner(nil, options: nil)[0] as CarViewController
+			var view: CarViewController = UINib(nibName: "CarViewController", bundle: NSBundle.mainBundle()).instantiateWithOwner(nil, options: nil)[0] as! CarViewController
 			view.car = car
 			view.setup(self.selectCarMode)
 			
@@ -123,8 +123,8 @@ class CarsTableViewController: UIViewController {
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if segue.identifier == "addCar" && sender != nil && sender as? Car != nil {
-			var vc: AddCarTableViewController = segue.destinationViewController as AddCarTableViewController
-			vc.car = sender as Car
+			var vc: AddCarTableViewController = segue.destinationViewController as! AddCarTableViewController
+			vc.car = sender as! Car
 		}
 	}
 	

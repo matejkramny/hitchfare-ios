@@ -17,18 +17,18 @@ class Message {
 	init(_response: [NSString: AnyObject]) {
 		self._id = _response["_id"] as? String
 		
-		self.message = _response["message"] as NSString
+		self.message = _response["message"] as! NSString
 		var sent = _response["sent"] as? Double
 		if sent != nil {
 			self.sent = NSDate(timeIntervalSince1970: sent!)
 		}
-		self.sender = _response["sender"] as NSString
+		self.sender = _response["sender"] as! NSString
 	}
 	
 	func sendMessage (callback: (err: NSError?, data: AnyObject?) -> Void) {
 		self.sent = NSDate()
 		
-		doPostRequest(makeRequest("/message/" + self.list._id, "POST"), { (err: NSError?, data: AnyObject?) -> Void in
+		doPostRequest(makeRequest("/message/" + (self.list._id as! String), "POST"), { (err: NSError?, data: AnyObject?) -> Void in
 			callback(err: err, data: data)
 			return
 		}, self.json())
@@ -57,7 +57,7 @@ class MessageList {
 	init(){}
 	
 	init(_response: [NSString: AnyObject]) {
-		self._id = _response["_id"] as String
+		self._id = _response["_id"] as! String
 		
 		var sender = _response["sender"] as? [NSString: AnyObject]
 		if sender != nil {
@@ -80,7 +80,7 @@ class MessageList {
 			var lists: [MessageList] = []
 			
 			if data != nil {
-				var dataObj = data as [[String: AnyObject]]
+				var dataObj = data as! [[String: AnyObject]]
 				
 				for d in dataObj {
 					lists.append(MessageList(_response: d))
@@ -92,11 +92,11 @@ class MessageList {
 	}
 	
 	class func getList(_id: NSString, callback: (err: NSError?, data: MessageList?) -> Void) {
-		doRequest(makeRequest("/messages/list/" + _id, "GET"), { (err: NSError?, data: AnyObject?) -> Void in
+		doRequest(makeRequest("/messages/list/" + (_id as! String), "GET"), { (err: NSError?, data: AnyObject?) -> Void in
 			var list: MessageList?
 			
 			if data != nil {
-				var dataObj = data as [String: AnyObject]
+				var dataObj = data as! [String: AnyObject]
 				
 				list = MessageList(_response: dataObj)
 			}
@@ -106,11 +106,11 @@ class MessageList {
 	}
 	
 	class func createList (user_id: NSString, callback: (err: NSError?, data: MessageList?) -> Void) {
-		doRequest(makeRequest("/messages/" + user_id, "PUT"), { (err: NSError?, data: AnyObject?) -> Void in
+		doRequest(makeRequest("/messages/" + (user_id as! String), "PUT"), { (err: NSError?, data: AnyObject?) -> Void in
 			var list: MessageList?
 			
 			if data != nil {
-				var dataObj = data as [String: AnyObject]
+				var dataObj = data as! [String: AnyObject]
 				
 				list = MessageList(_response: dataObj)
 			}
@@ -120,11 +120,11 @@ class MessageList {
 	}
 	
 	func getMessages (callback: (err: NSError?, data: [Message]) -> Void) {
-		doRequest(makeRequest("/messages/" + self._id, "GET"), { (err: NSError?, data: AnyObject?) -> Void in
+		doRequest(makeRequest("/messages/" + (self._id as! String), "GET"), { (err: NSError?, data: AnyObject?) -> Void in
 			self.messages = []
 			
 			if data != nil {
-				var dataObj = data as [[String: AnyObject]]
+				var dataObj = data as! [[String: AnyObject]]
 				
 				for d in dataObj {
 					self.messages.append(Message(_response: d))
@@ -136,7 +136,7 @@ class MessageList {
 	}
 	
 	func deleteList (callback: (err: NSError?) -> Void) {
-		doRequest(makeRequest("/message/" + self._id, "DELETE"), { (err: NSError?, data: AnyObject?) -> Void in
+		doRequest(makeRequest("/message/" + (self._id as! String), "DELETE"), { (err: NSError?, data: AnyObject?) -> Void in
 			if err != nil {
 				return callback(err: err)
 			}

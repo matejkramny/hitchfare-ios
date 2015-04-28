@@ -59,14 +59,14 @@ class LoginViewController: UIViewController, FacebookCtrlDelegate, UIScrollViewD
 		self.pageCtrl.currentPage = (Int)(floor((self.scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1)
 	}
 	
-	func onFinishedGetInformationSelf(_response: [NSString : AnyObject]!) {
-		currentUser = User(_response: _response)
+	func onFinishedGetInformationSelf(_response: [NSObject : AnyObject]!) {
+		currentUser = User(_response: _response as! [NSString: AnyObject])
 		currentUser!.register({ (error, data) -> Void in
 			self.dismissViewControllerAnimated(true, completion: nil)
 		})
 	}
 	
-	func onFinishedRequestAccessToken(token: NSString) {
-		storage.accessToken = token
+	func onFinishedRequestAccessToken(_accessToken: String!) {
+		storage.accessToken = _accessToken
 	}
 }

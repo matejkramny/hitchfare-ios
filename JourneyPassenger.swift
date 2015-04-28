@@ -22,8 +22,8 @@ class JourneyPassenger {
 	init(_response: [NSString: AnyObject]) {
 		self._id = _response["_id"] as? NSString
 		
-		self.journey = Journey(_response: _response["journey"] as [NSString: AnyObject])
-		self.user = User(_response: _response["user"] as [NSString: AnyObject])
+		self.journey = Journey(_response: _response["journey"] as! [NSString: AnyObject])
+		self.user = User(_response: _response["user"] as! [NSString: AnyObject])
 		
 		var approved = _response["approved"] as? Bool
 		if approved != nil {
@@ -122,19 +122,19 @@ class JourneyPassenger {
 	}
 	
 	func reviewJourney (review: Int, callback: (err: NSError?) -> Void) {
-		doRequest(makeRequest("/journey/" + self.journey._id! + "/request/" + self._id! + "/review/" + String(review), "PUT"), { (err: NSError?, data: AnyObject?) -> Void in
+		doRequest(makeRequest("/journey/" + (self.journey._id! as String) + "/request/" + (self._id as! String) + "/review/" + String(review), "PUT"), { (err: NSError?, data: AnyObject?) -> Void in
 			callback(err: err)
 		}, nil)
 	}
 	
 	func approveRequest (callback: (err: NSError?) -> Void) {
-		doRequest(makeRequest("/journey/" + self.journey._id! + "/request/" + self._id!, "PUT"), { (err: NSError?, data: AnyObject?) -> Void in
+		doRequest(makeRequest("/journey/" + (self.journey._id! as String) + "/request/" + (self._id! as String), "PUT"), { (err: NSError?, data: AnyObject?) -> Void in
 			callback(err: err)
 		}, nil)
 	}
 	
 	func rejectRequest (callback: (err: NSError?) -> Void) {
-		doRequest(makeRequest("/journey/" + self.journey._id! + "/request/" + self._id!, "DELETE"), { (err: NSError?, data: AnyObject?) -> Void in
+		doRequest(makeRequest("/journey/" + (self.journey._id! as String) + "/request/" + (self._id! as String), "DELETE"), { (err: NSError?, data: AnyObject?) -> Void in
 			callback(err: err)
 		}, nil)
 	}

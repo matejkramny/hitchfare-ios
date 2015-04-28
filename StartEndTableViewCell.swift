@@ -26,7 +26,7 @@ class StartEndTableViewCell: UITableViewCell, UITextFieldDelegate {
 	
 	func getDateFormatter() -> NSDateFormatter {
 		let dateFormatter = NSDateFormatter()
-		dateFormatter.dateFormat = self.datePickerDateFormat
+		dateFormatter.dateFormat = self.datePickerDateFormat as String
 		
 		return dateFormatter
 	}
@@ -48,7 +48,7 @@ class StartEndTableViewCell: UITableViewCell, UITextFieldDelegate {
 		if dateString.length > 0 {
 			var dateFormatter = getDateFormatter()
 			
-			var date = dateFormatter.dateFromString(dateString)
+			var date = dateFormatter.dateFromString(dateString as String)
 			
 			if date != nil {
 				datePicker!.date = date!

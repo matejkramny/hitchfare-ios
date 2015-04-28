@@ -79,7 +79,7 @@ class PassengersTableViewController: UITableViewController, MGSwipeTableCellDele
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		if indexPath.section == 0 {
 			if indexPath.row == 1 || (indexPath.row == 0 && self.journey.carObj == nil) {
-				var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("rating", forIndexPath: indexPath) as UITableViewCell
+				var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("rating", forIndexPath: indexPath) as! UITableViewCell
 				
 				cell.textLabel!.font = UIFont(awesomeFontOfSize: 18.0)
 				var stars = ""
@@ -96,17 +96,17 @@ class PassengersTableViewController: UITableViewController, MGSwipeTableCellDele
 					}
 				}
 				
-				cell.textLabel!.text = NSString(format: "Average Rating: %@", stars)
+				cell.textLabel!.text = NSString(format: "Average Rating: %@", stars) as String
 				cell.textLabel!.textColor = UIColor.whiteColor()
 				cell.backgroundColor = UIColor.clearColor()
 				
 				return cell
 			}
 			
-			var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("car", forIndexPath: indexPath) as UITableViewCell
+			var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("car", forIndexPath: indexPath) as! UITableViewCell
 			
 			cell.textLabel!.text = "Driver's Car"
-			cell.detailTextLabel!.text = self.journey.carObj!.name
+			cell.detailTextLabel!.text = self.journey.carObj!.name as String
 			cell.textLabel!.textColor = UIColor.whiteColor()
 			cell.backgroundColor = UIColor.clearColor()
 			
@@ -120,9 +120,9 @@ class PassengersTableViewController: UITableViewController, MGSwipeTableCellDele
 		}
 		
 		if indexPath.row == 0 {
-			cell!.nameLabel.text = self.journey.ownerObj!.name
+			cell!.nameLabel.text = self.journey.ownerObj!.name as? String
 			if self.journey.ownerObj!.picture != nil {
-				cell!.pictureImageView.sd_setImageWithURL(NSURL(string: self.journey.ownerObj!.picture!.url))
+				cell!.pictureImageView.sd_setImageWithURL(NSURL(string: self.journey.ownerObj!.picture!.url as! String)!)
 				cell!.pictureImageView.clipsToBounds = true
 				cell!.pictureImageView.layer.cornerRadius = 72/2
 			}
@@ -135,9 +135,9 @@ class PassengersTableViewController: UITableViewController, MGSwipeTableCellDele
 		var passenger = self.passengers[indexPath.row - 1]
 		var user = passenger.user
 		
-		cell!.nameLabel.text = user.name
+		cell!.nameLabel.text = user.name as? String
 		if user.picture != nil {
-			cell!.pictureImageView.sd_setImageWithURL(NSURL(string: user.picture!.url))
+			cell!.pictureImageView.sd_setImageWithURL(NSURL(string: user.picture!.url as! String)!)
 			cell!.pictureImageView.clipsToBounds = true
 			cell!.pictureImageView.layer.cornerRadius = 72/2
 		}
@@ -151,7 +151,7 @@ class PassengersTableViewController: UITableViewController, MGSwipeTableCellDele
 				stars = stars + NSString.fontAwesomeIconStringForEnum(FAIcon.FAStar)
 			}
 			
-			cell!.messageLabel!.text = NSString(format: "Rating: %@", stars)
+			cell!.messageLabel!.text = NSString(format: "Rating: %@", stars) as String
 		}
 		
 		var deleteBtn = MGSwipeButton(title: " " + NSString.fontAwesomeIconStringForEnum(FAIcon.FATrashO) + " ", backgroundColor: UIColor.blackColor())
@@ -184,9 +184,9 @@ class PassengersTableViewController: UITableViewController, MGSwipeTableCellDele
 			}
 			
 			// Show off the car..
-			let vc: CarViewController = UINib(nibName: "CarViewController", bundle: NSBundle.mainBundle()).instantiateWithOwner(nil, options: nil)[0] as CarViewController
+			let vc: CarViewController = UINib(nibName: "CarViewController", bundle: NSBundle.mainBundle()).instantiateWithOwner(nil, options: nil)[0] as! CarViewController
 			vc.car = self.journey.carObj!
-			vc.navigationItem.title = vc.car.name
+			vc.navigationItem.title = vc.car.name as String
 			vc.setup(false)
 			
 			UIGraphicsBeginImageContext(vc.view.frame.size)
@@ -212,7 +212,7 @@ class PassengersTableViewController: UITableViewController, MGSwipeTableCellDele
 			userId = journey.owner!
 		} else {
 			var passenger = self.passengers[indexPath.row - 1]
-			userId = passenger.user._id!
+			userId = passenger.user._id! as String
 		}
 		
 		findMessageList(userId, { (list: MessageList?) -> Void in
@@ -224,8 +224,8 @@ class PassengersTableViewController: UITableViewController, MGSwipeTableCellDele
 		SVProgressHUD.dismiss()
 		
 		if segue.identifier == "openMessage" {
-			var vc: MessagesViewController = segue.destinationViewController as MessagesViewController
-			vc.list = sender as MessageList
+			var vc: MessagesViewController = segue.destinationViewController as! MessagesViewController
+			vc.list = sender as! MessageList
 		}
 	}
 	

@@ -112,15 +112,15 @@ class HikesTableViewCell: UITableViewController, PageRootDelegate, MGSwipeTableC
 			user = message.sender
 		}
 		
-		cell!.nameLabel.text = user.name
+		cell!.nameLabel.text = user.name as? String
 		if user.picture != nil {
-			cell!.pictureImageView.sd_setImageWithURL(NSURL(string: user.picture!.url))
+			cell!.pictureImageView.sd_setImageWithURL(NSURL(string: user.picture!.url as! String)!)
 			cell!.pictureImageView.clipsToBounds = true
 			cell!.pictureImageView.layer.cornerRadius = 72/2
 		}
 		
 		if message.lastMessage != nil {
-			cell!.messageLabel.text = message.lastMessage!.message
+			cell!.messageLabel.text = message.lastMessage!.message as? String
 		} else {
 			cell!.messageLabel.text = ""
 		}
@@ -174,8 +174,8 @@ class HikesTableViewCell: UITableViewController, PageRootDelegate, MGSwipeTableC
 		isInSegue = true
 		
 		if segue.identifier == "openMessages" {
-			var vc: MessagesViewController = segue.destinationViewController as MessagesViewController
-			vc.list = sender as MessageList
+			var vc: MessagesViewController = segue.destinationViewController as! MessagesViewController
+			vc.list = sender as! MessageList
 		}
 	}
 	

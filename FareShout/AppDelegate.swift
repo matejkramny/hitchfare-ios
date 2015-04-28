@@ -64,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 	
 	func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-		let action = userInfo["action"] as NSString
+		let action = userInfo["action"] as! NSString
 		
 		if application.applicationState == UIApplicationState.Active {
 			println(userInfo)
@@ -72,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				NSNotificationCenter.defaultCenter().postNotificationName("ReceivedMessage", object: self, userInfo: userInfo)
 			}
 			
-			var messageText = (userInfo["aps"] as [NSString: AnyObject])["alert"] as NSString
+			var messageText = (userInfo["aps"] as! [NSString: AnyObject])["alert"] as! NSString
 			var messageTitle = "New Message"
 			
 			if action == "requestReject" {
@@ -84,12 +84,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			}
 			
 			JCNotificationCenter.sharedCenter().presenter = JCNotificationBannerPresenterSmokeStyle()
-			JCNotificationCenter.enqueueNotificationWithTitle(messageTitle, message: messageText, tapHandler: { () -> Void in
+			JCNotificationCenter.enqueueNotificationWithTitle(messageTitle, message: messageText as String, tapHandler: { () -> Void in
 				switch action {
 				case "newMessage":
-					self.openMessageNotification(userInfo["list"] as NSString)
+					self.openMessageNotification(userInfo["list"] as! NSString)
 				case "requestReject", "requestApprove", "journeyRequest":
-					self.openRequestNotification(userInfo as [NSString: AnyObject])
+					self.openRequestNotification(userInfo as! [NSString: AnyObject])
 				default:
 					break
 				}
@@ -102,9 +102,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		if NSDate().timeIntervalSince1970 - enteredForeground.timeIntervalSince1970 < 1 {
 			switch action {
 			case "newMessage":
-				self.openMessageNotification(userInfo["list"] as NSString)
+				self.openMessageNotification(userInfo["list"] as! NSString)
 			case "requestReject", "requestApprove", "journeyRequest":
-				self.openRequestNotification(userInfo as [NSString: AnyObject])
+				self.openRequestNotification(userInfo as! [NSString: AnyObject])
 			default:
 				break
 			}
@@ -114,7 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 	
 	func openRequestNotification (userInfo: [NSString: AnyObject]) {
-		var vc: PageRootViewController = self.window!.rootViewController! as PageRootViewController
+		var vc: PageRootViewController = self.window!.rootViewController! as! PageRootViewController
 		var navController = vc.getCurrentViewController()
 		//navController.visibleViewController.navigationController!.popToRootViewControllerAnimated(false)
 		if navController.visibleViewController.presentingViewController != nil {
@@ -124,13 +124,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		navController.popToRootViewControllerAnimated(false)
 		
 		vc.pageCtrl!.setViewControllers([vc.vcs[0]], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
-		var pageRootDelegate = (vc.vcs[0] as UINavigationController).viewControllers[0] as PageRootDelegate
+		var pageRootDelegate = (vc.vcs[0] as! UINavigationController).viewControllers[0] as! PageRootDelegate
 		pageRootDelegate.openJourneyNotification(true, info: userInfo)
 	}
 	
 	func openMessageNotification (listID: NSString) {
 		// Navigate the user to the message screen
-		var vc: PageRootViewController = self.window!.rootViewController! as PageRootViewController
+		var vc: PageRootViewController = self.window!.rootViewController! as! PageRootViewController
 		var navController = vc.getCurrentViewController()
 		//navController.visibleViewController.navigationController!.popToRootViewControllerAnimated(false)
 		if navController.visibleViewController.presentingViewController != nil {
@@ -140,7 +140,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		// navigates back to pageRootVC
 		navController.popToRootViewControllerAnimated(false)
-		var pageRootDelegate = navController.viewControllers[0] as PageRootDelegate
+		var pageRootDelegate = navController.viewControllers[0] as! PageRootDelegate
 		pageRootDelegate.openMessageNotification(listID)
 	}
 	

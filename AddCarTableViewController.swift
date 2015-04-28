@@ -59,10 +59,10 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 	
 	func getCellContents(indexPath: NSIndexPath) -> NSString {
         if indexPath.section == 1 {
-            return String(format: "%.0f", (self.tableView.cellForRowAtIndexPath(indexPath) as StepperTableViewCell).stepper.value)
+            return String(format: "%.0f", (self.tableView.cellForRowAtIndexPath(indexPath) as! StepperTableViewCell).stepper.value)
         }
         
-		return (self.tableView.cellForRowAtIndexPath(indexPath) as FSTextFieldTableViewCell).field.text
+		return (self.tableView.cellForRowAtIndexPath(indexPath) as! FSTextFieldTableViewCell).field.text
 	}
 	
 	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -81,7 +81,7 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 		
 		if indexPath.section == 2 {
 			if indexPath.row == 0 {
-				var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("basic", forIndexPath: indexPath) as UITableViewCell
+				var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("basic", forIndexPath: indexPath) as! UITableViewCell
 				
 				cell.textLabel!.text = "Select Picture"
 				if chosenImage != nil {
@@ -104,7 +104,7 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 				return cell! as UITableViewCell
 			}
 		} else if indexPath.section == 3 {
-			var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("basic", forIndexPath: indexPath) as UITableViewCell
+			var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("basic", forIndexPath: indexPath) as! UITableViewCell
 			
 			cell.textLabel!.text = "Delete Car"
 			cell.textLabel!.textColor = UIColor.redColor()
@@ -126,7 +126,7 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
             cell!.label.text = "Name"
 			cell!.delegate = self
 			cell!.initialize()
-            cell!.field.text = self.car.name
+            cell!.field.text = self.car.name as String
 //            cell!.field.placeholder = "Car Name"
             cell!.field.attributedPlaceholder = NSAttributedString(string: "Car Name", attributes: [NSForegroundColorAttributeName: UIColor.grayColor()])
             cell!.field.keyboardType = UIKeyboardType.Default
@@ -171,7 +171,7 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 			
 			cell!.backgroundColor = UIColor.clearColor()
 			cell!.fieldTitle.text = "Description"
-			cell!.textView.text = car.carDescription
+			cell!.textView.text = car.carDescription as String
 			cell!.textView.delegate = self
 			
 			cell!.textView.layer.borderColor = UIColor.grayColor().colorWithAlphaComponent(0.2).CGColor
@@ -220,7 +220,7 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 		}
 		
 		if indexPath.section == 0 && indexPath.row == 1 {
-			var cell: FSTextViewTableViewCell = tableView.cellForRowAtIndexPath(indexPath) as FSTextViewTableViewCell
+			var cell: FSTextViewTableViewCell = tableView.cellForRowAtIndexPath(indexPath) as! FSTextViewTableViewCell
 			cell.textView.becomeFirstResponder()
 			
 			tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -228,7 +228,7 @@ class AddCarTableViewController: UITableViewController, UIImagePickerControllerD
 			return
 		}
 		
-		var cell: FSTextFieldTableViewCell = tableView.cellForRowAtIndexPath(indexPath) as FSTextFieldTableViewCell
+		var cell: FSTextFieldTableViewCell = tableView.cellForRowAtIndexPath(indexPath) as! FSTextFieldTableViewCell
 		cell.field.becomeFirstResponder()
 		
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)

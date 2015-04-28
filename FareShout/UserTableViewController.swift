@@ -65,7 +65,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		}
 		
 		if presentedFromElsewhere == true {
-			self.navigationItem.title = shownUser.name
+			self.navigationItem.title = shownUser.name as? String
 		}
 	}
 	
@@ -78,7 +78,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		
 		if (self.pickingSelfJourneyForJourney != nil) {
 			if self.pickedJourney != nil {
-				self.pickingSelfJourneyForJourney!.requestJoinPassenger(self.pickedJourney!, { (err: NSError?) -> Void in
+				self.pickingSelfJourneyForJourney!.requestJoinPassenger(self.pickedJourney!, callback: { (err: NSError?) -> Void in
 					if err != nil {
 						SVProgressHUD.showErrorWithStatus("Error Joining Journey. You might have already requested to join.")
 					} else {
@@ -155,7 +155,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	func showProfileImage () {
 		let v: UIView = navigationController!.view
 		
-		let profileCell: FSProfileTableViewCell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as FSProfileTableViewCell
+		let profileCell: FSProfileTableViewCell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! FSProfileTableViewCell
 		
 		self.blackBackdropView = UIView(frame: CGRectMake(v.frame.origin.x, v.frame.origin.y, v.frame.size.width, v.frame.size.height))
 		self.profileImageView = UIImageView(image: profileCell.profileImageView.image)
@@ -332,13 +332,13 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		if indexPath.section == 0 {
-			var cell = tableView.dequeueReusableCellWithIdentifier(cellIDForIndexPath(indexPath), forIndexPath: indexPath) as? UITableViewCell
+			var cell = tableView.dequeueReusableCellWithIdentifier(cellIDForIndexPath(indexPath) as String, forIndexPath: indexPath) as? UITableViewCell
 			
 			if cell == nil {
-				cell = FSProfileTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: cellIDForIndexPath(indexPath))
+				cell = FSProfileTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: cellIDForIndexPath(indexPath) as String)
 			}
 			
-			var c = cell as FSProfileTableViewCell
+			var c = cell as! FSProfileTableViewCell
 			
 			if self.driverRating != nil {
 				c.ratingLabel.font = UIFont(awesomeFontOfSize: 17.0)
@@ -354,10 +354,10 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 					stars = stars + NSString.fontAwesomeIconStringForEnum(starEnum)
 				}
 				
-				c.ratingLabel.text = NSString(format: "Rating: %@", stars)
+				c.ratingLabel.text = NSString(format: "Rating: %@", stars as String) as String
 			}
 			
-			var url = NSURL(string: shownUser.picture!.url)
+			var url = NSURL(string: shownUser.picture!.url as! String)
 			c.profileImageView.sd_setImageWithURL(url!)
 			c.profileImageView.layer.cornerRadius = 45
 			c.profileImageView.layer.masksToBounds = true
@@ -365,7 +365,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			c.profileImageView.addGestureRecognizer(self.profileTapGestureRecognizer)
 			c.profileImageView.userInteractionEnabled = true
 			c.delegate = self
-			c.nameLabel.text = shownUser.name
+			c.nameLabel.text = shownUser.name as? String
 			c.selectionStyle = UITableViewCellSelectionStyle.None
 			
 			return cell!
@@ -377,7 +377,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 				cell = AcceptJourneyRequestTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "acceptJourneyRequest")
 			}
 			
-			cell!.journeyName.text = req.user.name
+			cell!.journeyName.text = req.user.name as? String
 			
 			if req.requested != nil {
 				cell!.requestedLabel.text = "Requested on " + requestedJourneyDateFormatter.stringFromDate(req.requested!)
@@ -386,7 +386,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			}
 			
 			if req.journey.ownerObj != nil {
-				var url = NSURL(string: req.user.picture!.url)
+				var url = NSURL(string: req.user.picture!.url as! String)
 				cell!.profileImageView.sd_setImageWithURL(url!)
 				cell!.profileImageView.layer.cornerRadius = 25
 				cell!.profileImageView.layer.masksToBounds = true
@@ -404,7 +404,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 				cell = JourneyRequestTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "journeyRequest")
 			}
 			
-			cell!.journeyName.text = req.journey.ownerObj!.name
+			cell!.journeyName.text = req.journey.ownerObj!.name as? String
 			
 			if req.requested != nil {
 				cell!.requestedLabel.text = "Requested on " + requestedJourneyDateFormatter.stringFromDate(req.requested!)
@@ -413,7 +413,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			}
 			
 			if req.journey.ownerObj != nil {
-				var url = NSURL(string: req.journey.ownerObj!.picture!.url)
+				var url = NSURL(string: req.journey.ownerObj!.picture!.url as! String)
 				cell!.profileImageView.sd_setImageWithURL(url!)
 				cell!.profileImageView.layer.cornerRadius = 25
 				cell!.profileImageView.layer.masksToBounds = true
@@ -455,7 +455,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 			
 			cell!.style()
 			cell!.populate(journey)
-			cell!.journeyNameLabel.text = journey.ownerObj!.name
+			cell!.journeyNameLabel.text = journey.ownerObj!.name as? String
 			
 			return cell!
 		} else if indexPath.section == 4 {
@@ -476,7 +476,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 				
 				if friend.picture != nil {
 					var imgView = UIImageView(frame: CGRectMake(CGFloat(i * 70 + offset), 8, 70, 70))
-					imgView.sd_setImageWithURL(NSURL(string: friend.picture!.url))
+					imgView.sd_setImageWithURL(NSURL(string: friend.picture!.url as! String))
 					imgView.clipsToBounds = true
 					imgView.layer.cornerRadius = 70/2
 					
@@ -487,7 +487,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 					mutualFriendGestureRecognizers.append(gestureRecognizer)
 					
 					var nameLabel = UILabel(frame: CGRectMake(CGFloat(i * 70 + offset), 78 + 8, 70, 14))
-					nameLabel.text = friend.name
+					nameLabel.text = friend.name as? String
 					nameLabel.textColor = UIColor.whiteColor()
 					nameLabel.font = UIFont.systemFontOfSize(12)
 					nameLabel.textAlignment = NSTextAlignment.Center
@@ -671,21 +671,21 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 		SVProgressHUD.dismiss()
 		
 		if segue.identifier == "openMessages" {
-			var vc: MessagesViewController = segue.destinationViewController as MessagesViewController
-			vc.list = sender as MessageList
+			var vc: MessagesViewController = segue.destinationViewController as! MessagesViewController
+			vc.list = sender as! MessageList
 		} else if segue.identifier == "openPassengers" {
-			var vc: PassengersTableViewController = segue.destinationViewController as PassengersTableViewController
-			vc.journey = sender as Journey
+			var vc: PassengersTableViewController = segue.destinationViewController as! PassengersTableViewController
+			vc.journey = sender as! Journey
 		} else if segue.identifier == "addJourney" && sender != nil {
-			var vc: AddJourneyTableViewController = (segue.destinationViewController as UINavigationController).viewControllers[0] as AddJourneyTableViewController
-			vc.journey = sender as Journey
+			var vc: AddJourneyTableViewController = (segue.destinationViewController as! UINavigationController).viewControllers[0] as! AddJourneyTableViewController
+			vc.journey = sender as! Journey
 		} else if segue.identifier == "openCars" {
 			if presentedFromElsewhere == true {
-				var vc: CarsTableViewController = segue.destinationViewController as CarsTableViewController
+				var vc: CarsTableViewController = segue.destinationViewController as! CarsTableViewController
 				vc.user = shownUser
 			}
 		} else if segue.identifier == "pickJourney" {
-			var vc: PickJourneyViewCtrl = (segue.destinationViewController as UINavigationController).viewControllers[0] as PickJourneyViewCtrl
+			var vc: PickJourneyViewCtrl = (segue.destinationViewController as! UINavigationController).viewControllers[0] as! PickJourneyViewCtrl
 			vc.delegate = self
 		}
 	}
@@ -711,7 +711,7 @@ class UserTableViewController: UITableViewController, FSProfileTableViewCellDele
 	}
 	
 	func swipeTableCell(cell: MGSwipeTableCell!, tappedButtonAtIndex index: Int, direction: MGSwipeDirection, fromExpansion: Bool) -> Bool {
-		var cell: JourneyTableViewCell = cell as JourneyTableViewCell
+		var cell: JourneyTableViewCell = cell as! JourneyTableViewCell
 		var indexPath: NSIndexPath = self.tableView.indexPathForCell(cell as UITableViewCell)!
 		
 		let journey = self.journeys[indexPath.row]

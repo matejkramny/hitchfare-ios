@@ -17,8 +17,8 @@ class Car: NSObject {
 	
 	init(_response: [NSString: AnyObject]) {
 		self._id = _response["_id"] as? String
-		self.seats = _response["seats"] as Int
-		self.name = _response["name"] as String
+		self.seats = _response["seats"] as! Int
+		self.name = _response["name"] as! String
 		var desc = _response["description"] as? String
 		if desc != nil {
 			self.carDescription = desc!
@@ -47,7 +47,7 @@ class Car: NSObject {
 			return
 		}
 		
-		var url = "/user/" + user._id! + "/cars"
+		var url = "/user/" + (user._id! as String) + "/cars"
 		if user === currentUser! {
 			url = "/cars"
 		}
@@ -75,7 +75,7 @@ class Car: NSObject {
 		if self._id == nil || self._id?.length == 0 {
 			request = makeRequest("/cars", "POST")
 		} else {
-			request = makeRequest("/car/" + self._id!, "PUT")
+			request = makeRequest("/car/" + (self._id! as String), "PUT")
 		}
 		
 		doPostRequest(request, { (err: NSError?, data: AnyObject?) -> Void in
@@ -90,7 +90,7 @@ class Car: NSObject {
 			}
 			
 			if withImage != nil {
-				self.uploadImage(withImage!, callback)
+				self.uploadImage(withImage!, callback: callback)
 				return
 			}
 			
@@ -99,7 +99,7 @@ class Car: NSObject {
 	}
 	
 	func uploadImage (image: UIImage, callback: (err: NSError?, data: AnyObject?) -> Void) {
-		var request = makeRequest("/car/" + self._id! + "/image", "PUT")
+		var request = makeRequest("/car/" + (self._id! as String) + "/image", "PUT")
 		
 		let imageData: NSData = UIImagePNGRepresentation(image)
 		
@@ -128,6 +128,6 @@ class Car: NSObject {
 			return
 		}
 		
-		doRequest(makeRequest("/car/" + self._id!, "DELETE"), callback, nil)
+		doRequest(makeRequest("/car/" + (self._id! as String), "DELETE"), callback, nil)
 	}
 }

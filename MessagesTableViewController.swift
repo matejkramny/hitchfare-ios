@@ -32,9 +32,9 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 		timeFormatter.timeZone = NSTimeZone.localTimeZone()
 		
 		if list.receiver._id == currentUser!._id! {
-			self.navigationItem.title = list.sender.name
+			self.navigationItem.title = list.sender.name as? String
 		} else {
-			self.navigationItem.title = list.receiver.name
+			self.navigationItem.title = list.receiver.name as? String
 		}
 		
 		var buttonTitle = NSString.fontAwesomeIconStringForEnum(FAIcon.FAcar)
@@ -45,7 +45,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 		self.navigationItem.rightBarButtonItem!.setTitleTextAttributes(attributes, forState: UIControlState.Normal)
 		
 		if !didRequestForNotifications {
-			var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+			var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 			appDelegate.requestForNotifications()
 		}
 		
@@ -116,7 +116,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 	}
 	
 	func refreshNotificationBadgeCount () {
-		doRequest(makeRequest("/messages/" + self.list._id + "/read", "PUT"), { (err: NSError?, data: AnyObject?) -> Void in
+		doRequest(makeRequest("/messages/" + (self.list._id as! String) + "/read", "PUT"), { (err: NSError?, data: AnyObject?) -> Void in
 			let json: [NSString: AnyObject]? = data as? [NSString: AnyObject]
 			if json != nil {
 				var unreadCount: Int? = json!["unreadCount"] as? Int
@@ -173,12 +173,12 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 		
 		var userInfo: NSDictionary = notification.userInfo!
 		
-		var duration: NSTimeInterval = userInfo.objectForKey(UIKeyboardAnimationDurationUserInfoKey) as NSTimeInterval
+		var duration: NSTimeInterval = userInfo.objectForKey(UIKeyboardAnimationDurationUserInfoKey) as! NSTimeInterval
 		
 //		var curveRawValue = userInfo.objectForKey(NSString(format: UIKeyboardAnimationCurveUserInfoKey)) as NSNumber
 		var curve: UIViewAnimationCurve = UIViewAnimationCurve.EaseOut//UIViewAnimationCurve(rawValue: Int(curveRawValue))!
 		
-		var kbFrameValue = userInfo[UIKeyboardFrameEndUserInfoKey] as NSValue
+		var kbFrameValue = userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue
 		var kbFrame = kbFrameValue.CGRectValue()
 		
 		UIView.animateWithDuration(duration, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
@@ -298,7 +298,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 			
 			cell!.backgroundView = nil
 			cell!.backgroundColor = UIColor.clearColor()
-			cell!.label.text = message.message
+			cell!.label.text = message.message as? String
 			cell!.label.textColor = textColor
 			cell!.bgView.layer.backgroundColor = bgColor.CGColor
 			cell!.bgView.layer.cornerRadius = cornerRadius
@@ -319,7 +319,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 				user = list.sender
 			}
 			
-			var url: NSURL = NSURL(string: user.picture!.url)!
+			var url: NSURL = NSURL(string: user.picture!.url as! String)!
 			cell!.profileImageView.sd_setImageWithURL(url)
 			cell!.profileImageView.layer.masksToBounds = true
 			cell!.profileImageView.layer.cornerRadius = 35/2
@@ -329,7 +329,7 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 			
 			cell!.backgroundView = nil
 			cell!.backgroundColor = UIColor.clearColor()
-			cell!.label.text = message.message
+			cell!.label.text = message.message as? String
 			cell!.label.textColor = UIColor.whiteColor()
 			cell!.bgView.layer.backgroundColor = UIColor.blackColor().CGColor
 			cell!.bgView.layer.cornerRadius = cornerRadius
@@ -353,11 +353,11 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 		var expectedRect: CGRect = message.message.boundingRectWithSize(CGSizeMake(tableView.frame.width - maxWidth, 99999999), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attributes, context: nil)
 		
 		if isSender {
-			var c: RightChatTableViewCell = cell as RightChatTableViewCell
+			var c: RightChatTableViewCell = cell as! RightChatTableViewCell
 			
 			c.bgViewWidth.constant = expectedRect.width + 16
 		} else {
-			var c: LeftChatTableViewCell = cell as LeftChatTableViewCell
+			var c: LeftChatTableViewCell = cell as! LeftChatTableViewCell
 			
 			c.bgViewWidth.constant = expectedRect.width + 16
 		}
@@ -423,14 +423,14 @@ class MessagesViewController: UIViewController, UITableViewDataSource, UITableVi
 	func didReceiveMessage(notification: NSNotification) {
 		var info = notification.userInfo!
 		
-		if info["list"] as NSString == list._id {
+		if info["list"] as! NSString == list._id {
 			self.refreshData(nil)
 		}
 	}
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if segue.identifier == "showUser" {
-			var vc: UserTableViewController = segue.destinationViewController as UserTableViewController
+			var vc: UserTableViewController = segue.destinationViewController as! UserTableViewController
 			vc.presentedFromElsewhere = true
 			
 			if list.receiver._id == currentUser!._id! {

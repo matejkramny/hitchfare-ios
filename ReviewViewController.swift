@@ -40,9 +40,9 @@ class ReviewViewController: UIViewController {
 			btn.enabled = true
 		}
 		
-		self.journeyName.text = journey.journey.ownerObj!.name
-		self.departureLabel.text = "Departure: " + journey.journey.startLocation!
-		self.destinationButton.text = "Destination: " + journey.journey.endLocation!
+		self.journeyName.text = journey.journey.ownerObj!.name as? String
+		self.departureLabel.text = "Departure: " + (journey.journey.startLocation! as String)
+		self.destinationButton.text = "Destination: " + (journey.journey.endLocation! as String)
 	}
 	
 	func didTap (gestureRecognizer: UITapGestureRecognizer) {

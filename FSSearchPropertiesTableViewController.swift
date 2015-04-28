@@ -56,11 +56,11 @@ class FSSearchPropertiesTableViewController: UITableViewController, FSTextFieldC
 			if indexPath.section == 0 {
 				cell!.label.text = "Departure"
 				cell!.field.placeholder = "Departing from ..."
-				cell!.field.text = properties.startLocation
+				cell!.field.text = properties.startLocation as! String
 			} else if indexPath.section == 1 {
 				cell!.label.text = "Destination"
 				cell!.field.placeholder = "Going to ..."
-				cell!.field.text = properties.endLocation
+				cell!.field.text = properties.endLocation as! String
 			}
 			
 			return cell!
@@ -104,15 +104,15 @@ class FSSearchPropertiesTableViewController: UITableViewController, FSTextFieldC
 			return
 		}
 		
-		var cell: FSTextFieldTableViewCell = tableView.cellForRowAtIndexPath(indexPath) as FSTextFieldTableViewCell
+		var cell: FSTextFieldTableViewCell = tableView.cellForRowAtIndexPath(indexPath) as! FSTextFieldTableViewCell
 		cell.field.becomeFirstResponder()
 	}
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if segue.identifier == "openLocationFinder" {
-			var vc = segue.destinationViewController as LocationFinderTableViewController
+			var vc = segue.destinationViewController as! LocationFinderTableViewController
 			
-			var isDeparture: Bool = sender as Bool
+			var isDeparture: Bool = sender as! Bool
 			self.lookingForDeparture = isDeparture
 			
 			vc.delegate = self
@@ -198,7 +198,7 @@ class FSSearchPropertiesTableViewController: UITableViewController, FSTextFieldC
 			indexPath = NSIndexPath(forRow: 0, inSection: 1)
 		}
 		
-		var cell = self.tableView.cellForRowAtIndexPath(indexPath) as FSTextFieldTableViewCell
+		var cell = self.tableView.cellForRowAtIndexPath(indexPath) as! FSTextFieldTableViewCell
 		cell.field.text = location.name
 		
 		if self.lookingForDeparture == true {

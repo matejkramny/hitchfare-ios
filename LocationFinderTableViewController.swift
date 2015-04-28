@@ -18,11 +18,11 @@ class LocationResult {
 	}
 	
 	class func parse(res: [NSString: AnyObject]) -> LocationResult {
-		var components = res["address_components"] as [[NSString: AnyObject]]
+		var components = res["address_components"] as! [[NSString: AnyObject]]
 		
 		var preference = ["postal_town", "administrative_area_level_3", "locality", "administrative_area_level_2", "political"]
 		
-		var name: String = res["formatted_address"] as String
+		var name: String = res["formatted_address"] as! String
 		for pref in preference {
 			var n = LocationResult.lookForComponentType(pref, components: components)
 			if n != nil {
@@ -31,19 +31,19 @@ class LocationResult {
 			}
 		}
 		
-		var geo = res["geometry"] as [NSString: AnyObject]
-		var location = geo["location"] as [NSString: AnyObject]
-		var lat = location["lat"] as Double
-		var lng = location["lng"] as Double
+		var geo = res["geometry"] as! [NSString: AnyObject]
+		var location = geo["location"] as! [NSString: AnyObject]
+		var lat = location["lat"] as! Double
+		var lng = location["lng"] as! Double
 		
 		return LocationResult(name: name, location: CLLocationCoordinate2D(latitude: lat, longitude: lng))
 	}
 	
 	class func lookForComponentType (type: NSString, components: [[NSString: AnyObject]]) -> String? {
 		for component in components {
-			var types = component["types"] as [NSString]
+			var types = component["types"] as! [NSString]
 			for t in types {
-				if type.isEqualToString(t) {
+				if type.isEqualToString(t as String) {
 					return component["short_name"] as? String
 				}
 			}
@@ -118,7 +118,7 @@ class LocationFinderTableViewController: UITableViewController, FSTextFieldCellP
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 		
-		var cell: FSFullTextFieldTableViewCell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as FSFullTextFieldTableViewCell
+		var cell: FSFullTextFieldTableViewCell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! FSFullTextFieldTableViewCell
 		cell.field.becomeFirstResponder()
 	}
 	
@@ -159,7 +159,7 @@ class LocationFinderTableViewController: UITableViewController, FSTextFieldCellP
 			return cell!
 		}
 		
-		var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("basic", forIndexPath: indexPath) as UITableViewCell
+		var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("basic", forIndexPath: indexPath) as! UITableViewCell
 		
 		cell.textLabel!.text = "My Location"
 		
@@ -219,7 +219,7 @@ class LocationFinderTableViewController: UITableViewController, FSTextFieldCellP
 	}
 	
 	func FSTextFieldCellValueChanged(cell: FSTextFieldTableViewCell?, value: NSString?) {
-		geocodeAddress((self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as FSFullTextFieldTableViewCell).field.text, { (err: NSError?, data: [[NSString: AnyObject]]) -> Void in
+		geocodeAddress((self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as! FSFullTextFieldTableViewCell).field.text, { (err: NSError?, data: [[NSString: AnyObject]]) -> Void in
 			self.results = []
 			for d in data {
 				self.results.append(LocationResult.parse(d))

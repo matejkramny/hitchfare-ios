@@ -29,10 +29,10 @@ class User {
 	}
 	
 	func parse (_response: [NSString: AnyObject]) {
-		var pictureData: [NSObject: AnyObject] = _response["picture"] as [String: AnyObject]
+		var pictureData: [NSObject: AnyObject] = _response["picture"] as! [String: AnyObject]
 		var url: NSString? = pictureData["url"] as? NSString
 		if url == nil {
-			pictureData = pictureData["data"] as [String: AnyObject]
+			pictureData = pictureData["data"] as! [String: AnyObject]
 			url = pictureData["url"] as? NSString
 		}
 		
@@ -41,12 +41,12 @@ class User {
 		var isSilhouette = pictureData["is_silhouette"] as? Bool
 		self.picture!.isSilhouette = isSilhouette != nil && isSilhouette! == true
 		
-		self._id = _response["_id"] as String?
-		self.email = _response["email"] as String?
-		self.first_name = _response["first_name"] as String?
-		self.id = _response["id"] as String?
-		self.last_name = _response["last_name"] as String?
-		self.name = _response["name"] as String?
+		self._id = _response["_id"] as? String
+		self.email = _response["email"] as? String
+		self.first_name = _response["first_name"] as? String
+		self.id = _response["id"] as? String
+		self.last_name = _response["last_name"] as? String
+		self.name = _response["name"] as? String
 		
 		self.userFriends = []
 		
@@ -82,7 +82,7 @@ class User {
 			
 			doRequest(makeRequest("/me", "GET"), { (err: NSError?, data: AnyObject?) -> Void in
 				if data != nil {
-					var json: [NSString: AnyObject] = data as [NSString: AnyObject]
+					var json: [NSString: AnyObject] = data as! [NSString: AnyObject]
 					self.parse(json)
 					saveSettings()
 				}
@@ -96,8 +96,8 @@ class User {
 	}
 	
 	class func find(_id: NSString, callback: (user: User?) -> Void) {
-		doRequest(makeRequest("/user/"+_id, nil), { (err: NSError?, data: AnyObject?) -> Void in
-			var json: [NSString: AnyObject] = data as [NSString: AnyObject]
+		doRequest(makeRequest("/user/" + (_id as! String), nil), { (err: NSError?, data: AnyObject?) -> Void in
+			var json: [NSString: AnyObject] = data as! [NSString: AnyObject]
 			var user = User(_response: json)
 			callback(user: user)
 		}, nil)
@@ -119,7 +119,7 @@ class User {
 	}
 	
 	func averageRating(callback: (err: NSError?, rating: Double?) -> Void) {
-		doRequest(makeRequest("/rating/user/" + self._id!, "GET"), { (err: NSError?, data: AnyObject?) -> Void in
+		doRequest(makeRequest("/rating/user/" + (self._id as! String), "GET"), { (err: NSError?, data: AnyObject?) -> Void in
 			var json: [NSString: AnyObject]? = data as? [NSString: AnyObject]
 			if json != nil {
 				let average: Double? = json!["average"] as? Double
@@ -131,7 +131,7 @@ class User {
 	}
 	
 	func getMutualFriends (user: User, callback: (err: NSError?, friends: [User]) -> Void) {
-		doRequest(makeRequest("/user/" + user._id! + "/mutualFriends", "GET"), { (err: NSError?, data: AnyObject?) -> Void in
+		doRequest(makeRequest("/user/" + (user._id as! String) + "/mutualFriends", "GET"), { (err: NSError?, data: AnyObject?) -> Void in
 			if err != nil {
 				return callback(err: err, friends: [])
 			}

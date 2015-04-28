@@ -45,7 +45,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 		super.viewDidAppear(animated)
 		
 		if !didRequestForNotifications {
-			var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+			var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 			appDelegate.requestForNotifications()
 		}
 	}
@@ -67,7 +67,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 		}
 		
 		if error != nil {
-			UIAlertView(title: "Cannot Save Journey", message: error!, delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "Ok").show()
+			UIAlertView(title: "Cannot Save Journey", message: error! as String, delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "Ok").show()
 			return
 		}
 		
@@ -119,7 +119,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 			
 			var car = storage.findCarWithId(car_id)
 			if car != nil {
-				cell!.detailTextLabel!.text = car!.name
+				cell!.detailTextLabel!.text = car!.name as String
 			} else {
 				cell!.detailTextLabel!.text = ""
 			}
@@ -142,11 +142,11 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 			if indexPath.row == 0 {
 				cell!.label.text = "Departure"
 				cell!.field.placeholder = "Departing from ..."
-				cell!.field.text = journey.startLocation
+				cell!.field.text = journey.startLocation as! String
 			} else if indexPath.row == 1 {
 				cell!.label.text = "Destination"
 				cell!.field.placeholder = "Going to ..."
-				cell!.field.text = journey.endLocation
+				cell!.field.text = journey.endLocation as! String
 			}
 			
 			return cell!
@@ -228,7 +228,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 			
 			return cell! as UITableViewCell
 		} else {
-			return tableView.dequeueReusableCellWithIdentifier("rightDetail", forIndexPath: indexPath) as UITableViewCell
+			return tableView.dequeueReusableCellWithIdentifier("rightDetail", forIndexPath: indexPath) as! UITableViewCell
 		}
 	}
 	
@@ -246,7 +246,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		switch indexPath.section {
 		case 1:
-			var cell: FSTextFieldTableViewCell = tableView.cellForRowAtIndexPath(indexPath) as FSTextFieldTableViewCell
+			var cell: FSTextFieldTableViewCell = tableView.cellForRowAtIndexPath(indexPath) as! FSTextFieldTableViewCell
 			cell.field.becomeFirstResponder()
 		case 2:
 			self.performSegueWithIdentifier("openCars", sender: nil)
@@ -260,7 +260,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if segue.identifier == "openCars" {
-			var dc = segue.destinationViewController as CarsTableViewController
+			var dc = segue.destinationViewController as! CarsTableViewController
 			dc.selectCarMode = true
 			dc.delegate = self
 			
@@ -274,9 +274,9 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 				dc.selectedCar = car!
 			}
 		} else if segue.identifier == "openLocationFinder" {
-			var vc = segue.destinationViewController as LocationFinderTableViewController
+			var vc = segue.destinationViewController as! LocationFinderTableViewController
 			
-			var isDeparture: Bool = sender as Bool
+			var isDeparture: Bool = sender as! Bool
 			self.lookingForDeparture = isDeparture
 			
 			vc.delegate = self
@@ -313,17 +313,17 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	// CarSelectionProtocol
 	
 	func didSelectCar(car: Car) {
-		journey.car = car._id
+		journey.car = car._id as? String
 		journey.availableSeats = car.seats - 1
 		
-		var cell: StepperTableViewCell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 3)) as StepperTableViewCell
+		var cell: StepperTableViewCell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 3)) as! StepperTableViewCell
 		if journey.availableSeats != nil {
 			cell.stepper.value = Double(journey.availableSeats!)
 			cell.label.text = "Availability: " + String(journey.availableSeats!)
 		}
 		
 		var carCell: UITableViewCell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 2))!
-		carCell.detailTextLabel!.text = car.name
+		carCell.detailTextLabel!.text = car.name as String
 		carCell.setNeedsDisplay()
 		self.tableView.reloadSections(NSIndexSet(index: 2), withRowAnimation: UITableViewRowAnimation.Fade)
 	}
@@ -334,7 +334,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 		// Availability
 		journey.availableSeats = Int(value)
 		
-		let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 3)) as StepperTableViewCell
+		let cell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 3)) as! StepperTableViewCell
 		cell.label.text = "Availability"
 		if journey.availableSeats != nil {
 			cell.label.text = cell.label.text! + ": " + String(journey.availableSeats!)
@@ -370,13 +370,13 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 	func SwitchCellValueChanged(cell: SwitchTableViewCell) {
 		journey.isDriver = cell.toggle.selectedSegmentIndex == 0
 		
-		var stepperCell: StepperTableViewCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 3)) as StepperTableViewCell
-		var priceCell: PriceTableViewCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 3)) as PriceTableViewCell
+		var stepperCell: StepperTableViewCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 3)) as! StepperTableViewCell
+		var priceCell: PriceTableViewCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 3)) as! PriceTableViewCell
 		
 		if journey.isDriver {
 			stepperCell.stepper.enabled = true
 			priceCell.slider.enabled = true
-			priceCell.field.text = NSString(format: "£%.2f", floor(priceCell.slider.value))
+			priceCell.field.text = NSString(format: "£%.2f", floor(priceCell.slider.value)) as String
 			
 			if self.originalStepperColor != nil {
 				stepperCell.stepper.tintColor = self.originalStepperColor!
@@ -410,7 +410,7 @@ class AddJourneyTableViewController: UITableViewController, StartEndTableViewCel
 			indexPath = NSIndexPath(forRow: 1, inSection: 1)
 		}
 		
-		var cell = self.tableView.cellForRowAtIndexPath(indexPath) as FSTextFieldTableViewCell
+		var cell = self.tableView.cellForRowAtIndexPath(indexPath) as! FSTextFieldTableViewCell
 		cell.field.text = location.name
 		
 		if self.lookingForDeparture == true {

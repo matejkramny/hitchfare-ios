@@ -66,7 +66,7 @@ class PickJourneyViewCtrl: UITableViewController {
 		
 		cell!.style()
 		cell!.populate(journey)
-		cell!.journeyNameLabel.text = journey.ownerObj!.name
+		cell!.journeyNameLabel.text = journey.ownerObj!.name as? String
 		
 		return cell!
 	}

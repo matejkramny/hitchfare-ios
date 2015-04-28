@@ -10,7 +10,7 @@ class SharedStorage: NSObject {
 	}
 	
 	func getCars (user: User, callback: (err: NSError?) -> Void) {
-		Car.getAll(user, { (err: NSError?, data: [Car]) -> Void in
+		Car.getAll(user, callback: { (err: NSError?, data: [Car]) -> Void in
 			self.cars = data
 			
 			callback(err: err)

@@ -32,7 +32,7 @@ class SettingTableViewController: UITableViewController, UIActionSheetDelegate, 
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var vc: FSWebViewController = segue.destinationViewController as FSWebViewController
+        var vc: FSWebViewController = segue.destinationViewController as! FSWebViewController
         vc.title = segue.identifier
 		vc._flag = segue.identifier
     }
